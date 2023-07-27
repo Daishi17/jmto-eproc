@@ -53,6 +53,15 @@
                                                             </small>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <th class="bg-light"><small>Rincian Dokumen Upload</small></th>
+                                                        <td>
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#rincian_dokumen">
+                                                                Lihat Rincian
+                                                            </button>
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                         </div>
@@ -657,7 +666,7 @@
                                                                     <table class="table table-sm table-bordered table-striped">
                                                                         <thead class="bg-dark text-white">
                                                                             <tr>
-                                                                                <th><small>No. Surat<small></th>
+                                                                                <th><small>No. NPWP<small></th>
                                                                                 <th><small>Berlaku Sampai<small></th>
                                                                                 <th colspan="2"><small>File Dokumen<small></th>
                                                                                 <th><small>Status Validasi<small></th>
@@ -834,3 +843,291 @@
 </main>
 
 <?php $this->load->view('validator/data_rekanan/modal'); ?>
+
+<!-- modal rincian upload -->
+<!-- Modal -->
+<div class="modal fade" id="rincian_dokumen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white" id="exampleModalLabel">Rincian Dokumen Upload <?= $vendor['nama_usaha'] ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <h4 for="">SIUP</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No Surat</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_siup">
+
+                    </tbody>
+                </table>
+                <center>
+                    <h4 for="">KBLI SIUP</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Kode KBLI/Jenis</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_kbli_siup">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">NIB</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No Surat</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_nib">
+
+                    </tbody>
+                </table>
+                <center>
+                    <h4 for="">KBLI NIB</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Kode KBLI/Jenis</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_kbli_nib">
+
+                    </tbody>
+                </table>
+
+
+                <center>
+                    <h4 for="">SBU</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No Surat</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_sbu">
+
+                    </tbody>
+                </table>
+                <center>
+                    <h4 for="">KODE SBU</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Kode SBU/Jenis</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_kbli_sbu">
+
+                    </tbody>
+                </table>
+
+
+                <center>
+                    <h4 for="">SIUJK</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No Surat</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_siujk">
+
+                    </tbody>
+                </table>
+                <center>
+                    <h4 for="">KBLI SIUJK</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Kode KBLI/Jenis</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_kbli_siujk">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">Akta Pendirian</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No Surat</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_akta_pendirian">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">Akta Perubahan</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No Surat</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_akta_perubahan">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">Pemilik Perusahaan</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nik/Paspor</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_pemilik">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">Pengurus Perusahaan</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nik/Paspor</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_pengurus">
+
+                    </tbody>
+                </table>
+
+
+                <center>
+                    <h4 for="">Pengalaman</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No Kontrak</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_pengalaman">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">SPPKP</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No Surat</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_sppkp">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">NPWP</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No NPWP</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_npwp">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">SPT</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No TTE/SPT</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_spt">
+
+                    </tbody>
+                </table>
+
+                <center>
+                    <h4 for="">Laporan Keuangan</h4>
+                </center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tahun Laporan/Jenis Audit</th>
+                            <th>Status Validasi</th>
+                            <th>Nama Validator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rincian_keuangan">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>

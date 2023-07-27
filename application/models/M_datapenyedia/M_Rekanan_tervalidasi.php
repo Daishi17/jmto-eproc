@@ -125,6 +125,16 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $query->row_array();
     }
 
+    public function get_result_siup_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siup');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_siup.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_siup.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_row_siup_kbli($id_vendor)
     {
         $this->db->select('*');
@@ -239,6 +249,17 @@ class M_Rekanan_tervalidasi extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function get_result_nib_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_nib');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_nib.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_nib.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 
     public function get_row_nib_kbli($id_vendor)
     {
@@ -365,6 +386,16 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $query->row_array();
     }
 
+    public function get_result_sbu_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_sbu');
+        $this->db->join('tbl_sbu', 'tbl_vendor_kbli_sbu.id_sbu = tbl_sbu.id_sbu', 'left');
+        $this->db->where('tbl_vendor_kbli_sbu.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_row_sbu_url($id_url)
     {
         $this->db->select('*');
@@ -481,6 +512,17 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $query->row_array();
     }
 
+    public function get_result_siujk_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_siujk');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_siujk.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_siujk.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
     public function get_row_siujk_url($id_url)
     {
         $this->db->select('*');
@@ -588,6 +630,7 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $query->row_array();
     }
 
+
     public function get_row_akta_pendirian_url($id_url)
     {
         $this->db->select('*');
@@ -639,6 +682,15 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->where('tbl_vendor_pemilik.id_vendor', $id_vendor);
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+    public function get_result_pemilik_manajerial($id_vendor)
+    {
+        $this->db->select('nik, sts_validasi, nama_validator');
+        $this->db->from('tbl_vendor_pemilik');
+        $this->db->where('tbl_vendor_pemilik.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function get_row_pemilik_manajerial_id($id_pemilik)
@@ -807,6 +859,14 @@ class M_Rekanan_tervalidasi extends CI_Model
     }
 
 
+    public function get_result_pengurus_manajerial($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengurus');
+        $this->db->where('tbl_vendor_pengurus.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
     public function get_row_pengurus_manajerial_id($id_pengurus)
     {
@@ -879,6 +939,15 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->where('tbl_vendor_pengalaman.id_vendor', $id_vendor);
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+    public function get_result_pengalaman($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_pengalaman');
+        $this->db->where('tbl_vendor_pengalaman.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function gettable_pengalaman($id_vendor) //nam[ilin data pake ini
@@ -996,6 +1065,15 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->where('tbl_vendor_spt.id_vendor', $id_vendor);
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+    public function get_result_spt($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_spt');
+        $this->db->where('tbl_vendor_spt.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function get_row_spt_id($id_spt)
@@ -1117,6 +1195,15 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $query->row_array();
     }
 
+    public function get_result_neraca($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_neraca_keuangan');
+        $this->db->where('tbl_vendor_neraca_keuangan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_row_neraca_id($id_neraca)
     {
         $this->db->select('*');
@@ -1235,6 +1322,15 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->where('tbl_vendor_keuangan.id_vendor', $id_vendor);
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+    public function get_result_keuangan($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_keuangan');
+        $this->db->where('tbl_vendor_keuangan.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function get_row_keuangan_id($id_keuangan)

@@ -274,19 +274,40 @@ class Rekanan_tervalidasi extends CI_Controller
 	{
 		$id_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
 		$row_siup = $this->M_Rekanan_tervalidasi->get_row_siup($id_vendor['id_vendor']);
+		$kbli_siup = $this->M_Rekanan_tervalidasi->get_result_siup_kbli($id_vendor['id_vendor']);
+
 		$row_nib = $this->M_Rekanan_tervalidasi->get_row_nib($id_vendor['id_vendor']);
+		$kbli_nib = $this->M_Rekanan_tervalidasi->get_result_nib_kbli($id_vendor['id_vendor']);
+
 		$row_sbu = $this->M_Rekanan_tervalidasi->get_row_sbu($id_vendor['id_vendor']);
+		$kbli_sbu = $this->M_Rekanan_tervalidasi->get_result_sbu_kbli($id_vendor['id_vendor']);
+
 		$row_siujk = $this->M_Rekanan_tervalidasi->get_row_siujk($id_vendor['id_vendor']);
+		$kbli_siujk = $this->M_Rekanan_tervalidasi->get_result_siujk_kbli($id_vendor['id_vendor']);
+
 		$row_akta_pendirian = $this->M_Rekanan_tervalidasi->get_row_akta_pendirian($id_vendor['id_vendor']);
 		$row_akta_perubahan = $this->M_Rekanan_tervalidasi->get_row_akta_perubahan($id_vendor['id_vendor']);
+
 		$get_row_pemilik_manajerial = $this->M_Rekanan_tervalidasi->get_row_pemilik_manajerial($id_vendor['id_vendor']);
+		$get_result_pemilik_manajerial = $this->M_Rekanan_tervalidasi->get_result_pemilik_manajerial($id_vendor['id_vendor']);
+
 		$get_row_pengurus_manajerial = $this->M_Rekanan_tervalidasi->get_row_pengurus_manajerial($id_vendor['id_vendor']);
+		$get_result_pengurus_manajerial = $this->M_Rekanan_tervalidasi->get_result_pengurus_manajerial($id_vendor['id_vendor']);
+
 		$row_pengalaman = $this->M_Rekanan_tervalidasi->get_row_pengalaman($id_vendor['id_vendor']);
+		$result_pengalaman = $this->M_Rekanan_tervalidasi->get_result_pengalaman($id_vendor['id_vendor']);
+
 		$row_sppkp = $this->M_Rekanan_tervalidasi->get_row_sppkp($id_vendor['id_vendor']);
 		$row_npwp = $this->M_Rekanan_tervalidasi->get_row_npwp($id_vendor['id_vendor']);
+
 		$row_spt = $this->M_Rekanan_tervalidasi->get_row_spt($id_vendor['id_vendor']);
+		$result_spt = $this->M_Rekanan_tervalidasi->get_result_spt($id_vendor['id_vendor']);
+
 		$row_neraca = $this->M_Rekanan_tervalidasi->get_row_neraca($id_vendor['id_vendor']);
+		$result_neraca = $this->M_Rekanan_tervalidasi->get_result_neraca($id_vendor['id_vendor']);
+
 		$row_keuangan = $this->M_Rekanan_tervalidasi->get_row_keuangan($id_vendor['id_vendor']);
+		$result_keuangan = $this->M_Rekanan_tervalidasi->get_result_keuangan($id_vendor['id_vendor']);
 		$response = [
 			'id_vendor' => $id_vendor,
 			'row_siup' => $row_siup,
@@ -303,6 +324,16 @@ class Rekanan_tervalidasi extends CI_Controller
 			'row_spt' => $row_spt,
 			'row_neraca' => $row_neraca,
 			'row_keuangan' => $row_keuangan,
+			'kbli_siup' => $kbli_siup,
+			'kbli_nib' => $kbli_nib,
+			'kbli_sbu' => $kbli_sbu,
+			'kbli_siujk' => $kbli_siujk,
+			'pemilik' => $get_result_pemilik_manajerial,
+			'pengurus' => $get_result_pengurus_manajerial,
+			'pengalaman' => $result_pengalaman,
+			'spt' => $result_spt,
+			'keuangan' => $result_keuangan,
+			'neraca' => $result_neraca
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
@@ -352,22 +383,39 @@ class Rekanan_tervalidasi extends CI_Controller
 	{
 		$type = $this->input->post('type');
 		$get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_siup_url($id_url);
+
 		$secret_token = $this->input->post('token_dokumen');
 		$chiper = "AES-128-ECB";
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($secret_token == $secret) {
 			if ($type == 'dekrip') {
-				$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
-				$data = [
-					'sts_token_dokumen' => 2,
-					'file_dokumen' => $encryption_string,
-				];
+				if ($get_row_enkrip['sts_token_dokumen'] == 2) {
+					$response = [
+						'gagal' => 'Gagal!'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					return false;
+				} else {
+					$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+					$data = [
+						'sts_token_dokumen' => 2,
+						'file_dokumen' => $encryption_string,
+					];
+				}
 			} else {
-				$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
-				$data = [
-					'sts_token_dokumen' => 1,
-					'file_dokumen' => $encryption_string,
-				];
+				if ($get_row_enkrip['sts_token_dokumen'] == 1) {
+					$response = [
+						'gagal' => 'Gagal!'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					return false;
+				} else {
+					$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+					$data = [
+						'sts_token_dokumen' => 1,
+						'file_dokumen' => $encryption_string,
+					];
+				}
 			}
 			$where = [
 				'id_url' => $id_url
@@ -631,17 +679,33 @@ class Rekanan_tervalidasi extends CI_Controller
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($secret_token == $secret) {
 			if ($type == 'dekrip') {
-				$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
-				$data = [
-					'sts_token_dokumen' => 2,
-					'file_dokumen' => $encryption_string,
-				];
+				if ($get_row_enkrip['sts_token_dokumen'] == 2) {
+					$response = [
+						'gagal' => 'Gagal!'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					return false;
+				} else {
+					$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+					$data = [
+						'sts_token_dokumen' => 2,
+						'file_dokumen' => $encryption_string,
+					];
+				}
 			} else {
-				$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
-				$data = [
-					'sts_token_dokumen' => 1,
-					'file_dokumen' => $encryption_string,
-				];
+				if ($get_row_enkrip['sts_token_dokumen'] == 1) {
+					$response = [
+						'gagal' => 'Gagal!'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					return false;
+				} else {
+					$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+					$data = [
+						'sts_token_dokumen' => 1,
+						'file_dokumen' => $encryption_string,
+					];
+				}
 			}
 			$where = [
 				'id_url' => $id_url
@@ -901,17 +965,33 @@ class Rekanan_tervalidasi extends CI_Controller
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($secret_token == $secret) {
 			if ($type == 'dekrip') {
-				$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
-				$data = [
-					'sts_token_dokumen' => 2,
-					'file_dokumen' => $encryption_string,
-				];
+				if ($get_row_enkrip['sts_token_dokumen'] == 2) {
+					$response = [
+						'gagal' => 'Gagal!'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					return false;
+				} else {
+					$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+					$data = [
+						'sts_token_dokumen' => 2,
+						'file_dokumen' => $encryption_string,
+					];
+				}
 			} else {
-				$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
-				$data = [
-					'sts_token_dokumen' => 1,
-					'file_dokumen' => $encryption_string,
-				];
+				if ($get_row_enkrip['sts_token_dokumen'] == 1) {
+					$response = [
+						'gagal' => 'Gagal!'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					return false;
+				} else {
+					$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+					$data = [
+						'sts_token_dokumen' => 1,
+						'file_dokumen' => $encryption_string,
+					];
+				}
 			}
 			$where = [
 				'id_url' => $id_url
@@ -1169,17 +1249,33 @@ class Rekanan_tervalidasi extends CI_Controller
 		$secret = $get_row_enkrip['token_dokumen'];
 		if ($secret_token == $secret) {
 			if ($type == 'dekrip') {
-				$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
-				$data = [
-					'sts_token_dokumen' => 2,
-					'file_dokumen' => $encryption_string,
-				];
+				if ($get_row_enkrip['sts_token_dokumen'] == 2) {
+					$response = [
+						'gagal' => 'Gagal!'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					return false;
+				} else {
+					$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+					$data = [
+						'sts_token_dokumen' => 2,
+						'file_dokumen' => $encryption_string,
+					];
+				}
 			} else {
-				$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
-				$data = [
-					'sts_token_dokumen' => 1,
-					'file_dokumen' => $encryption_string,
-				];
+				if ($get_row_enkrip['sts_token_dokumen'] == 1) {
+					$response = [
+						'gagal' => 'Gagal!'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					return false;
+				} else {
+					$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+					$data = [
+						'sts_token_dokumen' => 1,
+						'file_dokumen' => $encryption_string,
+					];
+				}
 			}
 			$where = [
 				'id_url' => $id_url
