@@ -38,6 +38,7 @@ class Fm_unit_kerja extends CI_Controller
 					'kode_departemen' => $kode_departemen,
 					'nama_departemen' => $nama_departemen,
 					'user_edited' => $this->session->userdata('nama_pegawai'),
+					'time_edited' => date('Y-m-d H:i'),
 					'sts_aktif' => 1
 				];
 				$this->M_unit_kerja->update_data($data, $id_departemen);
@@ -61,9 +62,10 @@ class Fm_unit_kerja extends CI_Controller
 
 	public function aktif()
 	{
+		$id_departemen = $this->input->post('id_departemen');
 		$data = [
-			'user_created' => $this->session->userdata('nama_pegawai'),
-			'sts_aktif' => 1
+			'sts_aktif' => 1,
+			'user_edited' => $this->session->userdata('nama_pegawai'),
 		];
 		$this->M_unit_kerja->update_data($data, $id_departemen);
 		$this->output->set_content_type('application/json')->set_output(json_encode('response'));
