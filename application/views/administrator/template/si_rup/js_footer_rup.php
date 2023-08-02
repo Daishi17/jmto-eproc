@@ -23,5 +23,6 @@
         <script src="<?php echo base_url();?>/assets/plugins-lte//select2/js/select2.full.min.js"></script>
         <script src="<?php echo base_url();?>/assets/js//select2_style.js"></script>
         
+        
     </body>
 </html>
