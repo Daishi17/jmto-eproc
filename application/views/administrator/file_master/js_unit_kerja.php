@@ -90,7 +90,7 @@
                             form_departemen_edit[0].reset();
                             $('[name="kode_departemen"]').val(response.kode);
                             reload_table()
-                            Swal.fire('Data Berhasil Di Masukkan!', '', 'success')
+                            Swal.fire('Data Berhasil Di Ubah!', '', 'success')
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */
@@ -231,6 +231,7 @@
                     $('[name="kode_departemen"]').val(response.kode_departemen);
                     $('[name="nama_departemen"]').val(response.nama_departemen);
                     $('[name="id_departemen"]').val(response.id_departemen);
+
                     $('#modal-xl-edit').modal('show')
                 } else if (type == 'aktif') {
                     Question_aktifkan(response.kode_departemen, response.nama_departemen);
