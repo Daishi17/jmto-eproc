@@ -27,6 +27,29 @@ class Role_login
                 redirect('auth');
             } else {
                 if ($cek && password_verify($password, $cek->password)) {
+                    if ($cek->id_role == 2) {
+
+                        $sekarang = date('Y-m-d H:i');
+                        $data = [
+                            'waktu_login' => $sekarang,
+                            'alamat_ip' => $this->ci->input->ip_address(),
+                            'id_pegawai' => $cek->id_pegawai
+                        ];
+                        $this->ci->Auth_model->insert_log($data);
+                        $userdata = [
+                            'id_pegawai' => $cek->id_pegawai,
+                            'id_url_pegawai' => $cek->id_url_pegawai,
+                            'nama_pegawai' => $cek->nama_pegawai,
+                            'email' => $cek->email,
+                            'nip' => $cek->nip,
+                            'id_unit' => $cek->id_unit,
+                            'id_role' => $cek->id_role
+                        ];
+
+                        // buat session
+                        $this->ci->session->set_userdata($userdata);
+                        redirect('administrator/dashboard');
+                    }
                     if ($cek->id_role == 4) {
 
                         $sekarang = date('Y-m-d H:i');
