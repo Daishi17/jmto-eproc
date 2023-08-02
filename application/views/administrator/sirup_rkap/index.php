@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <input type="text" name="id_post_form">
+                                        <input type="hidden" name="id_post_form">
                                         <input type="hidden" name="type_modal">
                                         <div class="row g-1">
                                             <div class="col-sm-3">
