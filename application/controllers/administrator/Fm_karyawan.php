@@ -15,7 +15,7 @@ class Fm_karyawan extends CI_Controller
 		$data['departemen'] = $this->M_karyawan->get_departemen();
 		$data['section'] = $this->M_karyawan->get_section();
 		$this->load->view('administrator/template_menu/header_menu');
-		$this->load->view('administrator/template/file_master/fm_karyawan', $data);
+		$this->load->view('administrator/file_master/fm_karyawan', $data);
 		$this->load->view('administrator/template_menu/footer_menu');
 		$this->load->view('administrator/file_master/js_karyawan');
 	}
@@ -31,15 +31,7 @@ class Fm_karyawan extends CI_Controller
 			$row[] = $res->nip;
 			$row[] = $res->nama_pegawai;
 			$row[] = $res->nama_departemen;
-			if ($res->id_role == 2) {
-				$row[] = '<small><span class="badge bg-danger">Administrator</span></small>';
-			} else if ($res->id_role == 3) {
-				$row[] = '<small><span class="badge bg-primary">Unit Kerja</span></small>';
-			} else if ($res->id_role == 4) {
-				$row[] = '<small><span class="badge bg-success">Validator</span></small>';
-			} else if ($res->id_role == 5) {
-				$row[] = '<small><span class="badge bg-info">Panitia</span></small>';
-			}
+			$row[] = $res->nama_section;
 
 			$row[] = $res->email;
 			if ($res->status == 1) {
@@ -98,9 +90,9 @@ class Fm_karyawan extends CI_Controller
 		$this->form_validation->set_rules('id_section', 'Nama Section', 'required|trim', ['required' => 'Section Wajib Diisi!']);
 		$this->form_validation->set_rules('email', 'Email Pegawai', 'required|trim|valid_email', ['required' => 'Email Email Pegawai Wajib Diisi!', 'valid_email' => 'Email Tidak Valid',  'is_unique' => 'Email Sudah Terdaftar']);
 		$this->form_validation->set_rules('no_telpon', 'No Telpon', 'required|trim', ['required' => 'No. Telpon Wajib Diisi!']);
-		$this->form_validation->set_rules('id_role', 'Nama Section', 'required|trim', ['required' => 'Role Wajib Diisi!']);
-		$this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);
-		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password]', ['required' => 'Password Verifikasi harus diisi!', 'matches' => 'Password Tidak Sama']);
+		// $this->form_validation->set_rules('id_role', 'Nama Section', 'required|trim', ['required' => 'Role Wajib Diisi!']);
+		// $this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);
+		// $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password]', ['required' => 'Password Verifikasi harus diisi!', 'matches' => 'Password Tidak Sama']);
 
 		if ($this->form_validation->run() == false) {
 
@@ -112,9 +104,6 @@ class Fm_karyawan extends CI_Controller
 					'id_departemen' => form_error('id_departemen'),
 					'email' => form_error('email'),
 					'no_telpon' => form_error('no_telpon'),
-					'id_role' => form_error('id_role'),
-					'password' => form_error('password'),
-					'password2' => form_error('password2'),
 				],
 			];
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -129,8 +118,6 @@ class Fm_karyawan extends CI_Controller
 				'id_section' => $id_section,
 				'email' => $email,
 				'no_telpon' => $no_telpon,
-				'id_role' => $id_role,
-				'password' => password_hash($password, PASSWORD_DEFAULT),
 				'status' => 1,
 				'user_created' => $this->session->userdata('nama_pegawai')
 			];

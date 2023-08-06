@@ -102,6 +102,12 @@
                                 <small> Data Karyawan</small>
                             </a>
                         </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_mjm_user">
+                                <i class="fa-solid fa-user-gear px-1"></i>
+                                <small> Manajemen Role User</small>
+                            </a>
+                        </li>
 
                         <li>
                             <hr class="dropdown-divider">
