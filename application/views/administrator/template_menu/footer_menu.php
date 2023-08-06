@@ -40,6 +40,13 @@
 
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/chart.js/Chart.min.js"></script>
         <script src="<?php echo base_url(); ?>/assets/js/chart_admin.js"></script>
+
+        <!-- Select2 -->
+        <script src="<?php echo base_url(); ?>assets/plugins-lte/select2/js/select2.full.min.js"></script>
+        <script>
+            $('.select2').select2()
+        </script>
+
         </body>
 
         </html>

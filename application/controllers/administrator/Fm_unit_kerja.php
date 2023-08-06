@@ -66,9 +66,22 @@ class Fm_unit_kerja extends CI_Controller
 		$data = [
 			'sts_aktif' => 1,
 			'user_edited' => $this->session->userdata('nama_pegawai'),
+			'time_edited' => date('Y-m-d H:i')
 		];
 		$this->M_unit_kerja->update_data($data, $id_departemen);
-		$this->output->set_content_type('application/json')->set_output(json_encode('response'));
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+	public function nonaktif()
+	{
+		$id_departemen = $this->input->post('id_departemen');
+		$data = [
+			'sts_aktif' => 2,
+			'user_edited' => $this->session->userdata('nama_pegawai'),
+			'time_edited' => date('Y-m-d H:i')
+		];
+		$this->M_unit_kerja->update_data($data, $id_departemen);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
 
 	public function datatable_departemen()
@@ -84,7 +97,7 @@ class Fm_unit_kerja extends CI_Controller
 			if ($res->sts_aktif == 1) {
 				$row[] = '<small><span class="badge bg-success">Aktif</span></small>';
 			} else if ($res->sts_aktif == 2) {
-				$row[] = '<small><span class="badge bg-danger">Aktif</span></small>';
+				$row[] = '<small><span class="badge bg-danger">Tidak Aktif</span></small>';
 			}
 			if ($res->sts_aktif == 1) {
 				$row[] = '<div class="text-center">

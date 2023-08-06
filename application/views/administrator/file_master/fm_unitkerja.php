@@ -32,8 +32,8 @@
                 <input type="hidden" name="url_post" value="<?= base_url('administrator/fm_unit_kerja/save') ?>">
                 <input type="hidden" name="url_get_departemen" value="<?= base_url('administrator/fm_unit_kerja/datatable_departemen') ?>">
                 <input type="hidden" name="url_get_byid" value="<?= base_url('administrator/fm_unit_kerja/byid/') ?>">
-                <input type="hidden" name="url_get_aktif" value="<?= base_url('administrator/fm_unit_kerja/aktif/') ?>">
-                <input type="hidden" name="url_get_nonaktif" value="<?= base_url('administrator/fm_unit_kerja/nonaktif/') ?>">
+                <input type="hidden" name="url_aktifkan_departemen" value="<?= base_url('administrator/fm_unit_kerja/aktif/') ?>">
+                <input type="hidden" name="url_nonaktifkan_departemen" value="<?= base_url('administrator/fm_unit_kerja/nonaktif/') ?>">
                 <!-- end url -->
 
                 <div class="card-body">
@@ -113,7 +113,6 @@
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
                                                 <input type="text" class="form-control" value="<?= $kode_departemen ?>" name="kode_departemen" readonly>
-
                                             </div>
                                         </div>
                                         <div class="col-sm-9">

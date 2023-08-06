@@ -25,6 +25,9 @@
 
     <link href="<?php echo base_url(); ?>/assets/css/bs5-style.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>/assets/css/bs4-card.css" rel="stylesheet">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins-lte/select2/css/select2.css">
 </head>
 
 <body class="bg-white">
@@ -97,6 +100,12 @@
                             <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_karyawan">
                                 <i class="fa-solid fa-id-card-clip px-1"></i>
                                 <small> Data Karyawan</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_mjm_user">
+                                <i class="fa-solid fa-user-gear px-1"></i>
+                                <small> Manajemen Role User</small>
                             </a>
                         </li>
 
