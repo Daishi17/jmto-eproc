@@ -35,7 +35,7 @@ class M_unit_area extends CI_Model
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('id_section', 'DESC');
+            $this->db->order_by('kode_section', 'ASC');
         }
     }
 

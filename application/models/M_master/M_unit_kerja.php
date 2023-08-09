@@ -34,7 +34,7 @@ class M_unit_kerja extends CI_Model
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('kode_departemen', 'DESC');
+            $this->db->order_by('kode_departemen', 'ASC');
         }
     }
 
