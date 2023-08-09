@@ -362,6 +362,7 @@ class Sirup_rup extends CI_Controller
 		$jangka_waktu_selesai_pelaksanaan = $this->input->post('jangka_waktu_selesai_pelaksanaan');
 		$jangka_waktu_hari_pelaksanaan = $this->input->post('jangka_waktu_hari_pelaksanaan');
 		$total_pagu_rup = $this->input->post('total_pagu_rup');
+		$nilai_pencatatan = $this->input->post('nilai_pencatatan');
 		$this->form_validation->set_rules('ruas_lokasi[]', 'Ruas', 'required|trim', ['required' => 'Ruas Wajib Diisi!']);
 		$this->form_validation->set_rules('detail_lokasi_rup', 'Detail Lokasi', 'required|trim', ['required' => 'Detil Lokasi Wajib Diisi!']);
 		$this->form_validation->set_rules('tahun_rup', 'Tahun', 'required|trim', ['required' => 'Tahun Wajib Diisi!']);
@@ -434,6 +435,7 @@ class Sirup_rup extends CI_Controller
 					'jenis_produk' => $jenis_produk,
 					'status_pencatatan' => $status_pencatatan,
 					'persen_pencatatan' => $persen_pencatatan,
+					'nilai_pencatatan' => $nilai_pencatatan,
 					'jangka_waktu_mulai_pelaksanaan' => $jangka_waktu_mulai_pelaksanaan,
 					'jangka_waktu_selesai_pelaksanaan' => $jangka_waktu_selesai_pelaksanaan,
 					'jangka_waktu_hari_pelaksanaan' => $jangka_waktu_hari_pelaksanaan,
@@ -457,8 +459,7 @@ class Sirup_rup extends CI_Controller
 				}
 				$this->db->insert_batch('tbl_ruas_rup', $result);
 
-				if (!$id_rkap) {
-				} else {
+				if (!$id_rkap) { } else {
 					$where = [
 						'id_rkap' => $id_rkap
 					];
@@ -497,6 +498,7 @@ class Sirup_rup extends CI_Controller
 					'jenis_produk' => $jenis_produk,
 					'status_pencatatan' => $status_pencatatan,
 					'persen_pencatatan' => $persen_pencatatan,
+					'nilai_pencatatan' => $nilai_pencatatan,
 					'jangka_waktu_mulai_pelaksanaan' => $jangka_waktu_mulai_pelaksanaan,
 					'jangka_waktu_selesai_pelaksanaan' => $jangka_waktu_selesai_pelaksanaan,
 					'jangka_waktu_hari_pelaksanaan' => $jangka_waktu_hari_pelaksanaan,
@@ -519,8 +521,7 @@ class Sirup_rup extends CI_Controller
 					);
 				}
 				$this->db->insert_batch('tbl_ruas_rup', $result);
-				if (!$id_rkap) {
-				} else {
+				if (!$id_rkap) { } else {
 					$where = [
 						'id_rkap' => $id_rkap
 					];

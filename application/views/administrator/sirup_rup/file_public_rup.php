@@ -67,9 +67,9 @@
         var nilai_pencatatan = harga * persen_pencatatan / 100;
 
         $('[name="nilai_pencatatan"]').val(nilai_pencatatan);
-        var test = $('[name="nilai_pencatatan2"]').val(nilai_pencatatan)
+        $('#nilai_pencatatan2').val(nilai_pencatatan)
 
-        var tanpa_rupiah2 = $('[name="nilai_pencatatan2"]').val(nilai_pencatatan)
+        var tanpa_rupiah2 = document.getElementById('nilai_pencatatan2');
         tanpa_rupiah2.value = formatRupiah(this.value, 'Rp. ');
 
 

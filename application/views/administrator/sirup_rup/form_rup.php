@@ -374,8 +374,8 @@
                                     <small>
                                         <div class="input-group mb-2">
                                             <span class="input-group-text">Rp.</span>
-                                            <input name="nilai_pencatatan2" type="text" class="form-control" placeholder="Nilai Pencatatan" readonly style="background-color: #ffffe0;">
-                                            <input type="text" name="nilai_pencatatan">
+                                            <input id="nilai_pencatatan2" type="text" class="form-control" placeholder="Nilai Pencatatan" readonly style="background-color: #ffffe0;">
+                                            <input type="hidden" name="nilai_pencatatan">
                                         </div>
                                         <!-- persen_pencatatan -->
                                         <small class="text-danger persen_pencatatan_validation"></small>
