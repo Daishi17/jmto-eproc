@@ -6,8 +6,8 @@ class Cek_dokumen extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('template_new/header');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('validator/data_rekanan/cek_dokumen');
-		$this->load->view('template_new/footer');
+		$this->load->view('template_menu/footer_menu');
 	}
 }

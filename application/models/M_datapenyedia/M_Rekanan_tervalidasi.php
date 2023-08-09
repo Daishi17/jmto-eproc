@@ -1851,4 +1851,61 @@ class M_Rekanan_tervalidasi extends CI_Model
 
 
     // END RAJA TERAKHIR
+
+    // skdp
+    function get_row_skdp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_skdp');
+        $this->db->where('tbl_vendor_skdp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function get_row_skdp_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_skdp');
+        $this->db->where('tbl_vendor_skdp.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_enkrip_skdp($where, $data)
+    {
+        $this->db->update('tbl_vendor_skdp', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+
+    // izin_lain
+    function get_row_lainnya($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_izin_lain');
+        $this->db->where('tbl_vendor_izin_lain.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function get_row_lainnya_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_izin_lain');
+        $this->db->where('tbl_vendor_izin_lain.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_enkrip_lainnya($where, $data)
+    {
+        $this->db->update('tbl_vendor_izin_lain', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+    // end izin_lain
+
+    // end skdp
 }

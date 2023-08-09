@@ -6,8 +6,8 @@ class Lihat_rekanan_baru extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('template_new/header');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('validator/data_rekanan/rekanan_baru');
-		$this->load->view('template_new/footer');
+		$this->load->view('template_menu/footer_menu');
 	}
 }

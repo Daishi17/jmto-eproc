@@ -16,9 +16,9 @@ class Fm_unit_area extends CI_Controller
 		$data['kode_section'] = $this->M_unit_area->kode();
 		// var_dump($data['kode_section']);
 		// die;
-		$this->load->view('administrator/template_menu/header_menu');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('administrator/file_master/fm_unitarea', $data);
-		$this->load->view('administrator/template_menu/footer_menu');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('administrator/file_master/js_unit_area');
 	}
 

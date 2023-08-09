@@ -27,7 +27,7 @@ class Role_login
                 redirect('auth');
             } else {
                 if ($cek && password_verify($password, $cek->password)) {
-                    if ($cek->id_role == 2) {
+                    if ($cek->role == 2) {
 
                         $sekarang = date('Y-m-d H:i');
                         $data = [
@@ -43,14 +43,14 @@ class Role_login
                             'email' => $cek->email,
                             'nip' => $cek->nip,
                             'id_unit' => $cek->id_unit,
-                            'id_role' => $cek->id_role
+                            'role' => $cek->role
                         ];
 
                         // buat session
                         $this->ci->session->set_userdata($userdata);
                         redirect('administrator/dashboard');
                     }
-                    if ($cek->id_role == 4) {
+                    if ($cek->role == 4) {
 
                         $sekarang = date('Y-m-d H:i');
                         $data = [
@@ -66,7 +66,7 @@ class Role_login
                             'email' => $cek->email,
                             'nip' => $cek->nip,
                             'id_unit' => $cek->id_unit,
-                            'id_role' => $cek->id_role
+                            'role' => $cek->role
                         ];
 
                         // buat session

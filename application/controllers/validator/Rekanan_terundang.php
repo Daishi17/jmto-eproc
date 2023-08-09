@@ -16,9 +16,9 @@ class Rekanan_terundang extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('template_new/header');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('validator/data_rekanan/rekanan_terundang');
-		$this->load->view('template_new/footer');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('validator/data_rekanan/file_public_terundang');
 	}
 
@@ -67,9 +67,9 @@ class Rekanan_terundang extends CI_Controller
 			$jenis_izin[] = $test;
 		}
 		$data['nama_izin_usaha'] = implode(' , ', $jenis_izin);
-		$this->load->view('template_new/header');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('validator/data_rekanan/cek_dokumen_terundang', $data);
-		$this->load->view('template_new/footer');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('validator/data_rekanan/file_public_cek_dokumen');
 	}
 

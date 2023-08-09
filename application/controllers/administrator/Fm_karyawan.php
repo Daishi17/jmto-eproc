@@ -14,9 +14,9 @@ class Fm_karyawan extends CI_Controller
 	{
 		$data['departemen'] = $this->M_karyawan->get_departemen();
 		$data['section'] = $this->M_karyawan->get_section();
-		$this->load->view('administrator/template_menu/header_menu');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('administrator/file_master/fm_karyawan', $data);
-		$this->load->view('administrator/template_menu/footer_menu');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('administrator/file_master/js_karyawan');
 	}
 
@@ -84,11 +84,11 @@ class Fm_karyawan extends CI_Controller
 		$password = $this->input->post('password');
 
 
-		$this->form_validation->set_rules('nip', 'NIK', 'required|trim', ['required' => 'Nama Section Wajib Diisi!']);
+		$this->form_validation->set_rules('nip', 'NIK', 'required|trim|is_unique[tbl_pegawai.nip]', ['required' => 'Nama Section Wajib Diisi!', 'is_unique' => 'Username Sudah Terdaftar']);
 		$this->form_validation->set_rules('nama_pegawai', 'Nama Pegawai', 'required|trim', ['required' => 'Nama Pegawai Wajib Diisi!']);
 		$this->form_validation->set_rules('id_departemen', 'Nama Departemen', 'required|trim', ['required' => 'Departemen Wajib Diisi!']);
 		$this->form_validation->set_rules('id_section', 'Nama Section', 'required|trim', ['required' => 'Section Wajib Diisi!']);
-		$this->form_validation->set_rules('email', 'Email Pegawai', 'required|trim|valid_email', ['required' => 'Email Email Pegawai Wajib Diisi!', 'valid_email' => 'Email Tidak Valid',  'is_unique' => 'Email Sudah Terdaftar']);
+		$this->form_validation->set_rules('email', 'Email Pegawai', 'required|trim|valid_email|is_unique[tbl_pegawai.nip]', ['required' => 'Email Email Pegawai Wajib Diisi!', 'valid_email' => 'Email Tidak Valid',  'is_unique' => 'Email Sudah Terdaftar']);
 		$this->form_validation->set_rules('no_telpon', 'No Telpon', 'required|trim', ['required' => 'No. Telpon Wajib Diisi!']);
 		// $this->form_validation->set_rules('id_role', 'Nama Section', 'required|trim', ['required' => 'Role Wajib Diisi!']);
 		// $this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);

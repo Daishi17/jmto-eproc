@@ -101,6 +101,18 @@
                                                 <small><b>SIUJK</b></small>
                                             </button>
 
+                                            <input type="hidden" name="url_download_skdp" value="<?= base_url('validator/rekanan_tervalidasi/url_download_skdp/') ?>">
+                                            <button class="nav-link" id="nav-skdp-tab" data-bs-toggle="tab" data-bs-target="#nav-skdp" type="button" role="tab" aria-controls="nav-skdp" aria-selected="false">
+                                                <i class="fa-regular fa-file-word"></i>
+                                                <small><b>SKDP</b></small>
+                                            </button>
+
+                                            <input type="hidden" name="url_download_lainnya" value="<?= base_url('validator/rekanan_tervalidasi/url_download_lainnya/') ?>">
+                                            <button class="nav-link" id="nav-lainnya-tab" data-bs-toggle="tab" data-bs-target="#nav-lainnya" type="button" role="tab" aria-controls="nav-lainnya" aria-selected="false">
+                                                <i class="fa-regular fa-file-word"></i>
+                                                <small><b>Izin Lainnya</b></small>
+                                            </button>
+
                                             <input type="hidden" name="url_download_akta_pendirian" value="<?= base_url('validator/rekanan_tervalidasi/url_download_akta_pendirian/') ?>">
                                             <input type="hidden" name="url_download_akta_perubahan" value="<?= base_url('validator/rekanan_tervalidasi/url_download_akta_perubahan/') ?>">
                                             <button class="nav-link" id="nav-akta-tab" data-bs-toggle="tab" data-bs-target="#nav-akta" type="button" role="tab" aria-controls="nav-akta" aria-selected="true">
@@ -116,12 +128,16 @@
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Pengalaman</b></small>
                                             </button>
+
                                             <input type="hidden" name="url_download_neraca" value="<?= base_url('validator/rekanan_tervalidasi/url_download_neraca/') ?>">
                                             <input type="hidden" name="url_download_keuangan" value="<?= base_url('validator/rekanan_tervalidasi/url_download_keuangan/') ?>">
                                             <button class="nav-link" id="nav-pajak-tab" data-bs-toggle="tab" data-bs-target="#nav-pajak" type="button" role="tab" aria-controls="nav-pajak" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Pajak</b></small>
                                             </button>
+
+
+
                                         </div>
                                         <div class="tab-content p-3 border bg-light" id="nav-tabContent">
                                             <!-- siupku -->
@@ -319,6 +335,52 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- skdpku -->
+                                            <div class="tab-pane fade  show" id="nav-skdp" role="tabpanel" aria-labelledby="nav-skdp-tab">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <table class="table table-bordered table-sm">
+                                                            <thead class="bg-info">
+                                                                <tr>
+                                                                    <th><small>No. Surat<small></th>
+                                                                    <th><small>Berlaku Sampai<small></th>
+                                                                    <th colspan="2"><small>File Dokumen<small></th>
+                                                                    <th><small>Status Validasi<small></th>
+                                                                    <th><small>Nama Validator<small></th>
+                                                                    <th class="text-center"><small>More Options<small></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="load_skdp">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- lainnyaku -->
+                                            <div class="tab-pane fade  show" id="nav-lainnya" role="tabpanel" aria-labelledby="nav-lainnya-tab">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <table class="table table-bordered table-sm">
+                                                            <thead class="bg-info">
+                                                                <tr>
+                                                                    <th><small>No. Surat<small></th>
+                                                                    <th><small>Berlaku Sampai<small></th>
+                                                                    <th colspan="2"><small>File Dokumen<small></th>
+                                                                    <th><small>Status Validasi<small></th>
+                                                                    <th><small>Nama Validator<small></th>
+                                                                    <th class="text-center"><small>More Options<small></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="load_lainnya">
+
                                                             </tbody>
                                                         </table>
                                                     </div>
