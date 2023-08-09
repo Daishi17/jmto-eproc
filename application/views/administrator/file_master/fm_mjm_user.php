@@ -30,11 +30,15 @@
                 <!-- url -->
                 <input type="hidden" name="url_get_bynip" value="<?= base_url('administrator/fm_mjm_user/get_byid/') ?>">
                 <input type="hidden" name="url_post" value="<?= base_url('administrator/fm_mjm_user/save/') ?>">
+                <input type="hidden" name="url_post_edit" value="<?= base_url('administrator/fm_mjm_user/update/') ?>">
+                <input type="hidden" name="url_get_manajemen_user" value="<?= base_url('administrator/fm_mjm_user/datatable_karyawan/') ?>">
+                <input type="hidden" name="url_get_byid" value="<?= base_url('administrator/fm_mjm_user/get_byid_mjm/') ?>">
                 <!-- end url -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-sm table-striped">
+                    <table id="tbl_manajemen_user" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary">
                             <tr>
+                                <th style="width:5%;"><small class="text-white">No</small></th>
                                 <th style="width:10%;"><small class="text-white">Kode</small></th>
                                 <th style="width:25%;"><small class="text-white">NIK & Nama Karyawan</small></th>
                                 <th style="width:15%;"><small class="text-white">User Account</small></th>
@@ -45,89 +49,13 @@
                                     </small></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td><small>001</small></td>
-                                <td><small>12345 || Angga</small></td>
-                                <td><small>validator@angga</small></td>
-                                <td><small><span class="badge swatch-orange">Validator</span></small></td>
-                                <td><small><span class="badge bg-success">Aktif</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
-                                            <i class="fa-solid fa-users-viewfinder px-1"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                            <i class="fa-solid fa-trash-can px-1"></i>
-                                            <small>Non Aktif</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><small>002</small></td>
-                                <td><small>23456 || danang</small></td>
-                                <td><small>panitia@danang</small></td>
-                                <td><small><span class="badge bd-cyan-700">Panitia</span></small></td>
-                                <td><small><span class="badge bg-success">Aktif</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
-                                            <i class="fa-solid fa-users-viewfinder px-1"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                            <i class="fa-solid fa-trash-can px-1"></i>
-                                            <small>Non Aktif</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><small>003</small></td>
-                                <td><small>12345 || Angga</small></td>
-                                <td><small>unit@angga</small></td>
-                                <td><small><span class="badge swatch-purple">Unit Kerja</span></small></td>
-                                <td><small><span class="badge bg-success">Aktif</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
-                                            <i class="fa-solid fa-users-viewfinder px-1"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                            <i class="fa-solid fa-trash-can px-1"></i>
-                                            <small>Non Aktif</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><small>004</small></td>
-                                <td><small>23456 || danang</small></td>
-                                <td><small>admin@danang</small></td>
-                                <td><small><span class="badge swatch-pink">Administrator</span></small></td>
-                                <td><small><span class="badge bg-success">Aktif</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
-                                            <i class="fa-solid fa-users-viewfinder px-1"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                            <i class="fa-solid fa-trash-can px-1"></i>
-                                            <small>Non Aktif</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal fade" tabindex="-1" id="modal-xl-tambah">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
@@ -230,6 +158,116 @@
                                                 </div>
                                                 <small class="password2 text-danger"></small>
                                             </div>
+                                            <!-- <div class="col-sm-2">
+                                                <button type="button" class="btn btn-success btn-sm shadow-lg" disabled>
+                                                    <i class="fa-solid fa-floppy-disk px-1"></i>
+                                                    Simpan Data
+                                                </button>
+                                            </div> -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-start">
+                        <button type="submit" class="btn btn-default btn-success shadow-lg">
+                            <i class="fa-solid fa-floppy-disk px-1"></i>
+                            Simpan Data
+                        </button>
+                        <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-rectangle-xmark"></i>
+                            Keluar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal-xl-edit">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="navbar-brand">
+                        <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                        <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+                    </a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="javascript:;" id="form_mjm_user_edit">
+                    <input type="hidden" name="id_manajemen_user">
+                    <input type="hidden" name="id_pegawai_edit">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card border-dark shadow-lg">
+                                    <div class="card-header border-dark bd-blue-700 d-flex justify-content-between align-items-center">
+                                        <div class="flex-grow-1 bd-highlight">
+                                            <span class="text-white">
+                                                <i class="fa-regular fa-rectangle-list px-1"></i>
+                                                <small><strong>Form Isian - Manajemen User</strong></small>
+                                            </span>
+                                        </div>
+                                        <!-- <div class="bd-highlight">
+                                        <button type="button" class="btn btn-secondary btn-sm shadow-lg">
+                                            <i class="fa-solid fa-pen-to-square px-1"></i>
+                                            Ubah Data
+                                        </button>
+                                    </div> -->
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="row g-1">
+                                            <div class="col-sm-4">
+                                                <div class="input-group mb-1">
+                                                    <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
+                                                    <input type="text" class="form-control" name="kode_mjm_user_edit" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="input-group mb-1">
+                                                    <span class="input-group-text"><i class="fa-solid fa-user-tie fa-lg"></i></span>
+                                                    <!-- <input class="form-control" list="datalist_karyawan" id="exampleDataList" placeholder="Pilih Karyawan..." name="id_pegawai" onclick="click_pegawai()" onkeyup="keyup_pegawai()"> -->
+                                                    <select class="form-control" name="id_pegawai_edit" onchange="get_pegawai_edit()" disabled>
+                                                        <?php foreach ($karyawan as $res) { ?>
+                                                            <option value="<?= $res['id_pegawai'] ?> "><?= $res['nama_pegawai'] ?> </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="input-group mb-1">
+                                                    <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
+                                                    <input type="text" class="form-control" name="nama_departemen_edit" placeholder="Departemen <<auto>>" disabled>
+                                                    <!-- <select class="form-select" aria-label="Default select example" disabled>
+                                                        <option selected>Departemen automatis</option>
+                                                        <option value="1">Human Capital & General Affair</option>
+                                                        <option value="2">Finance & Accounting</option>
+                                                        <option value="3">Operations 1</option>
+                                                    </select> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group mb-1">
+                                                    <span class="input-group-text"><i class="fa-solid fa-user-gear"></i></span>
+                                                    <select class="form-select" aria-label="Default select example" name="id_role_edit">
+                                                        <option value="2">Administrator</option>
+                                                        <option value="3">Unit Kerja</option>
+                                                        <option value="4">Validator</option>
+                                                        <option value="5">Panitia</option>
+                                                    </select>
+                                                </div>
+                                                <small class="role text-danger"></small>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="input-group mb-1">
+                                                    <span class="input-group-text"><i class="fa-solid fa-user-lock"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Buat Akun User" name="username_edit" disabled>
+                                                </div>
+                                            </div>
+
                                             <!-- <div class="col-sm-2">
                                                 <button type="button" class="btn btn-success btn-sm shadow-lg" disabled>
                                                     <i class="fa-solid fa-floppy-disk px-1"></i>

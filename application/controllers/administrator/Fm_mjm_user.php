@@ -13,13 +13,26 @@ class Fm_mjm_user extends CI_Controller
 	private function _role($role)
 	{
 		if ($role == '2') {
-			echo 'Administrator';
+			return 'Administrator';
 		} else if ($role == '3') {
-			echo 'Unit Kerja';
+			return 'Unit Kerja';
 		} else if ($role == '4') {
-			echo 'Validator';
+			return 'Validator';
 		} else if ($role == '5') {
-			echo 'Panitia';
+			return 'Panitia';
+		}
+	}
+
+	private function _role_badge($role)
+	{
+		if ($role == '2') {
+			return '<small><span class="badge swatch-pink">Administrator</span></small>';
+		} else if ($role == '3') {
+			return '<small><span class="badge swatch-purple">Unit Kerja</span></small>';
+		} else if ($role == '4') {
+			return '<small><span class="badge swatch-orange">Validator</span></small>';
+		} else if ($role == '5') {
+			return '<small><span class="badge bd-cyan-700">Panitia</span></small>';
 		}
 	}
 
@@ -33,10 +46,68 @@ class Fm_mjm_user extends CI_Controller
 		$this->load->view('administrator/file_master/js_mjm_user');
 	}
 
+	public function datatable_karyawan()
+	{
+		$result = $this->M_mjm_user->getdatatable();
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $res) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $res->kode_mjm_user;
+			$row[] = $res->nip . " || " . $res->nama_pegawai;
+			$row[] = $res->username;
+			$row[] = $this->_role_badge($res->role);
+			if ($res->status == 1) {
+				$row[] = '<small><span class="badge bg-success">Aktif</span></small>';
+			} else if ($res->status == 2) {
+				$row[] = '<small><span class="badge bg-danger">Tidak Aktif</span></small>';
+			}
+			if ($res->status == 1) {
+				$row[] = '<div class="text-center">
+							<button type="button" class="btn btn-danger btn-sm shadow-lg" onClick="byid(' . "'" . $res->id_manajemen_user  . "','nonaktif'" . ')" title="Non-Aktif">
+								<i class="fa-solid fa-trash-can px-1"></i>
+								<small>Non Aktif</small>
+							</button>
+							<button type="button" class="btn btn-info btn-sm shadow-lg" onClick="byid(' . "'" . $res->id_manajemen_user  . "','edit'" . ')" title="Edit Data">
+							<i class="fa-solid fa-edit px-1"></i>
+							<small>Detail</small>
+						</button>
+						</div>';
+			} else {
+				$row[] = '<div class="text-center">
+							<button type="button" class="btn btn-success btn-sm shadow-lg" onClick="byid(' . "'" . $res->id_manajemen_user  . "','aktif'" . ')" title="Aktif">
+								<i class="fa-solid fa-check px-1"></i>
+								<small>Aktifkan</small>
+							</button>
+							<button type="button" class="btn btn-info btn-sm shadow-lg" onClick="byid(' . "'" . $res->id_manajemen_user  . "','edit'" . ')" title="Edit Data">
+							<i class="fa-solid fa-edit px-1"></i>
+							<small>Detail</small>
+						</div>';
+			}
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_mjm_user->count_all_data(),
+			"recordsFiltered" => $this->M_mjm_user->count_filtered_data(),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
 	public function get_byid($value)
 	{
 
 		$data = $this->M_mjm_user->getByid($value);
+		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+
+
+	public function get_byid_mjm($value)
+	{
+
+		$data = $this->M_mjm_user->getByid_mjm($value);
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
@@ -51,7 +122,7 @@ class Fm_mjm_user extends CI_Controller
 
 		$this->form_validation->set_rules('id_pegawai', 'Nama Pegawai', 'required|trim', ['required' => 'Nama Pegawai Wajib Diisi!']);
 		$this->form_validation->set_rules('id_role', 'Role', 'required|trim', ['required' => 'Role Wajib Diisi!']);
-		$this->form_validation->set_rules('username', 'Username', 'required|trim', ['required' => 'Username Wajib Diisi!']);
+		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[tbl_manajemen_user.username]', ['required' => 'Username Wajib Diisi!', 'is_unique' => 'Username Sudah Terdaftar']);
 		$this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);
 		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password]', ['required' => 'Password Verifikasi Wajib Di isi!', 'matches' => 'Password Tidak Sama']);
 
@@ -67,49 +138,18 @@ class Fm_mjm_user extends CI_Controller
 			];
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
-			// $data = [
-			// 	'kode_mjm_user' => $kode_mjm_user,
-			// 	'id_pegawai' => $id_pegawai,
-			// 	'role' => $id_role,
-			// 	'username' => $username,
-			// 	'password' => password_hash($password, PASSWORD_DEFAULT),
-			// ];
-			// $this->M_mjm_user->insert_data($data);
-			// $kode = $this->M_mjm_user->kode();
-			// $output = [
-			// 	"kode" => $kode
-			// ];
-			// $this->output->set_content_type('application/json')->set_output(json_encode($output));
-
 
 			// checking role pegawai
-			$get_pegawai = $this->M_mjm_user->getByid_user($id_pegawai);
+			$get_pegawai = $this->M_mjm_user->getByid_user($id_pegawai, $id_role);
 			// checking pegawai 
-			if ($get_pegawai['id_pegawai']) {
+			if ($get_pegawai) {
 				// checking role pegawai
-				if ($get_pegawai['role'] == $id_role) {
-
-					$response = [
-						'error2' => [
-							'id_role' => 'Nama Pegawai ' . $id_pegawai . ' Dengan Role ' . $id_role,
-						],
-					];
-					$this->output->set_content_type('application/json')->set_output(json_encode($response));
-				} else {
-					$data = [
-						'kode_mjm_user' => $kode_mjm_user,
-						'id_pegawai' => $id_pegawai,
-						'role' => $id_role,
-						'username' => $username,
-						'password' => password_hash($password, PASSWORD_DEFAULT),
-					];
-					$this->M_mjm_user->insert_data($data);
-					$kode = $this->M_mjm_user->kode();
-					$output = [
-						"kode" => $kode
-					];
-					$this->output->set_content_type('application/json')->set_output(json_encode($output));
-				}
+				$response = [
+					'error2' => [
+						'id_role' => 'Nama Pegawai ' . $get_pegawai['nama_pegawai'] . ' Dengan Role ' . $this->_role($id_role) . ' Sudah Ada',
+					],
+				];
+				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
 				$data = [
 					'kode_mjm_user' => $kode_mjm_user,
@@ -123,8 +163,39 @@ class Fm_mjm_user extends CI_Controller
 				$output = [
 					"kode" => $kode
 				];
-				$this->output->set_content_type('application/json')->set_output(json_encode($response));
+				$this->output->set_content_type('application/json')->set_output(json_encode($output));
 			}
+		}
+	}
+
+	public function update()
+	{
+		$id_pegawai = $this->input->post('id_pegawai_edit');
+		$id_role = $this->input->post('id_role_edit');
+
+		$id_manajemen_user = $this->input->post('id_manajemen_user');
+
+		// checking role pegawai
+		$get_pegawai = $this->M_mjm_user->getByid_user($id_pegawai, $id_role);
+		// checking pegawai 
+		if ($get_pegawai) {
+			// checking role pegawai
+			$response = [
+				'error2' => [
+					'id_role' => 'Nama Pegawai ' . $get_pegawai['nama_pegawai'] . ' Dengan Role ' . $this->_role($id_role) . ' Sudah Ada',
+				],
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		} else {
+			$data = [
+				'role' => $id_role,
+			];
+			$this->M_mjm_user->update_data($data, $id_manajemen_user);
+			$kode = $this->M_mjm_user->kode();
+			$output = [
+				"kode" => $kode
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($output));
 		}
 	}
 }
