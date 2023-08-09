@@ -51,7 +51,7 @@ class Sirup_rup extends CI_Controller
 				<a href="javascript:;" class="btn btn-success btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "','finalisasi'" . ')"><i class="fa-regular fa-circle-up px-1"></i> Finalisasi</a>
 				</div>';
 			} else {
-				$row[] = '<div class="text-center">
+				$row[] = '<div class="text-center"><a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "','detail_rup'" . ')"><i class="fa-solid fa-square-plus px-1"></i> Detail</a>
 				<button type="button" class="btn btn-success btn-sm shadow-lg" disabled>
 				<i class="fa-regular fa-circle-up px-1"></i>
 					<small>Finalisasi</small>

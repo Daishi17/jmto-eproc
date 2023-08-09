@@ -30,7 +30,7 @@ class Sirup_buat_paket extends CI_Controller
 
 	function get_rup()
 	{
-		$result = $this->M_rup->gettable_rup();
+		$result = $this->M_rup->gettable_rup_paket();
 		$data = [];
 		$no = $_POST['start'];
 		foreach ($result as $rs) {
@@ -48,8 +48,8 @@ class Sirup_buat_paket extends CI_Controller
 		}
 		$output = array(
 			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->M_rup->count_all_rup(),
-			"recordsFiltered" => $this->M_rup->count_filtered_rup(),
+			"recordsTotal" => $this->M_rup->count_all_rup_paket(),
+			"recordsFiltered" => $this->M_rup->count_filtered_rup_paket(),
 			"data" => $data
 		);
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));
