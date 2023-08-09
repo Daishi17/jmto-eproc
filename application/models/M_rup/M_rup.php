@@ -150,6 +150,7 @@ class M_rup extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_manajemen_user');
         $this->db->join('tbl_pegawai', 'tbl_manajemen_user.id_pegawai = tbl_pegawai.id_pegawai', 'left');
+        $this->db->where('tbl_manajemen_user.role', 5);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -239,6 +240,18 @@ class M_rup extends CI_Model
         $this->db->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_manajemen_user.id_pegawai', 'left');
         $this->db->where('tbl_panitia.id_rup', $id_rup);
         $this->db->where('tbl_panitia.role_panitia', $role_panitia);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function cek_user_panitia($id_rup, $id_pegawai)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_panitia');
+        $this->db->join('tbl_manajemen_user', 'tbl_manajemen_user.id_manajemen_user = tbl_panitia.id_manajemen_user', 'left');
+        $this->db->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_manajemen_user.id_pegawai', 'left');
+        $this->db->where('tbl_panitia.id_rup', $id_rup);
+        $this->db->where('tbl_pegawai.id_pegawai', $id_pegawai);
         $query = $this->db->get();
         return $query->row_array();
     }

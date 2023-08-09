@@ -1,5 +1,5 @@
 <main class="container-fluid">
-    <input type="text" name="random_kode">
+    <input type="hidden" name="random_kode">
     <div class="row">
         <div class="col">
             <div class="card border-dark">
@@ -432,14 +432,6 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="input-group mb-2">
-                                                                        <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
-                                                                        <select class="form-select" name="id_jadwal_tender" id="id_jadwal_tender" aria-label="Default select example">
-                                                                            <option>Metode Pemilihan Dokumen</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-regular fa-calendar-check"></i></span>
                                                                         <select class="form-select" aria-label="Default select example">
                                                                             <option selected>Pilih Jenis Jadwal</option>
@@ -517,7 +509,7 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                          
+
                                                                         </tbody>
                                                                     </table>
                                                                 </th>

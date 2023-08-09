@@ -112,7 +112,7 @@
                                         <div class="col-sm-3">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                                <input type="text" class="form-control" value="<?= $kode_departemen ?>" name="kode_departemen" readonly>
+                                                <input type="text" class="form-control" value="<?= $kode_departemen ?>" name="kode_departemen" readonly style="background-color: #ffffe0;">
                                             </div>
                                         </div>
                                         <div class="col-sm-9">

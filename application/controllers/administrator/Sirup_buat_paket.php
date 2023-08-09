@@ -75,32 +75,16 @@ class Sirup_buat_paket extends CI_Controller
 		$row_pegawai_panitia = $this->M_rup->pegawai_panitia_by_kode_mnjm_user($kode_mnj_user);
 		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$cek_data_role_ketua = $this->M_rup->cek_role_panitia($row_rup['id_rup'], $role_panitia);
-		if (!$cek_data_role_ketua) {
-			$id = $this->uuid->v4();
-			$id = str_replace('-', '', $id);
-			$data  = array(
-				'id_url_panitia' => $id,
-				'id_manajemen_user' => $row_pegawai_panitia['id_manajemen_user'],
-				'role_panitia' => $role_panitia,
-				'id_rup' => $row_rup['id_rup']
-			);
-			$this->db->insert('tbl_panitia', $data);
+
+		$cek_user_panitia = $this->M_rup->cek_user_panitia($row_rup['id_rup'], $row_pegawai_panitia['id_pegawai']);
+
+		if ($cek_user_panitia) {
 			$response = [
-				'success' => 'success'
+				'error' => 'User Panitia Panitia Sudah Ada',
 			];
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
-			if ($cek_data_role_ketua['role_panitia'] == 1) {
-				$response = [
-					'error' => 'Role Ketua Panitia Sudah Ada',
-				];
-				$this->output->set_content_type('application/json')->set_output(json_encode($response));
-			} else if ($cek_data_role_ketua['role_panitia'] == 2) {
-				$response = [
-					'error' => 'Role Sekertaris Sudah Ada',
-				];
-				$this->output->set_content_type('application/json')->set_output(json_encode($response));
-			} else {
+			if (!$cek_data_role_ketua) {
 				$id = $this->uuid->v4();
 				$id = str_replace('-', '', $id);
 				$data  = array(
@@ -114,6 +98,33 @@ class Sirup_buat_paket extends CI_Controller
 					'success' => 'success'
 				];
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			} else {
+
+				if ($cek_data_role_ketua['role_panitia'] == 1) {
+					$response = [
+						'error' => 'Role Ketua Panitia Sudah Ada',
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+				} else if ($cek_data_role_ketua['role_panitia'] == 2) {
+					$response = [
+						'error' => 'Role Sekertaris Sudah Ada',
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+				} else {
+					$id = $this->uuid->v4();
+					$id = str_replace('-', '', $id);
+					$data  = array(
+						'id_url_panitia' => $id,
+						'id_manajemen_user' => $row_pegawai_panitia['id_manajemen_user'],
+						'role_panitia' => $role_panitia,
+						'id_rup' => $row_rup['id_rup']
+					);
+					$this->db->insert('tbl_panitia', $data);
+					$response = [
+						'success' => 'success'
+					];
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+				}
 			}
 		}
 	}

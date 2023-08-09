@@ -371,6 +371,15 @@
                                         <!-- persen_pencatatan -->
                                         <small class="text-danger persen_pencatatan_validation"></small>
                                     </small>
+                                    <small>
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text">Rp.</span>
+                                            <input name="nilai_pencatatan2" type="text" class="form-control" placeholder="Nilai Pencatatan" readonly style="background-color: #ffffe0;">
+                                            <input type="text" name="nilai_pencatatan">
+                                        </div>
+                                        <!-- persen_pencatatan -->
+                                        <small class="text-danger persen_pencatatan_validation"></small>
+                                    </small>
                                 </td>
                             </tr>
                             <tr>
@@ -401,7 +410,7 @@
                                                 <td>
                                                     <small>
                                                         <div class="input-group mb-2">
-                                                            <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                            <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i>&ensp; Tahun Awal</span>
                                                             <input name="jangka_waktu_mulai_pelaksanaan" type="date" class="form-control">
                                                         </div>
                                                         <!-- jangka_waktu_mulai_pelaksanaan -->
@@ -411,7 +420,7 @@
                                                 <td>
                                                     <small>
                                                         <div class="input-group mb-2">
-                                                            <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                            <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i>&ensp; Tahun Akhir</span>
                                                             <input name="jangka_waktu_selesai_pelaksanaan" type="date" class="form-control">
                                                         </div>
                                                         <!-- jangka_waktu_selesai_pelaksanaan -->

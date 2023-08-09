@@ -84,7 +84,7 @@ class Fm_karyawan extends CI_Controller
 		$password = $this->input->post('password');
 
 
-		$this->form_validation->set_rules('nip', 'NIK', 'required|trim|is_unique[tbl_pegawai.nip]', ['required' => 'Nama Section Wajib Diisi!', 'is_unique' => 'Username Sudah Terdaftar']);
+		$this->form_validation->set_rules('nip', 'NIK', 'required|trim|is_unique[tbl_pegawai.nip]', ['required' => 'Nama Section Wajib Diisi!', 'is_unique' => 'NIK Sudah Terdaftar']);
 		$this->form_validation->set_rules('nama_pegawai', 'Nama Pegawai', 'required|trim', ['required' => 'Nama Pegawai Wajib Diisi!']);
 		$this->form_validation->set_rules('id_departemen', 'Nama Departemen', 'required|trim', ['required' => 'Departemen Wajib Diisi!']);
 		$this->form_validation->set_rules('id_section', 'Nama Section', 'required|trim', ['required' => 'Section Wajib Diisi!']);

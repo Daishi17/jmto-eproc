@@ -193,7 +193,7 @@
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_buat_paket">
                                 <i class="fa-solid fa-business-time px-1"></i>
-                                <small>Buat Paket Penyedia</small>
+                                <small>Buat Paket Tender / Pengadaan</small>
                             </a>
                         </li>
                     </ul>

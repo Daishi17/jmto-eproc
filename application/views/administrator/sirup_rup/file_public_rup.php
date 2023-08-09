@@ -62,6 +62,18 @@
         var harga = $(".total_pagu_rup").val();
         var tanpa_rupiah = document.getElementById('rupiah_total_pagu_rup');
         tanpa_rupiah.value = formatRupiah(this.value, 'Rp. ');
+
+        var persen_pencatatan = $('[name="persen_pencatatan"]').val()
+        var nilai_pencatatan = harga * persen_pencatatan / 100;
+
+        $('[name="nilai_pencatatan"]').val(nilai_pencatatan);
+        var test = $('[name="nilai_pencatatan2"]').val(nilai_pencatatan)
+
+        var tanpa_rupiah2 = $('[name="nilai_pencatatan2"]').val(nilai_pencatatan)
+        tanpa_rupiah2.value = formatRupiah(this.value, 'Rp. ');
+
+
+
         /* Fungsi */
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, '').toString(),
