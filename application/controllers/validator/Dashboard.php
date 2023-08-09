@@ -47,9 +47,9 @@ class Dashboard extends CI_Controller
 			'rekanan_terundang_des' => $this->M_Dashboard->count_terundang_des(),
 		];
 
-		$this->load->view('template_new/header');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('validator/dashboard/index', $data);
-		$this->load->view('template_new/footer');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('validator/dashboard/file_public', $chart);
 	}
 }

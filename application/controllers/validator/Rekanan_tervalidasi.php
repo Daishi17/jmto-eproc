@@ -15,9 +15,9 @@ class Rekanan_tervalidasi extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('template_new/header');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('validator/data_rekanan/rekanan_tervalidasi');
-		$this->load->view('template_new/footer');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('validator/data_rekanan/file_public_tervalidasi');
 	}
 
@@ -61,9 +61,9 @@ class Rekanan_tervalidasi extends CI_Controller
 			$jenis_izin[] = $test;
 		}
 		$data['nama_izin_usaha'] = implode(' , ', $jenis_izin);
-		$this->load->view('template_new/header');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('validator/data_rekanan/cek_dokumen', $data);
-		$this->load->view('template_new/footer');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('validator/data_rekanan/file_public_cek_dokumen');
 	}
 

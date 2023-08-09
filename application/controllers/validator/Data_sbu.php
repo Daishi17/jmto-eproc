@@ -11,9 +11,9 @@ class Data_sbu extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('template_new/header');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('validator/data_master/data_sbu');
-		$this->load->view('template_new/footer');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('validator/data_master/file_public_sbu');
 	}
 

@@ -153,7 +153,7 @@
 
                             form_mjm_user[0].reset();
                             $('[name="kode_mjm_user"]').val(response.kode);
-                            // reload_table()
+                            reload_table()
                             Swal.fire('Data Berhasil Di Masukkan!', '', 'success')
                         }
                     }).then((result) => {
@@ -206,7 +206,7 @@
                             $('#modal-xl-edit').modal('hide')
 
                             form_mjm_user_edit[0].reset();
-                            // reload_table()
+                            reload_table()
                             Swal.fire('Data Berhasil Di Masukkan!', '', 'success')
                         }
                     }).then((result) => {

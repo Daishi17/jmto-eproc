@@ -40,9 +40,9 @@ class Fm_mjm_user extends CI_Controller
 	{
 		$data['karyawan'] = $this->M_mjm_user->get_karyawan();
 		$data['kode'] = $this->M_mjm_user->kode();
-		$this->load->view('administrator/template_menu/header_menu');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('administrator/file_master/fm_mjm_user', $data);
-		$this->load->view('administrator/template_menu/footer_menu');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('administrator/file_master/js_mjm_user');
 	}
 

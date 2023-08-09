@@ -14,9 +14,9 @@ class Fm_unit_kerja extends CI_Controller
 	public function index()
 	{
 		$data['kode_departemen'] = $this->M_unit_kerja->kode();
-		$this->load->view('administrator/template_menu/header_menu');
+		$this->load->view('template_menu/header_menu');
 		$this->load->view('administrator/file_master/fm_unitkerja', $data);
-		$this->load->view('administrator/template_menu/footer_menu');
+		$this->load->view('template_menu/footer_menu');
 		$this->load->view('administrator/file_master/js_unit_kerja');
 	}
 
