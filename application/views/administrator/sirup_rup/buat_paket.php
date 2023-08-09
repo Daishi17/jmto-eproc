@@ -1,4 +1,5 @@
 <main class="container-fluid">
+    <input type="text" name="random_kode">
     <div class="row">
         <div class="col">
             <div class="card border-dark">
@@ -10,7 +11,8 @@
                         </span>
                     </h6>
                 </div>
-            </div><hr>
+            </div>
+            <hr>
             <div class="card border-dark">
                 <div class="card-header border-dark bg-warning d-flex justify-content-between align-items-center">
                     <div class="flex-grow-1 bd-highlight">
@@ -36,7 +38,9 @@
                                 <th style="width:20%;"><small class="text-white">Departemen</small></th>
                                 <th style="width:10%;"><small class="text-white">Total Pagu (Rp.)</small></th>
                                 <th style="width:10%;"><small class="text-white">Status</small></th>
-                                <th style="width:15%;"><small class="text-white"><div class="text-center">More Options</div></small></th>
+                                <th style="width:15%;"><small class="text-white">
+                                        <div class="text-center">More Options</div>
+                                    </small></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +95,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <a class="navbar-brand">
-                        <img src="<?php echo base_url();?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                        <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
                         <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
                     </a>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -159,10 +163,11 @@
                                                             <i class="fa-solid fa-filter px-1"></i>
                                                             Filter Data
                                                         </button>
-                                                    </div><hr>
+                                                    </div>
+                                                    <hr>
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <table id="example2" class="table table-bordered table-sm table-striped">
+                                                            <table id="tbl_rup" class="table table-bordered table-sm table-striped">
                                                                 <thead class="bg-secondary">
                                                                     <tr>
                                                                         <th style="width:8%;"><small class="text-white">Kode</small></th>
@@ -171,43 +176,12 @@
                                                                         <th style="width:15%;"><small class="text-white">Departemen</small></th>
                                                                         <th style="width:15%;"><small class="text-white">Total Pagu (Rp)</small></th>
                                                                         <th style="width:15%;"><small class="text-white">Jenis Pengadaan</small></th>
-                                                                        <th style="width:14%;"><small class="text-white"><div class="text-center">Options</div></small></th>
+                                                                        <th style="width:14%;"><small class="text-white">
+                                                                                <div class="text-center">Options</div>
+                                                                            </small></th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td><small>2023.101.201.001</small></td>
-                                                                        <td><small>2023</small></td>
-                                                                        <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                                                        <td><small>Human Capital & General Affair</small></td>
-                                                                        <td><small>1.500.000.000</small></td>
-                                                                        <td><small>Jasa Lain</small></td>
-                                                                        <td>
-                                                                            <div class="text-center">
-                                                                                <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal"data-bs-dismiss="modal" data-bs-target="#modal-xl-paket">
-                                                                                    <i class="fa-solid fa-square-plus"></i>
-                                                                                    <small>Buat Paket</small>
-                                                                                </button>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><small>2023.101.201.002</small></td>
-                                                                        <td><small>2023</small></td>
-                                                                        <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                                                        <td><small>Human Capital & General Affair</small></td>
-                                                                        <td><small>1.500.000.000</small></td>
-                                                                        <td><small>Jasa Konsultasi</small></td>
-                                                                        <td>
-                                                                            <div class="text-center">
-                                                                                <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#modal-xl-paket">
-                                                                                    <i class="fa-solid fa-square-plus"></i>
-                                                                                    <small>Buat Paket</small>
-                                                                                </button>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
+                                                                <tbody></tbody>
                                                             </table>
                                                         </div>
                                                     </div>
@@ -234,7 +208,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <a class="navbar-brand">
-                        <img src="<?php echo base_url();?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                        <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
                         <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
                     </a>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -260,14 +234,16 @@
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-barcode px-2"></i>
-                                                    <small>CP.2023.101.201.0001</small>
+                                                    <!-- kode_rup -->
+                                                    <small id="kode_rup"></small>
                                                 </td>
                                                 <th class="bg-light">
                                                     <small>Tahun</small>
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-calendar-days px-2"></i>
-                                                    <small>2023</small>
+                                                    <!-- tahun_rup -->
+                                                    <small id="tahun_rup"></small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -276,14 +252,16 @@
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-building-columns px-2"></i>
-                                                    <small>Human Capital & General Affair</small>
+                                                    <!-- nama_departemen -->
+                                                    <small id="nama_departemen"></small>
                                                 </td>
                                                 <th class="bg-light">
                                                     <small>Sections</small>
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-map px-2"></i>
-                                                    <small>Procurement</small>
+                                                    <!-- nama_section -->
+                                                    <small id="nama_section"></small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -292,7 +270,8 @@
                                                 </th>
                                                 <td colspan="3">
                                                     <i class="fa-solid fa-gift px-2"></i>
-                                                    <small>Pengadaan Sewa Keamanan / Security Periode Kedua</small>
+                                                    <!-- nama_rup -->
+                                                    <small id="nama_rup"></small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -301,7 +280,8 @@
                                                 </th>
                                                 <td colspan="3">
                                                     <i class="fa-solid fa-align-justify px-2"></i>
-                                                    <small>Sewa Keamaan Periode Kedua Untuk Gerbang Toll Jagorawi Periode Kedua</small>
+                                                    <!-- deskripsi_rup -->
+                                                    <small id="deskripsi_rup"></small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -310,7 +290,8 @@
                                                 </th>
                                                 <td colspan="3">
                                                     <i class="fa-solid fa-map-location-dot px-2"></i>
-                                                    <small>Gerbang Toll Jakarta Cikampek</small>
+                                                    <!-- detail_lokasi_rup -->
+                                                    <small id="detail_lokasi_rup"></small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -319,8 +300,9 @@
                                                 </th>
                                                 <td colspan="3">
                                                     <i class="fa-solid fa-road px-2"></i>
-                                                    <small>Ruas Toll Jakarta Cikampek KM 17</small>&nbsp;&amp;
-                                                    <small>Ruas Toll Jakarta Cikampek KM 37</small>
+                                                    <smal id="detail_ruas_rup">
+
+                                                    </smal>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -329,16 +311,16 @@
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-briefcase px-2"></i>
-                                                    <small>Jasa Lain</small>&nbsp;&amp; 
+                                                    <small id="nama_jenis_pengadaan"></small>&nbsp;&amp;
                                                     <i class="fa-solid fa-business-time px-1"></i>
-                                                    <small>Tender Umum</small>
+                                                    <small id="nama_metode_pengadaan"></small>
                                                 </td>
                                                 <th class="bg-light">
                                                     <small>Jenis Anggaran</small>
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-money-bill-transfer px-2"></i>
-                                                    <small>Capex</small>
+                                                    <small id="nama_jenis_anggaran"></small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -347,14 +329,14 @@
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-list px-2"></i>
-                                                    <small>Menengah</small>
+                                                    <small id="kualifikasi_usaha"></small>
                                                 </td>
                                                 <th class="bg-light">
                                                     <small>Jenis Produk</small>
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-globe px-2"></i>
-                                                    <small>Menggunakan Produk Dalam Negri</small>
+                                                    <small id="jenis_produk"></small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -363,14 +345,14 @@
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-pen-to-square px-2"></i>
-                                                    <small>TKDN</small>
+                                                    <small id="status_pencatatan"></small>
                                                 </td>
                                                 <th class="bg-light">
                                                     <small>( % ) Pencatatan </small>
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-chart-simple px-2"></i>
-                                                    <small>55</small>
+                                                    <small id="persen_pencatatan"></small> %
                                                 </td>
                                             </tr>
                                             <tr>
@@ -379,16 +361,14 @@
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-calendar-days px-2"></i>
-                                                    <small>31/07/2023</small>&nbsp;
-                                                    <small>-</small>
-                                                    <small>31/07/2024</small>&nbsp;
+                                                    <small id="waktu_pelakasanaan"></small>&nbsp;
                                                 </td>
                                                 <th class="bg-light">
                                                     <small>Jangka Waktu</small>
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-clock px-2"></i>
-                                                    <small>360</small>&nbsp;&nbsp;<small>Hari</small>
+                                                    <small id="hari_pelaksanaan"></small>&nbsp;&nbsp;<small>Hari</small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -397,14 +377,14 @@
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-building-columns px-2"></i>
-                                                    <small>Human Capital & General Affair</small>
+                                                    <small id="nama_departemen2"></small>
                                                 </td>
                                                 <th class="bg-light">
                                                     <small>Total Pagu RUP</small>
                                                 </th>
                                                 <td>
                                                     <i class="fa-solid fa-money-bill-wave px-2"></i>
-                                                    <small>1.500.000.000</small>
+                                                    <small id="total_pagu_rup"></small>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -435,21 +415,27 @@
                                                                 <td>
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
-                                                                        <select class="form-select" aria-label="Default select example">
-                                                                            <option selected>Pilih Metode Kualifikasi</option>
-                                                                            <option value="1">Prakualifikasi</option>
-                                                                            <option value="2">Pascakualifikasi</option>
-                                                                        </select>  
+                                                                        <select class="form-select" name="metode_kualifikasi" id="metode_kualifikasi_tambah" onchange="pilih_metode_kualifikasi()" aria-label="Default select example">
+                                                                            <option>Pilih Metode Kualifikasi</option>
+                                                                            <option value="Prakualifikasi">Prakualifikasi</option>
+                                                                            <option value="Pascakualifikasi">Pascakualifikasi</option>
+                                                                        </select>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
-                                                                        <select class="form-select" aria-label="Default select example">
-                                                                            <option selected>Metode Pemilihan Dokumen</option>
-                                                                            <option value="1">Satu File</option>
-                                                                            <option value="2">Dua File</option>
-                                                                        </select>  
+                                                                        <select class="form-select" name="metode_dokumen" id="metode_dokumen" onchange="pilih_metode_dokumen()" aria-label="Default select example">
+                                                                            <option>Metode Pemilihan Dokumen</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="input-group mb-2">
+                                                                        <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
+                                                                        <select class="form-select" name="id_jadwal_tender" id="id_jadwal_tender" aria-label="Default select example">
+                                                                            <option>Metode Pemilihan Dokumen</option>
+                                                                        </select>
                                                                     </div>
                                                                 </td>
                                                                 <td>
@@ -459,7 +445,7 @@
                                                                             <option selected>Pilih Jenis Jadwal</option>
                                                                             <option value="1">Jasa Lain Tender Umum Prakualifikasi Satu File</option>
                                                                             <option value="2">Jasa Lain Tender Umum Prakualifikasi Dua File</option>
-                                                                        </select>  
+                                                                        </select>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -486,23 +472,23 @@
                                                                 <td colspan="2">
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-users"></i></span>
-                                                                        <input class="form-control" list="datalist_user" id="exampleDataList" placeholder="Pilih User...">
-                                                                            <datalist id="datalist_user">
-                                                                                <option value="001 || 1001 || Budi Apriyanto"></option>
-                                                                                <option value="002 || 1002 || Angga Pramuja Syam"></option>
-                                                                                <option value="002 || 1003 || Danang Prasetio Kusumo"></option>
-                                                                            </datalist>
+                                                                        <input name="nama_panitia" class="form-control" list="datalist_user" placeholder="Pilih User...">
+                                                                        <datalist id="datalist_user">
+                                                                            <?php foreach ($pegawai_panitia as $key => $value) { ?>
+                                                                                <option value="<?= $value['kode_mjm_user'] ?> || <?= $value['nip'] ?> || <?= $value['nama_pegawai'] ?>"></option>
+                                                                            <?php   } ?>
+                                                                        </datalist>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-users-gear"></i></span>
-                                                                        <select class="form-select" aria-label="Default select example">
-                                                                            <option selected>Pilih Role Panitia</option>
+                                                                        <select name="role_panitia" class="form-select" aria-label="Default select example">
+                                                                            <option>Pilih Role Panitia</option>
                                                                             <option value="1">Ketua Panitia</option>
                                                                             <option value="2">Sekretaris</option>
-                                                                            <option value="2">Anggota</option>
-                                                                        </select>  
+                                                                            <option value="3">Anggota</option>
+                                                                        </select>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -510,37 +496,28 @@
                                                         <thead>
                                                             <tr>
                                                                 <th class="bg-ligth text-white text-start" colspan="3">
-                                                                    <button type="button" class="btn btn-sm btn-success" data-bs-dismiss="modal">
+                                                                    <a href="javascript:;" onclick="Simpan_panitia()" class="btn btn-sm btn-success">
                                                                         <i class="fa-solid fa-user-plus"></i>
                                                                         Tambah User Panitia
-                                                                    </button>
+                                                                    </a>
                                                                 </th>
                                                             </tr>
                                                         </thead>
                                                         <thead>
                                                             <tr>
                                                                 <th class="bg-light text-white text-center" colspan="3">
-                                                                    <table id="example2" class="table table-bordered table-sm table-striped">
+                                                                    <table id="tbl_panitia" class="table table-bordered table-sm table-striped">
                                                                         <thead class="bg-secondary">
                                                                             <tr>
                                                                                 <th style="width:20%;"><small class="text-white">User Panitia</small></th>
                                                                                 <th style="width:20%;"><small class="text-white">Role Panitia</small></th>
-                                                                                <th style="width:15%;"><small class="text-white"><div class="text-center">Options</div></small></th>
+                                                                                <th style="width:15%;"><small class="text-white">
+                                                                                        <div class="text-center">Options</div>
+                                                                                    </small></th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td><small>Budi Apriyanto</small></td>
-                                                                                <td><small>Ketua Panitia</small></td>
-                                                                                <td>
-                                                                                    <div class="text-center">
-                                                                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                                                                            <i class="fa-solid fa-trash"></i>
-                                                                                            <small>Hapus User</small>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
+                                                                          
                                                                         </tbody>
                                                                     </table>
                                                                 </th>
@@ -549,7 +526,7 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            
+
                                         </table>
                                     </from>
                                 </div>

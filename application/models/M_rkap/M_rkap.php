@@ -92,6 +92,7 @@ class M_rkap extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_rkap');
+        $this->db->join('tbl_departemen', 'tbl_rkap.id_departemen = tbl_departemen.id_departemen', 'left');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -100,7 +101,18 @@ class M_rkap extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_rkap');
+        $this->db->join('tbl_departemen', 'tbl_rkap.id_departemen = tbl_departemen.id_departemen', 'left');
         $this->db->where('id_url_rkap', $id_url_rkap);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_rkap_by_id($id_rkap)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rkap');
+        $this->db->join('tbl_departemen', 'tbl_rkap.id_departemen = tbl_departemen.id_departemen', 'left');
+        $this->db->where('id_rkap', $id_rkap);
         $query = $this->db->get();
         return $query->row_array();
     }

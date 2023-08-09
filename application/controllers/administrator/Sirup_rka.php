@@ -11,19 +11,16 @@ class Sirup_rka extends CI_Controller
 		$this->load->model('M_rkap/M_rkap');
 		$this->load->model('M_departmen/M_departmen');
 	}
-
 	public function index()
 	{
 		$data = [
 			'result_departemen' => $this->M_departmen->get_result_departemen()
 		];
-		$this->load->view('administrator/template/si_rup/js_header_rup');
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('administrator/sirup_rkap/base_url'); //ini untuk base_url page rkap
 		$this->load->view('administrator/sirup_rkap/index', $data);
-		$this->load->view('administrator/template/si_rup/js_footer_rup');
-		$this->load->view('administrator/sirup_rkap/file_public_rkap');
 		$this->load->view('administrator/template_menu/footer_menu');
+		$this->load->view('administrator/sirup_rkap/file_public_rkap');
 	}
 
 
