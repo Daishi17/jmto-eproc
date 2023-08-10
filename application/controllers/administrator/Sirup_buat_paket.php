@@ -30,7 +30,7 @@ class Sirup_buat_paket extends CI_Controller
 
 	function get_rup()
 	{
-		$result = $this->M_rup->gettable_rup();
+		$result = $this->M_rup->gettable_rup_paket();
 		$data = [];
 		$no = $_POST['start'];
 		foreach ($result as $rs) {
@@ -42,14 +42,14 @@ class Sirup_buat_paket extends CI_Controller
 			$row[] = "Rp " . number_format($rs->total_pagu_rup, 2, ',', '.');
 			$row[] = $rs->nama_jenis_pengadaan;
 			$row[] = '<div class="text-center">
-				<a href="javascript:;" class="btn btn-primary btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "','buat_paket'" . ')"><i class="fa-solid fa-square-plus"></i> Buat Paket</a>
+				<a href="javascript:;" class="btn btn-primary btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-solid fa-square-plus"></i> Buat Paket</a>
 				</div>';
 			$data[] = $row;
 		}
 		$output = array(
 			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->M_rup->count_all_rup(),
-			"recordsFiltered" => $this->M_rup->count_filtered_rup(),
+			"recordsTotal" => $this->M_rup->count_all_rup_paket(),
+			"recordsFiltered" => $this->M_rup->count_filtered_rup_paket(),
 			"data" => $data
 		);
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));
@@ -131,7 +131,9 @@ class Sirup_buat_paket extends CI_Controller
 
 	function get_panitia()
 	{
-		$result = $this->M_rup->gettable_rup_panitia();
+		$id_url_rup = $this->input->post('random_kode');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$result = $this->M_rup->gettable_rup_panitia($row_rup['id_rup']);
 		$data = [];
 		$no = $_POST['start'];
 		foreach ($result as $rs) {
@@ -151,8 +153,106 @@ class Sirup_buat_paket extends CI_Controller
 		}
 		$output = array(
 			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->M_rup->count_all_rup_panitia(),
-			"recordsFiltered" => $this->M_rup->count_filtered_rup_panitia(),
+			"recordsTotal" => $this->M_rup->count_all_rup_panitia($row_rup['id_rup']),
+			"recordsFiltered" => $this->M_rup->count_filtered_rup_panitia($row_rup['id_rup']),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+
+	function get_by_id_panitia($id_url_panitia)
+	{
+		$response = [
+			'row_panitia' => $this->M_rup->get_row_panitia($id_url_panitia),
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
+	function hapus_panitia($id_url_panitia)
+	{
+		$where = [
+			'id_url_panitia' => $id_url_panitia
+		];
+		$this->M_rup->delete_panitia($where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+	function simpan_buat_rup($id_url_rup)
+	{
+		$where = [
+			'id_url_rup' => $id_url_rup
+		];
+		$data = [
+			'sts_rup_buat_paket' => 1
+		];
+		$this->M_rup->update_rup($data, $where);
+		$response = [
+			'success' => 'Rup Paket Berhasil Di Buat'
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
+	function finalisasi_paket_rup_final($id_url_rup)
+	{
+		$where = [
+			'id_url_rup' => $id_url_rup
+		];
+		$data = [
+			'sts_rup_buat_paket' => 2
+		];
+		$this->M_rup->update_rup($data, $where);
+		$response = [
+			'success' => 'Rup Paket Berhasil Di Buat'
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	function get_rup_final()
+	{
+		$result = $this->M_rup->gettable_rup_paket_final();
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = $rs->kode_rup;
+			$row[] = $rs->tahun_rup;
+			$row[] = $rs->nama_rup;
+			$row[] = $rs->nama_departemen;
+			$row[] = "Rp " . number_format($rs->total_pagu_rup, 2, ',', '.');
+			if ($rs->sts_rup_buat_paket == 1) {
+				$row[] = '<small><span class="badge bg-warning">Draft Paket</span></small>';
+			} else {
+				$row[] = '<small><span class="badge bg-success text-white">Finalisasi Paket</span></small>';
+			}
+			if ($rs->sts_rup_buat_paket == 1) {
+				$row[] = '<div class="text-center">
+				<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i>
+				<small>Detail</small></a>
+				<a href="javascript:;" class="btn btn-success btn-sm shadow-lg" onClick="finalisasi_final_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-regular fa-circle-up px-1"></i>
+				<small>Finalisasi</small></a>
+				</div>';
+			} else {
+				$row[] = '<div class="text-center">
+				<button type="button" class="btn btn-info btn-sm shadow-lg" disabled>
+				<i class="fa-solid fa-square-plus px-1"></i> 
+					<small>Detail</small>
+				</button>
+				<button type="button" class="btn btn-success btn-sm shadow-lg" disabled>
+				<i class="fa-regular fa-circle-up px-1"></i>
+					<small>Finalisasi</small>
+				</button>
+			</div>';
+			}
+
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_rup->count_all_rup_paket_final(),
+			"recordsFiltered" => $this->M_rup->count_filtered_rup_paket_final(),
 			"data" => $data
 		);
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));

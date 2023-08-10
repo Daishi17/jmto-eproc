@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-sm table-striped">
+                    <table id="tbl_rup_final" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary">
                             <tr>
                                 <th style="width:5%;"><small class="text-white">Kode</small></th>
@@ -44,46 +44,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><small>CP.2023.101.201.00001</small></td>
-                                <td><small>2023</small></td>
-                                <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                <td><small>Human Capital & General Affair</small></td>
-                                <td><small>1.500.000.000</small></td>
-                                <td><small><span class="badge bg-success text-white">Finalisasi Paket</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-paket" disabled>
-                                            <i class="fa-solid fa-users-viewfinder px-1"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-sm shadow-lg" disabled>
-                                            <i class="fa-regular fa-circle-up px-1"></i>
-                                            <small>Finalisasi</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><small>CP.2023.101.201.00002</small></td>
-                                <td><small>2023</small></td>
-                                <td><small>Pengadaan Sewa Keamanan / Securty Periode Kedua</small></td>
-                                <td><small>Human Capital & General Affair</small></td>
-                                <td><small>2.500.000.000</small></td>
-                                <td><small><span class="badge bg-warning text-dark">Draft Paket</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-paket">
-                                            <i class="fa-solid fa-users-viewfinder px-1"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-sm shadow-lg">
-                                            <i class="fa-regular fa-circle-up px-1"></i>
-                                            <small>Finalisasi</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -427,13 +387,15 @@
                                                                         <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
                                                                         <select class="form-select" name="metode_dokumen" id="metode_dokumen" onchange="pilih_metode_dokumen()" aria-label="Default select example">
                                                                             <option>Metode Pemilihan Dokumen</option>
+                                                                            <option>Satu File</option>
+                                                                            <option>Dua File</option>
                                                                         </select>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-regular fa-calendar-check"></i></span>
-                                                                        <select class="form-select" aria-label="Default select example">
+                                                                        <select class="form-select" id="jenis_jadwal" aria-label="Default select example">
                                                                             <option selected>Pilih Jenis Jadwal</option>
                                                                             <option value="1">Jasa Lain Tender Umum Prakualifikasi Satu File</option>
                                                                             <option value="2">Jasa Lain Tender Umum Prakualifikasi Dua File</option>
@@ -523,10 +485,10 @@
                                     </from>
                                 </div>
                                 <div class="card-footer bg-transparent border-dark">
-                                    <button type="button" class="btn btn-default btn-primary">
+                                    <a href="javascript:;" onclick="Buat_rup()" class="btn btn-default btn-primary">
                                         <i class="fa-solid fa-floppy-disk px-1"></i>
                                         Simpan Data Paket
-                                    </button>
+                                    </a>
                                     <button class="btn btn-warning" data-bs-target="#modal-xl-tambah" data-bs-toggle="modal" data-bs-dismiss="modal">
                                         <i class="fa-solid fa-angles-left px-1"></i>
                                         Kehalaman Sebelumnya

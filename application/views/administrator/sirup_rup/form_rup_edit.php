@@ -37,7 +37,7 @@
                         <input type="hidden" name="type_button" value="edit">
                         <table class="table table-bordered table-sm shadow-lg">
                             <?php if ($get_row_rkap) { ?>
-                                <input type="hidden" value="<?= $get_row_rkap['id_rkap'] ?>" name="id_rkap" readonly class="form-control">
+                                <input type="hidden" value="<?= $get_row_rkap['id_rkap'] ?>" name="id_rkap" readonly style="background-color: #ffffe0;" class="form-control">
                             <?php  } else { ?>
 
                             <?php }
@@ -50,11 +50,11 @@
                                     <small>
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
-                                            <input type="hidden" class="form-control" value="<?= $row_rup['kode_urut_rup'] ?>" name="kode_urut_rup" placeholder="Kode RUP <Auto Number>" readonly>
+                                            <input type="hidden" class="form-control" value="<?= $row_rup['kode_urut_rup'] ?>" name="kode_urut_rup" placeholder="Kode RUP <Auto Number>" readonly style="background-color: #ffffe0;">
                                             <?php if ($get_row_rkap) { ?>
-                                                <input type="text" class="form-control" value="<?= $row_rup['kode_rup'] ?>" name="kode_urut_manipulasi" readonly>
+                                                <input type="text" class="form-control" value="<?= $row_rup['kode_rup'] ?>" name="kode_urut_manipulasi" readonly style="background-color: #ffffe0;">
                                             <?php  } else { ?>
-                                                <input type="text" class="form-control" value="<?= $row_rup['kode_rup'] ?>" name="kode_urut_manipulasi" readonly>
+                                                <input type="text" class="form-control" value="<?= $row_rup['kode_rup'] ?>" name="kode_urut_manipulasi" readonly style="background-color: #ffffe0;">
                                             <?php }
                                             ?>
 
@@ -66,7 +66,7 @@
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
                                             <?php if ($get_row_rkap) { ?>
-                                                <input type="number" value="<?= $get_row_rkap['tahun_rkap'] ?>" name="tahun_rup" readonly class="form-control">
+                                                <input type="number" value="<?= $get_row_rkap['tahun_rkap'] ?>" name="tahun_rup" readonly style="background-color: #ffffe0;" class="form-control">
                                             <?php  } else { ?>
                                                 <input type="number" name="tahun_rup" value="<?= $row_rup['tahun_rup'] ?>" onkeyup="Tahun_change()" maxlength="4" class="form-control" placeholder="Tahun">
                                             <?php }
@@ -85,11 +85,14 @@
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
                                             <?php if ($get_row_rkap) { ?>
-                                                <input type="hidden" value="<?= $get_row_rkap['id_departemen'] ?>" name="id_departemen" readonly class="form-control">
-                                                <input type="text" value="<?= $get_row_rkap['nama_departemen'] ?>" readonly class="form-control">
-                                                <!-- id_departemen --> <br>
+                                                <select name="id_departemen" onchange="pilih_departemen()" id="select_departemen" class="form-control select2bs4">
+                                                    <option value="<?= $row_rup['id_departemen'] ?>"><?= $row_rup['nama_departemen'] ?></option>
+                                                    <?php foreach ($result_departemen as $key => $value) { ?>
+                                                        <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             <?php  } else { ?>
-                                                <select name="id_departemen" onchange="pilih_departemen()" class="form-control select2bs4">
+                                                <select name="id_departemen" onchange="pilih_departemen()" id="select_departemen" class="form-control select2bs4">
                                                     <option value="<?= $row_rup['id_departemen'] ?>"><?= $row_rup['nama_departemen'] ?></option>
                                                     <?php foreach ($result_departemen as $key => $value) { ?>
                                                         <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>
@@ -102,21 +105,40 @@
                                         <small class="text-danger id_departemen_validation"></small>
                                     </small>
                                 </td>
-                                <td>
-                                    <small>
-                                        <div class="input-group mb-2">
-                                            <span class="input-group-text"><i class="fa-solid fa-map"></i></span>
-                                            <select name="id_section" onchange="pilih_section()" class="form-control select2bs4">
-                                                <option value="<?= $row_rup['id_section'] ?>"><?= $row_rup['nama_section'] ?></option>
-                                                <?php foreach ($result_section as $key => $value) { ?>
-                                                    <option value="<?= $value['id_section'] ?>"><?= $value['nama_section'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <!-- id_section -->
-                                        <small class="text-danger id_section_validation"></small>
-                                    </small>
-                                </td>
+                                <?php if ($get_row_rkap) { ?>
+                                    <td>
+                                        <small>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text"><i class="fa-solid fa-map"></i></span>
+                                                <select name="id_section" id="section_data" class="form-control select2bs4">
+                                                    <option value="<?= $row_rup['id_section'] ?>"><?= $row_rup['nama_section'] ?></option>
+                                                    <?php foreach ($result_ruas_by_departemnt as $key => $value) { ?>
+                                                        <option value="<?= $value['id_section'] ?>"><?= $value['nama_section'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <!-- id_section -->
+                                            <small class="text-danger id_section_validation"></small>
+                                        </small>
+                                    </td>
+                                <?php  } else { ?>
+                                    <td>
+                                        <small>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text"><i class="fa-solid fa-map"></i></span>
+                                                <select name="id_section" id="section_data" class="form-control select2bs4">
+                                                    <option value="<?= $row_rup['id_section'] ?>"><?= $row_rup['nama_section'] ?></option>
+                                                    <?php foreach ($result_ruas_by_departemnt as $key => $value) { ?>
+                                                        <option value="<?= $value['id_section'] ?>"><?= $value['nama_section'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <!-- id_section -->
+                                            <small class="text-danger id_section_validation"></small>
+                                        </small>
+                                    </td>
+                                <?php }
+                                ?>
                             </tr>
                             <tr>
                                 <th class="bg-light">
@@ -127,9 +149,9 @@
                                         <div class="input-group mb-2">
                                             <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
                                             <?php if ($get_row_rkap) { ?>
-                                                <input type="text" class="form-control" value="<?= $get_row_rkap['nama_program_rkap'] ?>" placeholder="Nama Program RKAP" readonly>
+                                                <input type="text" class="form-control" value="<?= $get_row_rkap['nama_program_rkap'] ?>" placeholder="Nama Program RKAP" readonly style="background-color: #ffffe0;">
                                             <?php  } else { ?>
-                                                <input type="text" class="form-control" value="-" placeholder="Nama Program RKAP" readonly>
+                                                <input type="text" class="form-control" value="-" placeholder="Nama Program RKAP" readonly style="background-color: #ffffe0;">
                                             <?php }
                                             ?>
                                         </div>
@@ -376,6 +398,15 @@
                                         <!-- persen_pencatatan -->
                                         <small class="text-danger persen_pencatatan_validation"></small>
                                     </small>
+                                    <small>
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text">Rp.</span>
+                                            <input id="nilai_pencatatan2" type="text" value="<?= $row_rup['nilai_pencatatan'] ?>" class="form-control" placeholder="Nilai Pencatatan" readonly style="background-color: #ffffe0;">
+                                            <input type="hidden" name="nilai_pencatatan">
+                                        </div>
+                                        <!-- persen_pencatatan -->
+                                        <small class="text-danger persen_pencatatan_validation"></small>
+                                    </small>
                                 </td>
                             </tr>
                             <tr>
@@ -472,7 +503,7 @@
                                                         <small>
                                                             <div class="input-group mb-2">
                                                                 <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
-                                                                <input type="text" name="sumber_dana_anggaran" value="<?= $get_row_rkap['nama_departemen'] ?>" class="form-control" placeholder="Departemen" readonly>
+                                                                <input type="text" name="sumber_dana_anggaran" value="<?= $get_row_rkap['nama_departemen'] ?>" class="form-control" placeholder="Departemen" readonly style="background-color: #ffffe0;">
                                                             </div>
                                                             <small>
                                                     </td>
@@ -480,7 +511,7 @@
                                                         <small>
                                                             <div class="input-group mb-2">
                                                                 <span class="input-group-text">Rp.</span>
-                                                                <input type="text" value="<?= "Rp " . number_format($get_row_rkap['total_pagu_rkap'], 2, ',', '.') ?>" class="form-control" placeholder="0" readonly>
+                                                                <input type="text" value="<?= "Rp " . number_format($get_row_rkap['total_pagu_rkap'], 2, ',', '.') ?>" class="form-control" placeholder="0" readonly style="background-color: #ffffe0;">
                                                             </div>
                                                             <small>
                                                     </td>
@@ -489,7 +520,7 @@
                                                         <small>
                                                             <div class="input-group mb-2">
                                                                 <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
-                                                                <input type="text" class="form-control" value="<?= $row_rup['nama_departemen'] ?>" name="sumber_dana_anggaran" placeholder="Departemen" readonly>
+                                                                <input type="text" class="form-control" value="<?= $row_rup['nama_departemen'] ?>" name="sumber_dana_anggaran" placeholder="Departemen" readonly style="background-color: #ffffe0;">
                                                             </div>
                                                             <!-- sumber_dana_anggaran -->
                                                             <small class="text-danger sumber_dana_anggaran_validation"></small>
@@ -499,7 +530,7 @@
                                                         <small>
                                                             <div class="input-group mb-2">
                                                                 <span class="input-group-text">Rp.</span>
-                                                                <input type="text" class="form-control" placeholder="0" disabled>
+                                                                <input type="text" class="form-control" placeholder="0" readonly style="background-color: #ffffe0;">
                                                             </div>
                                                             <small>
                                                     </td>
@@ -511,7 +542,7 @@
                                                             <span class="input-group-text">Rp.</span>
                                                             <input type="number" value="<?= $row_rup['total_pagu_rup'] ?>" name="total_pagu_rup" class="form-control total_pagu_rup">
                                                             <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                                                            <input type="text" value="<?= "Rp " . number_format($row_rup['total_pagu_rup'], 2, ',', '.'); ?>" id="rupiah_total_pagu_rup" class="form-control" disabled>
+                                                            <input type="text" value="<?= "Rp " . number_format($row_rup['total_pagu_rup'], 2, ',', '.'); ?>" id="rupiah_total_pagu_rup" class="form-control" readonly style="background-color: #ffffe0;">
                                                         </div>
                                                         <!-- total_pagu_rup -->
                                                         <small class="text-danger total_pagu_rup_validation"></small>

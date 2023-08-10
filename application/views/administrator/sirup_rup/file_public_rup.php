@@ -92,67 +92,32 @@
         }
     });
 
-    Get_kode_rup()
+    // Get_kode_rup()
 
-    function Get_kode_rup() {
-        var url_get_kode_rup = $('[name="url_get_kode_rup"]').val();
+    // function Get_kode_rup() {
+    //     var url_get_kode_rup = $('[name="url_get_kode_rup"]').val();
+    //     $.ajax({
+    //         method: "GET",
+    //         url: url_get_kode_rup,
+    //         dataType: "JSON",
+    //         success: function(response) {
+    //             $('[name="kode_urut_rup"').val(response['kode_urut_rup'])
+    //             $('[name="kode_urut_manipulasi"').val(response['get_row_departemen']['kode_departemen'] + '.' + response['kode_urut_rup'])
+    //         }
+    //     })
+    // }
+
+    $('#select_departemen').change(function() {
+        var url_get_section_by_departemen = $('[name="url_get_section_by_departemen"]').val();
+        var id_departemen = $('#select_departemen').val();
         $.ajax({
-            method: "GET",
-            url: url_get_kode_rup,
-            dataType: "JSON",
-            success: function(response) {
-                $('[name="kode_urut_rup"').val(response['kode_urut_rup'])
-                $('[name="kode_urut_manipulasi"').val(response['get_row_departemen']['kode_departemen'] + '.' + response['kode_urut_rup'])
+            type: 'GET',
+            url: url_get_section_by_departemen + id_departemen,
+            success: function(html) {
+                $('#section_data').html(html);
             }
-        })
-    }
-
-    function pilih_departemen() {
-        var url_get_kode_departemen = $('[name="url_get_kode_departemen"]').val();
-        var id_departemen = $('[name="id_departemen"]').val();
-        if (id_departemen == '') {
-            Swal.fire('Maaf Pilih Departement Dahulu!', '', 'warning')
-        } else {
-            $.ajax({
-                method: "POST",
-                url: url_get_kode_departemen,
-                data: {
-                    id_departemen: id_departemen,
-                },
-                dataType: "JSON",
-                success: function(response) {
-                    $('[name="kode_urut_rup"').val(response['kode_urut_rup'])
-                    $('[name="kode_urut_manipulasi"').val(response['get_row_departemen']['kode_departemen'] + '.' + response['kode_urut_rup'])
-                    $('[name="sumber_dana_anggaran"').val(response['get_row_departemen']['nama_departemen'])
-                }
-            })
-        }
-    }
-
-    function pilih_section() {
-        var url_get_kode_section = $('[name="url_get_kode_section"]').val();
-        var id_departemen = $('[name="id_departemen"]').val();
-        var id_section = $('[name="id_section"]').val();
-        if (id_departemen == '') {
-            Swal.fire('Maaf Pilih Departement Dahulu!', '', 'warning')
-        } else if (id_section == '') {
-            Swal.fire('Maaf Pilih Section Dahulu!', '', 'warning')
-        } else {
-            $.ajax({
-                method: "POST",
-                url: url_get_kode_section,
-                data: {
-                    id_departemen: id_departemen,
-                    id_section: id_section
-                },
-                dataType: "JSON",
-                success: function(response) {
-                    $('[name="kode_urut_rup"').val(response['kode_urut_rup'])
-                    $('[name="kode_urut_manipulasi"').val(response['get_row_departemen']['kode_departemen'] + '.' + response['get_row_section']['kode_section'] + '.' + response['kode_urut_rup'])
-                }
-            })
-        }
-    }
+        });
+    })
 
     function pilih_jenis_anggaran() {
         var url_get_kode_jenis_anggaran = $('[name="url_get_kode_jenis_anggaran"]').val();
@@ -177,7 +142,7 @@
                 dataType: "JSON",
                 success: function(response) {
                     $('[name="kode_urut_rup"').val(response['kode_urut_rup'])
-                    $('[name="kode_urut_manipulasi"').val(response['get_row_jenis_anggaran']['kode_string'] + '.' + response['get_row_departemen']['kode_departemen'] + '.' + response['get_row_section']['kode_section'] + '.' + response['kode_urut_rup'])
+                    $('[name="kode_urut_manipulasi"').val(response['get_row_jenis_anggaran']['kode_string'] + '.' + response['get_row_departemen']['kode_departemen'] + '.' + response['kode_urut_rup'])
                 }
             })
         }

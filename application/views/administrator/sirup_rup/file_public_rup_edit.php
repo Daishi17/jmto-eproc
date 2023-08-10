@@ -62,6 +62,18 @@
         var harga = $(".total_pagu_rup").val();
         var tanpa_rupiah = document.getElementById('rupiah_total_pagu_rup');
         tanpa_rupiah.value = formatRupiah(this.value, 'Rp. ');
+
+        var persen_pencatatan = $('[name="persen_pencatatan"]').val()
+        var nilai_pencatatan = harga * persen_pencatatan / 100;
+
+        $('[name="nilai_pencatatan"]').val(nilai_pencatatan);
+        $('#nilai_pencatatan2').val(nilai_pencatatan)
+
+        var tanpa_rupiah2 = document.getElementById('nilai_pencatatan2');
+        tanpa_rupiah2.value = formatRupiah(this.value, 'Rp. ');
+
+
+
         /* Fungsi */
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -81,64 +93,22 @@
     });
 
 
-    function pilih_departemen() {
-        var url_get_kode_departemen = $('[name="url_get_kode_departemen"]').val();
-        var id_departemen = $('[name="id_departemen"]').val();
-        var kode_urut_rup_detail = $('[name="kode_urut_rup_detail"]').val();
-        var tahun_detail = $('[name="tahun_detail"]').val();
-        if (id_departemen == '') {
-            Swal.fire('Maaf Pilih Departement Dahulu!', '', 'warning')
-        } else {
-            $.ajax({
-                method: "POST",
-                url: url_get_kode_departemen,
-                data: {
-                    id_departemen: id_departemen,
-                },
-                dataType: "JSON",
-                success: function(response) {
-                    $('[name="kode_urut_rup"').val(kode_urut_rup_detail)
-                    $('[name="kode_urut_manipulasi"').val(response['get_row_departemen']['kode_departemen'] + '.' + tahun_detail + '.' + kode_urut_rup_detail)
-                    $('[name="sumber_dana_anggaran"').val(response['get_row_departemen']['nama_departemen'])
-                }
-            })
-        }
-    }
-
-    function pilih_section() {
-        var url_get_kode_section = $('[name="url_get_kode_section"]').val();
-        var kode_urut_rup_detail = $('[name="kode_urut_rup_detail"]').val();
-        var tahun_detail = $('[name="tahun_detail"]').val();
-        var id_departemen = $('[name="id_departemen"]').val();
-        var id_section = $('[name="id_section"]').val();
-        if (id_departemen == '') {
-            Swal.fire('Maaf Pilih Departement Dahulu!', '', 'warning')
-        } else if (id_section == '') {
-            Swal.fire('Maaf Pilih Section Dahulu!', '', 'warning')
-        } else {
-            $.ajax({
-                method: "POST",
-                url: url_get_kode_section,
-                data: {
-                    id_departemen: id_departemen,
-                    id_section: id_section
-                },
-                dataType: "JSON",
-                success: function(response) {
-                    $('[name="kode_urut_rup"').val(kode_urut_rup_detail)
-                    $('[name="kode_urut_manipulasi"').val(response['get_row_departemen']['kode_departemen'] + '.' + response['get_row_section']['kode_section'] + '.' + tahun_detail + '.' + kode_urut_rup_detail)
-                }
-            })
-        }
-    }
-
+    $('#select_departemen').change(function() {
+        var url_get_section_by_departemen = $('[name="url_get_section_by_departemen"]').val();
+        var id_departemen = $('#select_departemen').val();
+        $.ajax({
+            type: 'GET',
+            url: url_get_section_by_departemen + id_departemen,
+            success: function(html) {
+                $('#section_data').html(html);
+            }
+        });
+    })
 
     function pilih_jenis_anggaran() {
         var url_get_kode_jenis_anggaran = $('[name="url_get_kode_jenis_anggaran"]').val();
         var id_departemen = $('[name="id_departemen"]').val();
         var id_section = $('[name="id_section"]').val();
-        var kode_urut_rup_detail = $('[name="kode_urut_rup_detail"]').val();
-        var tahun_detail = $('[name="tahun_detail"]').val();
         var id_jenis_anggaran = $('[name="id_jenis_anggaran"]').val();
         if (id_departemen == '') {
             Swal.fire('Maaf Pilih Departement Dahulu!', '', 'warning');
@@ -157,8 +127,8 @@
                 },
                 dataType: "JSON",
                 success: function(response) {
-                    $('[name="kode_urut_rup"').val(kode_urut_rup_detail)
-                    $('[name="kode_urut_manipulasi"').val(response['get_row_jenis_anggaran']['kode_string'] + '.' + response['get_row_departemen']['kode_departemen'] + '.' + response['get_row_section']['kode_section'] + '.' + tahun_detail + '.' + kode_urut_rup_detail)
+                    $('[name="kode_urut_rup"').val(response['kode_urut_rup'])
+                    $('[name="kode_urut_manipulasi"').val(response['get_row_jenis_anggaran']['kode_string'] + '.' + response['get_row_departemen']['kode_departemen'] + '.' + response['kode_urut_rup'])
                 }
             })
         }
@@ -406,6 +376,7 @@
     }
 
     get_ruas();
+
     function get_ruas() {
         var url_get_ruas_lokasi = $('[name="url_get_ruas_lokasi"]').val();
         var random_kode = $('[name="random_kode"]').val();

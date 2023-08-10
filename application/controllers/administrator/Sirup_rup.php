@@ -47,11 +47,15 @@ class Sirup_rup extends CI_Controller
 			}
 			if ($rs->sts_rup == 0) {
 				$row[] = '<div class="text-center">
-            	<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "','detail_rup'" . ')"><i class="fa-solid fa-square-plus px-1"></i> Detail</a>
-				<a href="javascript:;" class="btn btn-success btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "','finalisasi'" . ')"><i class="fa-regular fa-circle-up px-1"></i> Finalisasi</a>
+            	<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "','detail_rup'" . ')"><i class="fa-solid fa-square-plus px-1"></i> <small>Detail</small></a>
+				<a href="javascript:;" class="btn btn-success btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "','finalisasi'" . ')"><i class="fa-regular fa-circle-up px-1"></i> <small>Finalisasi</small></a>
 				</div>';
 			} else {
 				$row[] = '<div class="text-center">
+				<button type="button" class="btn btn-info btn-sm shadow-lg" disabled>
+				<i class="fa-solid fa-square-plus px-1"></i> 
+					<small>Detail</small>
+				</button>
 				<button type="button" class="btn btn-success btn-sm shadow-lg" disabled>
 				<i class="fa-regular fa-circle-up px-1"></i>
 					<small>Finalisasi</small>
@@ -85,7 +89,8 @@ class Sirup_rup extends CI_Controller
 			'id_url_rup' => $id_url_rup
 		];
 		$data = [
-			'sts_rup' => 1
+			'sts_rup' => 1,
+			'sts_rup_buat_paket' => 0
 		];
 		$this->M_rup->update_rup($data, $where);
 		$response = [
@@ -147,6 +152,8 @@ class Sirup_rup extends CI_Controller
 		$id_url_rkap = $this->session->userdata('id_url_rkap');
 		if ($id_url_rkap) {
 			$data['get_row_rkap'] = $this->M_rkap->get_row_rkap($id_url_rkap);
+			$id_departemen = $data['get_row_rkap']['id_departemen'];
+			$data['result_ruas_by_departemnt'] = $this->M_section->get_section($id_departemen);
 		} else {
 			$data['get_row_rkap'] = '';
 		}
@@ -195,6 +202,8 @@ class Sirup_rup extends CI_Controller
 		} else {
 			$row_rkap = $this->M_rkap->get_row_rkap_by_id($row_rup['id_rkap']);
 			$data['get_row_rkap'] = $this->M_rkap->get_row_rkap($row_rkap['id_url_rkap']);
+			$id_departemen = $data['row_rup']['id_departemen'];
+			$data['result_ruas_by_departemnt'] = $this->M_section->get_section($id_departemen);
 		}
 		$data['ruas_rup'] = $this->M_rup->get_ruas_by_id_rup($row_rup['id_rup']);
 		$data['result_departemen'] = $this->M_departmen->get_result_departemen();
@@ -416,7 +425,6 @@ class Sirup_rup extends CI_Controller
 				$row_jenis_anggaran = $this->M_jenis_anggaran->get_row_jenis_anggaran($id_jenis_anggaran);
 				$id = $this->uuid->v4();
 				$id = str_replace('-', '', $id);
-
 				$data  = array(
 					'id_url_rup' => $id,
 					'kode_rup' => $row_jenis_anggaran['kode_string'] . '.' . $row_jenis_pengadaan['kode_jenis_pengadaan'] . '.' . $row_metode_pengadaan['kode_metode_pengadaan'] . '.' . $kode_urut_rup,
@@ -576,5 +584,14 @@ class Sirup_rup extends CI_Controller
 			'result_ruas_rup' => $ruas_rup
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	public function get_section($id_departemen) //satuan kerja
+	{
+		$data= $this->M_section->get_section($id_departemen);
+		echo '<option value="">Pilih Section</option>';
+		foreach ($data as $key => $value) {
+			echo '<option value="'.$value['id_section'].'">'.$value['nama_section'].'</option>';
+		}
 	}
 }

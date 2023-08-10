@@ -35,15 +35,11 @@
         tbl_rup.DataTable().ajax.reload();
     }
 
-    function by_id_rup(id_url_rup, type) {
+    function by_id_rup(id_url_rup) {
         var url_by_id_rup_paket = $('[name="url_by_id_rup_paket"]').val();
         var modal_paket = $('#modal-xl-paket');
-        if (type == 'buat_paket') {
-            saveData = 'buat_paket';
-        }
-        // if (type == 'finalisasi') {
-        //     saveData = 'finalisasi';
-        // }
+        var tbl_panitia = $('#tbl_panitia')
+        var url_get_panitia_buat_paket = $('[name="url_get_panitia_buat_paket"').val()
         $.ajax({
             type: "GET",
             url: url_by_id_rup_paket + id_url_rup,
@@ -86,6 +82,40 @@
                     html += '<small>' + ada_dan + ' ' + response['result_ruas_rup'][i].ruas_lokasi + '</small>';
                 }
                 $('#detail_ruas_rup').html(html);
+
+                $(document).ready(function() {
+                    tbl_panitia.DataTable({
+                        "responsive": false,
+                        "ordering": true,
+                        "paging": false,
+                        "info": false,
+                        "processing": true,
+                        "serverSide": true,
+                        "autoWidth": false,
+                        "bDestroy": true,
+                        "order": [],
+                        "ajax": {
+                            "url": url_get_panitia_buat_paket,
+                            "type": "POST",
+                            data: {
+                                random_kode: response['row_rup']['id_url_rup']
+                            },
+                        },
+                        "columnDefs": [{
+                            "target": [-1],
+                            "orderable": false
+                        }],
+                        "oLanguage": {
+                            "sSearch": "Pencarian : ",
+                            "sEmptyTable": "Data Tidak Tersedia",
+                            "sLoadingRecords": "Silahkan Tunggu - loading...",
+                            "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                            "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                            "sProcessing": "Memuat Data...."
+                        }
+                    });
+                });
+
             }
         })
     }
@@ -108,6 +138,79 @@
         })
     }
 
+
+
+    function by_id_panitia(id_url_panitia) {
+        var url_by_id_url_panitia = $('[name="url_by_id_url_panitia"]').val();
+        var modal_paket = $('#modal-xl-paket');
+        var tbl_panitia = $('#tbl_panitia')
+        var url_get_panitia_buat_paket = $('[name="url_get_panitia_buat_paket"').val()
+        $.ajax({
+            type: "GET",
+            url: url_by_id_url_panitia + id_url_panitia,
+            dataType: "JSON",
+            success: function(response) {
+                hapus_panitia(response['row_panitia']['id_url_panitia'], response['row_panitia']['nama_pegawai'])
+            }
+        })
+    }
+
+    function hapus_panitia(id_url_panitia, nama_pegawai) {
+        var url_hapus_panitia = $('[name="url_hapus_panitia"]').val()
+        var random_kode = $('[name="random_kode"]').val();
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Menghapus User Panitia ? ',
+            text: nama_pegawai,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Terima!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_panitia + id_url_panitia,
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('User Panitia Berhasil Di Hapus!', '', 'success')
+                        by_id_rup(random_kode)
+                    }
+                })
+
+            }
+        })
+    }
+
+    function Buat_rup() {
+        var url_buat_rup_panitia = $('[name="url_buat_rup_panitia"]').val()
+        var random_kode = $('[name="random_kode"]').val();
+        Swal.fire({
+            title: 'Apakah Paket Yang Anda Buat Sudah Benar ? ',
+            text: '',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Sudah!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_buat_rup_panitia + random_kode,
+                    dataType: "JSON",
+                    success: function(response) {
+                        $('#modal-xl-paket').modal('hide');
+                        $('#modal-xl-tambah').modal('hide');
+                        Swal.fire('Paket Berhasil Dibuat!', '', 'success');
+                    }
+                })
+
+            }
+        })
+    }
 
 
     function finalisasi_rup() {
@@ -161,43 +264,6 @@
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
 
-
-    var tbl_panitia = $('#tbl_panitia')
-    var url_get_panitia_buat_paket = $('[name="url_get_panitia_buat_paket"').val()
-    $(document).ready(function() {
-        tbl_panitia.DataTable({
-            "responsive": false,
-            "ordering": true,
-            "paging": false,
-            "info": false,
-            "processing": true,
-            "serverSide": true,
-            "autoWidth": false,
-            "bDestroy": true,
-            "order": [],
-            "ajax": {
-                "url": url_get_panitia_buat_paket,
-                "type": "POST",
-            },
-            "columnDefs": [{
-                "target": [-1],
-                "orderable": false
-            }],
-            "oLanguage": {
-                "sSearch": "Pencarian : ",
-                "sEmptyTable": "Data Tidak Tersedia",
-                "sLoadingRecords": "Silahkan Tunggu - loading...",
-                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
-                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                "sProcessing": "Memuat Data...."
-            }
-        });
-    });
-
-    function Reload_table_panitia() {
-        tbl_panitia.DataTable().ajax.reload();
-    }
-
     function Simpan_panitia() {
         var url_tambah_panitia = $('[name="url_tambah_panitia"]').val();
         var random_kode = $('[name="random_kode"]').val();
@@ -217,7 +283,7 @@
                     Swal.fire('Maaf!', response['error'], 'warning')
                 } else {
                     Swal.fire('Panitia Berhasil Di Tambah!', '', 'success')
-                    Reload_table_panitia()
+                    by_id_rup(random_kode)
                 }
             }
         })
@@ -232,4 +298,68 @@
             }
         });
     })
+
+
+    var tbl_rup_final = $('#tbl_rup_final')
+    var url_get_rup_final = $('[name="url_get_rup_final"').val()
+    $(document).ready(function() {
+        tbl_rup_final.DataTable({
+            "responsive": false,
+            "ordering": true,
+            "processing": true,
+            "serverSide": true,
+            "autoWidth": false,
+            "bDestroy": true,
+            "dom": 'Bfrtip',
+            "buttons": ["excel", "pdf", "print", "colvis"],
+            "order": [],
+            "ajax": {
+                "url": url_get_rup_final,
+                "type": "POST",
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false
+            }],
+            "oLanguage": {
+                "sSearch": "Pencarian : ",
+                "sEmptyTable": "Data Tidak Tersedia",
+                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                "sProcessing": "Memuat Data...."
+            }
+        }).buttons().container().appendTo('#tbl_rup_final .col-md-6:eq(0)');
+    });
+
+    function Reload_table_rup_final() {
+        tbl_rup_final.DataTable().ajax.reload();
+    }
+
+    function finalisasi_final_rup(id_url_rup) {
+        var url_finaliasai_paket_final_rup = $('[name="url_finaliasai_paket_final_rup"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Memfinalisasi Paket Ini ?? ? ',
+            text: '',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Sudah!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_finaliasai_paket_final_rup + id_url_rup,
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Paket Berhasil Dibuat!', '', 'success');
+                        Reload_table_rup_final()
+                    }
+                })
+
+            }
+        })
+    }
 </script>
