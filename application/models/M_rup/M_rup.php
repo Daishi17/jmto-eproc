@@ -79,6 +79,82 @@ class M_rup extends CI_Model
         $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
         return $this->db->count_all_results();
     }
+
+    private function _get_data_query_rup_paket()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->join('tbl_departemen', 'tbl_rup.id_departemen = tbl_departemen.id_departemen', 'left');
+        $this->db->join('tbl_section', 'tbl_rup.id_section = tbl_section.id_section', 'left');
+        $this->db->join('tbl_rkap', 'tbl_rup.id_rkap = tbl_rkap.id_rkap', 'left');
+        $this->db->join('tbl_provinsi', 'tbl_rup.id_provinsi = tbl_provinsi.id_provinsi', 'left');
+        $this->db->join('tbl_kabupaten', 'tbl_rup.id_kabupaten = tbl_kabupaten.id_kabupaten', 'left');
+        $this->db->join('tbl_jenis_pengadaan', 'tbl_rup.id_jenis_pengadaan = tbl_jenis_pengadaan.id_jenis_pengadaan', 'left');
+        $this->db->join('tbl_metode_pengadaan', 'tbl_rup.id_metode_pengadaan = tbl_metode_pengadaan.id_metode_pengadaan', 'left');
+        $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
+        $this->db->where('tbl_rup.sts_rup', 1);
+        $i = 0;
+        foreach ($this->order as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_rup.id_rup', 'ASC');
+        }
+    }
+
+    public function gettable_rup_paket() //nam[ilin data pake ini
+    {
+        $this->_get_data_query_rup_paket(); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_filtered_rup_paket()
+    {
+        $this->_get_data_query_rup_paket(); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_rup_paket()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->join('tbl_departemen', 'tbl_rup.id_departemen = tbl_departemen.id_departemen', 'left');
+        $this->db->join('tbl_section', 'tbl_rup.id_section = tbl_section.id_section', 'left');
+        $this->db->join('tbl_rkap', 'tbl_rup.id_rkap = tbl_rkap.id_rkap', 'left');
+        $this->db->join('tbl_provinsi', 'tbl_rup.id_provinsi = tbl_provinsi.id_provinsi', 'left');
+        $this->db->join('tbl_kabupaten', 'tbl_rup.id_kabupaten = tbl_kabupaten.id_kabupaten', 'left');
+        $this->db->join('tbl_jenis_pengadaan', 'tbl_rup.id_jenis_pengadaan = tbl_jenis_pengadaan.id_jenis_pengadaan', 'left');
+        $this->db->join('tbl_metode_pengadaan', 'tbl_rup.id_metode_pengadaan = tbl_metode_pengadaan.id_metode_pengadaan', 'left');
+        $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
+        $this->db->where('tbl_rup.sts_rup', 1);
+        return $this->db->count_all_results();
+    }
+
     public function get_kode_rup($text = null, $table = null, $field = null)
     {
         $this->db->select_max('kode_urut_rup');

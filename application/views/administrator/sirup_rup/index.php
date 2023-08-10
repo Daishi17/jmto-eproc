@@ -297,11 +297,11 @@
                                         </tr>
                                         <tr>
                                             <th class="bg-light" colspan="2">
-                                                <a href="javascript:;" onclick="finalisasi_rup()" class="btn btn-sm btn-success">
+                                                <a href="javascript:;" onclick="finalisasi_rup()" class="btn btn-sm btn-success btn-finalisasi">
                                                     <i class="fa-solid fa-circle-up px-1"></i>
                                                     Finalisasi
                                                 </a>
-                                                <a href="javascript:;" onclick="ubah_rup()" class="btn btn-sm btn-warning">
+                                                <a href="javascript:;" onclick="ubah_rup()" class="btn btn-sm btn-warning btn-rup">
                                                     <i class="fa-solid fa-pen-to-square px-1"></i>
                                                     Ubah RUP
                                                 </a>

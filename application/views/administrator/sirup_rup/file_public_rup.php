@@ -368,7 +368,13 @@
                 $('#waktu_pelakasanaan').text(response['row_rup']['jangka_waktu_mulai_pelaksanaan'] +
                     ' s/d ' + response['row_rup']['jangka_waktu_mulai_pelaksanaan']);
                 $('#hari_pelaksanaan').text(response['row_rup']['jangka_waktu_hari_pelaksanaan']);
-
+                if (response['row_rup']['sts_rup'] == 1) {
+                    $('.btn-finalisasi').hide()
+                    $('.btn-rup').hide()
+                } else {
+                    $('.btn-finalisasi').show()
+                    $('.btn-rup').show()
+                }
             }
         })
     }
