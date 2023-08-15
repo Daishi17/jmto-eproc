@@ -45,6 +45,19 @@
         <script src="<?php echo base_url(); ?>assets/plugins-lte/select2/js/select2.full.min.js"></script>
         <script>
             $('.select2').select2()
+            $(function() {
+                //Initialize Select2 Elements
+                $.fn.select2.defaults.set("theme", "bootstrap");
+                $('.select2bs4').select2({
+                    placeholder: 'Pillih Data…',
+                    width: null,
+                    theme: 'bootstrap4'
+                });
+                $('#select2bs4').select2({
+                    dropdownParent: $('#modal-xl-paket')
+                });
+                // $( ".modal-xl-paket" ).modal();
+            })
         </script>
 
         </body>

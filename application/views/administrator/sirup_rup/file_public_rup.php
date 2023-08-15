@@ -14,8 +14,13 @@
             "serverSide": true,
             "autoWidth": false,
             "bDestroy": true,
-            "dom": 'Bfrtip',
+
             "buttons": ["excel", "pdf", "print", "colvis"],
+            initComplete: function() {
+                this.api().buttons().container()
+                    .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+
+            },
             "order": [],
             "ajax": {
                 "url": url_get_rkap,
@@ -68,11 +73,8 @@
 
         $('[name="nilai_pencatatan"]').val(nilai_pencatatan);
         $('#nilai_pencatatan2').val(nilai_pencatatan)
-
-        var tanpa_rupiah2 = document.getElementById('nilai_pencatatan2');
-        tanpa_rupiah2.value = formatRupiah(this.value, 'Rp. ');
-
-
+        var tanpa_rupiah2 = $('[name="nilai_pencatatan2"]').val(nilai_pencatatan);
+        tanpa_rupiah2.value2 = formatRupiah(this.value2, 'Rp. ');
 
         /* Fungsi */
         function formatRupiah(angka, prefix) {
@@ -142,6 +144,7 @@
                 dataType: "JSON",
                 success: function(response) {
                     $('[name="kode_urut_rup"').val(response['kode_urut_rup'])
+                    $('[name="sumber_dana_anggaran"').val(response['get_row_departemen']['nama_departemen']);
                     $('[name="kode_urut_manipulasi"').val(response['get_row_jenis_anggaran']['kode_string'] + '.' + response['get_row_departemen']['kode_departemen'] + '.' + response['kode_urut_rup'])
                 }
             })
@@ -178,6 +181,7 @@
 
     function Simpan_rup() {
         var url_post_rup = $('[name="url_post_rup"]').val();
+        var url_back_rup = $('[name="url_back_rup"]').val();
         var form_rup = $('#form_rup');
         $.ajax({
             method: "POST",
@@ -190,6 +194,8 @@
             // },
             success: function(response) {
                 if (response['error']) {
+                    // ruas_lokasi
+                    $('.ruas_lokasi_validation').html(response['error']['id_ruas']);
                     // tahun_rup
                     $('.tahun_rup_validation').html(response['error']['tahun_rup']);
                     // id_departemen
@@ -226,8 +232,6 @@
                     $('.jangka_waktu_hari_pelaksanaan_validation').html(response['error']['jangka_waktu_hari_pelaksanaan']);
                     // total_pagu_rup
                     $('.total_pagu_rup_validation').html(response['error']['total_pagu_rup']);
-                    // ruas_lokasi
-                    $('.ruas_lokasi_validation').html(response['error']['ruas_lokasi']);
                     //  detail_lokasi_rup
                     $('.detail_lokasi_rup_validation').html(response['error']['detail_lokasi_rup']);
                 } else {
@@ -289,8 +293,7 @@
                             Swal.fire('Rup Berhasil Di Buat!', '', 'success')
                             form_rup[0].reset();
                             Get_kode_rup();
-                            // $('#button_dekrip_generate').css('display', 'block');
-                            // $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            location.replace(url_back_rup)
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */
@@ -303,6 +306,7 @@
         })
     }
 
+
     var tbl_rup = $('#tbl_rup')
     var url_get_rup = $('[name="url_get_rup"').val()
     $(document).ready(function() {
@@ -313,8 +317,12 @@
             "serverSide": true,
             "autoWidth": false,
             "bDestroy": true,
-            "dom": 'Bfrtip',
             "buttons": ["excel", "pdf", "print", "colvis"],
+            initComplete: function() {
+                this.api().buttons().container()
+                    .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+
+            },
             "order": [],
             "ajax": {
                 "url": url_get_rup,
@@ -448,5 +456,28 @@
 
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+</script>
+
+<script>
+    // a and b are javascript Date objects
+    function dateDiffInDays(a, b) {
+        const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+        // Discard the time and time-zone information.
+        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+    }
+
+    // test it
+
+    function hitung_hari() {
+        var date_1 = $('[name="jangka_waktu_mulai_pelaksanaan"]').val();
+        var date_2 = $('[name="jangka_waktu_selesai_pelaksanaan"]').val();
+        var a = new Date(date_1);
+        var b = new Date(date_2);
+        var difference = dateDiffInDays(a, b);
+        $('[name="jangka_waktu_hari_pelaksanaan"]').val(difference);
     }
 </script>

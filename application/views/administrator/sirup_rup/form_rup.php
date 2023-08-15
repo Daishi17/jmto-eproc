@@ -277,7 +277,7 @@
                                                     <small>Detail Lokasi</small>
                                                 </th>
                                                 <th class="text-center bg-secondary text-white" scope="col">
-                                                    <small>Tambah Ruas</small>
+                                                    <small>Ruas</small>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -293,7 +293,7 @@
                                                         </select>
                                                         <!-- id_provinsi -->
                                                         <small class="text-danger id_provinsi_validation"></small>
-                                                        <small>
+                                                    </small>
                                                 </td>
                                                 <td>
                                                     <small>
@@ -302,7 +302,7 @@
                                                         </select>
                                                         <!-- id_kabupaten -->
                                                         <small class="text-danger id_kabupaten_validation"></small>
-                                                        <small>
+                                                    </small>
                                                 </td>
                                                 <td>
                                                     <small>
@@ -312,12 +312,19 @@
                                                         </div>
                                                         <!-- detail_lokasi_rup -->
                                                         <small class="text-danger detail_lokasi_rup_validation"></small>
-                                                        <small>
+                                                    </small>
                                                 </td>
-                                                <td class="text-center">
-                                                    <button type="button" name="add" id="add" class="btn btn-success"><i class="fas fa-plus-square"></i></button> <br>
-                                                    <!-- ruas_lokasi -->
-                                                    <small class="text-danger ruas_lokasi_validation"></small>
+                                                <td>
+                                                    <small>
+                                                        <select name="id_ruas" class="form-control select2bs4" style="width: 100%;">
+                                                            <option>Pilih Ruas</option>
+                                                            <?php foreach ($ruas_lokasi as $key => $value) { ?>
+                                                                <option value="<?= $value['id_ruas'] ?>"><?= $value['nama_ruas'] ?></option>
+                                                            <?php  } ?>
+                                                        </select>
+                                                        <!-- id_ruas -->
+                                                        <small class="text-danger ruas_lokasi_validation"></small>
+                                                    </small>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -389,7 +396,7 @@
                                     <small>
                                         <div class="input-group mb-2">
                                             <span class="input-group-text">Rp.</span>
-                                            <input id="nilai_pencatatan2" type="text" class="form-control" placeholder="Nilai Pencatatan" readonly style="background-color: #ffffe0;">
+                                            <input id="nilai_pencatatan2" name="nilai_pencatatan2" type="text" class="form-control" placeholder="Nilai Pencatatan" readonly style="background-color: #ffffe0;">
                                             <input type="hidden" name="nilai_pencatatan">
                                         </div>
                                         <!-- persen_pencatatan -->
@@ -426,7 +433,7 @@
                                                     <small>
                                                         <div class="input-group mb-2">
                                                             <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i>&ensp; Tahun Awal</span>
-                                                            <input name="jangka_waktu_mulai_pelaksanaan" type="date" class="form-control">
+                                                            <input name="jangka_waktu_mulai_pelaksanaan" onchange="hitung_hari()" type="date" class="form-control">
                                                         </div>
                                                         <!-- jangka_waktu_mulai_pelaksanaan -->
                                                         <small class="text-danger jangka_waktu_mulai_pelaksanaan_validation"></small>
@@ -436,7 +443,7 @@
                                                     <small>
                                                         <div class="input-group mb-2">
                                                             <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i>&ensp; Tahun Akhir</span>
-                                                            <input name="jangka_waktu_selesai_pelaksanaan" type="date" class="form-control">
+                                                            <input name="jangka_waktu_selesai_pelaksanaan" onchange="hitung_hari()" type="date" class="form-control">
                                                         </div>
                                                         <!-- jangka_waktu_selesai_pelaksanaan -->
                                                         <small class="text-danger jangka_waktu_selesai_pelaksanaan_validation"></small>
@@ -446,7 +453,7 @@
                                                     <small>
                                                         <div class="input-group mb-2">
                                                             <span class="input-group-text"><i class="fa-solid fa-calendar"></i></span>
-                                                            <input type="number" name="jangka_waktu_hari_pelaksanaan" class="form-control" placeholder="360">
+                                                            <input type="number" readonly name="jangka_waktu_hari_pelaksanaan" style="background-color: #ffffe0;" class="form-control" placeholder="360">
                                                             <span class="input-group-text">Hari</span>
                                                         </div>
                                                         <!-- jangka_waktu_hari_pelaksanaan -->

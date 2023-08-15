@@ -44,7 +44,7 @@ class M_rup extends CI_Model
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('tbl_rup.id_rup', 'ASC');
+            $this->db->order_by('tbl_rup.id_rup', 'DESC');
         }
     }
 
@@ -204,7 +204,7 @@ class M_rup extends CI_Model
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_panitia[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('tbl_panitia.id_panitia', 'ASC');
+            $this->db->order_by('tbl_panitia.id_panitia', 'DESC');
         }
     }
 
@@ -316,7 +316,7 @@ class M_rup extends CI_Model
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_rup_paket[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('tbl_rup.id_rup', 'ASC');
+            $this->db->order_by('tbl_rup.id_rup', 'DESC');
         }
     }
 
@@ -356,7 +356,6 @@ class M_rup extends CI_Model
 
     // GET RUP PAKET FINAL
     var $order_rup_paket_final =  array('id_rup', 'kode_rup', 'tahun_rup', 'nama_program_rup', 'kode_departemen', 'total_pagu_rup', 'id_rup', 'id_rup', 'id_rup');
-
     // get nib
     private function _get_data_query_rup_paket_final()
     {
@@ -397,7 +396,7 @@ class M_rup extends CI_Model
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_rup_paket_final[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('tbl_rup.id_rup', 'ASC');
+            $this->db->order_by('tbl_rup.id_rup', 'DESC');
         }
     }
 

@@ -1,4 +1,6 @@
 <!-- ININ UTNUK BASE URL RUP INDEX -->
+<input type="hidden" name="url_back_rup" value="<?= base_url('administrator/sirup_rup') ?>">
+
 <input type="hidden" name="url_get_rup" value="<?= base_url('administrator/sirup_rup/get_rup') ?>">
 
 <!-- by rup -->

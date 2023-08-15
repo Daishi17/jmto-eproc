@@ -213,7 +213,7 @@
                     // total_pagu_rup
                     $('.total_pagu_rup_validation').html(response['error']['total_pagu_rup']);
                     // ruas_lokasi
-                    $('.ruas_lokasi_validation').html(response['error']['ruas_lokasi']);
+                    $('.ruas_lokasi_validation').html(response['error']['id_ruas']);
                     //  detail_lokasi_rup
                     $('.detail_lokasi_rup_validation').html(response['error']['detail_lokasi_rup']);
                 } else {

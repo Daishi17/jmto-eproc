@@ -6,14 +6,47 @@
     });
     var tbl_rkap = $('#tbl_rkap')
     var url_get_rkap = $('[name="url_get_rkap"').val()
+
+    // $("#tbl_rkap").DataTable({
+    //     "responsive": false,
+    //     "ordering": true,
+    //     "lengthChange": false,
+    //     "serverSide": true,
+    //     "autoWidth": false,
+    //     "buttons": ["excel", "pdf", "print", "colvis"],
+    //     "ajax": {
+    //         "url": url_get_rkap,
+    //         "type": "POST",
+    //     },
+    // }).buttons().container().appendTo('#tbl_rkap .col-md-6:eq(0)');
+
+    // $(document).ready(function() {
+    //     var table = $('#table_id').DataTable({
+    //         buttons: ['copy', 'excel', 'pdf', 'colvis'],
+    //         initComplete: function() {
+    //             this.api().buttons().container()
+    //                 //.appendTo( $ ('#table_id_wrapper .col-md-6:eq(0)', this.api().table (). container ()));
+    //                 //.appendTo( $('#table_id_wrapper .col-md-6:eq(0)' ) );
+    //                 .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+
+    //         }
+    //     });
+    // });
+
+
     $(document).ready(function() {
         tbl_rkap.DataTable({
             "responsive": false,
             "ordering": true,
             "processing": true,
             "serverSide": true,
-            "dom": 'Bfrtip',
-            "buttons": ["excel", "pdf", "print", "colvis"],
+            "lengthChange": false,
+            buttons: ['copy', 'excel', 'pdf', 'colvis'],
+            initComplete: function() {
+                this.api().buttons().container()
+                    .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+
+            },
             "order": [],
             "ajax": {
                 "url": url_get_rkap,

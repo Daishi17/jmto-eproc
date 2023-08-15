@@ -8,6 +8,7 @@ class Sirup_rup extends CI_Controller
 		parent::__construct();
 		$this->load->helper(array('url', 'form'));
 		$this->load->model('M_rkap/M_rkap');
+		$this->load->model('M_ruas/M_ruas');
 		$this->load->model('M_rup/M_rup');
 		$this->load->model('M_departmen/M_departmen');
 		$this->load->model('M_section/M_section');
@@ -184,6 +185,7 @@ class Sirup_rup extends CI_Controller
 		$data['result_jenis_pengadaan'] = $this->M_jenis_pengadaan->get_result_jenis_pengadaan();
 		$data['result_metode_pengadaan'] = $this->M_metode_pengadaan->get_result_metode_pengadaan();
 		$data['result_jenis_anggaran'] = $this->M_jenis_anggaran->get_result_jenis_anggaran();
+		$data['ruas_lokasi'] = $this->M_ruas->get_result_ruas();
 		$data['provinsi']  = $this->Wilayah_model->getProvinsi();
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('administrator/template/si_rup/js_header_rup');
@@ -342,10 +344,6 @@ class Sirup_rup extends CI_Controller
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
-
-
-
-
 	function simpan_rup()
 	{
 		$id_rkap = $this->input->post('id_rkap');
@@ -359,7 +357,7 @@ class Sirup_rup extends CI_Controller
 		$id_provinsi = $this->input->post('id_provinsi');
 		$id_kabupaten = $this->input->post('id_kabupaten');
 		$detail_lokasi_rup = $this->input->post('detail_lokasi_rup');
-		$ruas_lokasi = $this->input->post('ruas_lokasi');
+		$id_ruas = $this->input->post('id_ruas');
 		$id_jenis_pengadaan = $this->input->post('id_jenis_pengadaan');
 		$id_metode_pengadaan = $this->input->post('id_metode_pengadaan');
 		$id_jenis_anggaran = $this->input->post('id_jenis_anggaran');
@@ -372,7 +370,7 @@ class Sirup_rup extends CI_Controller
 		$jangka_waktu_hari_pelaksanaan = $this->input->post('jangka_waktu_hari_pelaksanaan');
 		$total_pagu_rup = $this->input->post('total_pagu_rup');
 		$nilai_pencatatan = $this->input->post('nilai_pencatatan');
-		$this->form_validation->set_rules('ruas_lokasi[]', 'Ruas', 'required|trim', ['required' => 'Ruas Wajib Diisi!']);
+		$this->form_validation->set_rules('id_ruas', 'Ruas', 'required|trim', ['required' => 'Ruas Wajib Diisi!']);
 		$this->form_validation->set_rules('detail_lokasi_rup', 'Detail Lokasi', 'required|trim', ['required' => 'Detil Lokasi Wajib Diisi!']);
 		$this->form_validation->set_rules('tahun_rup', 'Tahun', 'required|trim', ['required' => 'Tahun Wajib Diisi!']);
 		$this->form_validation->set_rules('id_departemen', 'Nama Departemen', 'required|trim', ['required' => 'Nama Departemen  Wajib Diisi!']);
@@ -414,20 +412,19 @@ class Sirup_rup extends CI_Controller
 					'jangka_waktu_selesai_pelaksanaan' => form_error('jangka_waktu_selesai_pelaksanaan'),
 					'jangka_waktu_hari_pelaksanaan' => form_error('jangka_waktu_hari_pelaksanaan'),
 					'total_pagu_rup' => form_error('total_pagu_rup'),
-					'ruas_lokasi' => form_error('ruas_lokasi[]'),
+					'id_ruas' => form_error('id_ruas'),
 				],
 			];
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			if ($type_button == 'tambah') {
-				$row_jenis_pengadaan = $this->M_jenis_pengadaan->get_row_jenis_pengadaan($id_jenis_pengadaan);
-				$row_metode_pengadaan = $this->M_metode_pengadaan->get_row_metode_pengadaan($id_metode_pengadaan);
 				$row_jenis_anggaran = $this->M_jenis_anggaran->get_row_jenis_anggaran($id_jenis_anggaran);
+				$row_departemen = $this->M_departmen->get_row_departemen($id_departemen);
 				$id = $this->uuid->v4();
 				$id = str_replace('-', '', $id);
 				$data  = array(
 					'id_url_rup' => $id,
-					'kode_rup' => $row_jenis_anggaran['kode_string'] . '.' . $row_jenis_pengadaan['kode_jenis_pengadaan'] . '.' . $row_metode_pengadaan['kode_metode_pengadaan'] . '.' . $kode_urut_rup,
+					'kode_rup' => $row_jenis_anggaran['kode_string'] . '.' . $row_departemen['kode_departemen'] . '.' . $kode_urut_rup,
 					'kode_urut_rup' => $kode_urut_rup,
 					'id_jenis_pengadaan' => $id_jenis_pengadaan,
 					'id_metode_pengadaan' => $id_metode_pengadaan,
@@ -452,22 +449,12 @@ class Sirup_rup extends CI_Controller
 					'id_provinsi' => $id_provinsi,
 					'id_kabupaten' => $id_kabupaten,
 					'detail_lokasi_rup' => $detail_lokasi_rup,
+					'id_ruas' => $id_ruas,
 
 				);
 				$this->db->insert('tbl_rup', $data);
-				// End Insert Batch Tbl_paket
-				$package_id = $this->db->insert_id(); // Ini ID table yang memberi Id Insertbatchnya
-				// Insert Batch Lokasi
-				$result = array();
-				foreach ($ruas_lokasi as $key => $val) {
-					$result[] = array(
-						'id_rup'   => $package_id,
-						'ruas_lokasi'   =>  $ruas_lokasi[$key],
-					);
-				}
-				$this->db->insert_batch('tbl_ruas_rup', $result);
-
-				if (!$id_rkap) { } else {
+				if (!$id_rkap) {
+				} else {
 					$where = [
 						'id_rkap' => $id_rkap
 					];
@@ -483,14 +470,13 @@ class Sirup_rup extends CI_Controller
 			} else {
 				$id_url_rup = $this->input->post('random_kode');
 				$row_rup = $this->M_rup->get_row_rup($id_url_rup);
-				$row_jenis_pengadaan = $this->M_jenis_pengadaan->get_row_jenis_pengadaan($id_jenis_pengadaan);
-				$row_metode_pengadaan = $this->M_metode_pengadaan->get_row_metode_pengadaan($id_metode_pengadaan);
 				$row_jenis_anggaran = $this->M_jenis_anggaran->get_row_jenis_anggaran($id_jenis_anggaran);
+				$row_departemen = $this->M_departmen->get_row_departemen($id_departemen);
 				$where_rup = [
 					'id_rup' => $row_rup['id_rup']
 				];
 				$data  = array(
-					'kode_rup' => $row_jenis_anggaran['kode_string'] . '.' . $row_jenis_pengadaan['kode_jenis_pengadaan'] . '.' . $row_metode_pengadaan['kode_metode_pengadaan'] . '.' . $kode_urut_rup,
+					'kode_rup' => $row_jenis_anggaran['kode_string'] . '.' . $row_departemen['kode_departemen'] . '.' . $kode_urut_rup,
 					'kode_urut_rup' => $kode_urut_rup,
 					'id_jenis_pengadaan' => $id_jenis_pengadaan,
 					'id_metode_pengadaan' => $id_metode_pengadaan,
@@ -515,21 +501,12 @@ class Sirup_rup extends CI_Controller
 					'id_provinsi' => $id_provinsi,
 					'id_kabupaten' => $id_kabupaten,
 					'detail_lokasi_rup' => $detail_lokasi_rup,
+					'id_ruas' => $id_ruas,
 
 				);
 				$this->M_rup->update_rup($data, $where_rup);
-				// End Insert Batch Tbl_paket
-				$package_id = $row_rup['id_rup'];
-				// Insert Batch Lokasi
-				$result = array();
-				foreach ($ruas_lokasi as $key => $val) {
-					$result[] = array(
-						'id_rup'   => $package_id,
-						'ruas_lokasi'   =>  $ruas_lokasi[$key],
-					);
-				}
-				$this->db->insert_batch('tbl_ruas_rup', $result);
-				if (!$id_rkap) { } else {
+				if (!$id_rkap) {
+				} else {
 					$where = [
 						'id_rkap' => $id_rkap
 					];
@@ -588,10 +565,10 @@ class Sirup_rup extends CI_Controller
 
 	public function get_section($id_departemen) //satuan kerja
 	{
-		$data= $this->M_section->get_section($id_departemen);
+		$data = $this->M_section->get_section($id_departemen);
 		echo '<option value="">Pilih Section</option>';
 		foreach ($data as $key => $value) {
-			echo '<option value="'.$value['id_section'].'">'.$value['nama_section'].'</option>';
+			echo '<option value="' . $value['id_section'] . '">' . $value['nama_section'] . '</option>';
 		}
 	}
 }
