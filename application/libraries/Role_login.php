@@ -19,11 +19,11 @@ class Role_login
 
         $cek = $this->ci->Auth_model->login($username);
         if (!$cek->nip) {
-            $this->ci->session->set_flashdata('salah', 'Username Tidak Terdaftar!');
+            $this->ci->session->set_flashdata('salah', 'Pegawai Tidak Terdaftar!');
             redirect('auth');
         } else {
-            if ($cek->sts_aktif == 2) {
-                $this->ci->session->set_flashdata('salah', 'Username Sedang Menunggu Di Aktivasi!');
+            if ($cek->status == 0) {
+                $this->ci->session->set_flashdata('salah', 'Pegawai Sedang Menunggu Di Aktivasi!');
                 redirect('auth');
             } else {
                 if ($cek && password_verify($password, $cek->password)) {

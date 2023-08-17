@@ -31,18 +31,17 @@ class Daftar_paket extends CI_Controller
 	public function beranda()
 	{
 		$this->load->view('panitia/template_menu/header_menu');
-		$this->load->view('panitia/daftar_paket/js_header_paket');
-		// $this->load->view('panitia/beranda/base_url_panitia');
+		$this->load->view('panitia/beranda/js_header_paket');
+		$this->load->view('panitia/beranda/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/daftar_paket');
-		$this->load->view('administrator/template_menu/footer_menu');
+		$this->load->view('panitia/template_menu/footer_menu');
 		$this->load->view('panitia/daftar_paket/file_public_daftar_paket');
 	}
 
 	public function form_daftar_paket($id_url_rup)
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
-		$this->load->view('panitia/template_menu/header_menu');
-		$this->load->view('panitia/daftar_paket/js_header_paket');
+		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
 		$this->load->view('administrator/template_menu/footer_menu');

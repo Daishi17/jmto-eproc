@@ -38,7 +38,7 @@
                                 <th style="width:20%;"><small class="text-white">Departemen</small></th>
                                 <th style="width:10%;"><small class="text-white">Total Pagu (Rp.)</small></th>
                                 <th style="width:10%;"><small class="text-white">Status</small></th>
-                                <th style="width:10%;"><small class="text-white">View Jadwal</small></th>
+                                <!-- <th style="width:10%;"><small class="text-white">View Jadwal</small></th> -->
                                 <th style="width:15%;"><small class="text-white">
                                         <div class="text-center">More Options</div>
                                     </small></th>

@@ -20,12 +20,18 @@
                             <small><strong>Data Tabel - Daftar Paket Penyedia</strong></small>
                         </span>
                     </div>
-                    <div class="bd-highlight">
-                        <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
-                            <i class="fa-solid fa-circle-plus px-1"></i>
-                            Tambah Paket Penyedia
-                        </button>
-                    </div>
+                    <?php if ($this->session->userdata('role') == 2) { ?>
+                   
+                    <?php  } else { ?>
+                        <div class="bd-highlight">
+                            <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
+                                <i class="fa-solid fa-circle-plus px-1"></i>
+                                Tambah Paket Penyedia
+                            </button>
+                        </div>
+                    <?php  }
+                    ?>
+
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-sm table-striped">

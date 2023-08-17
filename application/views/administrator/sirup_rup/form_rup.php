@@ -556,10 +556,10 @@
                         <i class="fa-solid fa-floppy-disk px-1"></i>
                         Simpan Data RUP
                     </a>
-                    <button type="button" class="btn btn-default btn-warning" onclick="history.back()">
+                    <a href="<?= base_url('administrator/Sirup_rup')?>" class="btn btn-default btn-warning" onclick="history.back()">
                         <i class="fa-solid fa-angles-left px-1"></i>
                         Kembali Kemenu Sebelumnya
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

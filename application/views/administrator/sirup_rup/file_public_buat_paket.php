@@ -88,12 +88,6 @@
                         "autoWidth": false,
                         "bDestroy": true,
                         "order": [],
-                        "buttons": ["excel", "pdf", "print", "colvis"],
-                        initComplete: function() {
-                            this.api().buttons().container()
-                                .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
-
-                        },
                         "ajax": {
                             "url": url_get_panitia_buat_paket,
                             "type": "POST",
@@ -217,6 +211,8 @@
                             $('#modal-xl-paket').modal('hide');
                             $('#modal-xl-tambah').modal('hide');
                             Swal.fire('Paket Berhasil Dibuat!', '', 'success');
+                            Reload_table_rup_final();
+                            Reload_table_rup();
                         }
                     })
 

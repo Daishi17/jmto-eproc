@@ -252,19 +252,19 @@ class Sirup_buat_paket extends CI_Controller
 			} else {
 				$row[] = '<small><span class="badge bg-success text-white">Finalisasi Paket</span></small>';
 			}
-			if ($rs->sts_rup_buat_paket == 1) {
-				$row[] = '<div class="text-center">
-				<a href="javascript:;" class="btn btn-warning btn-sm  shadow-lg" onClick="lihat_jadwal(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i>
-				<small>View Jadwal</small></a>
-				</div>';
-			} else {
-				$row[] = '<div class="text-center">
-				<button type="button" class="btn btn-warning btn-sm  shadow-lg" disabled>
-				<i class="fa-solid fa-users-viewfinder px-1"></i> 
-					<small>View Jadwal</small>
-				</button>
-			</div>';
-			}
+			// if ($rs->sts_rup_buat_paket == 1) {
+			// 	$row[] = '<div class="text-center">
+			// 	<a href="javascript:;" class="btn btn-warning btn-sm  shadow-lg" onClick="lihat_jadwal(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i>
+			// 	<small>View Jadwal</small></a>
+			// 	</div>';
+			// } else {
+			// 	$row[] = '<div class="text-center">
+			// 	<button type="button" class="btn btn-warning btn-sm  shadow-lg" disabled>
+			// 	<i class="fa-solid fa-users-viewfinder px-1"></i> 
+			// 		<small>View Jadwal</small>
+			// 	</button>
+			// </div>';
+			// }
 			if ($rs->sts_rup_buat_paket == 1) {
 				$row[] = '<div class="text-center">
 				<a href="javascript:;" class="btn btn-info btn-sm  shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i>

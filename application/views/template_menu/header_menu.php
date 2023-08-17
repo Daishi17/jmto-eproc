@@ -56,318 +56,232 @@
                     ||
                 </small>
             </a>&nbsp;
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li>
+                    <a href="<?= base_url() ?>administrator/dashboard" class="nav-link px-2 text-white">
+                        <i class="fa-solid fa-gauge-high mb-1"></i>
+                        <small>Dashboard</small>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-regular fa-folder-open"></i>
+                        <small>File Master</small>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>validator/data_kbli">
+                                <i class="fa-regular fa-folder-open px-1"></i>
+                                <small>Data KBLI</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>validator/data_sbu">
+                                <i class="fa-solid fa-folder-open px-1"></i>
+                                <small>Data SBU</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_unit_kerja">
+                                <i class="fa-solid fa-building-columns px-1"></i>
+                                <small>Data Departemen</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_unit_area">
+                                <i class="fa-solid fa-map px-1"></i>
+                                <small>Data Sections</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_karyawan">
+                                <i class="fa-solid fa-id-card-clip px-1"></i>
+                                <small> Data Karyawan</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_mjm_user">
+                                <i class="fa-solid fa-user-gear px-1"></i>
+                                <small> Manajemen Role User</small>
+                            </a>
+                        </li>
 
-            <!-- kondisi -->
-
-            <?php if ($this->session->userdata('role') == 2) { ?>
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li>
-                        <a href="<?= base_url() ?>administrator/dashboard" class="nav-link px-2 text-white">
-                            <i class="fa-solid fa-gauge-high mb-1"></i>
-                            <small>Dashboard</small>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-regular fa-folder-open"></i>
-                            <small>File Master</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/data_kbli">
-                                    <i class="fa-regular fa-folder-open px-1"></i>
-                                    <small>Data KBLI</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/data_sbu">
-                                    <i class="fa-solid fa-folder-open px-1"></i>
-                                    <small>Data SBU</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_unit_kerja">
-                                    <i class="fa-solid fa-building-columns px-1"></i>
-                                    <small>Data Departemen</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_unit_area">
-                                    <i class="fa-solid fa-map px-1"></i>
-                                    <small>Data Sections</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_karyawan">
-                                    <i class="fa-solid fa-id-card-clip px-1"></i>
-                                    <small> Data Karyawan</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_mjm_user">
-                                    <i class="fa-solid fa-user-gear px-1"></i>
-                                    <small> Manajemen Role User</small>
-                                </a>
-                            </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_jenis_pengadaan">
-                                    <i class="fa-solid fa-briefcase px-1"></i>
-                                    <small>Data Jenis Pengadaan</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_metode_pengadaan">
-                                    <i class="fa-solid fa-sitemap px-1"></i>
-                                    <small>Data Metode Pengadaan</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_jenis_jadwal">
-                                    <i class="fa-regular fa-calendar-days px-1"></i>
-                                    <small>Data Jenis Jadwal Pengadaan</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-user-tag"></i>
-                            <small>Info Data Rekanan</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_baru">
-                                    <i class="fa-solid fa-users-rectangle px-1"></i>
-                                    <small>Daftar Rekanan Terbaru</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_tervalidasi">
-                                    <i class="fa-solid fa-user-shield px-1"></i>
-                                    <small>Data Status Rekanan Tervalidasi</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_terundang">
-                                    <i class="fa-solid fa-address-card px-1"></i>
-                                    <small>Data Rekanan Terundang</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="">
-                                    <i class="fa-solid fa-user-secret px-1"></i>
-                                    <small>Daftar Hitam Rekanan</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-cash-register"></i>
-                            <small>SI-RUP</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_rka">
-                                    <i class="fa-solid fa-money-check-dollar px-1"></i>
-                                    <small>Rencana Kerja Anggaran Pengadaan (RKAP)</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_rup">
-                                    <i class="fa-solid fa-money-check px-1"></i>
-                                    <small>Rencana Umum Pengadaan (RUP)</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_buat_paket">
-                                    <i class="fa-solid fa-business-time px-1"></i>
-                                    <small>Buat Paket Penyedia</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-business-time"></i>
-                            <small>Transaksi Tender</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>panitia/Daftar_paket">
-                                    <i class="fa-solid fa-folder-plus px-1"></i>
-                                    <small>Daftar Paket Penyedia</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-circle-info px-1"></i>
-                                    <small>Info Tender</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-video px-1"></i>
-                                    <small>Info Progres Kinerja Rekanan</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-brands fa-product-hunt px-1"></i>
-                                    <small>Info Penilaian Kinerja Rekanan</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-newspaper px-1"></i>
-                                    <small>Buat Berita / Pengumuman</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-chart-pie"></i>
-                            <small>Laporan</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-chart-simple px-1"></i>
-                                    <small>Tabel Total Tender</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-chart-pie px-1"></i>
-                                    <small>Grafik & Rekap Tender</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-chart-column px-1"></i>
-                                    <small>Penilaian Kinerja Rekanan</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fa-solid fa-chart-area px-1"></i>
-                                    <small>Progres Kinerja Rekanan</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            <?php } else { ?>
-                <!-- kondisi -->
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li>
-                        <a href="<?= base_url() ?>validator/dashboard" class="nav-link px-2 text-white">
-                            <i class="fa-solid fa-gauge-high mb-1"></i>
-                            <small>Dashboard</small>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-regular fa-folder-open"></i>
-                            <small>File Master</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/data_kbli">
-                                    <i class="fa-solid fa-database px-1"></i>
-                                    <small>Data KBLI</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/data_sbu">
-                                    <i class="fa-solid fa-database px-1"></i>
-                                    <small>Data SBU</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-user-tag"></i>
-                            <small>Info Data Rekanan</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_baru">
-                                    <i class="fa-solid fa-users-rectangle px-1"></i>
-                                    <small>Daftar Rekanan Terbaru</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_tervalidasi">
-                                    <i class="fa-solid fa-user-shield px-1"></i>
-                                    <small>Data Status Rekanan Tervalidasi</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_terundang">
-                                    <i class="fa-solid fa-address-card px-1"></i>
-                                    <small>Data Rekanan Terundang</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="">
-                                    <i class="fa-solid fa-user-secret px-1"></i>
-                                    <small>Daftar Hitam Rekanan</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-business-time"></i>
-                            <small>Transaksi Tender</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                        </ul>
-                    </li>
-                </ul>
-                <!-- end kondisi -->
-            <?php }  ?>
-
-
-
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_jenis_pengadaan">
+                                <i class="fa-solid fa-briefcase px-1"></i>
+                                <small>Data Jenis Pengadaan</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_metode_pengadaan">
+                                <i class="fa-solid fa-sitemap px-1"></i>
+                                <small>Data Metode Pengadaan</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Fm_jenis_jadwal">
+                                <i class="fa-regular fa-calendar-days px-1"></i>
+                                <small>Data Jenis Jadwal Pengadaan</small>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user-tag"></i>
+                        <small>Info Data Rekanan</small>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_baru">
+                                <i class="fa-solid fa-users-rectangle px-1"></i>
+                                <small>Daftar Rekanan Terbaru</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_tervalidasi">
+                                <i class="fa-solid fa-user-shield px-1"></i>
+                                <small>Data Status Rekanan Tervalidasi</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_terundang">
+                                <i class="fa-solid fa-address-card px-1"></i>
+                                <small>Data Rekanan Terundang</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="">
+                                <i class="fa-solid fa-user-secret px-1"></i>
+                                <small>Daftar Hitam Rekanan</small>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-cash-register"></i>
+                        <small>SI-RUP</small>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_rka">
+                                <i class="fa-solid fa-money-check-dollar px-1"></i>
+                                <small>Rencana Kerja Anggaran Pengadaan (RKAP)</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_rup">
+                                <i class="fa-solid fa-money-check px-1"></i>
+                                <small>Rencana Umum Pengadaan (RUP)</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_buat_paket">
+                                <i class="fa-solid fa-business-time px-1"></i>
+                                <small>Buat Paket Penyedia</small>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-business-time"></i>
+                        <small>Transaksi Tender</small>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="<?= base_url('panitia/daftar_paket/daftar_paket') ?>">
+                                <i class="fa-solid fa-folder-plus px-1"></i>
+                                <small>Daftar Paket Penyedia</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-circle-info px-1"></i>
+                                <small>Info Tender</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-video px-1"></i>
+                                <small>Info Progres Kinerja Rekanan</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-brands fa-product-hunt px-1"></i>
+                                <small>Info Penilaian Kinerja Rekanan</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-newspaper px-1"></i>
+                                <small>Buat Berita / Pengumuman</small>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <small>Laporan</small>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-chart-simple px-1"></i>
+                                <small>Tabel Total Tender</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-chart-pie px-1"></i>
+                                <small>Grafik & Rekap Tender</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-chart-column px-1"></i>
+                                <small>Penilaian Kinerja Rekanan</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-chart-area px-1"></i>
+                                <small>Progres Kinerja Rekanan</small>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
             <div class="text-end">
                 <div class="d-flex align-items-center">
                     <div class="flex-shrink-0 dropdown">
@@ -376,7 +290,7 @@
                             <small class="text-white">Administrator</small>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="#"><small>Administrator</small></a></li>
+                            <li><a class="dropdown-item" href="#"><small><?= $this->session->userdata('nama_pegawai');?></small></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
