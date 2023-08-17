@@ -186,6 +186,8 @@
     function Buat_rup() {
         var url_buat_rup_panitia = $('[name="url_buat_rup_panitia"]').val()
         var random_kode = $('[name="random_kode"]').val();
+        var metode_kualifikasi = $('[name="metode_kualifikasi"]').val();
+        var metode_dokumen = $('[name="metode_dokumen"]').val();
         var id_jadwal_tender = $('[name="id_jadwal_tender"]').val();
         if (id_jadwal_tender == '') {
             Swal.fire('Harap isi Jenis Jadwal Pengadaan Dengan Benar!', '', 'warning')
@@ -206,7 +208,9 @@
                         url: url_buat_rup_panitia,
                         data: {
                             random_kode: random_kode,
-                            id_jadwal_tender: id_jadwal_tender
+                            id_jadwal_tender: id_jadwal_tender,
+                            metode_kualifikasi:metode_kualifikasi,
+                            metode_dokumen:metode_dokumen
                         },
                         dataType: "JSON",
                         success: function(response) {

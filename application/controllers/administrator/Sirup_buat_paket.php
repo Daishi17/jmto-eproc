@@ -184,12 +184,16 @@ class Sirup_buat_paket extends CI_Controller
 	{
 		$id_url_rup = $this->input->post('random_kode');
 		$id_jadwal_tender = $this->input->post('id_jadwal_tender');
+		$metode_kualifikasi = $this->input->post('metode_kualifikasi');
+		$metode_dokumen = $this->input->post('metode_dokumen');
 		$where = [
 			'id_url_rup' => $id_url_rup
 		];
 		$data = [
 			'sts_rup_buat_paket' => 1,
 			'id_jadwal_tender' => $id_jadwal_tender,
+			'metode_kualifikasi' => $metode_kualifikasi,
+			'metode_dokumen' => $metode_dokumen,
 		];
 		$this->M_rup->update_rup($data, $where);
 		$response = [

@@ -213,7 +213,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<?= base_url() ?>panitia/Daftar_paket">
                                     <i class="fa-solid fa-folder-plus px-1"></i>
                                     <small>Daftar Paket Penyedia</small>
                                 </a>
