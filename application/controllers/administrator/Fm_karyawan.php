@@ -72,6 +72,30 @@ class Fm_karyawan extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));
 	}
 
+	public function aktif()
+	{
+		$id_pegawai = $this->input->post('id_pegawai');
+		$data = [
+			'status' => 1,
+			'user_created' => $this->session->userdata('nama_pegawai'),
+			'date_created' => date('Y-m-d H:i')
+		];
+		$this->M_karyawan->update_data($data, $id_pegawai);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+	public function nonaktif()
+	{
+		$id_pegawai = $this->input->post('id_pegawai');
+		$data = [
+			'status' => 2,
+			'user_created' => $this->session->userdata('nama_pegawai'),
+			'date_created' => date('Y-m-d H:i')
+		];
+		$this->M_karyawan->update_data($data, $id_pegawai);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
 	function save()
 	{
 		$nip = $this->input->post('nip');

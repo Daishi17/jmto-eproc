@@ -22,6 +22,31 @@ class Fm_unit_area extends CI_Controller
 		$this->load->view('administrator/file_master/js_unit_area');
 	}
 
+	public function aktif()
+	{
+		$id_section = $this->input->post('id_section');
+		$data = [
+			'sts_aktif' => 1,
+			'user_edited' => $this->session->userdata('nama_pegawai'),
+			'time_edited' => date('Y-m-d H:i')
+		];
+		$this->M_unit_area->update_data($data, $id_section);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+	public function nonaktif()
+	{
+		$id_section = $this->input->post('id_section');
+		$data = [
+			'sts_aktif' => 2,
+			'user_edited' => $this->session->userdata('nama_pegawai'),
+			'time_edited' => date('Y-m-d H:i')
+		];
+		$this->M_unit_area->update_data($data, $id_section);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+
 	function save()
 	{
 

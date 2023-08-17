@@ -114,6 +114,7 @@ class M_mjm_user extends CI_Model
     {
         $this->db->insert('tbl_manajemen_user', $data);
     }
+
     public function update_data($data, $id_manajemen_user)
     {
         $this->db->where('id_manajemen_user', $id_manajemen_user);

@@ -1170,6 +1170,7 @@
                     }
                     html_lainnya += '<tr>' +
                         '<td>' + response['row_lainnya'].nomor_surat + '</td>' +
+                        '<td>' + response['row_lainnya'].nama_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +

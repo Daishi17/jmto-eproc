@@ -372,6 +372,7 @@
                                                             <thead class="bg-info">
                                                                 <tr>
                                                                     <th><small>No. Surat<small></th>
+                                                                    <th><small>Nama Surat<small></th>
                                                                     <th><small>Berlaku Sampai<small></th>
                                                                     <th colspan="2"><small>File Dokumen<small></th>
                                                                     <th><small>Status Validasi<small></th>

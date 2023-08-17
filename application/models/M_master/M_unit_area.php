@@ -8,6 +8,7 @@ class M_unit_area extends CI_Model
 
     private function _get_data_query()
     {
+        $this->db->select('id_section,kode_section, nama_section,nama_departemen,tbl_section.sts_aktif');
         $this->db->from($this->table);
         $this->db->join('tbl_departemen', 'tbl_section.id_departemen = tbl_departemen.id_departemen', 'left');
         $i = 0;

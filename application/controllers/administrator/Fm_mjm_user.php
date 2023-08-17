@@ -46,6 +46,28 @@ class Fm_mjm_user extends CI_Controller
 		$this->load->view('administrator/file_master/js_mjm_user');
 	}
 
+	public function aktif()
+	{
+		$id_mjm_user = $this->input->post('id_mjm_user');
+		$data = [
+			'sts_aktif' => 1,
+			'data_created' => date('Y-m-d H:i')
+		];
+		$this->M_mjm_user->update_data($data, $id_mjm_user);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+	public function nonaktif()
+	{
+		$id_mjm_user = $this->input->post('id_mjm_user');
+		$data = [
+			'sts_aktif' => 2,
+			'data_created' => date('Y-m-d H:i')
+		];
+		$this->M_mjm_user->update_data($data, $id_mjm_user);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
 	public function datatable_karyawan()
 	{
 		$result = $this->M_mjm_user->getdatatable();
@@ -58,12 +80,12 @@ class Fm_mjm_user extends CI_Controller
 			$row[] = $res->nip . " || " . $res->nama_pegawai;
 			$row[] = $res->username;
 			$row[] = $this->_role_badge($res->role);
-			if ($res->status == 1) {
+			if ($res->sts_aktif == 1) {
 				$row[] = '<small><span class="badge bg-success">Aktif</span></small>';
-			} else if ($res->status == 2) {
+			} else if ($res->sts_aktif == 2) {
 				$row[] = '<small><span class="badge bg-danger">Tidak Aktif</span></small>';
 			}
-			if ($res->status == 1) {
+			if ($res->sts_aktif == 1) {
 				$row[] = '<div class="text-center">
 							<button type="button" class="btn btn-danger btn-sm shadow-lg" onClick="byid(' . "'" . $res->id_manajemen_user  . "','nonaktif'" . ')" title="Non-Aktif">
 								<i class="fa-solid fa-trash-can px-1"></i>
@@ -157,6 +179,7 @@ class Fm_mjm_user extends CI_Controller
 					'role' => $id_role,
 					'username' => $username,
 					'password' => password_hash($password, PASSWORD_DEFAULT),
+					'sts_aktif' => 1
 				];
 				$this->M_mjm_user->insert_data($data);
 				$kode = $this->M_mjm_user->kode();

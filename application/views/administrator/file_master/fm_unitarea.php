@@ -33,6 +33,8 @@
                 <input type="hidden" name="url_get_byid" value="<?= base_url('administrator/fm_unit_area/byid/') ?>">
                 <input type="hidden" name="url_post" value="<?= base_url('administrator/fm_unit_area/save') ?>">
                 <input type="hidden" name="url_get_unit_area" value="<?= base_url('administrator/fm_unit_area/datatable_section') ?>">
+                <input type="hidden" name="url_aktifkan_area" value="<?= base_url('administrator/fm_unit_area/aktif/') ?>">
+                <input type="hidden" name="url_nonaktifkan_area" value="<?= base_url('administrator/fm_unit_area/nonaktif/') ?>">
                 <!-- end url -->
                 <div class="card-body">
                     <table id="tbl_section" class="table table-bordered table-sm table-striped">
