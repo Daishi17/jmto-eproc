@@ -14,8 +14,12 @@
             "serverSide": true,
             "autoWidth": false,
             "bDestroy": true,
-            "dom": 'Bfrtip',
             "buttons": ["excel", "pdf", "print", "colvis"],
+            initComplete: function() {
+                this.api().buttons().container()
+                    .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+
+            },
             "order": [],
             "ajax": {
                 "url": url_get_rkap,
@@ -297,8 +301,12 @@
             "serverSide": true,
             "autoWidth": false,
             "bDestroy": true,
-            "dom": 'Bfrtip',
             "buttons": ["excel", "pdf", "print", "colvis"],
+            initComplete: function() {
+                this.api().buttons().container()
+                    .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+
+            },
             "order": [],
             "ajax": {
                 "url": url_get_rup,
@@ -486,5 +494,28 @@
 
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+</script>
+
+<script>
+    // a and b are javascript Date objects
+    function dateDiffInDays(a, b) {
+        const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+        // Discard the time and time-zone information.
+        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+    }
+
+    // test it
+
+    function hitung_hari() {
+        var date_1 = $('[name="jangka_waktu_mulai_pelaksanaan"]').val();
+        var date_2 = $('[name="jangka_waktu_selesai_pelaksanaan"]').val();
+        var a = new Date(date_1);
+        var b = new Date(date_2);
+        var difference = dateDiffInDays(a, b);
+        $('[name="jangka_waktu_hari_pelaksanaan"]').val(difference);
     }
 </script>

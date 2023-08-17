@@ -38,6 +38,7 @@
                                 <th style="width:20%;"><small class="text-white">Departemen</small></th>
                                 <th style="width:10%;"><small class="text-white">Total Pagu (Rp.)</small></th>
                                 <th style="width:10%;"><small class="text-white">Status</small></th>
+                                <th style="width:10%;"><small class="text-white">View Jadwal</small></th>
                                 <th style="width:15%;"><small class="text-white">
                                         <div class="text-center">More Options</div>
                                     </small></th>
@@ -82,7 +83,7 @@
                                                         <div class="col-sm-2">
                                                             <div class="input-group mb-1">
                                                                 <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
-                                                                <select class="form-select" aria-label="Default select example" placeholder="Pilih Tahun..">
+                                                                <select class="form-control" placeholder="Pilih Tahun..">
                                                                     <option selected>Pilih Tahun</option>
                                                                     <option value="0">All</option>
                                                                     <option value="1">2023</option>
@@ -96,7 +97,7 @@
                                                         <div class="col-sm-5">
                                                             <div class="input-group mb-2">
                                                                 <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
-                                                                <select class="form-select" aria-label="Default select example">
+                                                                <select class="form-control">
                                                                     <option selected>Pilih Departemen</option>
                                                                     <option value="0">All</option>
                                                                     <option value="1">Human Capital & General Affair</option>
@@ -108,7 +109,7 @@
                                                         <div class="col-sm-5">
                                                             <div class="input-group mb-2">
                                                                 <span class="input-group-text"><i class="fa-solid fa-map"></i></span>
-                                                                <select class="form-select" aria-label="Default select example">
+                                                                <select class="form-control">
                                                                     <option selected>Pilih Sections</option>
                                                                     <option value="0">All</option>
                                                                     <option value="1">Human Capital & General Affair</option>
@@ -375,7 +376,7 @@
                                                                 <td>
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
-                                                                        <select class="form-select" name="metode_kualifikasi" id="metode_kualifikasi_tambah" onchange="pilih_metode_kualifikasi()" aria-label="Default select example">
+                                                                        <select class="form-control" id="metode_kualifikasi" name="metode_kualifikasi">
                                                                             <option>Pilih Metode Kualifikasi</option>
                                                                             <option value="Prakualifikasi">Prakualifikasi</option>
                                                                             <option value="Pascakualifikasi">Pascakualifikasi</option>
@@ -385,20 +386,16 @@
                                                                 <td>
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
-                                                                        <select class="form-select" name="metode_dokumen" id="metode_dokumen" onchange="pilih_metode_dokumen()" aria-label="Default select example">
-                                                                            <option>Metode Pemilihan Dokumen</option>
-                                                                            <option>Satu File</option>
-                                                                            <option>Dua File</option>
+                                                                        <select class="form-control" id="metode_dokumen" name="metode_dokumen">
+                                                                            <option value="">Pilih Metode Dokumen</option>
                                                                         </select>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-regular fa-calendar-check"></i></span>
-                                                                        <select class="form-select" id="jenis_jadwal" aria-label="Default select example">
-                                                                            <option selected>Pilih Jenis Jadwal</option>
-                                                                            <option value="1">Jasa Lain Tender Umum Prakualifikasi Satu File</option>
-                                                                            <option value="2">Jasa Lain Tender Umum Prakualifikasi Dua File</option>
+                                                                        <select name="id_jadwal_tender" class="form-control" id="jenis_jadwal">
+                                                                            <option value="">Pilih Jenis Jadwal</option>
                                                                         </select>
                                                                     </div>
                                                                 </td>
@@ -437,7 +434,7 @@
                                                                 <td>
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-users-gear"></i></span>
-                                                                        <select name="role_panitia" class="form-select" aria-label="Default select example">
+                                                                        <select name="role_panitia" class="form-control">
                                                                             <option>Pilih Role Panitia</option>
                                                                             <option value="1">Ketua Panitia</option>
                                                                             <option value="2">Sekretaris</option>
@@ -501,6 +498,25 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_lihat_jadwal">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>

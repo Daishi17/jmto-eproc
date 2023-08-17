@@ -81,29 +81,33 @@
                                     <small>Departemen & Sections</small>
                                 </th>
                                 <td>
-                                    <small>
-                                        <div class="input-group mb-2">
-                                            <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
-                                            <?php if ($get_row_rkap) { ?>
+                                    <?php if ($get_row_rkap) { ?>
+                                        <small>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
                                                 <select name="id_departemen" onchange="pilih_departemen()" id="select_departemen" class="form-control select2bs4">
-                                                    <option value="<?= $row_rup['id_departemen'] ?>"><?= $row_rup['nama_departemen'] ?></option>
+                                                    <option selected value="<?= $row_rup['id_departemen'] ?>"><?= $row_rup['nama_departemen'] ?></option>
                                                     <?php foreach ($result_departemen as $key => $value) { ?>
                                                         <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>
                                                     <?php } ?>
                                                 </select>
-                                            <?php  } else { ?>
+                                            </div>
+                                        </small>
+                                    <?php  } else { ?>
+                                        <small>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
                                                 <select name="id_departemen" onchange="pilih_departemen()" id="select_departemen" class="form-control select2bs4">
-                                                    <option value="<?= $row_rup['id_departemen'] ?>"><?= $row_rup['nama_departemen'] ?></option>
+                                                    <option selected value="<?= $row_rup['id_departemen'] ?>"><?= $row_rup['nama_departemen'] ?></option>
                                                     <?php foreach ($result_departemen as $key => $value) { ?>
                                                         <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>
                                                     <?php } ?>
                                                 </select>
-                                                <!-- id_departemen --> <br>
-                                            <?php }
-                                            ?>
-                                        </div>
-                                        <small class="text-danger id_departemen_validation"></small>
-                                    </small>
+                                            </div>
+                                            <small class="text-danger id_departemen_validation"></small>
+                                        </small>
+                                    <?php }
+                                    ?>
                                 </td>
                                 <?php if ($get_row_rkap) { ?>
                                     <td>
@@ -286,7 +290,7 @@
                                                     <small>Detail Lokasi</small>
                                                 </th>
                                                 <th class="text-center bg-secondary text-white" scope="col">
-                                                    <small>Tambah Ruas</small>
+                                                    <small> Ruas</small>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -323,14 +327,18 @@
                                                         <small class="text-danger detail_lokasi_rup_validation"></small>
                                                         <small>
                                                 </td>
-                                                <td class="text-center">
-                                                    <button type="button" name="add" id="add" class="btn btn-success"><i class="fas fa-plus-square"></i></button> <br>
-                                                    <!-- ruas_lokasi -->
-                                                    <small class="text-danger ruas_lokasi_validation"></small>
+                                                <td>
+                                                    <small>
+                                                        <select name="id_ruas" class="form-control select2bs4" style="width: 100%;">
+                                                        <option value="<?= $row_rup['id_ruas'] ?>"><?= $row_rup['nama_ruas'] ?></option>
+                                                            <?php foreach ($ruas_lokasi as $key => $value) { ?>
+                                                                <option value="<?= $value['id_ruas'] ?>"><?= $value['nama_ruas'] ?></option>
+                                                            <?php  } ?>
+                                                        </select>
+                                                        <!-- id_ruas -->
+                                                        <small class="text-danger ruas_lokasi_validation"></small>
+                                                    </small>
                                                 </td>
-                                            </tr>
-                                            <tr id="detail_ruas_rup">
-
                                             </tr>
                                         </tbody>
                                     </table>
@@ -438,7 +446,7 @@
                                                     <small>
                                                         <div class="input-group mb-2">
                                                             <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                            <input value="<?= $row_rup['jangka_waktu_mulai_pelaksanaan'] ?>" name="jangka_waktu_mulai_pelaksanaan" type="date" class="form-control">
+                                                            <input onchange="hitung_hari()" value="<?= $row_rup['jangka_waktu_mulai_pelaksanaan'] ?>" name="jangka_waktu_mulai_pelaksanaan" type="date" class="form-control">
                                                         </div>
                                                         <!-- jangka_waktu_mulai_pelaksanaan -->
                                                         <small class="text-danger jangka_waktu_mulai_pelaksanaan_validation"></small>
@@ -448,7 +456,7 @@
                                                     <small>
                                                         <div class="input-group mb-2">
                                                             <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                            <input value="<?= $row_rup['jangka_waktu_selesai_pelaksanaan'] ?>" name="jangka_waktu_selesai_pelaksanaan" type="date" class="form-control">
+                                                            <input onchange="hitung_hari()" value="<?= $row_rup['jangka_waktu_selesai_pelaksanaan'] ?>" name="jangka_waktu_selesai_pelaksanaan" type="date" class="form-control">
                                                         </div>
                                                         <!-- jangka_waktu_selesai_pelaksanaan -->
                                                         <small class="text-danger jangka_waktu_selesai_pelaksanaan_validation"></small>

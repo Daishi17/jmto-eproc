@@ -16,6 +16,7 @@ class Sirup_buat_paket extends CI_Controller
 		$this->load->model('M_metode_pengadaan/M_metode_pengadaan');
 		$this->load->model('M_jenis_anggaran/M_jenis_anggaran');
 		$this->load->model('Wilayah/Wilayah_model');
+		$this->load->model('M_jenis_jadwal/M_jenis_jadwal');
 	}
 	public function index()
 	{
@@ -179,13 +180,16 @@ class Sirup_buat_paket extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
 
-	function simpan_buat_rup($id_url_rup)
+	function simpan_buat_rup()
 	{
+		$id_url_rup = $this->input->post('random_kode');
+		$id_jadwal_tender = $this->input->post('id_jadwal_tender');
 		$where = [
 			'id_url_rup' => $id_url_rup
 		];
 		$data = [
-			'sts_rup_buat_paket' => 1
+			'sts_rup_buat_paket' => 1,
+			'id_jadwal_tender' => $id_jadwal_tender,
 		];
 		$this->M_rup->update_rup($data, $where);
 		$response = [
@@ -197,6 +201,23 @@ class Sirup_buat_paket extends CI_Controller
 
 	function finalisasi_paket_rup_final($id_url_rup)
 	{
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$result_jadwal = $this->M_jenis_jadwal->generate_jadwal($row_rup['id_jadwal_tender']);
+		$cek_ke_jadwal_rup = $this->M_jenis_jadwal->cek_jadwal_rup($row_rup['id_rup']);
+		
+		$this->M_jenis_jadwal->delete_jadwal_rup($row_rup['id_rup']);
+		foreach ($result_jadwal as $key => $value) {
+			$id = $this->uuid->v4();
+			$id = str_replace('-', '', $id);
+			$data = [
+				'id_url_jadwal_rup' => $id,
+				'id_rup' => $row_rup['id_rup'],
+				'id_url_rup' => $row_rup['id_url_rup'],
+				'nama_jadwal_rup' => $value['nama_jadwal'],
+			];
+			$this->M_jenis_jadwal->insert_generate_jadwal($data);
+		}
+
 		$where = [
 			'id_url_rup' => $id_url_rup
 		];
@@ -229,18 +250,31 @@ class Sirup_buat_paket extends CI_Controller
 			}
 			if ($rs->sts_rup_buat_paket == 1) {
 				$row[] = '<div class="text-center">
-				<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i>
+				<a href="javascript:;" class="btn btn-warning btn-sm  shadow-lg" onClick="lihat_jadwal(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i>
+				<small>View Jadwal</small></a>
+				</div>';
+			} else {
+				$row[] = '<div class="text-center">
+				<button type="button" class="btn btn-warning btn-sm  shadow-lg" disabled>
+				<i class="fa-solid fa-users-viewfinder px-1"></i> 
+					<small>View Jadwal</small>
+				</button>
+			</div>';
+			}
+			if ($rs->sts_rup_buat_paket == 1) {
+				$row[] = '<div class="text-center">
+				<a href="javascript:;" class="btn btn-info btn-sm  shadow-lg" onClick="by_id_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-solid fa-users-viewfinder px-1"></i>
 				<small>Detail</small></a>
-				<a href="javascript:;" class="btn btn-success btn-sm shadow-lg" onClick="finalisasi_final_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-regular fa-circle-up px-1"></i>
+				<a href="javascript:;" class="btn btn-success btn-sm  shadow-lg" onClick="finalisasi_final_rup(' . "'" . $rs->id_url_rup . "'" . ')"><i class="fa-regular fa-circle-up px-1"></i>
 				<small>Finalisasi</small></a>
 				</div>';
 			} else {
 				$row[] = '<div class="text-center">
-				<button type="button" class="btn btn-info btn-sm shadow-lg" disabled>
+				<button type="button" class="btn btn-info btn-sm  shadow-lg" disabled>
 				<i class="fa-solid fa-square-plus px-1"></i> 
 					<small>Detail</small>
 				</button>
-				<button type="button" class="btn btn-success btn-sm shadow-lg" disabled>
+				<button type="button" class="btn btn-success btn-sm  shadow-lg" disabled>
 				<i class="fa-regular fa-circle-up px-1"></i>
 					<small>Finalisasi</small>
 				</button>
@@ -256,5 +290,27 @@ class Sirup_buat_paket extends CI_Controller
 			"data" => $data
 		);
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+
+
+	public function get_jenis_jadwal_dokumen() //satuan kerja
+	{
+		$metode_kualifikasi = $this->input->post('metode_kualifikasi');
+		$data = $this->M_jenis_jadwal->get_result_jenis_jadwal_paket_dokumen($metode_kualifikasi);
+		echo '<option value="">Pilih Metode Dokumen</option>';
+		foreach ($data as $key => $value) {
+			echo '<option value="' . $value['metode_dokumen'] . '">' . $value['metode_dokumen'] . '</option>';
+		}
+	}
+	public function get_jenis_jadwal() //satuan kerja
+	{
+		$metode_kualifikasi = $this->input->post('metode_kualifikasi');
+		$metode_dokumen = $this->input->post('metode_dokumen');
+		$data = $this->M_jenis_jadwal->get_result_jenis_jadwal_paket($metode_kualifikasi, $metode_dokumen);
+		echo '<option value="">Pilih Jenis Jadwal</option>';
+		foreach ($data as $key => $value) {
+			echo '<option value="' . $value['id_jadwal_tender'] . '">' . $value['nama_jadwal_pengadaan'] . '</option>';
+		}
 	}
 }

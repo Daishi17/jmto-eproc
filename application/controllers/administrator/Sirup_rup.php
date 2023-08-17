@@ -213,6 +213,7 @@ class Sirup_rup extends CI_Controller
 		$data['result_jenis_pengadaan'] = $this->M_jenis_pengadaan->get_result_jenis_pengadaan();
 		$data['result_metode_pengadaan'] = $this->M_metode_pengadaan->get_result_metode_pengadaan();
 		$data['result_jenis_anggaran'] = $this->M_jenis_anggaran->get_result_jenis_anggaran();
+		$data['ruas_lokasi'] = $this->M_ruas->get_result_ruas();
 		$data['provinsi']  = $this->Wilayah_model->getProvinsi();
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('administrator/template/si_rup/js_header_rup');

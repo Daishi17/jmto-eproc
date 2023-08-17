@@ -58,7 +58,7 @@
 <!-- url_hapus_panitia -->
 <input type="hidden" name="url_hapus_panitia" value="<?= base_url('administrator/sirup_buat_paket/hapus_panitia/') ?>">
 <!-- url_buat_rup_panitia -->
-<input type="hidden" name="url_buat_rup_panitia" value="<?= base_url('administrator/sirup_buat_paket/simpan_buat_rup/') ?>">
+<input type="hidden" name="url_buat_rup_panitia" value="<?= base_url('administrator/sirup_buat_paket/simpan_buat_rup') ?>">
 
 <!-- GET RUP PAKET FINAL -->
 <!-- url_get_rup_final -->
@@ -66,3 +66,8 @@
 
 <!-- url_finaliasai_paket_final_rup -->
 <input type="hidden" name="url_finaliasai_paket_final_rup" value="<?= base_url('administrator/sirup_buat_paket/finalisasi_paket_rup_final/') ?>">
+
+
+<!-- URL BUAT PAKE -->
+<input type="hidden" name="url_get_jenis_dokumen_jadwal" value="<?= base_url('administrator/sirup_buat_paket/get_jenis_jadwal_dokumen') ?>">
+<input type="hidden" name="url_get_jenis_jadwal" value="<?= base_url('administrator/sirup_buat_paket/get_jenis_jadwal') ?>">
