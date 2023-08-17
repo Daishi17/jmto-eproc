@@ -27,6 +27,7 @@ class Role_login
                 redirect('auth');
             } else {
                 if ($cek && password_verify($password, $cek->password)) {
+                    // administrator
                     if ($cek->role == 2) {
 
                         $sekarang = date('Y-m-d H:i');
@@ -50,6 +51,7 @@ class Role_login
                         $this->ci->session->set_userdata($userdata);
                         redirect('administrator/dashboard');
                     }
+                    // validator
                     if ($cek->role == 4) {
 
                         $sekarang = date('Y-m-d H:i');
@@ -73,6 +75,7 @@ class Role_login
                         $this->ci->session->set_userdata($userdata);
                         redirect('validator/dashboard');
                     }
+                    // panitia
                     if ($cek->role == 5) {
 
                         $sekarang = date('Y-m-d H:i');
