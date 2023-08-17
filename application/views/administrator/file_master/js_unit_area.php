@@ -85,13 +85,85 @@
                     $('[name="id_section"]').val(response.id_section)
                     $('#modal-xl-edit').modal('show')
                 } else if (type == 'aktif') {
-                    Question_aktifkan(response.kode_section, response.nama_section);
+                    Question_aktifkan(response.id_section, response.nama_section);
                 } else if (type == 'nonaktif') {
-                    Question_nonaktifkan(response.kode_section, response.nama_section);
+                    Question_nonaktifkan(response.id_section, response.nama_section);
                 }
                 // else {
                 // 	deleteQuestion(response.kd_lokasi, response.nm_lokasi);
                 // }
+            }
+        })
+    }
+
+    function Question_aktifkan(id, nama_section) {
+        var url_aktifkan_area = $('[name="url_aktifkan_area"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Aktifkan Data ? ',
+            text: nama_section,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_aktifkan_area,
+                    data: {
+                        id_section: id,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Section ' + nama_section + ' Berhasil Di Aktifkan!',
+                                'success'
+                            )
+                            reload_table();
+                        }
+                    }
+                })
+
+            }
+        })
+    }
+
+    function Question_nonaktifkan(id, nama_section) {
+        var url_nonaktifkan_area = $('[name="url_nonaktifkan_area"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Non-Aktifkan Data ? ',
+            text: nama_section,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_nonaktifkan_area,
+                    data: {
+                        id_section: id,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Section ' + nama_section + ' Berhasil Di Non-Aktifkan!',
+                                'success'
+                            )
+                            reload_table();
+                        }
+                    }
+                })
+
             }
         })
     }

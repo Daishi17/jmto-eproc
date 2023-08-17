@@ -33,6 +33,8 @@
                 <input type="hidden" name="url_post_edit" value="<?= base_url('administrator/fm_mjm_user/update/') ?>">
                 <input type="hidden" name="url_get_manajemen_user" value="<?= base_url('administrator/fm_mjm_user/datatable_karyawan/') ?>">
                 <input type="hidden" name="url_get_byid" value="<?= base_url('administrator/fm_mjm_user/get_byid_mjm/') ?>">
+                <input type="hidden" name="url_aktifkan_user" value="<?= base_url('administrator/fm_mjm_user/aktif/') ?>">
+                <input type="hidden" name="url_nonaktifkan_user" value="<?= base_url('administrator/fm_mjm_user/nonaktif/') ?>">
                 <!-- end url -->
                 <div class="card-body">
                     <table id="tbl_manajemen_user" class="table table-bordered table-sm table-striped">

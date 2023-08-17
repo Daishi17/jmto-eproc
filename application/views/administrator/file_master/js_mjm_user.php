@@ -62,9 +62,9 @@
                     $('[name="id_role_edit"]').val(response.role)
                     $('#modal-xl-edit').modal('show')
                 } else if (type == 'aktif') {
-                    Question_aktifkan(response.kode_section, response.nama_section);
+                    Question_aktifkan(response.id_manajemen_user, response.username);
                 } else if (type == 'nonaktif') {
-                    Question_nonaktifkan(response.kode_section, response.nama_section);
+                    Question_nonaktifkan(response.id_manajemen_user, response.username);
                 }
                 // else {
                 // 	deleteQuestion(response.kd_lokasi, response.nm_lokasi);
@@ -220,4 +220,76 @@
             }
         })
     })
+
+    function Question_aktifkan(id, username) {
+        var url_aktifkan_user = $('[name="url_aktifkan_user"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Aktifkan Data User? ',
+            text: username,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_aktifkan_user,
+                    data: {
+                        id_mjm_user: id,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Section ' + username + ' Berhasil Di Aktifkan!',
+                                'success'
+                            )
+                            reload_table();
+                        }
+                    }
+                })
+
+            }
+        })
+    }
+
+    function Question_nonaktifkan(id, username) {
+        var url_nonaktifkan_user = $('[name="url_nonaktifkan_user"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Non-Aktifkan Data ? ',
+            text: username,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_nonaktifkan_user,
+                    data: {
+                        id_mjm_user: id,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Section ' + username + ' Berhasil Di Non-Aktifkan!',
+                                'success'
+                            )
+                            reload_table();
+                        }
+                    }
+                })
+
+            }
+        })
+    }
 </script>

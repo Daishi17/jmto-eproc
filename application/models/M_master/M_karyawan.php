@@ -85,6 +85,13 @@ class M_karyawan extends CI_Model
         $this->db->insert('tbl_pegawai', $data);
     }
 
+
+    public function update_data($data, $id_pegawai)
+    {
+        $this->db->where('id_pegawai', $id_pegawai);
+        $this->db->update('tbl_pegawai', $data);
+    }
+
     public function getByid($id_pegawai)
     {
         $this->db->select('*');

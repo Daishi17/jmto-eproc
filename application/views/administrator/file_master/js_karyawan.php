@@ -119,9 +119,9 @@
                     $('[name="password2"]').attr('disabled', true)
                     $('#modal-xl-tambah').modal('show')
                 } else if (type == 'aktif') {
-                    Question_aktifkan(response.kode_section, response.nama_section);
+                    Question_aktifkan(response.id_pegawai, response.nama_pegawai);
                 } else if (type == 'nonaktif') {
-                    Question_nonaktifkan(response.kode_section, response.nama_section);
+                    Question_nonaktifkan(response.id_pegawai, response.nama_pegawai);
                 }
                 // else {
                 // 	deleteQuestion(response.kd_lokasi, response.nm_lokasi);
@@ -136,5 +136,77 @@
         $('#button_ubah').attr('disabled', true)
         $('#modal-xl-tambah').modal('show')
         $('[name="id_pegawai"]').val();
+    }
+
+    function Question_aktifkan(id, nama_pegawai) {
+        var url_aktifkan_karyawan = $('[name="url_aktifkan_karyawan"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Aktifkan Data ? ',
+            text: nama_pegawai,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_aktifkan_karyawan,
+                    data: {
+                        id_pegawai: id,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Section ' + nama_pegawai + ' Berhasil Di Aktifkan!',
+                                'success'
+                            )
+                            reload_table();
+                        }
+                    }
+                })
+
+            }
+        })
+    }
+
+    function Question_nonaktifkan(id, nama_pegawai) {
+        var url_nonaktifkan_karyawan = $('[name="url_nonaktifkan_karyawan"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Non-Aktifkan Data ? ',
+            text: nama_pegawai,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_nonaktifkan_karyawan,
+                    data: {
+                        id_pegawai: id,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Section ' + nama_pegawai + ' Berhasil Di Non-Aktifkan!',
+                                'success'
+                            )
+                            reload_table();
+                        }
+                    }
+                })
+
+            }
+        })
     }
 </script>
