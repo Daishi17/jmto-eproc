@@ -21,7 +21,7 @@
                         </span>
                     </div>
                     <?php if ($this->session->userdata('role') == 2) { ?>
-                   
+
                     <?php  } else { ?>
                         <div class="bd-highlight">
                             <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
@@ -381,20 +381,31 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="card-footer bg-transparent border-dark">
-                                    <button type="button" class="btn btn-default btn-info">
-                                        <i class="fa-solid fa-bullhorn"></i>
-                                        Umumkan Paket
-                                    </button>
-                                    <a type="button" class="btn btn-default btn-warning" href="<?= base_url() ?>panitia/form_daftar_paket">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                        Edit Paket
-                                    </a>
-                                    <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
-                                        <i class="fa-solid fa-rectangle-xmark"></i>
-                                        Keluar
-                                    </button>
-                                </div>
+                                <?php if ($this->session->userdata('role') == 2) { ?>
+                                    <div class="card-footer bg-transparent border-dark">
+                                        <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
+                                            <i class="fa-solid fa-rectangle-xmark"></i>
+                                            Keluar
+                                        </button>
+                                    </div>
+                                <?php  } else { ?>
+                                    <div class="card-footer bg-transparent border-dark">
+                                        <button type="button" class="btn btn-default btn-info">
+                                            <i class="fa-solid fa-bullhorn"></i>
+                                            Umumkan Paket
+                                        </button>
+                                        <a type="button" class="btn btn-default btn-warning" href="<?= base_url() ?>panitia/form_daftar_paket">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            Edit Paket
+                                        </a>
+                                        <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
+                                            <i class="fa-solid fa-rectangle-xmark"></i>
+                                            Keluar
+                                        </button>
+                                    </div>
+                                <?php  }
+                                ?>
+
                             </div>
                         </div>
                     </div>
