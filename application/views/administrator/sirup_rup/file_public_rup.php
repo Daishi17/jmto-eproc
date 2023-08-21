@@ -95,7 +95,6 @@
     });
 
     // Get_kode_rup()
-
     // function Get_kode_rup() {
     //     var url_get_kode_rup = $('[name="url_get_kode_rup"]').val();
     //     $.ajax({
@@ -150,34 +149,6 @@
             })
         }
     }
-
-    var i = 1;
-    var url_provinsi = $('[name="url_provinsi"]').val();
-    $('#add').click(function() {
-        i++;
-        $('#dynamic_field').append('<tr id="row' + i + '">' +
-            '<td colspan="3"><div class="input-group mb-2">' +
-            '<span class="input-group-text"><i class="fa-solid fa-road"></i></span><input type="text" placeholder="Ruas Toll" name="ruas_lokasi[]" class="form-control">' +
-            '</div></td>' +
-            '<td class="text-center"><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove"><i class="fas fa-trash-alt"></i></button></td>' +
-            '</tr>');
-    });
-    // tanpa Javas script looping
-    $(document).on('click', '.btn_remove', function() {
-        var button_id = $(this).attr("id");
-        $('#row' + button_id + '').remove();
-    });
-
-    $('#provinsitambah').change(function() {
-        var id_provinsi = $('#provinsitambah').val();
-        $.ajax({
-            type: 'GET',
-            url: url_provinsi + id_provinsi,
-            success: function(html) {
-                $('#kabupatentambah').html(html);
-            }
-        });
-    })
 
     function Simpan_rup() {
         var url_post_rup = $('[name="url_post_rup"]').val();
@@ -293,7 +264,7 @@
                             Swal.fire('Rup Berhasil Di Buat!', '', 'success')
                             form_rup[0].reset();
                             Get_kode_rup();
-                            location.replace(url_back_rup)
+                            location.replace('' + url_back_rup + '');
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */
@@ -480,4 +451,43 @@
         var difference = dateDiffInDays(a, b);
         $('[name="jangka_waktu_hari_pelaksanaan"]').val(difference);
     }
+
+    var i = 1;
+    $('#add').click(function() {
+        var url_get_all_ruas = $('[name="url_get_all_ruas"]').val();
+        $.ajax({
+            type: "GET",
+            url: url_get_all_ruas,
+            success: function(response) {
+                var html = '';
+                var j;
+                for (j = 0; j < response['ruas_lokasi'].length; j++) {
+                    html += '<option value="' + response['ruas_lokasi'][j].id_ruas + '">' + response['ruas_lokasi'][j].nama_ruas + '</option>';
+                }
+                i++;
+                $('#dynamic_field').append('<tr id="row' + i + '">' +
+                    '<td colspan="3"><div class="input-group mb-2">' +
+                    '<span class="input-group-text"><i class="fa-solid fa-road"></i></span>' +
+                    '<select name="id_ruas[]" id="id_ruas' + i + '"  class="form-control select2bs4' + i + '">' + html + '</select>' +
+                    '</div></td>' +
+                    '<td class="text-center"><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove"><i class="fas fa-trash-alt"></i></button></td>' +
+                    '</tr>');
+            }
+        })
+    });
+    $(document).on('click', '.btn_remove', function() {
+        var button_id = $(this).attr("id");
+        $('#row' + button_id + '').remove();
+    });
+    $('#provinsitambah').change(function() {
+        var url_provinsi = $('[name="url_provinsi"]').val();
+        var id_provinsi = $('#provinsitambah').val();
+        $.ajax({
+            type: 'GET',
+            url: url_provinsi + id_provinsi,
+            success: function(html) {
+                $('#kabupatentambah').html(html);
+            }
+        });
+    })
 </script>

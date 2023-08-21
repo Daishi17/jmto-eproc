@@ -119,10 +119,23 @@ class M_rup extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_ruas_rup');
+        $this->db->join('mst_ruas', 'tbl_ruas_rup.id_ruas = mst_ruas.id_ruas', 'left');
         $this->db->where('id_rup', $id_rup);
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function get_row_ruas_rup($id_ruas_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_ruas_rup');
+        $this->db->join('mst_ruas', 'tbl_ruas_rup.id_ruas = mst_ruas.id_ruas', 'left');
+        $this->db->where('id_ruas_rup', $id_ruas_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    
 
 
     public function get_row_rup($id_url_rup)

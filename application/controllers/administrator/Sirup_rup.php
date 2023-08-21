@@ -216,6 +216,7 @@ class Sirup_rup extends CI_Controller
 		$data['result_jenis_anggaran'] = $this->M_jenis_anggaran->get_result_jenis_anggaran();
 		$data['ruas_lokasi'] = $this->M_ruas->get_result_ruas();
 		$data['provinsi']  = $this->Wilayah_model->getProvinsi();
+		$data['result_ruas_rup'] = $this->M_rup->get_ruas_by_id_rup($row_rup['id_rup']);
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('administrator/template/si_rup/js_header_rup');
 		$this->load->view('administrator/sirup_rup/base_url'); //ini untuk base_url page rup
@@ -372,7 +373,7 @@ class Sirup_rup extends CI_Controller
 		$jangka_waktu_hari_pelaksanaan = $this->input->post('jangka_waktu_hari_pelaksanaan');
 		$total_pagu_rup = $this->input->post('total_pagu_rup');
 		$nilai_pencatatan = $this->input->post('nilai_pencatatan');
-		$this->form_validation->set_rules('id_ruas', 'Ruas', 'required|trim', ['required' => 'Ruas Wajib Diisi!']);
+		$this->form_validation->set_rules('id_ruas[]', 'Ruas', 'required|trim', ['required' => 'Ruas Wajib Diisi!']);
 		$this->form_validation->set_rules('detail_lokasi_rup', 'Detail Lokasi', 'required|trim', ['required' => 'Detil Lokasi Wajib Diisi!']);
 		$this->form_validation->set_rules('tahun_rup', 'Tahun', 'required|trim', ['required' => 'Tahun Wajib Diisi!']);
 		$this->form_validation->set_rules('id_departemen', 'Nama Departemen', 'required|trim', ['required' => 'Nama Departemen  Wajib Diisi!']);
@@ -451,10 +452,20 @@ class Sirup_rup extends CI_Controller
 					'id_provinsi' => $id_provinsi,
 					'id_kabupaten' => $id_kabupaten,
 					'detail_lokasi_rup' => $detail_lokasi_rup,
-					'id_ruas' => $id_ruas,
 
 				);
 				$this->db->insert('tbl_rup', $data);
+				// End Insert Batch Tbl_paket
+				$package_id = $this->db->insert_id(); // Ini ID table yang memberi Id Insertbatchnya
+				// Insert Batch Lokasi
+				$result = array();
+				foreach ($id_ruas as $key => $val) {
+					$result[] = array(
+						'id_rup'   => $package_id,
+						'id_ruas'   =>  $id_ruas[$key],
+					);
+				}
+				$this->db->insert_batch('tbl_ruas_rup', $result);
 				if (!$id_rkap) {
 				} else {
 					$where = [
@@ -503,10 +514,19 @@ class Sirup_rup extends CI_Controller
 					'id_provinsi' => $id_provinsi,
 					'id_kabupaten' => $id_kabupaten,
 					'detail_lokasi_rup' => $detail_lokasi_rup,
-					'id_ruas' => $id_ruas,
-
 				);
 				$this->M_rup->update_rup($data, $where_rup);
+				// End Insert Batch Tbl_paket
+				$package_id = $row_rup['id_rup'];
+				// Insert Batch Lokasi
+				$result = array();
+				foreach ($id_ruas as $key => $val) {
+					$result[] = array(
+						'id_rup'   => $package_id,
+						'id_ruas'   =>  $id_ruas[$key],
+					);
+				}
+				$this->db->insert_batch('tbl_ruas_rup', $result);
 				if (!$id_rkap) {
 				} else {
 					$where = [
@@ -528,12 +548,12 @@ class Sirup_rup extends CI_Controller
 	function ubah_ruas()
 	{
 		$id_ruas_rup = $this->input->post('id_ruas_rup');
-		$nama_ruas_lokasi = $this->input->post('ruas_lokasi');
+		$id_ruas = $this->input->post('ruas_lokasi');
 		$where = [
 			'id_ruas_rup' => $id_ruas_rup
 		];
 		$data = [
-			'ruas_lokasi' => $nama_ruas_lokasi
+			'id_ruas' => $id_ruas
 		];
 		$this->M_rup->update_ruas($data, $where);
 		$response = [
@@ -560,10 +580,22 @@ class Sirup_rup extends CI_Controller
 		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$ruas_rup = $this->M_rup->get_ruas_by_id_rup($row_rup['id_rup']);
 		$response = [
-			'result_ruas_rup' => $ruas_rup
+			'result_ruas_rup' => $ruas_rup,
+			'ruas_lokasi' => $this->M_ruas->get_result_ruas(),
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
+
+	function get_row_id_ruas_rup($id_ruas_rup)
+	{
+		$ruas_rup = $this->M_rup->get_row_ruas_rup($id_ruas_rup);
+		$response = [
+			'row_ruas_rup' => $ruas_rup,
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	
 
 	public function get_section($id_departemen) //satuan kerja
 	{
@@ -572,5 +604,13 @@ class Sirup_rup extends CI_Controller
 		foreach ($data as $key => $value) {
 			echo '<option value="' . $value['id_section'] . '">' . $value['nama_section'] . '</option>';
 		}
+	}
+
+	function get_ruas_data()
+	{
+		$response = [
+			'ruas_lokasi' => $this->M_ruas->get_result_ruas(),
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 }

@@ -327,20 +327,16 @@
                                                         <small class="text-danger detail_lokasi_rup_validation"></small>
                                                         <small>
                                                 </td>
-                                                <td>
-                                                    <small>
-                                                        <select name="id_ruas" class="form-control select2bs4" style="width: 100%;">
-                                                        <option value="<?= $row_rup['id_ruas'] ?>"><?= $row_rup['nama_ruas'] ?></option>
-                                                            <?php foreach ($ruas_lokasi as $key => $value) { ?>
-                                                                <option value="<?= $value['id_ruas'] ?>"><?= $value['nama_ruas'] ?></option>
-                                                            <?php  } ?>
-                                                        </select>
-                                                        <!-- id_ruas -->
-                                                        <small class="text-danger ruas_lokasi_validation"></small>
-                                                    </small>
+                                                <td class="text-center">
+                                                    <button type="button" name="add" id="add" class="btn btn-success"><i class="fas fa-plus-square"></i></button> <br>
+                                                    <!-- ruas_lokasi -->
+                                                    <small class="text-danger ruas_lokasi_validation"></small>
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        <tfoot id="detail_ruas_rup">
+
+                                        </tfoot>
                                     </table>
                                 </td>
                             </tr>
@@ -569,10 +565,40 @@
                         <i class="fa-solid fa-floppy-disk px-1"></i>
                         Simpan Data RUP
                     </a>
-                    <a href="<?= base_url('administrator/Sirup_rup')?>" class="btn btn-default btn-warning" onclick="history.back()">
+                    <a href="<?= base_url('administrator/Sirup_rup') ?>" class="btn btn-default btn-warning" onclick="history.back()">
                         <i class="fa-solid fa-angles-left px-1"></i>
                         Kembali Kemenu Sebelumnya
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal_update_ruas" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">EDIT RUAS</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">UBAH RUAS</label><br>
+                        <input type="text" class="form-control" readonly id="nama_ruas_manipulasi"><br>
+                        <input type="hidden" name="id_ruas_rup_manipulasi" class="form-control" id="id_ruas_rup_manipulasi"><br>
+                        <select name="id_ruas_manipulasi" class="form-control">
+                            <option>-- Ubah Ruas --</option>
+                            <?php foreach ($ruas_lokasi as $key => $value) { ?>
+                                <option value="<?= $value['id_ruas'] ?>"><?= $value['nama_ruas'] ?></option>
+                            <?php  } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="javascript:;" onclick="update_ruas()" class="btn btn-primary">Save</a>
                 </div>
             </div>
         </div>

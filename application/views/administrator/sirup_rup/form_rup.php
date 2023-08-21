@@ -297,7 +297,7 @@
                                                 </td>
                                                 <td>
                                                     <small>
-                                                        <select name="id_kabupaten" required id="kabupatentambah" class="form-control select2bs4">
+                                                        <select name="id_kabupaten" required id="kabupatentambah" style="width: 100%;" class="form-control select2bs4">
                                                             <option value="">Pilih Kabupaten</option>
                                                         </select>
                                                         <!-- id_kabupaten -->
@@ -314,17 +314,10 @@
                                                         <small class="text-danger detail_lokasi_rup_validation"></small>
                                                     </small>
                                                 </td>
-                                                <td>
-                                                    <small>
-                                                        <select name="id_ruas" class="form-control select2bs4" style="width: 100%;">
-                                                            <option>Pilih Ruas</option>
-                                                            <?php foreach ($ruas_lokasi as $key => $value) { ?>
-                                                                <option value="<?= $value['id_ruas'] ?>"><?= $value['nama_ruas'] ?></option>
-                                                            <?php  } ?>
-                                                        </select>
-                                                        <!-- id_ruas -->
-                                                        <small class="text-danger ruas_lokasi_validation"></small>
-                                                    </small>
+                                                <td class="text-center">
+                                                    <button type="button" name="add" id="add" class="btn btn-success"><i class="fas fa-plus-square"></i></button> <br>
+                                                    <!-- ruas_lokasi -->
+                                                    <small class="text-danger ruas_lokasi_validation"></small>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -388,7 +381,7 @@
                                     <small>
                                         <div class="input-group mb-2">
                                             <span class="input-group-text">%</span>
-                                            <input name="persen_pencatatan" type="number" class="form-control" placeholder="Persentase">
+                                            <input name="persen_pencatatan" type="text" pattern="\d*" maxlength="4" class="form-control" placeholder="Persentase">
                                         </div>
                                         <!-- persen_pencatatan -->
                                         <small class="text-danger persen_pencatatan_validation"></small>

@@ -138,18 +138,30 @@
         }
     }
 
-    var i = 1;
     var url_provinsi = $('[name="url_provinsi"]').val();
+    var i = 1;
     $('#add').click(function() {
-        i++;
-        $('#dynamic_field').append('<tr id="row' + i + '">' +
-            '<td colspan="3"><div class="input-group mb-2">' +
-            '<span class="input-group-text"><i class="fa-solid fa-road"></i></span><input type="text" placeholder="Ruas Toll" name="ruas_lokasi[]" class="form-control">' +
-            '</div></td>' +
-            '<td class="text-center"><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove"><i class="fas fa-trash-alt"></i></button></td>' +
-            '</tr>');
+        var url_get_all_ruas = $('[name="url_get_all_ruas"]').val();
+        $.ajax({
+            type: "GET",
+            url: url_get_all_ruas,
+            success: function(response) {
+                var html = '';
+                var j;
+                for (j = 0; j < response['ruas_lokasi'].length; j++) {
+                    html += '<option value="' + response['ruas_lokasi'][j].id_ruas + '">' + response['ruas_lokasi'][j].nama_ruas + '</option>';
+                }
+                i++;
+                $('#dynamic_field').append('<tr id="row' + i + '">' +
+                    '<td colspan="3"><div class="input-group mb-2">' +
+                    '<span class="input-group-text"><i class="fa-solid fa-road"></i></span>' +
+                    '<select name="id_ruas[]" id="id_ruas' + i + '"  class="form-control select2bs4' + i + '">' + html + '</select>' +
+                    '</div></td>' +
+                    '<td class="text-center"><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove"><i class="fas fa-trash-alt"></i></button></td>' +
+                    '</tr>');
+            }
+        })
     });
-    // tanpa Javas script looping
     $(document).on('click', '.btn_remove', function() {
         var button_id = $(this).attr("id");
         $('#row' + button_id + '').remove();
@@ -217,7 +229,6 @@
                     // total_pagu_rup
                     $('.total_pagu_rup_validation').html(response['error']['total_pagu_rup']);
                     // ruas_lokasi
-                    $('.ruas_lokasi_validation').html(response['error']['id_ruas']);
                     //  detail_lokasi_rup
                     $('.detail_lokasi_rup_validation').html(response['error']['detail_lokasi_rup']);
                 } else {
@@ -273,7 +284,6 @@
                             // total_pagu_rup
                             $('.total_pagu_rup_validation').html('');
                             // ruas_lokasi
-                            $('.ruas_lokasi_validation').html('');
                             //  detail_lokasi_rup
                             $('.detail_lokasi_rup_validation').html('');
                             Swal.fire('Rup Berhasil Di UPDATE!', '', 'success')
@@ -400,10 +410,10 @@
                 var i;
                 for (i = 0; i < response['result_ruas_rup'].length; i++) {
                     html +=
-                        '<td colspan="3"><div class="input-group mb-2">' +
-                        '<span class="input-group-text"><i class="fa-solid fa-road"></i></span><input type="text" onkeyup="update_ruas(' + response['result_ruas_rup'][i].id_ruas_rup + ')" value="' + response['result_ruas_rup'][i].ruas_lokasi + '"  placeholder="Ruas Toll" name="ruas_lokasi[]" class="form-control">' +
+                        '<tr><td colspan="3"><div class="input-group mb-2">' +
+                        '<span class="input-group-text"><i class="fa-solid fa-road"></i></span><input type="text" readonly style="background-color: #ffffe0;" value="' + response['result_ruas_rup'][i].nama_ruas + '"  placeholder="Ruas Toll" name="ruas_lokasi[]" class="form-control">' +
                         '</div></td>' +
-                        '<td class="text-center"><a href="javascript:;" onclick="hapus_ruas(' + response['result_ruas_rup'][i].id_ruas_rup + ')" class="btn btn-danger btn_remove"><i class="fas fa-trash-alt"></i></a></td>';
+                        '<td class="text-center"><a href="javascript:;" onclick="update_ruas_modal(' + response['result_ruas_rup'][i].id_ruas_rup + ')" class="btn btn-warning"><i class="fas fa-edit"></i></a><a href="javascript:;" onclick="hapus_ruas_modal(' + response['result_ruas_rup'][i].id_ruas_rup + ')" class="btn btn-danger btn_remove"><i class="fas fa-trash-alt"></i></a></td></tr>';
                 }
                 $('#detail_ruas_rup').html(html);
             }
@@ -411,10 +421,29 @@
     }
 
 
+    function update_ruas_modal(id_ruas_rup) {
+        var modal_update_ruas = $('#modal_update_ruas');
+        var url_get_id_ruas_rup = $('[name="url_get_id_ruas_rup"]').val();
+        $.ajax({
+            type: "POST",
+            url: url_get_id_ruas_rup + id_ruas_rup,
+            data: {
+                id_ruas_rup: id_ruas_rup,
+            },
+            dataType: "JSON",
+            success: function(response) {
+                modal_update_ruas.modal('show');
+                $('#nama_ruas_manipulasi').val(response['row_ruas_rup'].nama_ruas);
+                $('#id_ruas_rup_manipulasi').val(response['row_ruas_rup'].id_ruas_rup);
+            }
+        })
+    }
 
-    function update_ruas(id_ruas_rup) {
-        var ruas_lokasi = $('[name="ruas_lokasi[]"]').val();
+    function update_ruas() {
+        var id_ruas_rup = $('[name="id_ruas_rup_manipulasi"]').val();
+        var ruas_lokasi = $('[name="id_ruas_manipulasi"]').val();
         var url_ubah_ruas = $('[name="url_ubah_ruas"]').val();
+        var modal_update_ruas = $('#modal_update_ruas');
         $.ajax({
             type: "POST",
             url: url_ubah_ruas,
@@ -423,24 +452,42 @@
                 ruas_lokasi: ruas_lokasi
             },
             dataType: "JSON",
-            success: function(response) {}
+            success: function(response) {
+                modal_update_ruas.modal('hide');
+                Swal.fire('Ruas Berhasil Di Update!', '', 'success')
+                get_ruas();
+            }
         })
     }
 
 
 
 
-    function hapus_ruas(id_ruas_rup) {
+    function hapus_ruas_modal(id_ruas_rup) {
         var url_hapus_ruas_rup = $('[name="url_hapus_ruas_rup"]').val();
-        $.ajax({
-            type: "POST",
-            url: url_hapus_ruas_rup,
-            data: {
-                id_ruas_rup: id_ruas_rup,
-            },
-            dataType: "JSON",
-            success: function(response) {
-                get_ruas();
+        Swal.fire({
+            title: 'Apakah Anda Yakin Menghapus Ruas Ini ? ',
+            text: '',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Terima!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_ruas_rup,
+                    data: {
+                        id_ruas_rup: id_ruas_rup,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Ruas Berhasil Di Hapus!', '', 'success')
+                        get_ruas();
+                    }
+                })
             }
         })
     }
