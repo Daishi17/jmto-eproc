@@ -83,4 +83,47 @@ class Daftar_paket extends CI_Controller
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
+
+	function update_hps()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$total_hps_rup = $this->input->post('total_hps_rup');
+		$data = [
+			'total_hps_rup' => $total_hps_rup
+		];
+		$this->M_panitia->update_hps($id_rup, $data);
+		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+
+	function update_dok_hps()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$nama_rup = $this->input->post('nama_rup');
+
+
+		$date = date('Y');
+		if (!is_dir('file_paket/' . $nama_rup . '-' . $date . '/HPS-' . $date)) {
+			mkdir('file_paket/' . $nama_rup . '-' . $date . '/HPS-' . $date, 0777, TRUE);
+		}
+
+
+		$config['upload_path'] = './file_paket/' . $nama_rup . '-' . $date . '/HPS-' . $date;
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_hps')) {
+			$fileData = $this->upload->data();
+
+			$upload = [
+				'file_hps' => $fileData['file_name']
+			];
+
+			$this->M_panitia->update_hps($id_rup, $upload);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
+	}
 }

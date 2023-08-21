@@ -189,13 +189,20 @@ class Sirup_buat_paket extends CI_Controller
 		$where = [
 			'id_url_rup' => $id_url_rup
 		];
+
 		$data = [
 			'sts_rup_buat_paket' => 1,
 			'id_jadwal_tender' => $id_jadwal_tender,
 			'metode_kualifikasi' => $metode_kualifikasi,
 			'metode_dokumen' => $metode_dokumen,
 		];
+		$date = date('Y');
+		$get_nama_rup = $this->M_rup->get_nama($where);
+		if (!is_dir('file_paket/' . $get_nama_rup['nama_rup'] . '-' . $date)) {
+			mkdir('file_paket/' . $get_nama_rup['nama_rup'] . '-' . $date, 0777, TRUE);
+		}
 		$this->M_rup->update_rup($data, $where);
+
 		$response = [
 			'success' => 'Rup Paket Berhasil Di Buat'
 		];
@@ -208,7 +215,7 @@ class Sirup_buat_paket extends CI_Controller
 		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$result_jadwal = $this->M_jenis_jadwal->generate_jadwal($row_rup['id_jadwal_tender']);
 		$cek_ke_jadwal_rup = $this->M_jenis_jadwal->cek_jadwal_rup($row_rup['id_rup']);
-		
+
 		$this->M_jenis_jadwal->delete_jadwal_rup($row_rup['id_rup']);
 		foreach ($result_jadwal as $key => $value) {
 			$id = $this->uuid->v4();

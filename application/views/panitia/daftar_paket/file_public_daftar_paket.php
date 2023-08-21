@@ -87,12 +87,98 @@
     function total_hps_validasi(id_url_rup) {
         var total_hps_rup = $('[name="total_hps_rup"]').val();
         var total_pagu_rup = $('[name="total_pagu_rup"]').val();
-        console.log(total_hps_rup + '.' + total_pagu_rup);
         if (parseInt(total_hps_rup) > parseInt(total_pagu_rup)) {
-            Swal.fire('Maaf Nilai Hps Hanya Bole Sama Dengan Atau Kurang Dari Total Pagu!', '', 'warning');
+            Swal.fire('Maaf Nilai Hps Hanya Boleh Sama Dengan Atau Kurang Dari Total Pagu!', '', 'warning');
             $('[name="total_hps_rup"]').val('');
         } else {
+            var url_update_rup_hps = $('[name="url_update_rup_hps"]').val()
+            var id_rup = $('[name="id_rup"]').val()
+            $.ajax({
+                type: "POST",
+                url: url_update_rup_hps,
+                data: {
+                    total_hps_rup: total_hps_rup,
+                    id_rup: id_rup
+                },
+                dataType: "JSON",
+                success: function(response) {
 
+                }
+            })
         }
+    }
+
+    var form_hps = $('#form_hps')
+    form_hps.on('submit', function(e) {
+        var url_update_dok_hps = $('[name="url_update_dok_hps"]').val();
+        var file_hps = $('[name="file_hps"]').val();
+        if (file_hps == '') {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Dokumen Wajib Di Isi!',
+            })
+        } else {
+            e.preventDefault();
+            $.ajax({
+                url: url_update_dok_hps,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.file_hps_btn').attr("disabled", true);
+                },
+                success: function(response) {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('.file_hps_btn').attr("disabled", false);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            })
+        }
+    })
+    load_dok_hps()
+
+    function load_dok_hps() {
+
+        var url_by_id_rup = $('[name="url_by_id_rup"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val()
+        var url_cek_dokumen_hps = $('[name="url_cek_dokumen_hps"]').val()
+        var nama_rup = $('[name="nama_rup"]').val()
+        var date_y = $('[name="date_y"]').val()
+        $.ajax({
+            type: "GET",
+            url: url_by_id_rup + id_url_rup,
+            dataType: "JSON",
+            success: function(response) {
+                console.log(response);
+                var html = ''
+                html += '<a target="_blank" href="' + url_cek_dokumen_hps + nama_rup + '-' + date_y + '/HPS-' + date_y + '/' + response['row_rup'].file_hps + '" class="btn btn-default btn-info">' + '<i class="fa-solid fa-file px-1"></i>' + 'Dokumen HPS' + '</a>';
+                $('.load_dok_Hps').html(html);
+            }
+        })
     }
 </script>
