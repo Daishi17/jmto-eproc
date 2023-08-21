@@ -1,4 +1,6 @@
 <main class="container-fluid">
+    <input type="hidden" name="id_url_rup" value="<?= $row_rup['id_url_rup'] ?>">
+
     <div class="row">
         <div class="col">
             <div class="card border-dark">
@@ -190,32 +192,39 @@
                                                             <tr>
                                                                 <td style="vertical-align: middle;">
                                                                     <i class="fa-solid fa-rupiah-sign px-1"></i>
-                                                                    <input type="hidden" name="total_pagu_rup" value="<?= $row_rup['total_pagu_rup'] ?>" class="form-control total_hps" placeholder="Total HPS">
+                                                                    <input type="hidden" name="total_pagu_rup" value="<?= $row_rup['total_pagu_rup'] ?>" class="form-control" placeholder="Total HPS">
                                                                     <small><?= "Rp " . number_format($row_rup['total_pagu_rup'], 2, ',', '.') ?></small>
                                                                 </td>
                                                                 <td>
                                                                     <div class="col-sm-12">
                                                                         <div class="input-group">
                                                                             <span class="input-group-text">Rp.</span>
-                                                                            <input type="number" name="total_hps_rup" onkeyup="total_hps_validasi('<?= $row_rup['id_url_rup'] ?>')" class="form-control total_hps" placeholder="Total HPS">
-                                                                            <input type="text" id="rupiah_total_hps" class="form-control bg-light" readonly>
+                                                                            <input type="number" name="total_hps_rup" onkeyup="total_hps_validasi('<?= $row_rup['id_url_rup'] ?>')" class="form-control " placeholder="Total HPS" value="<?= $row_rup['total_hps_rup'] ?>">
+                                                                            <input type="text" id="rupiah_total_hps" class="form-control bg-light" readonly value="<?= "Rp " . number_format($row_rup['total_hps_rup'], 2, ',', '.') ?>">
                                                                         </div>
                                                                     </div>
                                                                 </td>
+
                                                                 <td>
-                                                                    <div class="input-group">
-                                                                        <input type="file" class="form-control" id="file" accept=".xlsx, .xls, .pdf">
-                                                                        <button class="btn btn-outline-secondary" type="button">Upload</button>
+                                                                    <form id="form_hps" action="javascript:;" enctype="multipart/form-data">
+                                                                        <div class="input-group">
+                                                                            <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+                                                                            <input type="hidden" name="nama_rup" value="<?= $row_rup['nama_rup'] ?>">
+                                                                            <input type="hidden" name="date_y" value="<?= date('Y') ?>">
+
+                                                                            <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
+
+                                                                            <button class="btn btn-outline-secondary file_hps_btn" type="submit">Upload</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-center load_dok_Hps">
+
                                                                     </div>
                                                                 </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <button type="button" class="btn btn-default btn-info">
-                                                                            <i class="fa-solid fa-file px-1"></i>
-                                                                            Dokumen HPS
-                                                                        </button>
-                                                                    </div>
-                                                                </td>
+
                                                             </tr>
                                                         </tbody>
                                                     </table>

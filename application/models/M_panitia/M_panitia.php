@@ -77,9 +77,15 @@ class M_panitia extends CI_Model
         $this->db->join('tbl_jenis_pengadaan', 'tbl_rup.id_jenis_pengadaan = tbl_jenis_pengadaan.id_jenis_pengadaan', 'left');
         $this->db->join('tbl_metode_pengadaan', 'tbl_rup.id_metode_pengadaan = tbl_metode_pengadaan.id_metode_pengadaan', 'left');
         $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
-         $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
+        $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
         $this->db->where('tbl_rup.sts_rup', 1);
         $this->db->where_in('tbl_rup.sts_rup_buat_paket', [1, 2]);
         return $this->db->count_all_results();
+    }
+
+    public function update_Hps($id_rup, $data)
+    {
+        $this->db->where('id_rup', $id_rup);
+        $this->db->update('tbl_rup', $data);
     }
 }
