@@ -90,7 +90,7 @@
                         </a>
                     </li>
                 <?php } else { ?>
-                    
+
                 <?php }  ?>
             </ul>
             <div class="text-end">
@@ -98,10 +98,14 @@
                     <div class="flex-shrink-0 dropdown">
                         <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="<?php echo base_url(); ?>/assets/brand/avatar5.png" alt="mdo" width="32" height="32" class="rounded-circle shadow-lg">&nbsp;
-                            <small class="text-white">Panitia</small>
+                            <?php if ($this->session->userdata('role') == 2) { ?>
+                                <small class="text-white">Administrator</small>
+                            <?php } else { ?>
+                                <small class="text-white">Panitia</small>
+                            <?php }  ?>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="#"><small><?= $this->session->userdata('nama_pegawai');?></small></a></li>
+                            <li><a class="dropdown-item" href="#"><small><?= $this->session->userdata('nama_pegawai'); ?></small></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
