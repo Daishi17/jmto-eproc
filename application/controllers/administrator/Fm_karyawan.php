@@ -8,6 +8,7 @@ class Fm_karyawan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_master/M_karyawan');
+		$this->load->model('M_section/M_section');
 	}
 
 	public function index()
@@ -107,46 +108,88 @@ class Fm_karyawan extends CI_Controller
 		$id_role = $this->input->post('id_role');
 		$password = $this->input->post('password');
 
+		$id_pegawai = $this->input->post('id_pegawai');
+		if ($id_pegawai) {
+			// $this->form_validation->set_rules('nip', 'NIK', 'required|trim|is_unique[tbl_pegawai.nip]', ['required' => 'Nama Section Wajib Diisi!', 'is_unique' => 'NIK Sudah Terdaftar']);
+			$this->form_validation->set_rules('nama_pegawai', 'Nama Pegawai', 'required|trim', ['required' => 'Nama Pegawai Wajib Diisi!']);
+			$this->form_validation->set_rules('id_departemen', 'Nama Departemen', 'required|trim', ['required' => 'Departemen Wajib Diisi!']);
+			$this->form_validation->set_rules('id_section', 'Nama Section', 'required|trim', ['required' => 'Section Wajib Diisi!']);
+			$this->form_validation->set_rules('email', 'Email Pegawai', 'required|trim|valid_email|is_unique[tbl_pegawai.nip]', ['required' => 'Email Email Pegawai Wajib Diisi!', 'valid_email' => 'Email Tidak Valid',  'is_unique' => 'Email Sudah Terdaftar']);
+			$this->form_validation->set_rules('no_telpon', 'No Telpon', 'required|trim', ['required' => 'No. Telpon Wajib Diisi!']);
+			// $this->form_validation->set_rules('id_role', 'Nama Section', 'required|trim', ['required' => 'Role Wajib Diisi!']);
+			// $this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);
+			// $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password]', ['required' => 'Password Verifikasi harus diisi!', 'matches' => 'Password Tidak Sama']);
+			if ($this->form_validation->run() == false) {
 
-		$this->form_validation->set_rules('nip', 'NIK', 'required|trim|is_unique[tbl_pegawai.nip]', ['required' => 'Nama Section Wajib Diisi!', 'is_unique' => 'NIK Sudah Terdaftar']);
-		$this->form_validation->set_rules('nama_pegawai', 'Nama Pegawai', 'required|trim', ['required' => 'Nama Pegawai Wajib Diisi!']);
-		$this->form_validation->set_rules('id_departemen', 'Nama Departemen', 'required|trim', ['required' => 'Departemen Wajib Diisi!']);
-		$this->form_validation->set_rules('id_section', 'Nama Section', 'required|trim', ['required' => 'Section Wajib Diisi!']);
-		$this->form_validation->set_rules('email', 'Email Pegawai', 'required|trim|valid_email|is_unique[tbl_pegawai.nip]', ['required' => 'Email Email Pegawai Wajib Diisi!', 'valid_email' => 'Email Tidak Valid',  'is_unique' => 'Email Sudah Terdaftar']);
-		$this->form_validation->set_rules('no_telpon', 'No Telpon', 'required|trim', ['required' => 'No. Telpon Wajib Diisi!']);
-		// $this->form_validation->set_rules('id_role', 'Nama Section', 'required|trim', ['required' => 'Role Wajib Diisi!']);
-		// $this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);
-		// $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password]', ['required' => 'Password Verifikasi harus diisi!', 'matches' => 'Password Tidak Sama']);
-
-		if ($this->form_validation->run() == false) {
-
-			$response = [
-				'error' => [
-					'nip' => form_error('nip'),
-					'nama_pegawai' => form_error('nama_pegawai'),
-					'id_section' => form_error('id_section'),
-					'id_departemen' => form_error('id_departemen'),
-					'email' => form_error('email'),
-					'no_telpon' => form_error('no_telpon'),
-				],
-			];
-			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+				$response = [
+					'error' => [
+						'nip' => form_error('nip'),
+						'nama_pegawai' => form_error('nama_pegawai'),
+						'id_section' => form_error('id_section'),
+						'id_departemen' => form_error('id_departemen'),
+						'email' => form_error('email'),
+						'no_telpon' => form_error('no_telpon'),
+					],
+				];
+				$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			} else {
+				$id = $this->uuid->v4();
+				$id = str_replace('-', '', $id);
+				$data = [
+					'nip' => $nip,
+					'id_url_pegawai' => $id,
+					'nama_pegawai' => $nama_pegawai,
+					'id_departemen' => $id_departemen,
+					'id_section' => $id_section,
+					'email' => $email,
+					'no_telpon' => $no_telpon,
+					'status' => 1,
+					'user_created' => $this->session->userdata('nama_pegawai')
+				];
+				$this->M_karyawan->update_data($data, $id_pegawai);
+				$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+			}
 		} else {
-			$id = $this->uuid->v4();
-			$id = str_replace('-', '', $id);
-			$data = [
-				'nip' => $nip,
-				'id_url_pegawai' => $id,
-				'nama_pegawai' => $nama_pegawai,
-				'id_departemen' => $id_departemen,
-				'id_section' => $id_section,
-				'email' => $email,
-				'no_telpon' => $no_telpon,
-				'status' => 1,
-				'user_created' => $this->session->userdata('nama_pegawai')
-			];
-			$this->M_karyawan->insert_data($data);
-			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+
+			$this->form_validation->set_rules('nip', 'NIK', 'required|trim|is_unique[tbl_pegawai.nip]', ['required' => 'Nama Section Wajib Diisi!', 'is_unique' => 'NIK Sudah Terdaftar']);
+			$this->form_validation->set_rules('nama_pegawai', 'Nama Pegawai', 'required|trim', ['required' => 'Nama Pegawai Wajib Diisi!']);
+			$this->form_validation->set_rules('id_departemen', 'Nama Departemen', 'required|trim', ['required' => 'Departemen Wajib Diisi!']);
+			$this->form_validation->set_rules('id_section', 'Nama Section', 'required|trim', ['required' => 'Section Wajib Diisi!']);
+			$this->form_validation->set_rules('email', 'Email Pegawai', 'required|trim|valid_email|is_unique[tbl_pegawai.nip]', ['required' => 'Email Email Pegawai Wajib Diisi!', 'valid_email' => 'Email Tidak Valid',  'is_unique' => 'Email Sudah Terdaftar']);
+			$this->form_validation->set_rules('no_telpon', 'No Telpon', 'required|trim', ['required' => 'No. Telpon Wajib Diisi!']);
+			// $this->form_validation->set_rules('id_role', 'Nama Section', 'required|trim', ['required' => 'Role Wajib Diisi!']);
+			// $this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);
+			// $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password]', ['required' => 'Password Verifikasi harus diisi!', 'matches' => 'Password Tidak Sama']);
+			if ($this->form_validation->run() == false) {
+
+				$response = [
+					'error' => [
+						'nip' => form_error('nip'),
+						'nama_pegawai' => form_error('nama_pegawai'),
+						'id_section' => form_error('id_section'),
+						'id_departemen' => form_error('id_departemen'),
+						'email' => form_error('email'),
+						'no_telpon' => form_error('no_telpon'),
+					],
+				];
+				$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			} else {
+				$id = $this->uuid->v4();
+				$id = str_replace('-', '', $id);
+				$data = [
+					'nip' => $nip,
+					'id_url_pegawai' => $id,
+					'nama_pegawai' => $nama_pegawai,
+					'id_departemen' => $id_departemen,
+					'id_section' => $id_section,
+					'email' => $email,
+					'no_telpon' => $no_telpon,
+					'status' => 1,
+					'user_created' => $this->session->userdata('nama_pegawai')
+				];
+				$this->M_karyawan->insert_data($data);
+				$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+			}
 		}
 	}
 
@@ -154,5 +197,14 @@ class Fm_karyawan extends CI_Controller
 	{
 		$data = $this->M_karyawan->getByid($id_departemen);
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+
+	public function data_section($id_departemen)
+	{
+		$data = $this->M_section->get_section($id_departemen);
+		echo '<option value="">--Pilih Section--</option>';
+		foreach ($data as $key => $value) {
+			echo '<option value="' . $value['id_section'] . '">' . $value['nama_section'] . '</option>';
+		}
 	}
 }

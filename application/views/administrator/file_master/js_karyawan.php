@@ -135,7 +135,7 @@
         form_karyawan[0].reset();
         $('#button_ubah').attr('disabled', true)
         $('#modal-xl-tambah').modal('show')
-        $('[name="id_pegawai"]').val();
+        $('[name="id_pegawai"]').val('');
     }
 
     function Question_aktifkan(id, nama_pegawai) {
@@ -208,5 +208,17 @@
 
             }
         })
+    }
+
+    function get_section_dept() {
+        var url_karyawan_section = $('[name="url_karyawan_section"]').val();
+        var id_departemen = $('[name="id_departemen"]').val();
+        $.ajax({
+            type: 'GET',
+            url: url_karyawan_section + id_departemen,
+            success: function(html) {
+                $('#form_section').html(html);
+            }
+        });
     }
 </script>

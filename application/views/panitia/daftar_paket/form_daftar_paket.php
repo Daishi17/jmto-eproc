@@ -563,8 +563,8 @@
                 </div>
             </div>
             <!-- modal buat jadwal -->
-            <div class="modal fade" id="modal-xl-jadwal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal fade modal-dialog-centered modal-dialog-scrollable" id="modal-xl-jadwal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+                <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
                             <a class="navbar-brand">
@@ -573,7 +573,8 @@
                             </a>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form>
+                        <form action="javascript:;" id="form_jadwal">
+                            <input type="hidden" value="<?= $row_rup['id_rup'] ?>" name="id_rup">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col">
@@ -587,36 +588,50 @@
                                                 </div>
                                             </div>
                                             <div class="card-body">
+
                                                 <table class="table table-bordered table-sm shadow-lg">
                                                     <thead class="bg-secondary text-white">
                                                         <tr>
+                                                            <th><small>No</small></th>
                                                             <th><small>Keterangan Jadwal Tender</small></th>
                                                             <th><small>Tanggal Awal</small></th>
                                                             <th><small>Tanggal Akhir</small></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td><small>Pengumuman Pengadaan/Tender</small></td>
-                                                            <td>
-                                                                <small>
-                                                                    <div class="input-group mb-2">
-                                                                        <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                        <input type="datetime-local" class="form-control">
-                                                                    </div>
-                                                                </small>
-                                                            </td>
-                                                            <td>
-                                                                <small>
-                                                                    <div class="input-group mb-2">
-                                                                        <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                        <input type="datetime-local" class="form-control">
-                                                                    </div>
-                                                                </small>
-                                                            </td>
-                                                        </tr>
+                                                        <?php
+                                                        $i = 1;
+                                                        $j = 1;
+                                                        $k = 1;
+                                                        foreach ($jadwal as $key => $value) { ?>
+                                                            <input type="hidden" name="id_jadwal_rup[<?= $j ?>]">
+                                                            <tr>
+                                                                <td><small><?= $i++ ?></small></td>
+                                                                <td><small><?= $value['nama_jadwal_rup'] ?></small></td>
+                                                                <td>
+                                                                    <small>
+                                                                        <div class="input-group mb-2">
+                                                                            <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                                            <input type="datetime-local" class="form-control" name="waktu_mulai[<?= $k ?>]" value="<?= $value['waktu_mulai'] ?>">
+                                                                        </div>
+                                                                    </small>
+                                                                </td>
+                                                                <td>
+                                                                    <small>
+                                                                        <div class="input-group mb-2">
+                                                                            <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                                            <input type="datetime-local" class="form-control" name="waktu_selesai[<?= $k ?>]" value="<?= $value['waktu_selesai'] ?>">
+                                                                        </div>
+                                                                    </small>
+                                                                </td>
+                                                            </tr>
+                                                            <?php $j++ ?>
+                                                            <?php $k++ ?>
+                                                        <?php  } ?>
+
                                                     </tbody>
                                                 </table>
+
                                             </div>
                                         </div>
                                     </div>
@@ -624,7 +639,7 @@
                             </div>
                             <div class="modal-footer justify-content-start">
                                 <div class="container-fluid">
-                                    <button type="submit" class="btn btn-success">
+                                    <button type="submit" class="btn btn-success btn_jadwal">
                                         <i class="fa-solid fa-hard-drive"></i>
                                         Simpan Data
                                     </button>
@@ -634,7 +649,7 @@
                                     </button>
                                 </div>
                             </div>
-                            </from>
+                        </form>
                     </div>
                 </div>
             </div>

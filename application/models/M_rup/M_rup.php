@@ -135,7 +135,7 @@ class M_rup extends CI_Model
         return $query->row_array();
     }
 
-    
+
     public function get_nama($id_url_rup)
     {
         $this->db->select('*');
