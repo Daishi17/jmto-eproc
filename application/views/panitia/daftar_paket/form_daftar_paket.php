@@ -563,7 +563,7 @@
                 </div>
             </div>
             <!-- modal buat jadwal -->
-            <div class="modal fade modal-dialog-centered modal-dialog-scrollable" id="modal-xl-jadwal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal fade" id="modal-xl-jadwal" data-bs-keyboard="false" tabindex="-1">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -604,7 +604,7 @@
                                                         $j = 1;
                                                         $k = 1;
                                                         foreach ($jadwal as $key => $value) { ?>
-                                                            <input type="hidden" name="id_jadwal_rup[<?= $j ?>]">
+                                                            <input type="hidden" name="id_jadwal_rup[<?= $j ?>]" value="<?= $value['id_jadwal_rup'] ?>">
                                                             <tr>
                                                                 <td><small><?= $i++ ?></small></td>
                                                                 <td><small><?= $value['nama_jadwal_rup'] ?></small></td>
@@ -655,8 +655,8 @@
             </div>
         </div>
         <!-- modal buat syarat administrasi dan teknis -->
-        <div class="modal fade" id="modal-xl-syarat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal fade" id="modal-xl-syarat" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <a class="navbar-brand">

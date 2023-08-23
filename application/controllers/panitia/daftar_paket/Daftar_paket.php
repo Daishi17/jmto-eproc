@@ -137,19 +137,7 @@ class Daftar_paket extends CI_Controller
 		$waktu_selesai = $this->input->post('waktu_selesai[]');
 
 		$jadwal1 = 	$waktu_mulai[1];
-		$test = substr($jadwal1, 0, -6);
-		$test2 = substr($jadwal1, -5);
-		$jadwal1 = $test . ' ' . $test2;
-
-
-
 		$jadwal2 = 	$waktu_selesai[1];
-		$test3 = substr($jadwal2, 0, -6);
-		$test4 = substr($jadwal2, -5);
-		$jadwal2 = $test3 . ' ' . $test4;
-		var_dump($jadwal2);
-		die;
-
 		$jadwal3 = 	$waktu_mulai[2];
 		$jadwal4 = 	$waktu_selesai[2];
 		$jadwal5 = 	$waktu_mulai[3];
@@ -197,17 +185,15 @@ class Daftar_paket extends CI_Controller
 				'id_jadwal_rup' => $id_jadwal_rup[1]
 			];
 			$data = [
-				'waktu_mulai' => $jadwal1[1],
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal1)),
 				// 'jam_mulai' => $time_mulai[1],
-				'waktu_selesai' => $jadwal2[1],
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal2)),
 				// 'jam_selesai' => $time_selesai[1],
 			];
 			$data2 = [
 				'batas_pendaftaran_tender' => $waktu_selesai[1],
 			];
 
-			var_dump($data, $data2);
-			die;
 			$this->M_panitia->update_jadwal($data, $where);
 			$this->M_panitia->update_rup_panitia($id_rup, $data2);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
