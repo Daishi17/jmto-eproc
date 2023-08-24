@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+header("Content-Security-Policy: default-src 'self' *");
+header("Content-Security-Policy: img-src 'self' *");
+?>
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPROC - JMTO</title>
 
@@ -57,55 +60,7 @@
                                 <!-- Navbar START -->
                                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                                     <ul class="navbar-nav">
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Home</i></a>
-                                        </li> -->
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Pages</i><i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="about-us.html"><i>About Us</i></a></li>
-                                                <li><a class="dropdown-item" href="teachers.html">Teachers</a></li>
-                                                <li><a class="dropdown-item" href="teachers-single.html">Teacher Single</a></li>
-                                                <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                                                <li><a class="dropdown-item" href="pricing.html">Pricing</a></li>
-                                                <li><a class="dropdown-item" href="faq.html">Faq</a></li>
-                                                <li><a class="dropdown-item" href="sign-in.html">Sign In</a></li>
-                                                <li><a class="dropdown-item" href="sign-up.html">Sign Up</a></li>
-                                                <li><a class="dropdown-item" href="error-page.html">Error Page</a></li>
-                                                <li><a class="dropdown-item" href="coming-soon.html">Coming Soon</a></li>
-                                                <li><a class="dropdown-item" href="privacy-policy.html">Privacy Policy</a></li>
-                                                <li><a class="dropdown-item" href="terms-and-conditions.html">Terms & Conditions</a></li>
-                                            </ul>
-                                        </li> -->
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link  dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Course</i><i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="course.html"><i>Course</i></a></li>
-                                                <li><a class="dropdown-item" href="course-detail.html">Course Detail</a></li>
-                                            </ul>
-                                        </li> -->
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link  dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Event</i><i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="events-list.html">Events List</a></li>
-                                                <li><a class="dropdown-item" href="events-grid.html">Events Grid</a></li>
-                                                <li><a class="dropdown-item" href="event-detail.html">Event Detail</a></li>
-                                            </ul>
-                                        </li> -->
-                                        <!-- <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Blog</i><i class="fa fa-chevron-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="blog.html"><i>Blog</i></a></li>
-                                                <li><a class="dropdown-item" href="blog-detail.html"><i>Blog Detail</i></a></li>
-                                            </ul>
-                                        </li> -->
-                                        <!-- <li class="nav-item">
-                                            <a class="nav-link" href="contact-us.html"><i>Contact Us</i></a>
-                                        </li> -->
+
                                     </ul>
                                 </div>
                                 <!-- Navbar END-->
@@ -567,7 +522,7 @@
     Action box -->
     <!--=================================
     Footer-->
-    <footer class="space-pt bg-overlay-black-90 bg-holder footer" style="background-image: url(images/bg/03.jpg);">
+    <footer class="space-pt bg-overlay-black-90 bg-holder footer">
         <div class="container">
             <div class="row pb-5 pb-lg-6 mb-lg-3">
                 <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0 pr-lg-5">
@@ -640,7 +595,8 @@
     Javascript -->
 
     <!-- JS Global Compulsory (Do not remove)-->
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables/jquery.dataTables.min.js"></script>
     <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/popper/popper.min.js"></script>
     <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/bootstrap/bootstrap.min.js"></script>
 
