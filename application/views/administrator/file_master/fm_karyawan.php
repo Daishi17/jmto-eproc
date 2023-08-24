@@ -33,6 +33,7 @@
                 <input type="hidden" name="url_get_byid" value="<?= base_url('administrator/fm_karyawan/byid/') ?>">
                 <input type="hidden" name="url_aktifkan_karyawan" value="<?= base_url('administrator/fm_karyawan/aktif/') ?>">
                 <input type="hidden" name="url_nonaktifkan_karyawan" value="<?= base_url('administrator/fm_karyawan/nonaktif/') ?>">
+                <input type="hidden" name="url_karyawan_section" value="<?= base_url('administrator/fm_karyawan/data_section/') ?>">
                 <!--  -->
                 <div class="card-body">
                     <table id="tbl_karyawan" class="table table-bordered table-sm table-striped">
@@ -89,7 +90,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="id_pegawai">
+
                     <div class="row">
                         <div class="col">
                             <div class="card border-dark shadow-lg">
@@ -109,6 +110,7 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="javascript:;" id="form_karyawan">
+                                        <input type="hidden" name="id_pegawai">
                                         <div class="row g-1">
                                             <div class="col-sm-6">
                                                 <div class="input-group mb-1">
@@ -127,7 +129,7 @@
                                             <div class="col-sm-6">
                                                 <div class="input-group mb-1">
                                                     <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
-                                                    <select class="form-select" aria-label="Default select example" name="id_departemen">
+                                                    <select class="form-select" aria-label="Default select example" name="id_departemen" onchange="get_section_dept()">
                                                         <option value="">Pilih Departemen</option>
                                                         <?php foreach ($departemen as $key => $value) {  ?>
                                                             <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>
@@ -139,11 +141,8 @@
                                             <div class="col-sm-6">
                                                 <div class="input-group mb-1">
                                                     <span class="input-group-text"><i class="fa-solid fa-map"></i></span>
-                                                    <select class="form-select" aria-label="Default select example" name="id_section">
-                                                        <option value="">Pilih Sections</option>
-                                                        <?php foreach ($section as $key => $value) {  ?>
-                                                            <option value="<?= $value['id_section'] ?>"><?= $value['nama_section'] ?></option>
-                                                        <?php } ?>
+                                                    <select class="form-select" aria-label="Default select example" name="id_section" id="form_section">
+
                                                     </select>
                                                 </div>
                                                 <small class="id_section text-danger"></small>

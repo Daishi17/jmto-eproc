@@ -41,6 +41,7 @@ class Daftar_paket extends CI_Controller
 	public function form_daftar_paket($id_url_rup)
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
+		$data['jadwal'] = $this->M_panitia->get_jadwal($id_url_rup);
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
@@ -48,7 +49,7 @@ class Daftar_paket extends CI_Controller
 		$this->load->view('panitia/daftar_paket/file_public_daftar_paket');
 	}
 
-	function get_rup_terfinalisasi()
+	public function get_rup_terfinalisasi()
 	{
 		$result = $this->M_panitia->gettable_rup_paket_final();
 		$data = [];
@@ -76,7 +77,7 @@ class Daftar_paket extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));
 	}
 
-	function by_id_rup($id_url_rup)
+	public function by_id_rup($id_url_rup)
 	{
 		$response = [
 			'row_rup' => $this->M_rup->get_row_rup($id_url_rup),
@@ -84,18 +85,18 @@ class Daftar_paket extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
-	function update_hps()
+	public function update_hps()
 	{
 		$id_rup = $this->input->post('id_rup');
 		$total_hps_rup = $this->input->post('total_hps_rup');
 		$data = [
 			'total_hps_rup' => $total_hps_rup
 		];
-		$this->M_panitia->update_hps($id_rup, $data);
+		$this->M_panitia->update_rup_panitia($id_rup, $data);
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
 	}
 
-	function update_dok_hps()
+	public function update_dok_hps()
 	{
 		$id_rup = $this->input->post('id_rup');
 		$nama_rup = $this->input->post('nama_rup');
@@ -120,10 +121,82 @@ class Daftar_paket extends CI_Controller
 				'file_hps' => $fileData['file_name']
 			];
 
-			$this->M_panitia->update_hps($id_rup, $upload);
+			$this->M_panitia->update_rup_panitia($id_rup, $upload);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else {
 			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
+	}
+
+
+	public function simpan_jadwal_20baris()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$id_jadwal_rup = $this->input->post('id_jadwal_rup[]');
+		$waktu_mulai = $this->input->post('waktu_mulai[]');
+		$waktu_selesai = $this->input->post('waktu_selesai[]');
+
+		$jadwal1 = 	$waktu_mulai[1];
+		$jadwal2 = 	$waktu_selesai[1];
+		$jadwal3 = 	$waktu_mulai[2];
+		$jadwal4 = 	$waktu_selesai[2];
+		$jadwal5 = 	$waktu_mulai[3];
+		$jadwal6 = 	$waktu_selesai[3];
+		$jadwal7 = 	$waktu_mulai[4];
+		$jadwal8 = 	$waktu_selesai[4];
+		$jadwal9 = 	$waktu_mulai[5];
+		$jadwal10 = $waktu_selesai[5];
+		$jadwal11 = $waktu_mulai[6];
+		$jadwal12 = $waktu_selesai[6];
+		$jadwal13 = $waktu_mulai[7];
+		$jadwal14 = $waktu_selesai[7];
+		$jadwal15 = $waktu_mulai[8];
+		$jadwal16 = $waktu_selesai[8];
+		$jadwal17 = $waktu_mulai[9];
+		$jadwal18 = $waktu_selesai[9];
+		$jadwal19 = $waktu_mulai[10];
+		$jadwal20 = $waktu_selesai[10];
+		$jadwal21 = $waktu_mulai[11];
+		$jadwal22 = $waktu_selesai[11];
+		$jadwal23 = $waktu_mulai[12];
+		$jadwal24 = $waktu_selesai[12];
+		$jadwal25 = $waktu_mulai[13];
+		$jadwal26 = $waktu_selesai[13];
+		$jadwal27 = $waktu_mulai[14];
+		$jadwal28 = $waktu_selesai[14];
+		$jadwal29 = $waktu_mulai[15];
+		$jadwal30 = $waktu_selesai[15];
+		$jadwal31 = $waktu_mulai[16];
+		$jadwal32 = $waktu_selesai[16];
+		$jadwal33 = $waktu_mulai[17];
+		$jadwal34 = $waktu_selesai[17];
+		$jadwal35 = $waktu_mulai[18];
+		$jadwal36 = $waktu_selesai[18];
+		$jadwal37 = $waktu_mulai[19];
+		$jadwal38 = $waktu_selesai[19];
+		$jadwal39 = $waktu_mulai[20];
+		$jadwal40 = $waktu_selesai[20];
+
+
+		if (date('Y-m-d H:i', strtotime($jadwal1)) > date('Y-m-d H:i', strtotime($jadwal2))) {
+			$this->session->set_flashdata('jadwal_salah1', '<label id="validasi_c1" class="text-danger"></label>');
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[1]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal1)),
+				// 'jam_mulai' => $time_mulai[1],
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal2)),
+				// 'jam_selesai' => $time_selesai[1],
+			];
+			$data2 = [
+				'batas_pendaftaran_tender' => $waktu_selesai[1],
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->M_panitia->update_rup_panitia($id_rup, $data2);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		}
 	}
 }

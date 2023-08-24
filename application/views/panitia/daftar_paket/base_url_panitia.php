@@ -13,3 +13,6 @@
 <input type="hidden" name="url_update_rup_hps" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_hps/') ?>">
 <input type="hidden" name="url_update_dok_hps" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_dok_hps') ?>">
 <input type="hidden" name="url_cek_dokumen_hps" value="<?= base_url('file_paket/') ?>">
+
+<!-- url jadwal -->
+<input type="hidden" name="url_update_jadwal" value="<?= base_url('panitia/daftar_paket/daftar_paket/simpan_jadwal_20baris/') ?>">

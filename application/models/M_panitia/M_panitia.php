@@ -83,9 +83,24 @@ class M_panitia extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function update_Hps($id_rup, $data)
+    public function update_rup_panitia($id_rup, $data)
     {
         $this->db->where('id_rup', $id_rup);
         $this->db->update('tbl_rup', $data);
+    }
+
+    public function get_jadwal($id_url_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_url_rup', $id_url_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function update_jadwal($data, $where)
+    {
+        $this->db->where($where);
+        $this->db->update('tbl_jadwal_rup', $data);
     }
 }
