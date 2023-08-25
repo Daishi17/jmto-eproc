@@ -685,12 +685,17 @@
                                                     <td>
                                                         <div class="input-group">
                                                             <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
-                                                            <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                <option selected disabled value="">Pilih Kualifikasi...</option>
-                                                                <option value="1">Besar</option>
-                                                                <option value="2">Minimal Menengah</option>
-                                                                <option value="3">Maksimal Menengah</option>
-                                                                <option value="4">Kecil/UMKM</option>
+                                                            <select name="syarat_tender_kualifikasi" class="form-select form-select-sm" onchange="kualifikasi_syart_tender()" aria-label="Default select example">
+                                                                <?php if ($row_rup['syarat_tender_kualifikasi']) { ?>
+                                                                    <option value="<?= $row_rup['syarat_tender_kualifikasi'] ?>"><?= $row_rup['syarat_tender_kualifikasi'] ?></option>
+                                                                <?php } else { ?>
+                                                                    <option selected disabled value="">Pilih Kualifikasi...</option>
+                                                                <?php } ?>
+
+                                                                <option value="Besar">Besar</option>
+                                                                <option value="Minimal Menengah">Minimal Menengah</option>
+                                                                <option value="Maksimal Menengah">Maksimal Menengah</option>
+                                                                <option value="Kecil/UMKM">Kecil/UMKM</option>
                                                             </select>
                                                         </div>
                                                     </td>
@@ -724,31 +729,35 @@
                                                                             <td>
                                                                                 <div class="input-group mb-1">
                                                                                     <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox" value="Setuju">
+                                                                                        <?php if ($syarat_izin_usaha_tender['sts_checked_siup'] == 1) { ?>
+                                                                                            <input id="cek_siup" checked class="form-check-input mt-0" value="<?= $syarat_izin_usaha_tender['sts_checked_siup'] ?>" name="sts_checked_siup" type="checkbox">
+                                                                                        <?php } else { ?>
+                                                                                            <input id="cek_siup" name="sts_checked_siup" class="form-check-input mt-0" type="checkbox">
+                                                                                        <?php  }  ?>
                                                                                     </div>
                                                                                     <input type="text" class="form-control form-control-sm" value="Surat Izin Usaha Perdagangan (SIUP)" readonly>
                                                                                 </div>
                                                                                 <div class="input-group mb-1">
                                                                                     <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox" value="Setuju">
+                                                                                        <input class="form-check-input mt-0" type="checkbox">
                                                                                     </div>
                                                                                     <input type="text" class="form-control form-control-sm" value="Nomor Induk Berusaha (NIB/TDP)" readonly>
                                                                                 </div>
                                                                                 <div class="input-group mb-1">
                                                                                     <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox" value="Setuju">
+                                                                                        <input class="form-check-input mt-0" type="checkbox">
                                                                                     </div>
                                                                                     <input type="text" class="form-control form-control-sm" value="Sertifikat Badan Usaha (SBU)" readonly>
                                                                                 </div>
                                                                                 <div class="input-group mb-1">
                                                                                     <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox" value="Setuju">
+                                                                                        <input class="form-check-input mt-0" type="checkbox">
                                                                                     </div>
                                                                                     <input type="text" class="form-control form-control-sm" value="Surat Izin Jasa Konstruksi (SIUJK)" readonly>
                                                                                 </div>
                                                                                 <div class="input-group mb-1">
                                                                                     <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox" value="Setuju">
+                                                                                        <input class="form-check-input mt-0" type="checkbox">
                                                                                     </div>
                                                                                     <input type="text" class="form-control form-control-sm" value="Surat Keterangan Domisili Perusahan (SKDP)" readonly>
                                                                                 </div>
@@ -756,12 +765,27 @@
                                                                             <td>
                                                                                 <div class="input-group mb-1">
                                                                                     <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                        <option selected disabled value="">Pilih...</option>
-                                                                                        <option value="1">Seumur Hidup</option>
-                                                                                        <option value="2">Tanggal</option>
+                                                                                    <select onchange="pilih_syarat_izin_usaha_tender_siup()" name="sts_masa_berlaku_siup" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                        <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup']) { ?>
+                                                                                            <option value="<?= $syarat_izin_usaha_tender['sts_masa_berlaku_siup'] ?>">
+                                                                                                <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup'] == 1) { ?>
+                                                                                                    Tanggal
+                                                                                                <?php } else { ?>
+                                                                                                    Seumur Hidup
+                                                                                                <?php } ?>
+                                                                                            </option>
+                                                                                        <?php } else { ?>
+                                                                                            <option selected disabled value="">Pilih...</option>
+                                                                                        <?php } ?>
+                                                                                        <option value="2">Seumur Hidup</option>
+                                                                                        <option value="1">Tanggal</option>
                                                                                     </select>
-                                                                                    <input type="date" class="form-control form-control-sm">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup'] == 1) { ?>
+                                                                                        <input type="date" name="tgl_berlaku_siup" class="form-control form-control-sm">
+                                                                                    <?php } else { ?>
+                                                                                        <input type="date" style="display: none;" name="tgl_berlaku_siup" class="form-control form-control-sm">
+                                                                                    <?php } ?>
+
                                                                                 </div>
                                                                                 <div class="input-group mb-1">
                                                                                     <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>

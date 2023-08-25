@@ -225,3 +225,92 @@
         })
     })
 </script>
+
+<!-- INI UNTUK BAGIAN ADMINISTRASI PERSYARATAN SCRIPTNYA -->
+<script>
+    function kualifikasi_syart_tender() {
+        var url_update_syarat_klasifikasi = $('[name="url_update_syarat_klasifikasi"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var syarat_tender_kualifikasi = $('[name="syarat_tender_kualifikasi"]').val();
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_klasifikasi,
+            data: {
+                id_url_rup: id_url_rup,
+                syarat_tender_kualifikasi: syarat_tender_kualifikasi
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="syarat_tender_kualifikasi"]').val(response['row_rup']['syarat_tender_kualifikasi']);
+            }
+        })
+    }
+
+
+
+    $("#cek_siup").change(function() {
+        if (this.checked) {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_siup = 1;
+            var type = 'sts_checked_siup';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_siup: sts_checked_siup,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_siup"]').val(response['row_syarat_izin_usah_tender']['sts_checked_siup']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_siup = 0;
+            var type = 'sts_checked_siup';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_siup: sts_checked_siup,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_siup"]').val(response['row_syarat_izin_usah_tender']['sts_checked_siup']);
+                    $('[name="sts_masa_berlaku_siup"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_siup']);
+                }
+            })
+        }
+    });
+
+    function pilih_syarat_izin_usaha_tender_siup() {
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var sts_masa_berlaku_siup = $('[name="sts_masa_berlaku_siup"]').val();
+        var type = 'sts_masa_berlaku_siup';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                sts_masa_berlaku_siup: sts_masa_berlaku_siup,
+                type: type
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="sts_masa_berlaku_siup"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_siup']);
+                if (response['row_syarat_izin_usah_tender']['sts_masa_berlaku_siup'] == 1) {
+                    $('[name="tgl_berlaku_siup"]').css('display', 'block');
+                } else {
+                    $('[name="tgl_berlaku_siup"]').css('display', 'none');
+                }
+            }
+        })
+    }
+</script>

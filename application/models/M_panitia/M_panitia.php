@@ -103,4 +103,29 @@ class M_panitia extends CI_Model
         $this->db->where($where);
         $this->db->update('tbl_jadwal_rup', $data);
     }
+
+    // INI UNTUK BAGIAN SYARAT ADMINISTRASI
+    public function update_rup($id_url_rup, $data)
+    {
+        $this->db->where('id_url_rup', $id_url_rup);
+        $this->db->update('tbl_rup', $data);
+    }
+
+    public function get_syarat_izin_usaha_tender($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_izin_rup');
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    
+    public function update_syarat_izin_usaha_tender($id_rup, $data)
+    {
+        $this->db->where('id_rup', $id_rup);
+        $this->db->update('tbl_izin_rup', $data);
+    }
+    
+    
 }

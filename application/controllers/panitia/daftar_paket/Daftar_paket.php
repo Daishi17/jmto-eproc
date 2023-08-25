@@ -42,6 +42,7 @@ class Daftar_paket extends CI_Controller
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$data['jadwal'] = $this->M_panitia->get_jadwal($id_url_rup);
+		$data['syarat_izin_usaha_tender'] = $this->M_panitia->get_syarat_izin_usaha_tender($data['row_rup']['id_rup']);
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
@@ -198,5 +199,51 @@ class Daftar_paket extends CI_Controller
 			$this->M_panitia->update_rup_panitia($id_rup, $data2);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		}
+	}
+
+	public function update_syarat_klasifikasi()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$syarat_tender_kualifikasi = $this->input->post('syarat_tender_kualifikasi');
+		$data = [
+			'syarat_tender_kualifikasi' => $syarat_tender_kualifikasi
+		];
+		$this->M_panitia->update_rup($id_url_rup, $data);
+		$response = [
+			'row_rup' => $this->M_rup->get_row_rup($id_url_rup),
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	public function update_syarat_izin_usaha_tender()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		// bagian siup
+		$sts_checked_siup = $this->input->post('sts_checked_siup');
+		$sts_masa_berlaku_siup = $this->input->post('sts_masa_berlaku_siup');
+		$type = $this->input->post('type');
+		if ($type == 'sts_checked_siup') {
+			$data = [
+				'sts_checked_siup' => $sts_checked_siup,
+			];
+		} else if ($type == 'sts_masa_berlaku_siup') {
+			if ($sts_masa_berlaku_siup == 1) {
+				$data = [
+					'sts_masa_berlaku_siup' => $sts_masa_berlaku_siup
+				];
+			} else {
+				$data = [
+					'sts_masa_berlaku_siup' => $sts_masa_berlaku_siup,
+					'tgl_berlaku_siup' => NULL
+				];
+			}
+		} else {
+		}
+		$this->M_panitia->update_syarat_izin_usaha_tender($row_rup['id_rup'], $data);
+		$response = [
+			'row_syarat_izin_usah_tender' => $this->M_panitia->get_syarat_izin_usaha_tender($row_rup['id_rup'])
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 }

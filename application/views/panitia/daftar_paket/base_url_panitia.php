@@ -16,3 +16,7 @@
 
 <!-- url jadwal -->
 <input type="hidden" name="url_update_jadwal" value="<?= base_url('panitia/daftar_paket/daftar_paket/simpan_jadwal_20baris/') ?>">
+
+<!-- INI UTNUK URL PERSYATAN ADMINISTRASI -->
+<input type="hidden" name="url_update_syarat_klasifikasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_syarat_klasifikasi') ?>">
+<input type="hidden" name="url_update_syarat_izin_usaha_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_syarat_izin_usaha_tender') ?>">
