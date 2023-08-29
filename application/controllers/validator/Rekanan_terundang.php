@@ -265,6 +265,9 @@ class Rekanan_terundang extends CI_Controller
 		$row_siujk = $this->M_Rekanan_tervalidasi->get_row_siujk($id_vendor['id_vendor']);
 		$kbli_siujk = $this->M_Rekanan_tervalidasi->get_result_siujk_kbli($id_vendor['id_vendor']);
 
+		$row_skdp = $this->M_Rekanan_tervalidasi->get_row_skdp($id_vendor['id_vendor']);
+		$kbli_skdp = $this->M_Rekanan_tervalidasi->get_result_skdp_kbli($id_vendor['id_vendor']);
+
 		$row_akta_pendirian = $this->M_Rekanan_tervalidasi->get_row_akta_pendirian($id_vendor['id_vendor']);
 		$row_akta_perubahan = $this->M_Rekanan_tervalidasi->get_row_akta_perubahan($id_vendor['id_vendor']);
 
@@ -282,6 +285,7 @@ class Rekanan_terundang extends CI_Controller
 
 		$row_spt = $this->M_Rekanan_tervalidasi->get_row_spt($id_vendor['id_vendor']);
 		$result_spt = $this->M_Rekanan_tervalidasi->get_result_spt($id_vendor['id_vendor']);
+		$row_izin_lainya = $this->M_Rekanan_tervalidasi->get_row_lainnya($id_vendor['id_vendor']);
 
 		$row_neraca = $this->M_Rekanan_tervalidasi->get_row_neraca($id_vendor['id_vendor']);
 		$result_neraca = $this->M_Rekanan_tervalidasi->get_result_neraca($id_vendor['id_vendor']);
@@ -290,10 +294,12 @@ class Rekanan_terundang extends CI_Controller
 		$result_keuangan = $this->M_Rekanan_tervalidasi->get_result_keuangan($id_vendor['id_vendor']);
 		$response = [
 			'id_vendor' => $id_vendor,
+			'row_lainnya' => $row_izin_lainya,
 			'row_siup' => $row_siup,
 			'row_nib' => $row_nib,
 			'row_sbu' => $row_sbu,
 			'row_siujk' => $row_siujk,
+			'row_skdp' => $row_skdp,
 			'row_akta_pendirian' => $row_akta_pendirian,
 			'row_akta_perubahan' => $row_akta_perubahan,
 			'row_pemilik_manajerial' => $get_row_pemilik_manajerial,
@@ -308,6 +314,7 @@ class Rekanan_terundang extends CI_Controller
 			'kbli_nib' => $kbli_nib,
 			'kbli_sbu' => $kbli_sbu,
 			'kbli_siujk' => $kbli_siujk,
+			'kbli_skdp' => $kbli_skdp,
 			'pemilik' => $get_result_pemilik_manajerial,
 			'pengurus' => $get_result_pengurus_manajerial,
 			'pengalaman' => $result_pengalaman,
@@ -1407,6 +1414,275 @@ class Rekanan_terundang extends CI_Controller
 		redirect($url);
 	}
 	// end siujk
+
+	// skdp
+	function get_kbli_skdp($id_vendor)
+	{
+		$result = $this->M_Rekanan_terundang->gettable_kbli_skdp($id_vendor);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $rs->kode_kbli;
+			$row[] = $rs->nama_kbli;
+			$row[] = $rs->nama_kualifikasi;
+			// nanti main kondisi hitung dokumen dimari
+			if ($rs->sts_kbli_skdp == 0 || $rs->sts_kbli_skdp == null) {
+				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
+			} else if ($rs->sts_kbli_skdp == 1) {
+				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
+			} else if ($rs->sts_kbli_skdp == 2) {
+				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
+			} else if ($rs->sts_kbli_skdp == 3) {
+				$row[] = '<small><span class="badge bg-warning text-white">Revisi</span></small>';
+			}
+			$row[] = $rs->nama_validator;
+			if ($rs->sts_kbli_skdp == 1) {
+				$row[] = '<center><button disabled type="button" class="btn btn-success btn-block btn-sm shadow-lg" onClick="Valid_skdp(' . "'" . $rs->id_url_kbli_skdp . "' ,'terima_kbli'" . ')"> <i class="fa-solid fa-square-check px-1"></i> Valid</button disabled> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="NonValid_skdp(' . "'" . $rs->id_url_kbli_skdp . "','tolak_kbli'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
+			} else {
+				$row[] = '<center><a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="Valid_skdp(' . "'" . $rs->id_url_kbli_skdp . "' ,'terima_kbli'" . ')"> <i class="fa-solid fa-square-check px-1"></i> Valid</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="NonValid_skdp(' . "'" . $rs->id_url_kbli_skdp . "','tolak_kbli'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
+			}
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_Rekanan_terundang->count_all_kbli_skdp($id_vendor),
+			"recordsFiltered" => $this->M_Rekanan_terundang->count_filtered_kbli_skdp($id_vendor),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+	public function encryption_skdp($id_url)
+	{
+		$type = $this->input->post('type');
+		$get_row_enkrip = $this->M_Rekanan_terundang->get_row_skdp_url($id_url);
+		$secret_token = $this->input->post('token_dokumen');
+
+		$chiper = "AES-128-ECB";
+		$secret = $get_row_enkrip['token_dokumen'];
+		if ($secret_token == $secret) {
+			if ($type == 'dekrip') {
+				$encryption_string = openssl_decrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+				$data = [
+					'sts_token_dokumen' => 2,
+					'file_dokumen' => $encryption_string,
+				];
+			} else {
+				$encryption_string = openssl_encrypt($get_row_enkrip['file_dokumen'], $chiper, $secret);
+				$data = [
+					'sts_token_dokumen' => 1,
+					'file_dokumen' => $encryption_string,
+				];
+			}
+			$where = [
+				'id_url' => $id_url
+			];
+			$response = [
+				'message' => 'success'
+			];
+
+			$this->M_Rekanan_terundang->update_enkrip_skdp($where, $data);
+		} else {
+			$response = [
+				'maaf' => 'Gagal!'
+			];
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	function validation_skdp()
+	{
+		$type = $this->input->post('type');
+		$type_kbli = $this->input->post('type_kbli');
+		$alasan_validator = $this->input->post('alasan_validator');
+		$id_url = $this->input->post('id_url_skdp');
+
+		$nm_validator = $this->session->userdata('nama_pegawai');
+
+		if (!$type_kbli) {
+
+			$id_vendor = $this->M_Rekanan_terundang->get_row_skdp_url($id_url);
+			$get_vendor = $id_vendor['id_vendor'];
+			// 1 itu sesuai 2 itu tidak sesuai 3 itu revisi
+			if ($type == 'valid') {
+				$data = [
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i')
+				];
+				$where = [
+					'id_url' => $id_url
+				];
+
+				$data_vendor = [
+					'sts_dokumen_cek' => 1
+				];
+				$where_vendor = [
+					'id_vendor' => $get_vendor
+				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'SKDP',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_skdp'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$message = "Dokumen SKDP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
+				$type_email = 'SKDP';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			} else {
+				$data = [
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 3,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i')
+				];
+				$where = [
+					'id_url' => $id_url
+				];
+				$data_vendor = [
+					'sts_dokumen_cek' => 3
+				];
+				$where_vendor = [
+					'id_vendor' => $get_vendor
+				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'SKDP',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_skdp'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 3,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$message = "Dokumen SKDP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SKDP Anda";
+				$type_email = 'SKDP';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			}
+			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
+			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
+			$data = $this->M_Rekanan_terundang->update_enkrip_skdp($where, $data);
+		} else {
+			$id_vendor = $this->M_Rekanan_terundang->get_row_skdp_kbli_url($id_url);
+			$get_vendor = $id_vendor['id_vendor'];
+			if ($type_kbli == 'terima_kbli') {
+				$data = [
+					'alasan_validator' => $alasan_validator,
+					'sts_kbli_skdp' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i')
+				];
+				$where = [
+					'id_url_kbli_skdp' => $id_url
+				];
+				$data_vendor = [
+					'sts_dokumen_cek' => 1
+				];
+				$where_vendor = [
+					'id_vendor' => $get_vendor
+				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_skdp'],
+					'jenis_dokumen' => 'SKDP-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_skdp'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$type_email = 'KBLI-SKDP';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			} else {
+				$data = [
+					'alasan_validator' => $alasan_validator,
+					'sts_kbli_skdp' => 3,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i')
+				];
+				$where = [
+					'id_url_kbli_skdp' => $id_url
+				];
+				$data_vendor = [
+					'sts_dokumen_cek' => 3
+				];
+				$where_vendor = [
+					'id_vendor' => $get_vendor
+				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_skdp'],
+					'jenis_dokumen' => 'SKDP-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_skdp'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 3,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$type_email = 'KBLI-SKDP';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen skdp";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			}
+			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
+			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
+			$data = $this->M_Rekanan_terundang->update_enkrip_kbli_skdp($where, $data);
+		}
+
+		if ($data) {
+			$response = [
+				'message' => 'Berhasil!'
+			];
+		} else {
+			$response = [
+				'message' => 'Gagal!'
+			];
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	public function url_download_skdp($id_url)
+	{
+		if ($id_url == '') {
+			// tendang not found
+		}
+		$get_row_enkrip = $this->M_Rekanan_terundang->get_row_skdp_url($id_url);
+		$id_vendor = $get_row_enkrip['id_vendor'];
+		$row_vendor = $this->M_Rekanan_terundang->get_id_vendor($id_vendor);
+		$date = date('Y');
+		// $nama_file = $get_row_enkrip['nomor_surat'];
+		// $file_dokumen = $get_row_enkrip['file_dokumen'];
+
+		// Locate.
+		$file_name = $get_row_enkrip['file_dokumen'];
+		$file_url = $this->url_dokumen_vendor . 'file_vms/' . $row_vendor['nama_usaha'] . '/SKDP-' . $date . '/' . $get_row_enkrip['file_dokumen'];
+
+		$url = $this->url_dokumen_vendor . 'url_download_skdp/' . $id_url;
+
+		// Configure.
+		// header('Content-Type: application/octet-stream');
+		// header("Content-Transfer-Encoding: Binary");
+		// header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+
+		// Actual download.
+		redirect($url);
+	}
+	// end skdp
 
 	// AKTA PENDIRIAN
 	public function encryption_akta_pendirian($id_url)

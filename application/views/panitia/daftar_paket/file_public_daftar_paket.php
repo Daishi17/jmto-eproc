@@ -313,4 +313,486 @@
             }
         })
     }
+    // INI UNTUK SYARAT KBLI
+    $(document).ready(function() {
+        $('#table_kbli_syarat_tender').DataTable({
+            info: true,
+            ordering: true,
+            paging: true
+        });
+    });
+
+    function simpan_syarat_kbli() {
+        var url_get_tambah_syarat_kbli = $('[name="url_get_tambah_syarat_kbli"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var nama_kbli = $('[name="nama_kbli"]').val();
+        if (nama_kbli == '') {
+            Swal.fire('Anda Belum Memilih Kbli!', '', 'warning')
+        } else {
+            $.ajax({
+                type: "POST",
+                url: url_get_tambah_syarat_kbli,
+                data: {
+                    id_url_rup: id_url_rup,
+                    nama_kbli: nama_kbli,
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    if (response['error']) {
+                        var responkbli = '' + response['error']['id_kbli'] + '';
+                        Swal.fire(responkbli, '', 'warning')
+                        get_syarat_kbli()
+                        var nama_kbli = $('[name="nama_kbli"]').val('');
+                    } else {
+                        Swal.fire('Data Berhasil Di Tambah!', '', 'success')
+                        get_syarat_kbli()
+                        var nama_kbli = $('[name="nama_kbli"]').val('');
+                    }
+                }
+            })
+        }
+    }
+    get_syarat_kbli()
+
+    function get_syarat_kbli() {
+        var url_get_syarat_kbli_tender = $('[name="url_get_syarat_kbli_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var id_kbli = $('[name="id_kbli"]').val();
+        $.ajax({
+            type: "POST",
+            url: url_get_syarat_kbli_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                id_kbli: id_kbli,
+            },
+            dataType: "JSON",
+            success: function(response) {
+                // get sumber dana
+                var html = '';
+                var i;
+                for (i = 0; i < response['result_syarat_tender_kbli'].length; i++) {
+                    html += '<tr>' +
+                        '<td>' + response['result_syarat_tender_kbli'][i].nama_kbli + '</td>' +
+                        '<td><a href="javascript:;" onclick="hapus_kbli_syarat(' + response['result_syarat_tender_kbli'][i].id_syarat_kbli_tender + ')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus</a></td>' +
+                        '</tr>'
+                }
+                $('#result_tbl_kbli_syarat_tender').html(html);
+            }
+        })
+    }
+
+    function hapus_kbli_syarat(id_syarat_kbli_tender) {
+        var url_hapus_syarat_kbli = $('[name="url_hapus_syarat_kbli"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Menhapus',
+            text: 'Syarat Kbli Ini ??',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Jangan Hapus!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_syarat_kbli,
+                    data: {
+                        id_syarat_kbli_tender: id_syarat_kbli_tender,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Data Berhasil Di Hapus!', '', 'success')
+                        get_syarat_kbli()
+                    }
+                })
+
+            }
+        })
+    }
+
+    // INI UNTUK SYARAT SBU
+    $(document).ready(function() {
+        $('#table_sbu_syarat_tender').DataTable({
+            info: true,
+            ordering: true,
+            paging: true
+        });
+    });
+
+    function simpan_syarat_sbu() {
+        var url_get_tambah_syarat_sbu = $('[name="url_get_tambah_syarat_sbu"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var nama_sbu = $('[name="nama_sbu"]').val();
+        if (nama_sbu == '') {
+            Swal.fire('Anda Belum Memilih sbu!', '', 'warning')
+        } else {
+            $.ajax({
+                type: "POST",
+                url: url_get_tambah_syarat_sbu,
+                data: {
+                    id_url_rup: id_url_rup,
+                    nama_sbu: nama_sbu,
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    if (response['error']) {
+                        var responsbu = '' + response['error']['id_sbu'] + '';
+                        Swal.fire(responsbu, '', 'warning')
+                        get_syarat_sbu()
+                        var nama_sbu = $('[name="nama_sbu"]').val('');
+                    } else {
+                        Swal.fire('Data Berhasil Di Tambah!', '', 'success')
+                        get_syarat_sbu()
+                        var nama_sbu = $('[name="nama_sbu"]').val('');
+                    }
+                }
+            })
+        }
+    }
+    get_syarat_sbu()
+
+    function get_syarat_sbu() {
+        var url_get_syarat_sbu_tender = $('[name="url_get_syarat_sbu_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var id_sbu = $('[name="id_sbu"]').val();
+        $.ajax({
+            type: "POST",
+            url: url_get_syarat_sbu_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                id_sbu: id_sbu,
+            },
+            dataType: "JSON",
+            success: function(response) {
+                // get sumber dana
+                var html = '';
+                var i;
+                for (i = 0; i < response['result_syarat_tender_sbu'].length; i++) {
+                    html += '<tr>' +
+                        '<td>' + response['result_syarat_tender_sbu'][i].nama_sbu + '</td>' +
+                        '<td><a href="javascript:;" onclick="hapus_sbu_syarat(' + response['result_syarat_tender_sbu'][i].id_syarat_sbu_tender + ')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus</a></td>' +
+                        '</tr>'
+                }
+                $('#result_tbl_sbu_syarat_tender').html(html);
+            }
+        })
+    }
+
+    function hapus_sbu_syarat(id_syarat_sbu_tender) {
+        var url_hapus_syarat_sbu = $('[name="url_hapus_syarat_sbu"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Menhapus',
+            text: 'Syarat sbu Ini ??',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Jangan Hapus!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_syarat_sbu,
+                    data: {
+                        id_syarat_sbu_tender: id_syarat_sbu_tender,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Data Berhasil Di Hapus!', '', 'success')
+                        get_syarat_sbu()
+                    }
+                })
+
+            }
+        })
+    }
+
+    // INI UNTUK SYARAT TEKNIS ADMINISTRASI
+    // pengalaman pekerjaan
+    $("#sts_checked_pengalaman_pekerjaan").change(function() {
+        if (this.checked) {
+            var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_pengalaman_pekerjaan = 1;
+            var type = 'sts_checked_pengalaman_pekerjaan';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_teknis_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_pengalaman_pekerjaan: sts_checked_pengalaman_pekerjaan,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_pengalaman_pekerjaan"]').val(response['row_syarat_izin_teknis_tender']['sts_checked_pengalaman_pekerjaan']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_pengalaman_pekerjaan = 0;
+            var type = 'sts_checked_pengalaman_pekerjaan';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_teknis_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_pengalaman_pekerjaan: sts_checked_pengalaman_pekerjaan,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_pengalaman_pekerjaan"]').val(response['row_syarat_izin_teknis_tender']['sts_checked_pengalaman_pekerjaan']);
+                }
+            })
+        }
+    });
+    // spt
+    $("#sts_checked_spt").change(function() {
+        if (this.checked) {
+            var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_spt = 1;
+            var type = 'sts_checked_spt';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_teknis_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_spt: sts_checked_spt,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_spt"]').val(response['row_syarat_izin_teknis_tender']['sts_checked_spt']);
+                    $('[name="tahun_lapor_spt"]').val(response['row_syarat_izin_teknis_tender']['tahun_lapor_spt']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_spt = 0;
+            var type = 'sts_checked_spt';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_teknis_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_spt: sts_checked_spt,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_spt"]').val(response['row_syarat_izin_teknis_tender']['sts_checked_spt']);
+                    $('[name="tahun_lapor_spt"]').val(2020);
+                }
+            })
+        }
+    });
+
+    function pilih_tahun_lapor_spt() {
+        var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tahun_lapor_spt = $('[name="tahun_lapor_spt"]').val();
+        var type = 'tahun_lapor_spt';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_teknis_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tahun_lapor_spt: tahun_lapor_spt,
+                type: type
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="tahun_lapor_spt"]').val(response['row_syarat_izin_teknis_tender']['tahun_lapor_spt']);
+            }
+        })
+    }
+
+    // Laporan Keuangan
+    $("#sts_checked_laporan_keuangan").change(function() {
+        if (this.checked) {
+            var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_laporan_keuangan = 1;
+            var type = 'sts_checked_laporan_keuangan';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_teknis_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_laporan_keuangan: sts_checked_laporan_keuangan,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_laporan_keuangan"]').val(response['row_syarat_izin_teknis_tender']['sts_checked_laporan_keuangan']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_laporan_keuangan = 0;
+            var type = 'sts_checked_laporan_keuangan';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_teknis_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_laporan_keuangan: sts_checked_laporan_keuangan,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_laporan_keuangan"]').val(response['row_syarat_izin_teknis_tender']['sts_checked_laporan_keuangan']);
+                }
+            })
+        }
+    });
+
+    function pilih_sts_audit_laporan_keuangan() {
+        var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var sts_audit_laporan_keuangan = $('[name="sts_audit_laporan_keuangan"]').val();
+        var type = 'sts_audit_laporan_keuangan';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_teknis_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                sts_audit_laporan_keuangan: sts_audit_laporan_keuangan,
+                type: type
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="sts_audit_laporan_keuangan"]').val(response['row_syarat_izin_teknis_tender']['sts_audit_laporan_keuangan']);
+            }
+        })
+    }
+
+    function pilih_tahun_awal_laporan_keuangan() {
+        var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tahun_awal_laporan_keuangan = $('[name="tahun_awal_laporan_keuangan"]').val();
+        var type = 'tahun_awal_laporan_keuangan';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_teknis_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tahun_awal_laporan_keuangan: tahun_awal_laporan_keuangan,
+                type: type
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="tahun_awal_laporan_keuangan"]').val(response['row_syarat_izin_teknis_tender']['tahun_awal_laporan_keuangan']);
+            }
+        })
+    }
+
+    function pilih_tahun_akhir_laporan_keuangan() {
+        var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tahun_akhir_laporan_keuangan = $('[name="tahun_akhir_laporan_keuangan"]').val();
+        var type = 'tahun_akhir_laporan_keuangan';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_teknis_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tahun_akhir_laporan_keuangan: tahun_akhir_laporan_keuangan,
+                type: type
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="tahun_akhir_laporan_keuangan"]').val(response['row_syarat_izin_teknis_tender']['tahun_akhir_laporan_keuangan']);
+            }
+        })
+    }
+    
+        // Neraca Keuangan
+        $("#sts_checked_neraca_keuangan").change(function() {
+        if (this.checked) {
+            var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_neraca_keuangan = 1;
+            var type = 'sts_checked_neraca_keuangan';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_teknis_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_neraca_keuangan: sts_checked_neraca_keuangan,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_neraca_keuangan"]').val(response['row_syarat_izin_teknis_tender']['sts_checked_neraca_keuangan']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_neraca_keuangan = 0;
+            var type = 'sts_checked_neraca_keuangan';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_teknis_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_neraca_keuangan: sts_checked_neraca_keuangan,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_neraca_keuangan"]').val(response['row_syarat_izin_teknis_tender']['sts_checked_neraca_keuangan']);
+                }
+            })
+        }
+    });
+
+    function pilih_tahun_awal_neraca_keuangan() {
+        var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tahun_awal_neraca_keuangan = $('[name="tahun_awal_neraca_keuangan"]').val();
+        var type = 'tahun_awal_neraca_keuangan';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_teknis_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tahun_awal_neraca_keuangan: tahun_awal_neraca_keuangan,
+                type: type
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="tahun_awal_neraca_keuangan"]').val(response['row_syarat_izin_teknis_tender']['tahun_awal_neraca_keuangan']);
+            }
+        })
+    }
+
+    function pilih_tahun_akhir_neraca_keuangan() {
+        var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tahun_akhir_neraca_keuangan = $('[name="tahun_akhir_neraca_keuangan"]').val();
+        var type = 'tahun_akhir_neraca_keuangan';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_teknis_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tahun_akhir_neraca_keuangan: tahun_akhir_neraca_keuangan,
+                type: type
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="tahun_akhir_neraca_keuangan"]').val(response['row_syarat_izin_teknis_tender']['tahun_akhir_neraca_keuangan']);
+            }
+        })
+    }
+    
 </script>

@@ -665,197 +665,198 @@
                         </a>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card border-dark shadow-lg">
-                                        <div class="card-header border-dark bd-blue-700 d-flex justify-content-between align-items-center">
-                                            <div class="flex-grow-1 bd-highlight">
-                                                <span class="text-white">
-                                                    <i class="fa-regular fa-rectangle-list px-1"></i>
-                                                    <small><strong>Form Data - Persyaratan Administrasi & Teknis Pengadaan</strong></small>
-                                                </span>
-                                            </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card border-dark shadow-lg">
+                                    <div class="card-header border-dark bd-blue-700 d-flex justify-content-between align-items-center">
+                                        <div class="flex-grow-1 bd-highlight">
+                                            <span class="text-white">
+                                                <i class="fa-regular fa-rectangle-list px-1"></i>
+                                                <small><strong>Form Data - Persyaratan Administrasi & Teknis Pengadaan</strong></small>
+                                            </span>
                                         </div>
-                                        <div class="card-body">
-                                            <table class="table table-bordered table-sm shadow-lg">
-                                                <tr>
-                                                    <th><small>Kualifikasi Usaha</small></th>
-                                                    <td>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
-                                                            <select name="syarat_tender_kualifikasi" class="form-select form-select-sm" onchange="kualifikasi_syart_tender()" aria-label="Default select example">
-                                                                <?php if ($row_rup['syarat_tender_kualifikasi']) { ?>
-                                                                    <option value="<?= $row_rup['syarat_tender_kualifikasi'] ?>"><?= $row_rup['syarat_tender_kualifikasi'] ?></option>
-                                                                <?php } else { ?>
-                                                                    <option selected disabled value="">Pilih Kualifikasi...</option>
-                                                                <?php } ?>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-bordered table-sm shadow-lg">
+                                            <tr>
+                                                <th><small>Kualifikasi Usaha</small></th>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
+                                                        <select name="syarat_tender_kualifikasi" class="form-select form-select-sm" onchange="kualifikasi_syart_tender()" aria-label="Default select example">
+                                                            <?php if ($row_rup['syarat_tender_kualifikasi']) { ?>
+                                                                <option value="<?= $row_rup['syarat_tender_kualifikasi'] ?>"><?= $row_rup['syarat_tender_kualifikasi'] ?></option>
+                                                            <?php } else { ?>
+                                                                <option selected disabled value="">Pilih Kualifikasi...</option>
+                                                            <?php } ?>
 
-                                                                <option value="Besar">Besar</option>
-                                                                <option value="Minimal Menengah">Minimal Menengah</option>
-                                                                <option value="Maksimal Menengah">Maksimal Menengah</option>
-                                                                <option value="Kecil/UMKM">Kecil/UMKM</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <div class="card border-dark shadow-lg">
-                                                            <div class="card-header border-dark bg-warning d-flex justify-content-between align-items-center">
-                                                                <div class="flex-grow-1 text-center bd-highlight">
-                                                                    <span class="text-dark">
-                                                                        <i class="fa-regular fa-rectangle-list px-1"></i>
-                                                                        <small><strong>Persyaratan Administrasi / Legalitas</strong></small>
-                                                                    </span>
-                                                                </div>
+                                                            <option value="Besar">Besar</option>
+                                                            <option value="Minimal Menengah">Minimal Menengah</option>
+                                                            <option value="Maksimal Menengah">Maksimal Menengah</option>
+                                                            <option value="Kecil/UMKM">Kecil/UMKM</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="card border-dark shadow-lg">
+                                                        <div class="card-header border-dark bg-warning d-flex justify-content-between align-items-center">
+                                                            <div class="flex-grow-1 text-center bd-highlight">
+                                                                <span class="text-dark">
+                                                                    <i class="fa-regular fa-rectangle-list px-1"></i>
+                                                                    <small><strong>Persyaratan Administrasi / Legalitas</strong></small>
+                                                                </span>
                                                             </div>
-                                                            <div class="card-body">
-                                                                <table class="table table-sm table-bordered table-sm shadow-lg">
-                                                                    <thead class="bg-secondary text-white text-center">
-                                                                        <tr>
-                                                                            <th colspan="2"><small>Izin Usaha</small></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <thead class="bg-light text-center">
-                                                                        <tr>
-                                                                            <th><small>Keterangan Jenis Izin Usaha</small></th>
-                                                                            <th><small>Tahun Berlaku / Seumur Hidup</small></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="input-group mb-1">
-                                                                                    <div class="input-group-text">
-                                                                                        <?php if ($syarat_izin_usaha_tender['sts_checked_siup'] == 1) { ?>
-                                                                                            <input id="cek_siup" checked class="form-check-input mt-0" value="<?= $syarat_izin_usaha_tender['sts_checked_siup'] ?>" name="sts_checked_siup" type="checkbox">
-                                                                                        <?php } else { ?>
-                                                                                            <input id="cek_siup" name="sts_checked_siup" class="form-check-input mt-0" type="checkbox">
-                                                                                        <?php  }  ?>
-                                                                                    </div>
-                                                                                    <input type="text" class="form-control form-control-sm" value="Surat Izin Usaha Perdagangan (SIUP)" readonly>
-                                                                                </div>
-                                                                                <div class="input-group mb-1">
-                                                                                    <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox">
-                                                                                    </div>
-                                                                                    <input type="text" class="form-control form-control-sm" value="Nomor Induk Berusaha (NIB/TDP)" readonly>
-                                                                                </div>
-                                                                                <div class="input-group mb-1">
-                                                                                    <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox">
-                                                                                    </div>
-                                                                                    <input type="text" class="form-control form-control-sm" value="Sertifikat Badan Usaha (SBU)" readonly>
-                                                                                </div>
-                                                                                <div class="input-group mb-1">
-                                                                                    <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox">
-                                                                                    </div>
-                                                                                    <input type="text" class="form-control form-control-sm" value="Surat Izin Jasa Konstruksi (SIUJK)" readonly>
-                                                                                </div>
-                                                                                <div class="input-group mb-1">
-                                                                                    <div class="input-group-text">
-                                                                                        <input class="form-check-input mt-0" type="checkbox">
-                                                                                    </div>
-                                                                                    <input type="text" class="form-control form-control-sm" value="Surat Keterangan Domisili Perusahan (SKDP)" readonly>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="input-group mb-1">
-                                                                                    <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                    <select onchange="pilih_syarat_izin_usaha_tender_siup()" name="sts_masa_berlaku_siup" class="form-select form-select-sm" aria-label="Default select example">
-                                                                                        <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup']) { ?>
-                                                                                            <option value="<?= $syarat_izin_usaha_tender['sts_masa_berlaku_siup'] ?>">
-                                                                                                <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup'] == 1) { ?>
-                                                                                                    Tanggal
-                                                                                                <?php } else { ?>
-                                                                                                    Seumur Hidup
-                                                                                                <?php } ?>
-                                                                                            </option>
-                                                                                        <?php } else { ?>
-                                                                                            <option selected disabled value="">Pilih...</option>
-                                                                                        <?php } ?>
-                                                                                        <option value="2">Seumur Hidup</option>
-                                                                                        <option value="1">Tanggal</option>
-                                                                                    </select>
-                                                                                    <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup'] == 1) { ?>
-                                                                                        <input type="date" name="tgl_berlaku_siup" class="form-control form-control-sm">
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table table-sm table-bordered table-sm shadow-lg">
+                                                                <thead class="bg-secondary text-white text-center">
+                                                                    <tr>
+                                                                        <th colspan="2"><small>Izin Usaha</small></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <thead class="bg-light text-center">
+                                                                    <tr>
+                                                                        <th><small>Keterangan Jenis Izin Usaha</small></th>
+                                                                        <th><small>Tahun Berlaku / Seumur Hidup</small></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="input-group mb-1">
+                                                                                <div class="input-group-text">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_checked_siup'] == 1) { ?>
+                                                                                        <input id="cek_siup" checked class="form-check-input mt-0" value="<?= $syarat_izin_usaha_tender['sts_checked_siup'] ?>" name="sts_checked_siup" type="checkbox">
                                                                                     <?php } else { ?>
-                                                                                        <input type="date" style="display: none;" name="tgl_berlaku_siup" class="form-control form-control-sm">
+                                                                                        <input id="cek_siup" name="sts_checked_siup" class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php  }  ?>
+                                                                                </div>
+                                                                                <input type="text" class="form-control form-control-sm" value="Surat Izin Usaha Perdagangan (SIUP)" readonly>
+                                                                            </div>
+                                                                            <div class="input-group mb-1">
+                                                                                <div class="input-group-text">
+                                                                                    <input class="form-check-input mt-0" type="checkbox">
+                                                                                </div>
+                                                                                <input type="text" class="form-control form-control-sm" value="Nomor Induk Berusaha (NIB/TDP)" readonly>
+                                                                            </div>
+                                                                            <div class="input-group mb-1">
+                                                                                <div class="input-group-text">
+                                                                                    <input class="form-check-input mt-0" type="checkbox">
+                                                                                </div>
+                                                                                <input type="text" class="form-control form-control-sm" value="Sertifikat Badan Usaha (SBU)" readonly>
+                                                                            </div>
+                                                                            <div class="input-group mb-1">
+                                                                                <div class="input-group-text">
+                                                                                    <input class="form-check-input mt-0" type="checkbox">
+                                                                                </div>
+                                                                                <input type="text" class="form-control form-control-sm" value="Surat Izin Jasa Konstruksi (SIUJK)" readonly>
+                                                                            </div>
+                                                                            <div class="input-group mb-1">
+                                                                                <div class="input-group-text">
+                                                                                    <input class="form-check-input mt-0" type="checkbox">
+                                                                                </div>
+                                                                                <input type="text" class="form-control form-control-sm" value="Surat Keterangan Domisili Perusahan (SKDP)" readonly>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-group mb-1">
+                                                                                <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                                                <select onchange="pilih_syarat_izin_usaha_tender_siup()" name="sts_masa_berlaku_siup" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup']) { ?>
+                                                                                        <option value="<?= $syarat_izin_usaha_tender['sts_masa_berlaku_siup'] ?>">
+                                                                                            <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup'] == 1) { ?>
+                                                                                                Tanggal
+                                                                                            <?php } else { ?>
+                                                                                                Seumur Hidup
+                                                                                            <?php } ?>
+                                                                                        </option>
+                                                                                    <?php } else { ?>
+                                                                                        <option selected disabled value="">Pilih...</option>
                                                                                     <?php } ?>
+                                                                                    <option value="2">Seumur Hidup</option>
+                                                                                    <option value="1">Tanggal</option>
+                                                                                </select>
+                                                                                <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup'] == 1) { ?>
+                                                                                    <input type="date" name="tgl_berlaku_siup" class="form-control form-control-sm">
+                                                                                <?php } else { ?>
+                                                                                    <input type="date" style="display: none;" name="tgl_berlaku_siup" class="form-control form-control-sm">
+                                                                                <?php } ?>
 
-                                                                                </div>
-                                                                                <div class="input-group mb-1">
-                                                                                    <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                        <option selected disabled value="">Pilih...</option>
-                                                                                        <option value="1">Seumur Hidup</option>
-                                                                                        <option value="2">Tanggal</option>
-                                                                                    </select>
-                                                                                    <input type="date" class="form-control form-control-sm">
-                                                                                </div>
-                                                                                <div class="input-group mb-1">
-                                                                                    <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                        <option selected disabled value="">Pilih...</option>
-                                                                                        <option value="1">Seumur Hidup</option>
-                                                                                        <option value="2">Tanggal</option>
-                                                                                    </select>
-                                                                                    <input type="date" class="form-control form-control-sm">
-                                                                                </div>
-                                                                                <div class="input-group mb-1">
-                                                                                    <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                        <option selected disabled value="">Pilih...</option>
-                                                                                        <option value="1">Seumur Hidup</option>
-                                                                                        <option value="2">Tanggal</option>
-                                                                                    </select>
-                                                                                    <input type="date" class="form-control form-control-sm">
-                                                                                </div>
-                                                                                <div class="input-group mb-1">
-                                                                                    <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                    <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                        <option selected disabled value="">Pilih...</option>
-                                                                                        <option value="1">Seumur Hidup</option>
-                                                                                        <option value="2">Tanggal</option>
-                                                                                    </select>
-                                                                                    <input type="date" class="form-control form-control-sm">
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                                <table class="table table-sm table-bordered table-sm shadow-lg">
-                                                                    <thead class="bg-secondary text-white text-center">
-                                                                        <tr>
-                                                                            <th colspan="3"><small>Klasifikasi Buku Lapang Usaha Indonesia (KBLI)</small></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td class="col-sm-10">
-                                                                                <div class="input-group">
-                                                                                    <span class="input-group-text"><small>Jenis KBLI</small></span>
-                                                                                    <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
-                                                                                    <input class="form-control form-control-sm" list="datalistOptions" placeholder="Pilih...">
-                                                                                    <datalist id="datalistOptions">
-                                                                                        <option value="1001 || Peralatan Komputer dan Lainnya">
-                                                                                        <option value="1002 || Pemrograman dan Teknologi Informasi Lainnya">
-                                                                                    </datalist>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td class="col-sm-2 text-center">
-                                                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                                                    <i class="fa-solid fa-square-plus"></i>
-                                                                                    Tambah KBLI
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="3">
-                                                                                <table class="table table-sm table-bordered table-sm shadow-lg">
+                                                                            </div>
+                                                                            <div class="input-group mb-1">
+                                                                                <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <option selected disabled value="">Pilih...</option>
+                                                                                    <option value="1">Seumur Hidup</option>
+                                                                                    <option value="2">Tanggal</option>
+                                                                                </select>
+                                                                                <input type="date" class="form-control form-control-sm">
+                                                                            </div>
+                                                                            <div class="input-group mb-1">
+                                                                                <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <option selected disabled value="">Pilih...</option>
+                                                                                    <option value="1">Seumur Hidup</option>
+                                                                                    <option value="2">Tanggal</option>
+                                                                                </select>
+                                                                                <input type="date" class="form-control form-control-sm">
+                                                                            </div>
+                                                                            <div class="input-group mb-1">
+                                                                                <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <option selected disabled value="">Pilih...</option>
+                                                                                    <option value="1">Seumur Hidup</option>
+                                                                                    <option value="2">Tanggal</option>
+                                                                                </select>
+                                                                                <input type="date" class="form-control form-control-sm">
+                                                                            </div>
+                                                                            <div class="input-group mb-1">
+                                                                                <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <option selected disabled value="">Pilih...</option>
+                                                                                    <option value="1">Seumur Hidup</option>
+                                                                                    <option value="2">Tanggal</option>
+                                                                                </select>
+                                                                                <input type="date" class="form-control form-control-sm">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table class="table table-sm table-bordered table-sm shadow-lg">
+                                                                <thead class="bg-secondary text-white text-center">
+                                                                    <tr>
+                                                                        <th colspan="3"><small>Klasifikasi Buku Lapang Usaha Indonesia (KBLI)</small></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="col-sm-10">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text"><small>Jenis KBLI</small></span>
+                                                                                <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
+                                                                                <input class="form-control form-control-sm" name="nama_kbli" list="datalistOptions" placeholder="Pilih...">
+                                                                                <datalist id="datalistOptions">
+                                                                                    <?php foreach ($result_kbli as $key => $value) { ?>
+                                                                                        <option value="<?= $value['nama_kbli'] ?>"><?= $value['kode_kbli'] ?></option>
+                                                                                    <?php } ?>
+                                                                                </datalist>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="col-sm-2 text-center">
+                                                                            <a onclick="simpan_syarat_kbli()" href="javascript:;" class="btn btn-sm btn-primary">
+                                                                                <i class="fa-solid fa-square-plus"></i>
+                                                                                Tambah KBLI
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="3">
+                                                                            <div style="margin: 10px;">
+                                                                                <table id="table_kbli_syarat_tender" class="table table-bordered table-sm shadow-lg">
                                                                                     <thead class="bg-info">
                                                                                         <tr>
                                                                                             <th><small>Keterangan Jenis KBLI</small></th>
@@ -866,40 +867,46 @@
                                                                                             </th>
                                                                                         </tr>
                                                                                     </thead>
+                                                                                    <tbody id="result_tbl_kbli_syarat_tender">
+
+                                                                                    </tbody>
                                                                                 </table>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                                <table class="table table-sm table-bordered table-sm shadow-lg">
-                                                                    <thead class="bg-secondary text-white text-center">
-                                                                        <tr>
-                                                                            <th colspan="3"><small>Sertifikat Badan Usaha (SBU)</small></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td class="col-sm-10">
-                                                                                <div class="input-group">
-                                                                                    <span class="input-group-text"><small>Jenis SBU</small></span>
-                                                                                    <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
-                                                                                    <input class="form-control form-control-sm" list="datalistOptions" placeholder="Pilih...">
-                                                                                    <datalist id="datalistOptions">
-                                                                                        <option value="1001 || Peralatan Komputer dan Lainnya">
-                                                                                        <option value="1002 || Pemrograman dan Teknologi Informasi Lainnya">
-                                                                                    </datalist>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td class="col-sm-2 text-center">
-                                                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                                                    <i class="fa-solid fa-square-plus"></i>
-                                                                                    Tambah SBU
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="3">
-                                                                                <table class="table table-sm table-bordered table-sm shadow-lg">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table class="table table-sm table-bordered table-sm shadow-lg">
+                                                                <thead class="bg-secondary text-white text-center">
+                                                                    <tr>
+                                                                        <th colspan="3"><small>Sertifikat Badan Usaha (SBU)</small></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="col-sm-10">
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text"><small>Jenis SBU</small></span>
+                                                                                <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
+                                                                                <input class="form-control form-control-sm" name="nama_sbu" list="datalistOptionsSbu" placeholder="Pilih...">
+                                                                                <datalist id="datalistOptionsSbu">
+                                                                                    <?php foreach ($result_sbu as $key => $value) { ?>
+                                                                                        <option value="<?= $value['nama_sbu'] ?>"><?= $value['kode_sbu'] ?></option>
+                                                                                    <?php } ?>
+                                                                                </datalist>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="col-sm-2 text-center">
+                                                                            <a onclick="simpan_syarat_sbu()" href="javascript:;" class="btn btn-sm btn-primary">
+                                                                                <i class="fa-solid fa-square-plus"></i>
+                                                                                Tambah SBU
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="3">
+                                                                            <div style="margin: 10px;">
+                                                                                <table id="table_sbu_syarat_tender" class="table table-bordered table-sm shadow-lg">
                                                                                     <thead class="bg-info">
                                                                                         <tr>
                                                                                             <th><small>Keterangan Jenis SBU</small></th>
@@ -910,199 +917,299 @@
                                                                                             </th>
                                                                                         </tr>
                                                                                     </thead>
+                                                                                    <tbody id="result_tbl_sbu_syarat_tender">
+
+                                                                                    </tbody>
                                                                                 </table>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="card border-dark shadow-lg">
+                                                        <div class="card-header border-dark bg-warning d-flex justify-content-between align-items-center">
+                                                            <div class="flex-grow-1 text-center bd-highlight">
+                                                                <span class="text-dark">
+                                                                    <i class="fa-regular fa-rectangle-list px-1"></i>
+                                                                    <small><strong>Persyaratan Teknis</strong></small>
+                                                                </span>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <div class="card border-dark shadow-lg">
-                                                            <div class="card-header border-dark bg-warning d-flex justify-content-between align-items-center">
-                                                                <div class="flex-grow-1 text-center bd-highlight">
-                                                                    <span class="text-dark">
-                                                                        <i class="fa-regular fa-rectangle-list px-1"></i>
-                                                                        <small><strong>Persyaratan Teknis</strong></small>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <table class="table table-sm table-bordered table-sm shadow-lg">
-                                                                    <tr>
-                                                                        <td colspan="3">
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-text">
-                                                                                    <input class="form-check-input mt-0" type="checkbox" value="Setuju">
-                                                                                </div>
-                                                                                <input type="text" class="form-control form-control-sm" value="Pengalaman Pekerjaan Perusahaan" readonly>
+                                                        <div class="card-body">
+                                                            <table class="table table-sm table-bordered table-sm shadow-lg">
+                                                                <tr>
+                                                                    <td colspan="3">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-text">
+                                                                                <?php if ($syarat_izin_teknis_tender['sts_checked_pengalaman_pekerjaan'] == 1) { ?>
+                                                                                    <input id="sts_checked_pengalaman_pekerjaan" checked class="form-check-input mt-0" value="<?= $syarat_izin_teknis_tender['sts_checked_pengalaman_pekerjaan'] ?>" name="sts_checked_pengalaman_pekerjaan" type="checkbox">
+                                                                                <?php } else { ?>
+                                                                                    <input id="sts_checked_pengalaman_pekerjaan" name="sts_checked_pengalaman_pekerjaan" class="form-check-input mt-0" type="checkbox">
+                                                                                <?php  }  ?>
                                                                             </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="col-sm-8" colspan=2>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-text">
-                                                                                    <input class="form-check-input mt-0" type="checkbox" value="Setuju">
-                                                                                </div>
-                                                                                <input type="text" class="form-control form-control-sm" value="Surat Pemberitahuan Tahunan (SPT) Badan" readonly>
+                                                                            <input type="text" class="form-control form-control-sm" value="Pengalaman Pekerjaan Perusahaan" readonly>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-sm-8" colspan=2>
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-text">
+                                                                                <?php if ($syarat_izin_teknis_tender['sts_checked_spt'] == 1) { ?>
+                                                                                    <input id="sts_checked_spt" checked class="form-check-input mt-0" value="<?= $syarat_izin_teknis_tender['sts_checked_spt'] ?>" name="sts_checked_spt" type="checkbox">
+                                                                                <?php } else { ?>
+                                                                                    <input id="sts_checked_spt" name="sts_checked_spt" class="form-check-input mt-0" type="checkbox">
+                                                                                <?php  }  ?>
                                                                             </div>
-                                                                        </td>
-                                                                        <td class="col-sm-4">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-text"><small>Tahun Lapor</small></span>
-                                                                                <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                <input type="number" class="form-control form-control-sm" min="2020" max="2099" step="1" value="2020">
-                                                                                <!-- <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i>&nbsp;<small>Akhir</small></span>
-                                                                                    <input type="number" class="form-control form-control-sm" min="2020" max="2099" step="1" value="2020"> -->
+                                                                            <input type="text" class="form-control form-control-sm" value="Surat Pemberitahuan Tahunan (SPT) Badan" readonly>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-sm-4">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text"><small>Tahun Lapor</small></span>
+                                                                            <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
+                                                                            <select onchange="pilih_tahun_lapor_spt()" name="tahun_lapor_spt" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                <?php if ($syarat_izin_teknis_tender['tahun_lapor_spt']) { ?>
+                                                                                    <option value="<?= $syarat_izin_teknis_tender['tahun_lapor_spt'] ?>">
+                                                                                        <?= $syarat_izin_teknis_tender['tahun_lapor_spt'] ?>
+                                                                                    </option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } else { ?>
+                                                                                    <option selected value="2020">2020</option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-sm-8" colspan="2">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-text">
+                                                                                <?php if ($syarat_izin_teknis_tender['sts_checked_laporan_keuangan'] == 1) { ?>
+                                                                                    <input id="sts_checked_laporan_keuangan" checked class="form-check-input mt-0" value="<?= $syarat_izin_teknis_tender['sts_checked_laporan_keuangan'] ?>" name="sts_checked_laporan_keuangan" type="checkbox">
+                                                                                <?php } else { ?>
+                                                                                    <input id="sts_checked_laporan_keuangan" name="sts_checked_laporan_keuangan" class="form-check-input mt-0" type="checkbox">
+                                                                                <?php  }  ?>
                                                                             </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="col-sm-8" colspan="2">
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-text">
-                                                                                    <input class="form-check-input mt-0" type="checkbox" value="Setuju">
-                                                                                </div>
-                                                                                <input type="text" class="form-control form-control-sm" value="Laporan Keuangan" readonly>
-                                                                                <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
-                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                    <option selected disabled value="">Pilih Status...</option>
-                                                                                    <option value="1">Audit</option>
-                                                                                    <option value="2">Tidak Audit</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </td>
+                                                                            <input type="text" class="form-control form-control-sm" value="Laporan Keuangan" readonly>
+                                                                            <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
+                                                                            <select onchange="pilih_sts_audit_laporan_keuangan()" name="sts_audit_laporan_keuangan" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                <?php if ($syarat_izin_teknis_tender['sts_audit_laporan_keuangan']) { ?>
+                                                                                    <option value="<?= $syarat_izin_teknis_tender['sts_audit_laporan_keuangan'] ?>">
+                                                                                        <?= $syarat_izin_teknis_tender['sts_audit_laporan_keuangan'] ?>
+                                                                                    </option>
+                                                                                    <option value="Audit">Audit</option>
+                                                                                    <option value="Tidak Audit">Tidak Audit</option>
+                                                                                <?php } else { ?>
+                                                                                    <option selected value="Audit">Audit</option>
+                                                                                    <option value="Tidak Audit">Tidak Audit</option>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
 
-                                                                        <td class="col-sm-4">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-text"><small>Awal</small></span>
-                                                                                <!-- <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span> -->
-                                                                                <input type="number" class="form-control form-control-sm" min="2020" max="2099" step="1" value="2020">
+                                                                    <td class="col-sm-4">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text"><small>Awal</small></span>
+                                                                            <select onchange="pilih_tahun_awal_laporan_keuangan()" name="tahun_awal_laporan_keuangan" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                <?php if ($syarat_izin_teknis_tender['tahun_awal_laporan_keuangan']) { ?>
+                                                                                    <option value="<?= $syarat_izin_teknis_tender['tahun_awal_laporan_keuangan'] ?>">
+                                                                                        <?= $syarat_izin_teknis_tender['tahun_awal_laporan_keuangan'] ?>
+                                                                                    </option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } else { ?>
+                                                                                    <option selected value="2020">2020</option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } ?>
+                                                                            </select>
 
-                                                                                <span class="input-group-text"><small>Akhir</small></span>
-                                                                                <!-- <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span> -->
-                                                                                <input type="number" class="form-control form-control-sm" min="2020" max="2099" step="1" value="2020">
+                                                                            <span class="input-group-text"><small>Akhir</small></span>
+                                                                            <select onchange="pilih_tahun_akhir_laporan_keuangan()" name="tahun_akhir_laporan_keuangan" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                <?php if ($syarat_izin_teknis_tender['tahun_akhir_laporan_keuangan']) { ?>
+                                                                                    <option value="<?= $syarat_izin_teknis_tender['tahun_akhir_laporan_keuangan'] ?>">
+                                                                                        <?= $syarat_izin_teknis_tender['tahun_akhir_laporan_keuangan'] ?>
+                                                                                    </option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } else { ?>
+                                                                                    <option selected value="2020">2020</option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-sm-8">
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-text">
+                                                                                <?php if ($syarat_izin_teknis_tender['sts_checked_neraca_keuangan'] == 1) { ?>
+                                                                                    <input id="sts_checked_neraca_keuangan" checked class="form-check-input mt-0" value="<?= $syarat_izin_teknis_tender['sts_checked_neraca_keuangan'] ?>" name="sts_checked_neraca_keuangan" type="checkbox">
+                                                                                <?php } else { ?>
+                                                                                    <input id="sts_checked_neraca_keuangan" name="sts_checked_neraca_keuangan" class="form-check-input mt-0" type="checkbox">
+                                                                                <?php  }  ?>
                                                                             </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="col-sm-8">
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-text">
-                                                                                    <input class="form-check-input mt-0" type="checkbox" value="Setuju">
-                                                                                </div>
-                                                                                <input type="text" class="form-control form-control-sm" value="Neraca Keuangan" readonly>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="col-sm-4" colspan="2">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-text"><small>Awal</small></span>
-                                                                                <!-- <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span> -->
-                                                                                <input type="number" class="form-control form-control-sm" min="2020" max="2099" step="1" value="2020">
+                                                                            <input type="text" class="form-control form-control-sm" value="Neraca Keuangan" readonly>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-sm-4" colspan="2">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text"><small>Awal</small></span>
+                                                                            <select onchange="pilih_tahun_awal_neraca_keuangan()" name="tahun_awal_neraca_keuangan" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                <?php if ($syarat_izin_teknis_tender['tahun_awal_neraca_keuangan']) { ?>
+                                                                                    <option value="<?= $syarat_izin_teknis_tender['tahun_awal_neraca_keuangan'] ?>">
+                                                                                        <?= $syarat_izin_teknis_tender['tahun_awal_neraca_keuangan'] ?>
+                                                                                    </option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } else { ?>
+                                                                                    <option selected value="2020">2020</option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } ?>
+                                                                            </select>
 
-                                                                                <span class="input-group-text"><small>Akhir</small></span>
-                                                                                <!-- <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span> -->
-                                                                                <input type="number" class="form-control form-control-sm" min="2020" max="2099" step="1" value="2020">
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
+                                                                            <span class="input-group-text"><small>Akhir</small></span>
+                                                                            <select onchange="pilih_tahun_akhir_neraca_keuangan()" name="tahun_akhir_neraca_keuangan" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                <?php if ($syarat_izin_teknis_tender['tahun_akhir_neraca_keuangan']) { ?>
+                                                                                    <option value="<?= $syarat_izin_teknis_tender['tahun_akhir_neraca_keuangan'] ?>">
+                                                                                        <?= $syarat_izin_teknis_tender['tahun_akhir_neraca_keuangan'] ?>
+                                                                                    </option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } else { ?>
+                                                                                    <option selected value="2020">2020</option>
+                                                                                    <?php $i = 0;
+                                                                                    for ($i = 20; $i <= 30; $i++) {  ?>
+                                                                                        <option value="20<?= $i ?>">20<?= $i ?></option>
+                                                                                    <?php  } ?>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="card border-dark shadow-lg">
+                                                        <div class="card-header border-dark bg-warning d-flex justify-content-between align-items-center">
+                                                            <div class="flex-grow-1 text-center bd-highlight">
+                                                                <span class="text-dark">
+                                                                    <i class="fa-regular fa-rectangle-list px-1"></i>
+                                                                    <small><strong>Persyaratan Tambahan</strong></small>
+                                                                </span>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <div class="card border-dark shadow-lg">
-                                                            <div class="card-header border-dark bg-warning d-flex justify-content-between align-items-center">
-                                                                <div class="flex-grow-1 text-center bd-highlight">
-                                                                    <span class="text-dark">
-                                                                        <i class="fa-regular fa-rectangle-list px-1"></i>
-                                                                        <small><strong>Persyaratan Tambahan</strong></small>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <table class="table table-sm table-bordered table-sm shadow-lg">
-                                                                    <thead class="bg-secondary text-white text-center">
-                                                                        <tr>
-                                                                            <th class="col-sm-8"><small>Keterangan Persyaratan</small></th>
-                                                                            <th class="col-sm-4"><small>Upload Contoh Format File Excel</small></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="input-group">
-                                                                                    <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
-                                                                                    <input type="text" class="form-control form-control-sm">
-                                                                                </div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="input-group">
-                                                                                    <span class="input-group-text"><i class="fa-solid fa-cloud-arrow-up"></i></span>
-                                                                                    <input type="file" class="form-control form-control-sm" accept=".xlsx, .xls">
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="2">
-                                                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                                                    <i class="fa-solid fa-square-plus"></i>
-                                                                                    Persyaratan Tambahan
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="2">
-                                                                                <table class="table table-sm table-bordered table-sm shadow-lg">
-                                                                                    <thead class="bg-info">
-                                                                                        <tr>
-                                                                                            <th class="col-sm-9"><small>Keterangan Persyaratan</small></th>
-                                                                                            <th class="col-sm-2">
-                                                                                                <div class="text-center">
-                                                                                                    <small>Contoh Format File</small>
-                                                                                                </div>
-                                                                                            </th>
-                                                                                            <th class="col-sm-1">
-                                                                                                <div class="text-center">
-                                                                                                    <small>#</small>
-                                                                                                </div>
-                                                                                            </th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                </table>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
+                                                        <div class="card-body">
+                                                            <table class="table table-sm table-bordered table-sm shadow-lg">
+                                                                <thead class="bg-secondary text-white text-center">
+                                                                    <tr>
+                                                                        <th class="col-sm-8"><small>Keterangan Persyaratan</small></th>
+                                                                        <th class="col-sm-4"><small>Upload Contoh Format File Excel</small></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
+                                                                                <input type="text" class="form-control form-control-sm">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+                                                                                <input type="file" class="form-control form-control-sm" accept=".xlsx, .xls">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                                                <i class="fa-solid fa-square-plus"></i>
+                                                                                Persyaratan Tambahan
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <table class="table table-sm table-bordered table-sm shadow-lg">
+                                                                                <thead class="bg-info">
+                                                                                    <tr>
+                                                                                        <th class="col-sm-9"><small>Keterangan Persyaratan</small></th>
+                                                                                        <th class="col-sm-2">
+                                                                                            <div class="text-center">
+                                                                                                <small>Contoh Format File</small>
+                                                                                            </div>
+                                                                                        </th>
+                                                                                        <th class="col-sm-1">
+                                                                                            <div class="text-center">
+                                                                                                <small>#</small>
+                                                                                            </div>
+                                                                                        </th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer justify-content-start">
-                            <div class="container">
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fa-solid fa-hard-drive"></i>
-                                    Simpan Data
-                                </button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    <i class="fa-solid fa-angles-left"></i>
-                                    Kembali
-                                </button>
-                            </div>
+                    </div>
+                    <div class="modal-footer justify-content-start">
+                        <div class="container">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa-solid fa-hard-drive"></i>
+                                Simpan Data
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                <i class="fa-solid fa-angles-left"></i>
+                                Kembali
+                            </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1137,39 +1244,33 @@
                                                     <th class="col-sm-3"><small>Jenis Usaha</small></th>
                                                     <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
                                                     <th class="col-sm-2"><small>NIK Pelaksana</small></th>
-                                                    <th class="col-sm-1"><small>#</small></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <small>
-                                                            <span>Kreatif Intelegensi Teknologi</span>
-                                                        </small>
-                                                    </td>
-                                                    <td>
-                                                        <small>
-                                                            <span>Jasa Lain & Jasa Konsultasi & Pengadaan Barang</span>
-                                                        </small>
-                                                    </td>
-                                                    <td>
-                                                        <small>
-                                                            <span>Menengah</span>
-                                                        </small>
-                                                    </td>
-                                                    <td>
-                                                        <small>
-                                                            <span>36740711223344</span>
-                                                        </small>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <button type="button" class="btn btn-sm btn-danger">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                <?php foreach ($result_vendor_terundang as $key => $value) { ?>
+                                                    <tr>
+                                                        <td>
+                                                            <small>
+                                                                <span><?= $value['username'] ?></span>
+                                                            </small>
+                                                        </td>
+                                                        <td>
+                                                            <small>
+                                                                <span>Jasa Lain & Jasa Konsultasi & Pengadaan Barang</span>
+                                                            </small>
+                                                        </td>
+                                                        <td>
+                                                            <small>
+                                                                <span>Menengah</span>
+                                                            </small>
+                                                        </td>
+                                                        <td>
+                                                            <small>
+                                                                <span>36740711223344</span>
+                                                            </small>
+                                                        </td>
+                                                    </tr>
+                                                <?php   } ?>
                                             </tbody>
                                         </table>
                                     </div>

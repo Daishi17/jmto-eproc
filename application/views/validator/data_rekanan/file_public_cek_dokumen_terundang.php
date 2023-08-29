@@ -481,7 +481,194 @@
 
                 }
 
-                // end siujk
+                // end skdp
+
+                //  skdp
+                if (response['row_skdp']) {
+                    var html_skdp = '';
+                    if (response['row_skdp'].sts_validasi == null || response['row_skdp'].sts_validasi == 0) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_skdp'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_skdp'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    } else if (response['row_skdp'].sts_validasi == 3) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-warning">Revisi</span>'
+                    }
+                    if (response['row_skdp'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_skdp(\'' + response['row_skdp'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_skdp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_skdp']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_skdp'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_skdp']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_skdp(\'' + response['row_skdp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_skdp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_skdp']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_skdp'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_skdp'].tgl_berlaku + '</label>'
+                    }
+                    if (response['row_skdp'].nama_validator) {
+                        var nama_validator = response['row_skdp'].nama_validator
+                    } else {
+                        var nama_validator = '-'
+                    }
+                    html_skdp += '<tr>' +
+                        '<td>' + response['row_skdp'].nomor_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_skdp').html(html_skdp);
+
+                    var html_skdp_rincian = ''
+                    html_skdp_rincian += '<tr>' +
+                        '<td>' + response['row_skdp'].nomor_surat + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
+                        '</tr>';
+                    $('#rincian_skdp').html(html_skdp_rincian);
+
+                    var url_kbli_skdp = $('[name="url_kbli_skdp"]').val()
+                    $(document).ready(function() {
+                        $('#tbl_kbli_skdp').DataTable({
+                            "responsive": true,
+                            "ordering": true,
+                            "processing": true,
+                            "serverSide": true,
+                            "dom": 'Bfrtip',
+                            "bDestroy": true,
+                            "autoWidth": false,
+                            "buttons": ["excel", "pdf", "print", "colvis"],
+                            "order": [],
+                            "ajax": {
+                                "url": url_kbli_skdp + response['row_skdp'].id_vendor,
+                                "type": "POST",
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Data Tidak Tersedia",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp; _MENU_ &nbsp; Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        })
+                    });
+
+                    var html_kbli_skdp = ''
+                    for (i = 0; i < response['kbli_skdp'].length; i++) {
+                        if (response['kbli_skdp'][i].sts_kbli_skdp == null || response['kbli_skdp'][i].sts_kbli_skdp == 0) {
+                            var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                        } else if (response['kbli_skdp'][i].sts_kbli_skdp == 1) {
+                            var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                        } else if (response['kbli_skdp'][i].sts_kbli_skdp == 2) {
+                            var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                        } else if (response['kbli_skdp'][i].sts_kbli_skdp == 3) {
+                            var sts_validasi = '<span class="badge bg-warning">Revisi</span>'
+                        }
+                        if (response['kbli_skdp'][i].nama_validator) {
+                            var nama_validator = response['kbli_skdp'][i].nama_validator
+                        } else {
+                            var nama_validator = '-'
+                        }
+                        html_kbli_skdp += '<tr>' +
+                            '<td>' + response['kbli_skdp'][i].kode_kbli + '|' + response['kbli_skdp'][i].nama_kbli + '</td>' +
+                            '<td>' + sts_validasi + '</td>' +
+                            '<td>' + nama_validator + '</td>' +
+                            '</tr>';
+                    }
+                    $('#rincian_kbli_skdp').html(html_kbli_skdp);
+                } else {
+
+                }
+
+                // end skdp
+
+
+                 // end skdp
+
+                //  izin_lainya
+                if (response['row_izin_lain']) {
+                    var html_izin_lain = '';
+                    if (response['row_izin_lain'].sts_validasi == null || response['row_izin_lain'].sts_validasi == 0) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_izin_lain(\'' + response['row_izin_lain'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_izin_lain(\'' + response['row_izin_lain'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_izin_lain'].sts_validasi == 1) {
+                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_izin_lain(\'' + response['row_izin_lain'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_izin_lain'].sts_validasi == 2) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_izin_lain(\'' + response['row_izin_lain'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_izin_lain(\'' + response['row_izin_lain'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    } else if (response['row_izin_lain'].sts_validasi == 3) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_izin_lain(\'' + response['row_izin_lain'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_izin_lain(\'' + response['row_izin_lain'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-warning">Revisi</span>'
+                    }
+                    if (response['row_izin_lain'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_izin_lain(\'' + response['row_izin_lain'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_izin_lain').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_izin_lain']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_izin_lain'].sts_token_dokumen == 2) {
+                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_izin_lain(\'' + response['row_izin_lain'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_izin_lain']['file_dokumen'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_izin_lain(\'' + response['row_izin_lain'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_izin_lain').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_izin_lain']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_izin_lain'].sts_seumur_hidup == 1) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_izin_lain'].tgl_berlaku + '</label>'
+                    }
+                    if (response['row_izin_lain'].nama_validator) {
+                        var nama_validator = response['row_izin_lain'].nama_validator
+                    } else {
+                        var nama_validator = '-'
+                    }
+                    html_izin_lain += '<tr>' +
+                        '<td>' + response['row_izin_lain'].nomor_surat + '</td>' +
+                        '<td>' + tgl_berlaku + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
+                        '<td class="text-center">' + tombol_validasi +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_izin_lain').html(html_izin_lain);
+
+                    var html_izin_lain_rincian = ''
+                    html_izin_lain_rincian += '<tr>' +
+                        '<td>' + response['row_izin_lain'].nomor_surat + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
+                        '</tr>';
+                    $('#rincian_izin_lain').html(html_izin_lain_rincian);
+                } else {
+
+                }
+
+                // end skdp
+
 
 
                 // akta pendiran

@@ -360,6 +360,22 @@
 
                                                             </tbody>
                                                         </table>
+                                                        <input type="hidden" name="url_kbli_skdp" value="<?= base_url('validator/rekanan_tervalidasi/get_kbli_skdp/') ?>">
+                                                        <table class="table table-bordered table-sm" id="tbl_kbli_skdp">
+                                                            <thead class="bg-info">
+                                                                <tr>
+                                                                    <th><small>No<small></th>
+                                                                    <th><small>Kode KBLI<small></th>
+                                                                    <th><small>Jenis KBLI<small></th>
+                                                                    <th><small>Kualifikasi KBLI<small></th>
+                                                                    <th><small>Status Validasi<small></th>
+                                                                    <th><small>Nama Validator<small></th>
+                                                                    <th class="text-center"><small>More Options<small></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>

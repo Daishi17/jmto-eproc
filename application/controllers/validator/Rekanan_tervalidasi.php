@@ -284,7 +284,7 @@ class Rekanan_tervalidasi extends CI_Controller
 
 		$row_siujk = $this->M_Rekanan_tervalidasi->get_row_siujk($id_vendor['id_vendor']);
 		$kbli_siujk = $this->M_Rekanan_tervalidasi->get_result_siujk_kbli($id_vendor['id_vendor']);
-
+		$kbli_skdp = $this->M_Rekanan_tervalidasi->get_result_skdp_kbli($id_vendor['id_vendor']);
 		$row_akta_pendirian = $this->M_Rekanan_tervalidasi->get_row_akta_pendirian($id_vendor['id_vendor']);
 		$row_akta_perubahan = $this->M_Rekanan_tervalidasi->get_row_akta_perubahan($id_vendor['id_vendor']);
 
@@ -331,6 +331,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			'kbli_nib' => $kbli_nib,
 			'kbli_sbu' => $kbli_sbu,
 			'kbli_siujk' => $kbli_siujk,
+			'kbli_skdp' => $kbli_skdp,
 			'pemilik' => $get_result_pemilik_manajerial,
 			'pengurus' => $get_result_pengurus_manajerial,
 			'pengalaman' => $result_pengalaman,
@@ -1308,7 +1309,6 @@ class Rekanan_tervalidasi extends CI_Controller
 		$nm_validator = $this->session->userdata('nama_pegawai');
 
 		if (!$type_kbli) {
-
 			$id_vendor = $this->M_Rekanan_tervalidasi->get_row_siujk_url($id_url);
 			$get_vendor = $id_vendor['id_vendor'];
 			// 1 itu sesuai 2 itu tidak sesuai 3 itu revisi
@@ -3665,80 +3665,148 @@ class Rekanan_tervalidasi extends CI_Controller
 		$type_kbli = $this->input->post('type_kbli');
 		$alasan_validator = $this->input->post('alasan_validator');
 		$id_url = $this->input->post('id_url_skdp');
-
 		$nm_validator = $this->session->userdata('nama_pegawai');
+		if (!$type_kbli) {
+			$id_vendor = $this->M_Rekanan_tervalidasi->get_row_skdp_url($id_url);
+			$get_vendor = $id_vendor['id_vendor'];
+			// 1 itu sesuai 2 itu tidak sesuai 3 itu revisi
+			if ($type == 'valid') {
+				$data = [
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i')
+				];
+				$where = [
+					'id_url' => $id_url
+				];
 
-		$id_vendor = $this->M_Rekanan_tervalidasi->get_row_skdp_url($id_url);
-		$get_vendor = $id_vendor['id_vendor'];
-		// 1 itu sesuai 2 itu tidak sesuai 3 itu revisi
-		if ($type == 'valid') {
-			$data = [
-				'alasan_validator' => $alasan_validator,
-				'sts_validasi' => 1,
-				'nama_validator' => $nm_validator,
-				'tgl_periksa' => date('Y-m-d H:i')
-			];
-			$where = [
-				'id_url' => $id_url
-			];
-
-			$data_vendor = [
-				'sts_dokumen_cek' => 1
-			];
-			$where_vendor = [
-				'id_vendor' => $get_vendor
-			];
-
-			$data_monitoring = [
-				'id_vendor' => $id_vendor['id_vendor'],
-				'id_url' => $id_vendor['id_url'],
-				'jenis_dokumen' => 'SKDP',
-				'nomor_surat' => $id_vendor['nomor_surat'],
-				'id_dokumen' => $id_vendor['id_vendor_skdp'],
-				'alasan_validator' => $alasan_validator,
-				'sts_validasi' => 1,
-				'nama_validator' => $nm_validator,
-				'tgl_periksa' => date('Y-m-d H:i'),
-				'notifikasi' => 1
-			];
-			$message = "Dokumen skdp dengan nomor surat " . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
-			$type_email = 'skdp';
-			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				$data_vendor = [
+					'sts_dokumen_cek' => 1
+				];
+				$where_vendor = [
+					'id_vendor' => $get_vendor
+				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'skdp',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_skdp'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$message = "Dokumen SKDP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
+				$type_email = 'skdp';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			} else {
+				$data = [
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i')
+				];
+				$where = [
+					'id_url' => $id_url
+				];
+				$data_vendor = [
+					'sts_dokumen_cek' => 2
+				];
+				$where_vendor = [
+					'id_vendor' => $get_vendor
+				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url'],
+					'jenis_dokumen' => 'skdp',
+					'nomor_surat' => $id_vendor['nomor_surat'],
+					'id_dokumen' => $id_vendor['id_vendor_skdp'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$message = "Dokumen SKDP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen skdp Anda";
+				$type_email = 'skdp';
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			}
+			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
+			$data = $this->M_Rekanan_tervalidasi->update_enkrip_skdp($where, $data);
 		} else {
-			$data = [
-				'alasan_validator' => $alasan_validator,
-				'sts_validasi' => 2,
-				'nama_validator' => $nm_validator,
-				'tgl_periksa' => date('Y-m-d H:i')
-			];
-			$where = [
-				'id_url' => $id_url
-			];
-			$data_vendor = [
-				'sts_dokumen_cek' => 2
-			];
-			$where_vendor = [
-				'id_vendor' => $get_vendor
-			];
-			$data_monitoring = [
-				'id_vendor' => $id_vendor['id_vendor'],
-				'id_url' => $id_vendor['id_url'],
-				'jenis_dokumen' => 'skdp',
-				'nomor_surat' => $id_vendor['nomor_surat'],
-				'id_dokumen' => $id_vendor['id_vendor_skdp'],
-				'alasan_validator' => $alasan_validator,
-				'sts_validasi' => 2,
-				'nama_validator' => $nm_validator,
-				'tgl_periksa' => date('Y-m-d H:i'),
-				'notifikasi' => 1
-			];
-			$message = "Dokumen skdp dengan nomor surat " . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen skdp Anda";
-			$type_email = 'skdp';
-			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			$id_vendor = $this->M_Rekanan_tervalidasi->get_row_skdp_kbli_url($id_url);
+			$get_vendor = $id_vendor['id_vendor'];
+			if ($type_kbli == 'terima_kbli') {
+				$data = [
+					'alasan_validator' => $alasan_validator,
+					'sts_kbli_skdp' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i')
+				];
+				$where = [
+					'id_url_kbli_skdp' => $id_url
+				];
+				$data_vendor = [
+					'sts_dokumen_cek' => 1
+				];
+				$where_vendor = [
+					'id_vendor' => $get_vendor
+				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_skdp'],
+					'jenis_dokumen' => 'skdp-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_skdp'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 1,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$type_email = 'KBLI-skdp';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			} else {
+				$data = [
+					'alasan_validator' => $alasan_validator,
+					'sts_kbli_skdp' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i')
+				];
+				$where = [
+					'id_url_kbli_skdp' => $id_url
+				];
+				$data_vendor = [
+					'sts_dokumen_cek' => 2
+				];
+				$where_vendor = [
+					'id_vendor' => $get_vendor
+				];
+				$data_monitoring = [
+					'id_vendor' => $id_vendor['id_vendor'],
+					'id_url' => $id_vendor['id_url_kbli_skdp'],
+					'jenis_dokumen' => 'skdp-KBLI',
+					'nomor_kbli' => $id_vendor['kode_kbli'],
+					'id_dokumen' => $id_vendor['id_vendor_kbli_skdp'],
+					'alasan_validator' => $alasan_validator,
+					'sts_validasi' => 2,
+					'nama_validator' => $nm_validator,
+					'tgl_periksa' => date('Y-m-d H:i'),
+					'notifikasi' => 1
+				];
+				$type_email = 'KBLI-skdp';
+				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen skdp";
+				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			}
+			$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
+			$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
+			$data = $this->M_Rekanan_tervalidasi->update_enkrip_kbli_skdp($where, $data);
 		}
-		$this->M_Rekanan_tervalidasi->insert_monitoring($data_monitoring);
-		$this->M_Rekanan_tervalidasi->update_vendor($data_vendor, $where_vendor);
-		$data = $this->M_Rekanan_tervalidasi->update_enkrip_skdp($where, $data);
 
 		if ($data) {
 			$response = [
@@ -3751,6 +3819,7 @@ class Rekanan_tervalidasi extends CI_Controller
 		}
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
+
 
 	public function url_download_skdp($id_url)
 	{
@@ -3777,6 +3846,45 @@ class Rekanan_tervalidasi extends CI_Controller
 
 		// Actual download.
 		redirect($url);
+	}
+
+
+
+	// skdp
+	function get_kbli_skdp($id_vendor)
+	{
+		$result = $this->M_Rekanan_tervalidasi->gettable_kbli_skdp($id_vendor);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $rs->kode_kbli;
+			$row[] = $rs->nama_kbli;
+			$row[] = $rs->nama_kualifikasi;
+			// nanti main kondisi hitung dokumen dimari
+			if ($rs->sts_kbli_skdp == 0 || $rs->sts_kbli_skdp == null) {
+				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
+			} else if ($rs->sts_kbli_skdp == 1) {
+				$row[] = '<small><span class="badge bg-success text-white">Sudah Valid</span></small>';
+			} else if ($rs->sts_kbli_skdp == 2) {
+				$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
+			}
+			$row[] = $rs->nama_validator;
+			if ($rs->sts_kbli_skdp == 1) {
+				$row[] = '<center><button disabled type="button" class="btn btn-success btn-block btn-sm shadow-lg" onClick="Valid_skdp(' . "'" . $rs->id_url_kbli_skdp . "' ,'terima_kbli'" . ')"> <i class="fa-solid fa-square-check px-1"></i> Valid</button disabled> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="NonValid_skdp(' . "'" . $rs->id_url_kbli_skdp . "','tolak_kbli'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
+			} else {
+				$row[] = '<center><a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="Valid_skdp(' . "'" . $rs->id_url_kbli_skdp . "' ,'terima_kbli'" . ')"> <i class="fa-solid fa-square-check px-1"></i> Valid</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="NonValid_skdp(' . "'" . $rs->id_url_kbli_skdp . "','tolak_kbli'" . ')"> <i class="fa-solid fa-rectangle-xmark px-1"></i> Tidak Valid</a></center>';
+			}
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_Rekanan_tervalidasi->count_all_kbli_skdp($id_vendor),
+			"recordsFiltered" => $this->M_Rekanan_tervalidasi->count_filtered_kbli_skdp($id_vendor),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
 	}
 	// end skdp
 

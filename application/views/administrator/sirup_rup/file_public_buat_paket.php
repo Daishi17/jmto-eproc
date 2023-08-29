@@ -227,7 +227,6 @@
         var nama_rup = $('#nama_rup').text();
         var url_finaliasi_rup = $('[name="url_finaliasi_rup"]').val()
         var modal_detail = $('#modal-xl-detail');
-
         Swal.fire({
             title: 'Apakah Anda Yakin Ingin Memfinalisasi ? ',
             text: nama_rup,

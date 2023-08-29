@@ -2359,7 +2359,7 @@
                     <input type="hidden" name="url_validasi_skdp" value="<?= base_url('validator/rekanan_tervalidasi/validation_skdp/') ?>">
                     <input type="hidden" name="id_url_skdp">
                     <input type="hidden" name="type" value="nonvalid">
-                    <input type="hidden" name="type_kbli" id="kbli_nonvalid">
+                    <input type="hidden" name="type_kbli" id="kbli_nonvalid_skdp">
                     <center>
                         <img src="<?= base_url('assets/img/tanya.jpg') ?>" width="35%" alt="">
                         <p class="mt-2"><b>Silakan Masukan Alasan Bahwa Anda Tidak Setuju Dokumen Tersebut Valid!</b></p>
@@ -2393,7 +2393,7 @@
                     <input type="hidden" name="url_validasi_skdp" value="<?= base_url('validator/rekanan_tervalidasi/validation_skdp/') ?>">
                     <input type="hidden" name="id_url_skdp">
                     <input type="hidden" name="type" value="valid">
-                    <input type="hidden" name="type_kbli" id="kbli_valid">
+                    <input type="hidden" name="type_kbli" id="kbli_valid_skdp">
                     <center>
                         <img src="<?= base_url('assets/img/tanya.jpg') ?>" width="35%" alt="">
                         <p class="mt-2"><b>Silakan Masukan Alasan Bahwa Anda Setuju Dokumen Tersebut Valid!</b></p>

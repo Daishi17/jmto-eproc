@@ -17,6 +17,17 @@
 <!-- url jadwal -->
 <input type="hidden" name="url_update_jadwal" value="<?= base_url('panitia/daftar_paket/daftar_paket/simpan_jadwal_20baris/') ?>">
 
-<!-- INI UTNUK URL PERSYATAN ADMINISTRASI -->
+<!-- INI UTNUK URL PERSYATAN IZIN USAHA ADMINISTRASI -->
 <input type="hidden" name="url_update_syarat_klasifikasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_syarat_klasifikasi') ?>">
 <input type="hidden" name="url_update_syarat_izin_usaha_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_syarat_izin_usaha_tender') ?>">
+<!-- INI UNTUK KBLI SYARAT TENDER -->
+<input type="hidden" name="url_get_tambah_syarat_kbli" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_get_tambah_syarat_kbli') ?>">
+<input type="hidden" name="url_get_syarat_kbli_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_kbli_syarat_tender') ?>">
+<input type="hidden" name="url_hapus_syarat_kbli" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_hapus_syarat_kbli') ?>">
+<!-- INI UNTUK SBU SYARAT TENDER -->
+<input type="hidden" name="url_get_tambah_syarat_sbu" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_get_tambah_syarat_sbu') ?>">
+<input type="hidden" name="url_get_syarat_sbu_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_sbu_syarat_tender') ?>">
+<input type="hidden" name="url_hapus_syarat_sbu" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_hapus_syarat_sbu') ?>">
+<!-- INI UTNUK URL PERSYATAN TEKNIS ADMINISTRASI -->
+<input type="hidden" name="url_update_syarat_izin_teknis_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_syarat_izin_teknis_tender') ?>">
+

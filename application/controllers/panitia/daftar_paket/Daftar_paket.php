@@ -42,10 +42,22 @@ class Daftar_paket extends CI_Controller
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$data['jadwal'] = $this->M_panitia->get_jadwal($id_url_rup);
+
 		$data['syarat_izin_usaha_tender'] = $this->M_panitia->get_syarat_izin_usaha_tender($data['row_rup']['id_rup']);
+		$data['syarat_izin_teknis_tender'] = $this->M_panitia->get_syarat_izin_teknis_tender($data['row_rup']['id_rup']);
+		$data['result_kbli'] = $this->M_panitia->result_kbli();
+		$data['result_sbu'] = $this->M_panitia->result_sbu();
+		// cek vendor terundang
+		$syarat_izin_usaha = $this->M_panitia->cek_syarat_izin_usaha($data['row_rup']['id_rup']);
+		$cek_syarat_kbli = $this->M_panitia->cek_syarat_kbli($data['row_rup']['id_rup']);
+		$data_vendor_lolos_siup_kbli = $this->M_panitia->data_vendor_lolos_siup_kbli($cek_syarat_kbli);
+		$data_vendor_lolos_nib_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
+		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli);
+		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli);
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
+		// $this->load->view('panitia/daftar_paket/cek_vendor_terundang', $data);
 		$this->load->view('administrator/template_menu/footer_menu');
 		$this->load->view('panitia/daftar_paket/file_public_daftar_paket');
 	}
@@ -215,6 +227,7 @@ class Daftar_paket extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
+	// INI UNTUK SYARAT TENDER IZIN USAHA
 	public function update_syarat_izin_usaha_tender()
 	{
 		$id_url_rup = $this->input->post('id_url_rup');
@@ -243,6 +256,179 @@ class Daftar_paket extends CI_Controller
 		$this->M_panitia->update_syarat_izin_usaha_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_usah_tender' => $this->M_panitia->get_syarat_izin_usaha_tender($row_rup['id_rup'])
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	// INI UNTUK SYARAT TENDER KBLI
+
+	function url_get_tambah_syarat_kbli()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$nama_kbli = $this->input->post('nama_kbli');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$row_kbli = $this->M_panitia->get_row_kbli($nama_kbli);
+		$cek_syarat_kbli_tender = $this->M_panitia->row_syarat_tender_kbli($row_rup['id_rup'], $row_kbli['id_kbli']);
+		if ($cek_syarat_kbli_tender) {
+			$response = [
+				'error' => [
+					'id_kbli' => 'Kode Kbli Sudah Ada Di Table Anda',
+				],
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		} else {
+			$data = [
+				'id_rup' => $row_rup['id_rup'],
+				'id_kbli' => $row_kbli['id_kbli']
+			];
+			$this->M_panitia->tambah_syarat_tender_kbli($data);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+	}
+	function get_kbli_syarat_tender()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$response = [
+			'result_syarat_tender_kbli' => $this->M_panitia->result_syarat_tender_kbli($row_rup['id_rup'])
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
+	function url_hapus_syarat_kbli()
+	{
+		$id_syarat_kbli_tender = $this->input->post('id_syarat_kbli_tender');
+		$where = [
+			'id_syarat_kbli_tender' => $id_syarat_kbli_tender
+		];
+		$this->M_panitia->delete_syarat_tender_kbli($where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+
+	// INI UNTUK SYARAT TENDER SBU
+
+	function url_get_tambah_syarat_sbu()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$nama_sbu = $this->input->post('nama_sbu');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$row_sbu = $this->M_panitia->get_row_sbu($nama_sbu);
+		$cek_syarat_sbu_tender = $this->M_panitia->row_syarat_tender_sbu($row_rup['id_rup'], $row_sbu['id_sbu']);
+		if ($cek_syarat_sbu_tender) {
+			$response = [
+				'error' => [
+					'id_sbu' => 'Kode sbu Sudah Ada Di Table Anda',
+				],
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		} else {
+			$data = [
+				'id_rup' => $row_rup['id_rup'],
+				'id_sbu' => $row_sbu['id_sbu']
+			];
+			$this->M_panitia->tambah_syarat_tender_sbu($data);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+	}
+	function get_sbu_syarat_tender()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$response = [
+			'result_syarat_tender_sbu' => $this->M_panitia->result_syarat_tender_sbu($row_rup['id_rup'])
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
+	function url_hapus_syarat_sbu()
+	{
+		$id_syarat_sbu_tender = $this->input->post('id_syarat_sbu_tender');
+		$where = [
+			'id_syarat_sbu_tender' => $id_syarat_sbu_tender
+		];
+		$this->M_panitia->delete_syarat_tender_sbu($where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+	// INI UNTUK SYARAT TENDER TEKNIS
+
+	public function update_syarat_izin_teknis_tender()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		// pengalaman_pekerjaan
+		$sts_checked_pengalaman_pekerjaan = $this->input->post('sts_checked_pengalaman_pekerjaan');
+		// spt
+		$sts_checked_spt = $this->input->post('sts_checked_spt');
+		$tahun_lapor_spt = $this->input->post('tahun_lapor_spt');
+		// laporan_keuangan
+		$sts_checked_laporan_keuangan = $this->input->post('sts_checked_laporan_keuangan');
+		$sts_audit_laporan_keuangan = $this->input->post('sts_audit_laporan_keuangan');
+		$tahun_awal_laporan_keuangan = $this->input->post('tahun_awal_laporan_keuangan');
+		$tahun_akhir_laporan_keuangan = $this->input->post('tahun_akhir_laporan_keuangan');
+		// neraca_keuangan
+		$sts_checked_neraca_keuangan = $this->input->post('sts_checked_neraca_keuangan');
+		$tahun_awal_neraca_keuangan = $this->input->post('tahun_awal_neraca_keuangan');
+		$tahun_akhir_neraca_keuangan = $this->input->post('tahun_akhir_neraca_keuangan');
+		$type = $this->input->post('type');
+		if ($type == 'sts_checked_pengalaman_pekerjaan') {
+			// pengalaman_pekerjaan
+			$data = [
+				'sts_checked_pengalaman_pekerjaan' => $sts_checked_pengalaman_pekerjaan,
+			];
+		} else if ($type == 'sts_checked_spt') {
+			// spt
+			$data = [
+				'sts_checked_spt' => $sts_checked_spt,
+			];
+		} else if ($type == 'tahun_lapor_spt') {
+			// spt
+			$data = [
+				'tahun_lapor_spt' => $tahun_lapor_spt,
+			];
+		} else if ($type == 'sts_checked_laporan_keuangan') {
+			// laporan_keuangan
+			$data = [
+				'sts_checked_laporan_keuangan' => $sts_checked_laporan_keuangan,
+			];
+		} else if ($type == 'sts_audit_laporan_keuangan') {
+			// laporan_keuangan
+			$data = [
+				'sts_audit_laporan_keuangan' => $sts_audit_laporan_keuangan,
+			];
+		} else if ($type == 'tahun_awal_laporan_keuangan') {
+			// laporan_keuangan
+			$data = [
+				'tahun_awal_laporan_keuangan' => $tahun_awal_laporan_keuangan,
+			];
+		} else if ($type == 'tahun_akhir_laporan_keuangan') {
+			// laporan_keuangan
+			$data = [
+				'tahun_akhir_laporan_keuangan' => $tahun_akhir_laporan_keuangan,
+			];
+		} else if ($type == 'sts_checked_neraca_keuangan') {
+			// neraca_keuangan
+			$data = [
+				'sts_checked_neraca_keuangan' => $sts_checked_neraca_keuangan,
+			];
+		} else if ($type == 'tahun_awal_neraca_keuangan') {
+			// neraca_keuangan
+			$data = [
+				'tahun_awal_neraca_keuangan' => $tahun_awal_neraca_keuangan,
+			];
+		} else if ($type == 'tahun_akhir_neraca_keuangan') {
+			// neraca_keuangan
+			$data = [
+				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
+			];
+		} else {
+		}
+		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
+		$response = [
+			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}

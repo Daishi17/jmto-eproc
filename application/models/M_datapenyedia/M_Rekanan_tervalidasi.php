@@ -522,6 +522,17 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $query->result_array();
     }
 
+    public function get_result_skdp_kbli($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_skdp');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_skdp.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_skdp.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
 
     public function get_row_siujk_url($id_url)
     {
@@ -554,6 +565,20 @@ class M_Rekanan_tervalidasi extends CI_Model
         return $this->db->affected_rows();
     }
 
+    public function get_row_skdp_kbli_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_skdp');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_skdp.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_vendor_kbli_skdp.id_url_kbli_skdp', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+    public function update_enkrip_kbli_skdp($where, $data)
+    {
+        $this->db->update('tbl_vendor_kbli_skdp', $data, $where);
+        return $this->db->affected_rows();
+    }
 
     var $order_kbli_siujk = array('id_vendor', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor');
     private function _get_data_query_kbli_siujk($id_vendor)
@@ -1852,7 +1877,34 @@ class M_Rekanan_tervalidasi extends CI_Model
 
     // END RAJA TERAKHIR
 
-    // skdp
+
+    // izin_lainya
+
+
+    public function get_row_izin_lainya_url($id_url)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_izin_lain');
+        $this->db->where('tbl_vendor_izin_lain.id_url', $id_url);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_enkrip_izin_lainya($where, $data)
+    {
+        $this->db->update('tbl_vendor_izin_lain', $data, $where);
+        return $this->db->affected_rows();
+    }
+
+    function get_row_izin_lainya($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_izin_lain');
+        $this->db->where('tbl_vendor_izin_lain.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     function get_row_skdp($id_vendor)
     {
         $this->db->select('*');
@@ -1876,6 +1928,70 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->update('tbl_vendor_skdp', $data, $where);
         return $this->db->affected_rows();
+    }
+    // skdp
+    var $order_kbli_skdp = array('id_vendor', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor', 'id_vendor');
+    private function _get_data_query_kbli_skdp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_skdp');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_skdp.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->join('tbl_kualifikasi_izin', 'tbl_vendor_kbli_skdp.id_kualifikasi_izin = tbl_kualifikasi_izin.id_kualifikasi_izin', 'left');
+        $this->db->where('tbl_vendor_kbli_skdp.id_vendor', $id_vendor);
+        $i = 0;
+        foreach ($this->order_kbli_skdp as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_kbli_skdp) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_kbli_skdp[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_vendor_kbli_skdp.id_vendor', 'ASC');
+        }
+    }
+
+    public function gettable_kbli_skdp($id_vendor) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_kbli_skdp($id_vendor); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_filtered_kbli_skdp($id_vendor)
+    {
+        $this->_get_data_query_kbli_skdp($id_vendor); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_kbli_skdp($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_kbli_skdp');
+        $this->db->join('tbl_kbli', 'tbl_vendor_kbli_skdp.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->join('tbl_kualifikasi_izin', 'tbl_vendor_kbli_skdp.id_kualifikasi_izin = tbl_kualifikasi_izin.id_kualifikasi_izin', 'left');
+        $this->db->where('tbl_vendor_kbli_skdp.id_vendor', $id_vendor);
+        return $this->db->count_all_results();
     }
 
 

@@ -120,12 +120,261 @@ class M_panitia extends CI_Model
         return $query->row_array();
     }
 
-    
+
     public function update_syarat_izin_usaha_tender($id_rup, $data)
     {
         $this->db->where('id_rup', $id_rup);
         $this->db->update('tbl_izin_rup', $data);
     }
-    
-    
+
+    // INI UNTUK SYART KBLI TENDER
+    function result_kbli()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_kbli');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function get_row_kbli($nama_kbli)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_kbli');
+        $this->db->where('nama_kbli', $nama_kbli);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    function row_syarat_tender_kbli($id_rup, $id_kbli)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_kbli_tender');
+        $this->db->where('tbl_syratat_kbli_tender.id_rup', $id_rup);
+        $this->db->where('tbl_syratat_kbli_tender.id_kbli', $id_kbli);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    function result_kbli_syarat($id_kbli)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_kbli_tender');
+        $this->db->join('tbl_kbli', 'tbl_syratat_kbli_tender.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_syratat_kbli_tender.id_kbli', $id_kbli);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+
+    function result_syarat_tender_kbli($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_kbli_tender');
+        $this->db->join('tbl_kbli', 'tbl_syratat_kbli_tender.id_kbli = tbl_kbli.id_kbli', 'left');
+        $this->db->where('tbl_syratat_kbli_tender.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function tambah_syarat_tender_kbli($data)
+    {
+        $this->db->insert('tbl_syratat_kbli_tender', $data);
+    }
+
+    public function delete_syarat_tender_kbli($where)
+    {
+        $this->db->delete('tbl_syratat_kbli_tender', $where);
+    }
+
+    // INI UNTUK SYART SBU TENDER
+    function result_sbu()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_sbu');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function get_row_sbu($nama_sbu)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_sbu');
+        $this->db->where('nama_sbu', $nama_sbu);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    function row_syarat_tender_sbu($id_rup, $id_sbu)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_sbu_tender');
+        $this->db->where('tbl_syratat_sbu_tender.id_rup', $id_rup);
+        $this->db->where('tbl_syratat_sbu_tender.id_sbu', $id_sbu);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    function result_sbu_syarat($id_sbu)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_sbu_tender');
+        $this->db->join('tbl_sbu', 'tbl_syratat_sbu_tender.id_sbu = tbl_sbu.id_sbu', 'left');
+        $this->db->where('tbl_syratat_sbu_tender.id_sbu', $id_sbu);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+
+    function result_syarat_tender_sbu($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_sbu_tender');
+        $this->db->join('tbl_sbu', 'tbl_syratat_sbu_tender.id_sbu = tbl_sbu.id_sbu', 'left');
+        $this->db->where('tbl_syratat_sbu_tender.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function tambah_syarat_tender_sbu($data)
+    {
+        $this->db->insert('tbl_syratat_sbu_tender', $data);
+    }
+
+    public function delete_syarat_tender_sbu($where)
+    {
+        $this->db->delete('tbl_syratat_sbu_tender', $where);
+    }
+
+    // INI UNTUK BAGIAN SYARAT ADMINISTRASI TEJNIS
+    public function get_syarat_izin_teknis_tender($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_izin_teknis_rup');
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    public function update_syarat_izin_teknis_tender($id_rup, $data)
+    {
+        $this->db->where('id_rup', $id_rup);
+        $this->db->update('tbl_izin_teknis_rup', $data);
+    }
+
+
+
+
+
+
+
+    // START KUALIFIKASI DAN DATA VENDOR TERUNDANG
+    // cek vendor terundang
+    public function cek_syarat_izin_usaha($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_izin_rup');
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+    public function cek_syarat_kbli($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_kbli_tender');
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function cek_syarat_sbu($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syratat_sbu_tender');
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    private function cek_kbli_siup_vendor()
+    {
+        $this->db->select('tbl_vendor.id_vendor,tbl_vendor_kbli_siup.id_kbli');
+        $this->db->from('tbl_vendor');
+        $this->db->join('tbl_vendor_kbli_siup', 'tbl_vendor_kbli_siup.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->group_by('tbl_vendor.id_vendor');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function data_vendor_lolos_siup_kbli($cek_syarat_kbli)
+    {
+        $cek_kbli_vendor_siup = $this->cek_kbli_siup_vendor();
+        $tampung_data_vendor_siup = [];
+        foreach ($cek_syarat_kbli as $data_syarat) {
+            foreach ($cek_kbli_vendor_siup as $data_siup_vendor) {
+                if ($data_syarat['id_kbli'] == $data_siup_vendor['id_kbli']) {
+                    $tampung_data_vendor_siup[] = $data_siup_vendor;
+                }
+            }
+        }
+        return $tampung_data_vendor_siup;
+    }
+    private function cek_kbli_siujk_vendor()
+    {
+        $this->db->select('tbl_vendor.id_vendor,tbl_vendor_kbli_siujk.id_kbli');
+        $this->db->from('tbl_vendor');
+        $this->db->join('tbl_vendor_kbli_siujk', 'tbl_vendor_kbli_siujk.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->group_by('tbl_vendor.id_vendor');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function data_vendor_lolos_siujk_kbli($cek_syarat_kbli)
+    {
+        $cek_kbli_vendor_siujk = $this->cek_kbli_siujk_vendor();
+        $tampung_data_vendor_siujk = [];
+        foreach ($cek_syarat_kbli as $data_syarat_siujk) {
+            foreach ($cek_kbli_vendor_siujk as $data_siujk_vendor) {
+                if ($data_syarat_siujk['id_kbli'] == $data_siujk_vendor['id_kbli']) {
+                    $tampung_data_vendor_siujk[] = $data_siujk_vendor;
+                }
+            }
+        }
+        return $tampung_data_vendor_siujk;
+    }
+
+    // ini untuk mengabungkan data vendor terundang
+    function gabung_keseluruhan_vendor_terundang($array_kbli_siup, $array_kbli_siujk)
+    {
+        $mergedResult = [];
+        foreach ($array_kbli_siup as $row) {
+            $mergedResult[$row['id_vendor']] = $row;
+        }
+
+        foreach ($array_kbli_siujk as $row) {
+            if (isset($mergedResult[$row['id_vendor']])) {
+                $mergedResult[$row['id_vendor']] = array_merge($mergedResult[$row['id_vendor']], $row);
+            }
+        }
+        return $mergedResult;
+    }
+
+    function result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor');
+        $this->db->join('tbl_vendor_siup', 'tbl_vendor_siup.id_vendor = tbl_vendor.id_vendor', 'left');
+        $id_vendor_terundang = [];
+        foreach ($data_vendor_terundang_by_kbli as $row) {
+            $id_vendor_terundang[] = $row['id_vendor'];
+        }
+        $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang);
+        // cek siup
+        if ($syarat_izin_usaha['sts_checked_siup'] == 1) {
+            if ($syarat_izin_usaha['sts_masa_berlaku_siup'] == 1) {
+                $this->db->where('tbl_vendor_siup.tgl_berlaku <=', $syarat_izin_usaha['tgl_berlaku_siup']);
+            } else {
+                $this->db->where('tbl_vendor_siup.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_siup']);
+            }
+        }
+        $this->db->group_by('tbl_vendor.id_vendor');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
