@@ -50,7 +50,7 @@
                                                 <h5>
                                                     <small class="text-white"><b><?= $rekanan_tervalidasi ?></b></small>
                                                 </h5>
-                                                <small class="text-white"><b>Status Rekanan Tervalidasi</b></small>
+                                                <small class="text-white"><b>Status Rekanan Terdaftar</b></small>
                                             </div>
                                         </div>
                                         <div class="card-footer bg-light">
@@ -70,7 +70,7 @@
                                                 <h5>
                                                     <small class="text-white"><b><?= $rekanan_terundang ?></b></small>
                                                 </h5>
-                                                <small class="text-white"><b>Status Rekanan Terundang</b></small>
+                                                <small class="text-white"><b>Status Rekanan Tervalidasi</b></small>
                                             </div>
                                         </div>
                                         <div class="card-footer bg-light">

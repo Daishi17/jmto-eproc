@@ -139,7 +139,13 @@
             Login <br>
             Non - Penyedia
         </div>
+        <?php
+        if (!$this->session->csrf_token) {
+            $this->session->csrf_token = hash('sha1', time());
+        }
+        ?>
         <form class="p-3 mt-3" action="<?= base_url('auth') ?>" method="post">
+            <input type="hidden" name="csrf_token_name" value="<?= $this->session->csrf_token ?>">
             <div class="form-field d-flex align-items-center">
                 <i class="fas fa fa-user"></i>
                 <input type="text" name="userName" id="userName" placeholder="Email Atau NIP">

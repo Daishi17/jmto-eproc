@@ -27,6 +27,12 @@ class Rekanan_tervalidasi extends CI_Controller
 		$pesan = $this->input->post('pesan');
 		$type_email = 'KIRIM-PESAN';
 		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
+		//  $data = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
+		//  $email = $data['email'];
+		//  $no_telpon = $data['no_telpon'];
+		//  $pesanku = str_replace(" ", "-", $pesan);
+		//  json_decode(file_get_contents("https://jmto-vms.kintekindo.net/send_email_jmto/kirim_email_vendor_terdaftar/" . $email . '/' . $pesanku));
+		//  json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 	}
 
 	public function undang()
@@ -44,10 +50,14 @@ class Rekanan_tervalidasi extends CI_Controller
 		$this->M_Rekanan_tervalidasi->update_vendor($data, $where);
 
 		$data = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
-
-		$type_email = 'KIRIM-UNDANGAN';
+		$email = $data['email'];
 		$pesan = '<i>Kepada Yth.<br><b id="nama_usaha">' . $data['nama_usaha'] . '</b><br></i><i>dokumen anda sudah tervalidasi silahkan lakukan pembuktian dokumen pada</i><br>' . 'Hari	: ' . $hari . '<br><br>' . 'Tanggal	: ' . $tanggal;
-		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
+		$no_telpon = $data['no_telpon'];
+		$pesanku = str_replace(" ", "-", $pesan);
+		json_decode(file_get_contents("https://jmto-vms.kintekindo.net/send_email_jmto/kirim_email_vendor_terundang/" . $email . '/' . $pesanku));
+		json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terundang/" . $no_telpon . '/' . $pesanku));
+		// $type_email = 'KIRIM-UNDANGAN';
+		// $this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
 	}
 
 

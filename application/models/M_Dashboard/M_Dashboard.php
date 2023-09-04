@@ -17,6 +17,7 @@ class M_Dashboard extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_vendor');
         $this->db->where('sts_aktif', 1);
+        $this->db->where('sts_terundang', null);
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -26,6 +27,7 @@ class M_Dashboard extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_vendor');
+        $this->db->where('sts_aktif', 1);
         $this->db->where('sts_terundang', 1);
         $query = $this->db->get();
         return $query->num_rows();

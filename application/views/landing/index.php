@@ -7,31 +7,16 @@ header("Content-Security-Policy: img-src 'self' *");
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-Frame-Options" content="sameorigin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPROC - JMTO</title>
-
-    <!-- Favicon -->
-    <!-- <link rel="shortcut icon" href="https://themes.potenzaglobalsolutions.com/html/academic/images/favicon.ico" /> -->
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200&display=swap" rel="stylesheet">
     <!-- CSS Global Compulsory (Do not remove)-->
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/bootstrap/bootstrap.min.css" />
-
-    <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/owl-carousel/owl.carousel.min.css" />
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/magnific-popup/magnific-popup.css" />
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/swiper/swiper.min.css" />
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/animate/animate.min.css" />
-
+    <link rel="stylesheet" href="<?= base_url('assets_landing/') ?>bootstrap.min.css" />
     <!-- dattable -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="<?= base_url('assets_landing/') ?>dataTables.bootstrap4.min.css" />
     <!-- Template Style -->
-    <link rel="stylesheet" href="https://themes.potenzaglobalsolutions.com/html/academic/css/style.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url('assets_landing/') ?>style.css" />
+    <link rel="stylesheet" href="<?= base_url('assets_landing/') ?>sticky.css" />
 </head>
 
 <body>
@@ -47,7 +32,7 @@ header("Content-Security-Policy: img-src 'self' *");
                             <!-- logo -->
                             <a class="navbar-brand text-lg-center" href="index.html">
                                 <img class="logo" src="<?= base_url() ?>assets/img/jmto_logo.png" alt="Logo">
-                                <img class="sticky-logo" src="https://media.licdn.com/dms/image/C5616AQEu8BWysPOY4g/profile-displaybackgroundimage-shrink_200_800/0/1629163094732?e=2147483647&v=beta&t=Q8dE2xAcWWwU9GuheMkq6cZB_qfUpQkN7Mgk_ezYBpY" alt="Logo">
+                                <img class="sticky-logo" src="<?= base_url() ?>assets_landing/foto_navbar.jpeg" alt="Logo">
                             </a>
                             <nav class="navbar navbar-expand-lg">
 
@@ -69,11 +54,11 @@ header("Content-Security-Policy: img-src 'self' *");
                                     </a>
                                     <!-- Dropdown Menu -->
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="https://jmto-vms.kintekindo.net/auth"><i> Penyedia</i></a></li>
-                                        <li><a class="dropdown-item" href="https://jmto-eproc.kintekindo.net/auth"><i> Non Penyedia</i></a></li>
+                                        <li><a class="dropdown-item" href="https://drtproc.jmto.co.id/auth"><i> Penyedia</i></a></li>
+                                        <li><a class="dropdown-item" href="https://eprocurement.jmto.co.id/auth"><i> Non Penyedia</i></a></li>
                                     </ul>
                                 </li>
-                                <a href="https://jmto-vms.kintekindo.net/registrasi" class="btn btn-warning text-white btn-round ml-3"><i>REGISTRASI PENYEDIA</i></a>
+                                <a href="https://drtproc.jmto.co.id/auth" class="btn btn-warning text-white btn-round ml-3"><i>REGISTRASI PENYEDIA</i></a>
                             </nav>
                         </div>
                     </div>
@@ -139,7 +124,7 @@ header("Content-Security-Policy: img-src 'self' *");
         <ul class="sticky">
             <li>
                 <img src="<?= base_url('assets/img/volume_logo.png') ?>" width="32" height="32">
-                <p><a href="javascript:;" onclick="matikan()">Kelik Untuk <br>Backsound</a></p>
+                <p><a href="javascript:;" onclick="matikan()">Klik Untuk <br>Backsound</a></p>
             </li>
             <li>
                 <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
@@ -190,7 +175,7 @@ header("Content-Security-Policy: img-src 'self' *");
             <ul class="sticky">
                 <li>
                     <img src="<?= base_url('assets/img/volume_logo.png') ?>" width="32" height="32">
-                    <p><a href="javascript:;" onclick="matikan()">Kelik Untuk <br>Backsound</a></p>
+                    <p><a href="javascript:;" onclick="matikan()">Klik Untuk <br>Backsound</a></p>
                 </li>
                 <li>
                     <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
@@ -329,16 +314,7 @@ header("Content-Security-Policy: img-src 'self' *");
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit</td>
-                                <td>20 Mei 2023</td>
-                            </tr>
-                            <tr>
-                                <td scope="row">2</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit</td>
-                                <td>20 Mei 2023</td>
-                            </tr>
+                          
                         </tbody>
                     </table>
                 </div>
@@ -391,13 +367,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td scope="row">1</td>
-                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
-                                                    <td>Rp 16.610.361.900,00</td>
-                                                    <td>10-May-2023 12:00</td>
-                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
-                                                </tr>
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -421,13 +391,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td scope="row">1</td>
-                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
-                                                    <td>Rp 16.610.361.900,00</td>
-                                                    <td>10-May-2023 12:00</td>
-                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
-                                                </tr>
+                                              
                                             </tbody>
                                         </table>
                                     </div>
@@ -451,13 +415,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td scope="row">1</td>
-                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
-                                                    <td>Rp 16.610.361.900,00</td>
-                                                    <td>10-May-2023 12:00</td>
-                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
-                                                </tr>
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -481,13 +439,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td scope="row">1</td>
-                                                    <td>Jasa Pemborongan Pekerjaan Pemeliharaan Periodik Scrapping Filling Overlay (SFO) Pada Ruas Jalan Tol Bali - Mandara Tahun 2023</td>
-                                                    <td>Rp 16.610.361.900,00</td>
-                                                    <td>10-May-2023 12:00</td>
-                                                    <td><a class="btn btn-sm btn-dark text-white" href="javascript:;"><i class="fas fa fa-file"></i> View</a></td>
-                                                </tr>
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -562,11 +514,11 @@ header("Content-Security-Policy: img-src 'self' *");
                     <p class="text-white">Helped thousands of clients to find the right property for their needs.</p>
                     <div class="footer-link">
                         <ul class="list-unstyled mb-0">
-                            <li><a class="text-white" href="index.html">Corporate Internal Media (CIM)</a></li>
-                            <li><a class="text-white" href="about-us.html">Electronic Operational Performance Appraisal (EOPA)</a></li>
-                            <li><a class="text-white" href="course.html">Jasa Marga Livestreaming</a></li>
-                            <li><a class="text-white" href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a class="text-white" href="pricing.html">JMTO Internal Web Mail</a></li>
+                            <li><a class="text-white" href="#">Corporate Internal Media (CIM)</a></li>
+                            <li><a class="text-white" href="#">Electronic Operational Performance Appraisal (EOPA)</a></li>
+                            <li><a class="text-white" href="#">Jasa Marga Livestreaming</a></li>
+                            <li><a class="text-white" href="#">Privacy Policy</a></li>
+                            <li><a class="text-white" href="#">JMTO Internal Web Mail</a></li>
                         </ul>
                     </div>
                 </div>
@@ -576,7 +528,7 @@ header("Content-Security-Policy: img-src 'self' *");
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 text-center">
-                        <p class="mb-0 text-white">©PT Jasamarga Tollroad Operator. 2023 <a href="index.html"></a> Privacy & Policy</p>
+                        <p class="mb-0 text-white">©PT Jasamarga Tollroad Operator. 2023 <a href="#"></a> Privacy & Policy</p>
                     </div>
                 </div>
             </div>
@@ -595,24 +547,13 @@ header("Content-Security-Policy: img-src 'self' *");
     Javascript -->
 
     <!-- JS Global Compulsory (Do not remove)-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables/jquery.dataTables.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/popper/popper.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/jquery.appear.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/counter/jquery.countTo.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/owl-carousel/owl.carousel.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/swiper/swiper.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/swiperanimation/SwiperAnimation.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/shuffle/shuffle.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/jarallax/jarallax.min.js"></script>
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/jarallax/jarallax-video.min.js"></script>
-
+    <script src="<?= base_url('assets_landing/') ?>jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/plugins-lte/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url('assets_landing/') ?>jarallax.min.js"></script>
+    <script src="<?= base_url('assets_landing/') ?>jarallax-video.min.js"></script>
     <!-- Template Scripts (Do not remove)-->
-    <script src="https://themes.potenzaglobalsolutions.com/html/academic/js/custom.js"></script>
+    <script src="<?= base_url('assets_landing/') ?>custom.js"></script>
 
 </body>
 

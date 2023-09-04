@@ -24,18 +24,18 @@ class Email_send
         $email = $data['email'];
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'kintekindo.net',
-            'smtp_port' => 465,
-            'smtp_user' => 'admin@kintekindo.net',
-            'smtp_pass' => 'Kintekindo0902#',
+            'smtp_host' => 'mail.jmto.co.id',
+            'smtp_port' => 26,
+            'smtp_user' => 'e-procurement@jmto.co.id',
+            'smtp_pass' => 'jmt02023!#',
             'mailtype'  => 'html',
-            // 'smtp_crypto'  => 'ssl',
+            'smtp_crypto'  => 'tls',
             'charset'   => 'iso-8859-1'
         );
         $this->ci->load->library('email', $config);
         $this->ci->email->set_newline("\r\n");
         // Email dan nama pengirim
-        $this->ci->email->from('admin@kintekindo.net', 'JMTO');
+        $this->ci->email->from('e-procurement@jmto.co.id', 'JMTO');
 
         // Email penerima
 

@@ -180,13 +180,13 @@
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_tervalidasi">
                                 <i class="fa-solid fa-user-shield px-1"></i>
-                                <small>Data Status Rekanan Tervalidasi</small>
+                                <small>Data Status Rekanan Terdaftar</small>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="<?= base_url() ?>validator/rekanan_terundang">
                                 <i class="fa-solid fa-address-card px-1"></i>
-                                <small>Data Rekanan Terundang</small>
+                                <small>Data Status Rekanan Tervalidasi</small>
                             </a>
                         </li>
                         <li>
