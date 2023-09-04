@@ -30,4 +30,7 @@
 <input type="hidden" name="url_hapus_syarat_sbu" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_hapus_syarat_sbu') ?>">
 <!-- INI UTNUK URL PERSYATAN TEKNIS ADMINISTRASI -->
 <input type="hidden" name="url_update_syarat_izin_teknis_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_syarat_izin_teknis_tender') ?>">
-
+<input type="hidden" name="url_simpan_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/simpan_syarat_tambahan') ?>">
+<input type="hidden" name="url_get_syarat_tambahan_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_syarat_tambahan') ?>">
+<input type="hidden" name="url_hapus_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_hapus_syarat_tambahan') ?>"> 
+<input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_download_syarat_tambahan') ?>">
