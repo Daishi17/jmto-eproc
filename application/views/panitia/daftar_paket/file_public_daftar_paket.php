@@ -209,6 +209,18 @@
                     $("#validasi_jadwal3").css({
                         "background-color": "red",
                     });
+                } else if (response == 'gagal4') {
+                    $("#validasi_jadwal4").css({
+                        "background-color": "red",
+                    });
+                } else if (response == 'gagal5') {
+                    $("#validasi_jadwal5").css({
+                        "background-color": "red",
+                    });
+                } else if (response == 'gagal6') {
+                    $("#validasi_jadwal6").css({
+                        "background-color": "red",
+                    });
                 } else {
                     let timerInterval
                     Swal.fire({
