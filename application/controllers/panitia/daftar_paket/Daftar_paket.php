@@ -211,7 +211,7 @@ class Daftar_paket extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		}
 
-		if ($jadwal3 < $jadwal2 || $jadwal4 > $jadwal3) {
+		if ($jadwal3 < $jadwal2 || $jadwal3 > $jadwal4) {
 			$this->output->set_content_type('application/json')->set_output(json_encode('gagal2'));
 		} else {
 			$where = [
@@ -226,8 +226,8 @@ class Daftar_paket extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		}
 
-		if ($jadwal5 < $jadwal4 || $jadwal6 > $jadwal5) {
-			$this->output->set_content_type('application/json')->set_output(json_encode('gagal2'));
+		if ($jadwal5 < $jadwal4 || $jadwal5 > $jadwal6) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal3'));
 		} else {
 			$where = [
 				'id_jadwal_rup' => $id_jadwal_rup[3]
@@ -242,14 +242,271 @@ class Daftar_paket extends CI_Controller
 		}
 
 		if ($jadwal7 < $jadwal6 || $jadwal7 > $jadwal8) {
-			$this->output->set_content_type('application/json')->set_output(json_encode('gagal2'));
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal4'));
 		} else {
 			$where = [
-				'id_jadwal_rup' => $id_jadwal_rup[3]
+				'id_jadwal_rup' => $id_jadwal_rup[4]
 			];
 			$data = [
-				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal5)),
-				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal6)),
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal7)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal8)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal9 < $jadwal8 || $jadwal9 > $jadwal10) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal5'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[5]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal9)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal10)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal11 < $jadwal10 || $jadwal11 > $jadwal12) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal6'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[6]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal11)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal12)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal13 < $jadwal12 || $jadwal13 > $jadwal14) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal7'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[7]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal13)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal14)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal15 < $jadwal14 || $jadwal15 > $jadwal16) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal8'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[8]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal15)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal16)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal17 < $jadwal16 || $jadwal17 > $jadwal18) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal9'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[9]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal17)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal18)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal19 < $jadwal18 || $jadwal19 > $jadwal20) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal10'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[10]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal19)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal20)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal21 < $jadwal20 || $jadwal21 > $jadwal22) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal11'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[11]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal21)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal22)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal23 < $jadwal22 || $jadwal23 > $jadwal24) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal12'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[12]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal23)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal24)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal25 < $jadwal24 || $jadwal25 > $jadwal26) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal13'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[13]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal25)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal26)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal27 < $jadwal26 || $jadwal27 > $jadwal29) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal14'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[14]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal27)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal28)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal29 < $jadwal28 || $jadwal29 > $jadwal30) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal15'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[15]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal29)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal30)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+
+		if ($jadwal29 < $jadwal28 || $jadwal29 > $jadwal30) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal15'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[15]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal29)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal30)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal31 < $jadwal30 || $jadwal31 > $jadwal32) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal16'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[16]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal31)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal32)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal33 < $jadwal32 || $jadwal33 > $jadwal34) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal17'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[17]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal33)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal34)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal35 < $jadwal34 || $jadwal35 > $jadwal36) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal18'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[18]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal35)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal36)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+
+		if ($jadwal37 < $jadwal35 || $jadwal37 > $jadwal38) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal19'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[19]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal37)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal38)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal39 < $jadwal37 || $jadwal39 > $jadwal40) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal20'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[20]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal39)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal40)),
 			];
 
 			$this->M_panitia->update_jadwal($data, $where);
