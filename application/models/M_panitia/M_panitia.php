@@ -186,6 +186,36 @@ class M_panitia extends CI_Model
         $this->db->delete('tbl_syratat_kbli_tender', $where);
     }
 
+    // syarat tambahan
+    public function tambah_syarat_rup($data)
+    {
+        $this->db->insert('tbl_syarat_tambahan_rup', $data);
+    }
+    public function delete_syarat_rup($where)
+    {
+        $this->db->delete('tbl_syarat_tambahan_rup', $where);
+    }
+
+    function result_syarat_tambahan($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syarat_tambahan_rup');
+        $this->db->where('tbl_syarat_tambahan_rup.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    function row_syarat_tambahan($id_syarat_tambahan)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syarat_tambahan_rup');
+        $this->db->join('tbl_paket', 'tbl_syarat_tambahan_rup.id_rup = tbl_paket.id_rup', 'left');
+        $this->db->where('tbl_syarat_tambahan_rup.id_syarat_tambahan', $id_syarat_tambahan);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     // INI UNTUK SYART SBU TENDER
     function result_sbu()
     {

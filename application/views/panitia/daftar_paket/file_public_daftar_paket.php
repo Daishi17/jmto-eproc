@@ -412,6 +412,7 @@
 
     // SIUP
     $("#cek_siup").change(function() {
+        var type_izin = 'siup';
         if (this.checked) {
             var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
             var id_url_rup = $('[name="id_url_rup"]').val();
@@ -423,7 +424,8 @@
                 data: {
                     id_url_rup: id_url_rup,
                     sts_checked_siup: sts_checked_siup,
-                    type: type
+                    type: type,
+                    type_izin: type_izin
                 },
                 dataType: "JSON",
                 success: function(response) {
@@ -441,7 +443,8 @@
                 data: {
                     id_url_rup: id_url_rup,
                     sts_checked_siup: sts_checked_siup,
-                    type: type
+                    type: type,
+                    type_izin: type_izin
                 },
                 dataType: "JSON",
                 success: function(response) {
@@ -453,9 +456,11 @@
     });
 
     function pilih_syarat_izin_usaha_tender_siup() {
+        var type_izin = 'siup';
         var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
         var id_url_rup = $('[name="id_url_rup"]').val();
         var sts_masa_berlaku_siup = $('[name="sts_masa_berlaku_siup"]').val();
+        var tgl_berlaku_siup = $('[name="tgl_berlaku_siup"]').val();
         var type = 'sts_masa_berlaku_siup';
         $.ajax({
             type: "POST",
@@ -463,7 +468,9 @@
             data: {
                 id_url_rup: id_url_rup,
                 sts_masa_berlaku_siup: sts_masa_berlaku_siup,
-                type: type
+                tgl_berlaku_siup: tgl_berlaku_siup,
+                type: type,
+                type_izin: type_izin
             },
             dataType: "JSON",
             success: function(response) {
@@ -477,8 +484,32 @@
         })
     }
 
+    function pilih_syarat_tanggal_izin_usaha_tender_siup() {
+        var type_izin = 'siup';
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tgl_berlaku_siup = $('[name="tgl_berlaku_siup"]').val();
+        var type = 'tanggal_masa_berlaku_siup';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tgl_berlaku_siup: tgl_berlaku_siup,
+                type: type,
+                type_izin: type_izin
+            },
+            dataType: "JSON",
+            success: function(response) {
+
+            }
+        })
+    }
+
+
     // nib
     $("#cek_nib").change(function() {
+        var type_izin = 'nib';
         if (this.checked) {
             var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
             var id_url_rup = $('[name="id_url_rup"]').val();
@@ -490,7 +521,8 @@
                 data: {
                     id_url_rup: id_url_rup,
                     sts_checked_nib: sts_checked_nib,
-                    type: type
+                    type: type,
+                    type_izin: type_izin
                 },
                 dataType: "JSON",
                 success: function(response) {
@@ -508,7 +540,8 @@
                 data: {
                     id_url_rup: id_url_rup,
                     sts_checked_nib: sts_checked_nib,
-                    type: type
+                    type: type,
+                    type_izin: type_izin
                 },
                 dataType: "JSON",
                 success: function(response) {
@@ -520,9 +553,11 @@
     });
 
     function pilih_syarat_izin_usaha_tender_nib() {
+        var type_izin = 'nib';
         var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
         var id_url_rup = $('[name="id_url_rup"]').val();
         var sts_masa_berlaku_nib = $('[name="sts_masa_berlaku_nib"]').val();
+        var tgl_berlaku_nib = $('[name="tgl_berlaku_nib"]').val();
         var type = 'sts_masa_berlaku_nib';
         $.ajax({
             type: "POST",
@@ -530,7 +565,9 @@
             data: {
                 id_url_rup: id_url_rup,
                 sts_masa_berlaku_nib: sts_masa_berlaku_nib,
-                type: type
+                tgl_berlaku_nib: tgl_berlaku_nib,
+                type: type,
+                type_izin: type_izin
             },
             dataType: "JSON",
             success: function(response) {
@@ -543,6 +580,318 @@
             }
         })
     }
+    // nib
+    function pilih_syarat_tanggal_izin_usaha_tender_nib() {
+        var type_izin = 'nib';
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tgl_berlaku_nib = $('[name="tgl_berlaku_nib"]').val();
+        var type = 'tanggal_masa_berlaku_nib';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tgl_berlaku_nib: tgl_berlaku_nib,
+                type: type,
+                type_izin: type_izin
+            },
+            dataType: "JSON",
+            success: function(response) {}
+        })
+    }
+
+
+
+    // sbu
+    $("#cek_sbu").change(function() {
+        var type_izin = 'sbu';
+        if (this.checked) {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_sbu = 1;
+            var type = 'sts_checked_sbu';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_sbu: sts_checked_sbu,
+                    type: type,
+                    type_izin: type_izin
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_sbu"]').val(response['row_syarat_izin_usah_tender']['sts_checked_sbu']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_sbu = 0;
+            var type = 'sts_checked_sbu';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_sbu: sts_checked_sbu,
+                    type: type,
+                    type_izin: type_izin
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_sbu"]').val(response['row_syarat_izin_usah_tender']['sts_checked_sbu']);
+                    $('[name="sts_masa_berlaku_sbu"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_sbu']);
+                }
+            })
+        }
+    });
+
+    function pilih_syarat_izin_usaha_tender_sbu() {
+        var type_izin = 'sbu';
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var sts_masa_berlaku_sbu = $('[name="sts_masa_berlaku_sbu"]').val();
+        var tgl_berlaku_sbu = $('[name="tgl_berlaku_sbu"]').val();
+        var type = 'sts_masa_berlaku_sbu';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                sts_masa_berlaku_sbu: sts_masa_berlaku_sbu,
+                tgl_berlaku_sbu: tgl_berlaku_sbu,
+                type: type,
+                type_izin: type_izin
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="sts_masa_berlaku_sbu"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_sbu']);
+                if (response['row_syarat_izin_usah_tender']['sts_masa_berlaku_sbu'] == 1) {
+                    $('[name="tgl_berlaku_sbu"]').css('display', 'block');
+                } else {
+                    $('[name="tgl_berlaku_sbu"]').css('display', 'none');
+                }
+            }
+        })
+    }
+
+    // sbu
+    function pilih_syarat_tanggal_izin_usaha_tender_sbu() {
+        var type_izin = 'sbu';
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tgl_berlaku_sbu = $('[name="tgl_berlaku_sbu"]').val();
+        var type = 'tanggal_masa_berlaku_sbu';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tgl_berlaku_sbu: tgl_berlaku_sbu,
+                type: type,
+                type_izin: type_izin
+            },
+            dataType: "JSON",
+            success: function(response) {}
+        })
+    }
+
+
+    // siujk
+    $("#cek_siujk").change(function() {
+        var type_izin = 'siujk';
+        if (this.checked) {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_siujk = 1;
+            var type = 'sts_checked_siujk';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_siujk: sts_checked_siujk,
+                    type: type,
+                    type_izin: type_izin
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_siujk"]').val(response['row_syarat_izin_usah_tender']['sts_checked_siujk']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_siujk = 0;
+            var type = 'sts_checked_siujk';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_siujk: sts_checked_siujk,
+                    type: type,
+                    type_izin: type_izin
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_siujk"]').val(response['row_syarat_izin_usah_tender']['sts_checked_siujk']);
+                    $('[name="sts_masa_berlaku_siujk"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_siujk']);
+                }
+            })
+        }
+    });
+
+    function pilih_syarat_izin_usaha_tender_siujk() {
+        var type_izin = 'siujk';
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var sts_masa_berlaku_siujk = $('[name="sts_masa_berlaku_siujk"]').val();
+        var tgl_berlaku_siujk = $('[name="tgl_berlaku_siujk"]').val();
+        var type = 'sts_masa_berlaku_siujk';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                sts_masa_berlaku_siujk: sts_masa_berlaku_siujk,
+                tgl_berlaku_siujk: tgl_berlaku_siujk,
+                type: type,
+                type_izin: type_izin
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="sts_masa_berlaku_siujk"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_siujk']);
+                if (response['row_syarat_izin_usah_tender']['sts_masa_berlaku_siujk'] == 1) {
+                    $('[name="tgl_berlaku_siujk"]').css('display', 'block');
+                } else {
+                    $('[name="tgl_berlaku_siujk"]').css('display', 'none');
+                }
+            }
+        })
+    }
+
+
+    // siujk
+    function pilih_syarat_tanggal_izin_usaha_tender_siujk() {
+        var type_izin = 'siujk';
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tgl_berlaku_siujk = $('[name="tgl_berlaku_siujk"]').val();
+        var type = 'tanggal_masa_berlaku_siujk';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tgl_berlaku_siujk: tgl_berlaku_siujk,
+                type: type,
+                type_izin: type_izin
+            },
+            dataType: "JSON",
+            success: function(response) {}
+        })
+    }
+
+
+    // skdp
+    $("#cek_skdp").change(function() {
+        var type_izin = 'skdp';
+        if (this.checked) {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_skdp = 1;
+            var type = 'sts_checked_skdp';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_skdp: sts_checked_skdp,
+                    type: type,
+                    type_izin: type_izin
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_skdp"]').val(response['row_syarat_izin_usah_tender']['sts_checked_skdp']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_skdp = 0;
+            var type = 'sts_checked_skdp';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_skdp: sts_checked_skdp,
+                    type: type,
+                    type_izin: type_izin
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_skdp"]').val(response['row_syarat_izin_usah_tender']['sts_checked_skdp']);
+                    $('[name="sts_masa_berlaku_skdp"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_skdp']);
+                }
+            })
+        }
+    });
+
+    function pilih_syarat_izin_usaha_tender_skdp() {
+        var type_izin = 'skdp';
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var sts_masa_berlaku_skdp = $('[name="sts_masa_berlaku_skdp"]').val();
+        var tgl_berlaku_skdp = $('[name="tgl_berlaku_skdp"]').val();
+        var type = 'sts_masa_berlaku_skdp';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                sts_masa_berlaku_skdp: sts_masa_berlaku_skdp,
+                tgl_berlaku_skdp: tgl_berlaku_skdp,
+                type: type,
+                type_izin: type_izin
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="sts_masa_berlaku_skdp"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_skdp']);
+                if (response['row_syarat_izin_usah_tender']['sts_masa_berlaku_skdp'] == 1) {
+                    $('[name="tgl_berlaku_skdp"]').css('display', 'block');
+                } else {
+                    $('[name="tgl_berlaku_skdp"]').css('display', 'none');
+                }
+            }
+        })
+    }
+
+
+    // skdp
+    function pilih_syarat_tanggal_izin_usaha_tender_skdp() {
+        var type_izin = 'skdp';
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var tgl_berlaku_skdp = $('[name="tgl_berlaku_skdp"]').val();
+        var type = 'tanggal_masa_berlaku_skdp';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                tgl_berlaku_skdp: tgl_berlaku_skdp,
+                type: type,
+                type_izin: type_izin
+            },
+            dataType: "JSON",
+            success: function(response) {}
+        })
+    }
+
     // INI UNTUK SYARAT KBLI
     $(document).ready(function() {
         $('#table_kbli_syarat_tender').DataTable({
@@ -1260,9 +1609,7 @@
             "bDestroy": true,
             "buttons": ["excel", "pdf", "print", "colvis"],
             initComplete: function() {
-                this.api().buttons().container()
-                    .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
-
+                this.api().buttons().container().appendTo($('.col-md-6:eq(0)', this.api().table().container()));
             },
             "order": [],
             "ajax": {
@@ -1323,6 +1670,123 @@
                 $('#jenis_kontrak').text(jenis_kontrak)
                 $('#bobot_teknis').text(response['row_rup'].bobot_teknis)
                 $('#bobot_biaya').text(response['row_rup'].bobot_biaya)
+            }
+        })
+    }
+
+    var form_simpan_syarat_tambahan = $('#form_simpan_syarat_tambahan')
+    form_simpan_syarat_tambahan.on('submit', function(e) {
+        var url_simpan_syarat_tambahan = $('[name="url_simpan_syarat_tambahan"]').val();
+        var file_syarat_tambahan = $('[name="file_syarat_tambahan"]').val();
+        if (file_syarat_tambahan == '') {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Dokumen Wajib Di Isi!',
+            })
+        } else {
+            e.preventDefault();
+            $.ajax({
+                url: url_simpan_syarat_tambahan,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.file_syarat_tambahan_btn').attr("disabled", true);
+                },
+                success: function(response) {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('.file_syarat_tambahan_btn').attr("disabled", false);
+                            get_syarat_tambahan()
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+    get_syarat_tambahan()
+
+    function get_syarat_tambahan() {
+        var url_get_syarat_tambahan_tender = $('[name="url_get_syarat_tambahan_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        $.ajax({
+            type: "POST",
+            url: url_get_syarat_tambahan_tender,
+            data: {
+                id_url_rup: id_url_rup,
+            },
+            dataType: "JSON",
+            success: function(response) {
+                // get sumber dana
+                var html = '';
+                var i;
+                for (i = 0; i < response['result_syarat_tender_tambahan'].length; i++) {
+                    html += '<tr>' +
+                        '<td>' + response['result_syarat_tender_tambahan'][i].nama_syarat_tambahan + '</td>' +
+                        '<td><a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['result_syarat_tender_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> Download File</a></td>' +
+                        '<td><a href="javascript:;" onclick="hapus_tambahan_syarat(' + response['result_syarat_tender_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus</a></td>' +
+                        '</tr>'
+                }
+                $('#result_tbl_tambahan_syarat_tender').html(html);
+            }
+        })
+    }
+
+    function download_file_syarat_tambahan(id_syarat_tambahan) {
+        var url_download_syarat_tambahan = $('[name="url_download_syarat_tambahan"]').val()
+        location.href = url_download_syarat_tambahan + id_syarat_tambahan;
+    }
+
+    function hapus_tambahan_syarat(id_syarat_tambahan) {
+        var url_hapus_syarat_tambahan = $('[name="url_hapus_syarat_tambahan"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Menhapus',
+            text: 'Syarat Kbli Ini ??',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Jangan Hapus!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_syarat_tambahan,
+                    data: {
+                        id_syarat_tambahan: id_syarat_tambahan,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Data Berhasil Di Hapus!', '', 'success')
+                        get_syarat_tambahan()
+                    }
+                })
+
             }
         })
     }

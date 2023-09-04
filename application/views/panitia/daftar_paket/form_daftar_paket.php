@@ -874,47 +874,102 @@
                                                                                     <option value="1">Tanggal</option>
                                                                                 </select>
                                                                                 <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siup'] == 1) { ?>
-                                                                                    <input type="date" name="tgl_berlaku_siup" class="form-control form-control-sm">
+                                                                                    <input type="date" value="<?= $syarat_izin_usaha_tender['tgl_berlaku_siup'] ?>" onchange="pilih_syarat_tanggal_izin_usaha_tender_siup()" name="tgl_berlaku_siup" class="form-control form-control-sm">
                                                                                 <?php } else { ?>
                                                                                     <input type="date" style="display: none;" name="tgl_berlaku_siup" class="form-control form-control-sm">
                                                                                 <?php } ?>
-
                                                                             </div>
                                                                             <div class="input-group mb-1">
                                                                                 <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                    <option selected disabled value="">Pilih...</option>
-                                                                                    <option value="1">Seumur Hidup</option>
-                                                                                    <option value="2">Tanggal</option>
+                                                                                <select onchange="pilih_syarat_izin_usaha_tender_nib()" name="sts_masa_berlaku_nib" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_nib']) { ?>
+                                                                                        <option value="<?= $syarat_izin_usaha_tender['sts_masa_berlaku_nib'] ?>">
+                                                                                            <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_nib'] == 1) { ?>
+                                                                                                Tanggal
+                                                                                            <?php } else { ?>
+                                                                                                Seumur Hidup
+                                                                                            <?php } ?>
+                                                                                        </option>
+                                                                                    <?php } else { ?>
+                                                                                        <option selected disabled value="">Pilih...</option>
+                                                                                    <?php } ?>
+                                                                                    <option value="2">Seumur Hidup</option>
+                                                                                    <option value="1">Tanggal</option>
                                                                                 </select>
-                                                                                <input type="date" class="form-control form-control-sm">
+                                                                                <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_nib'] == 1) { ?>
+                                                                                    <input type="date" value="<?= $syarat_izin_usaha_tender['tgl_berlaku_nib'] ?>" onchange="pilih_syarat_tanggal_izin_usaha_tender_nib()" name="tgl_berlaku_nib" class="form-control form-control-sm">
+                                                                                <?php } else { ?>
+                                                                                    <input type="date" style="display: none;" name="tgl_berlaku_nib" class="form-control form-control-sm">
+                                                                                <?php } ?>
                                                                             </div>
                                                                             <div class="input-group mb-1">
                                                                                 <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                    <option selected disabled value="">Pilih...</option>
-                                                                                    <option value="1">Seumur Hidup</option>
-                                                                                    <option value="2">Tanggal</option>
+                                                                                <select onchange="pilih_syarat_izin_usaha_tender_sbu()" name="sts_masa_berlaku_sbu" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_sbu']) { ?>
+                                                                                        <option value="<?= $syarat_izin_usaha_tender['sts_masa_berlaku_sbu'] ?>">
+                                                                                            <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_sbu'] == 1) { ?>
+                                                                                                Tanggal
+                                                                                            <?php } else { ?>
+                                                                                                Seumur Hidup
+                                                                                            <?php } ?>
+                                                                                        </option>
+                                                                                    <?php } else { ?>
+                                                                                        <option selected disabled value="">Pilih...</option>
+                                                                                    <?php } ?>
+                                                                                    <option value="2">Seumur Hidup</option>
+                                                                                    <option value="1">Tanggal</option>
                                                                                 </select>
-                                                                                <input type="date" class="form-control form-control-sm">
+                                                                                <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_sbu'] == 1) { ?>
+                                                                                    <input type="date" value="<?= $syarat_izin_usaha_tender['tgl_berlaku_sbu'] ?>" onchange="pilih_syarat_tanggal_izin_usaha_tender_sbu()" name="tgl_berlaku_sbu" class="form-control form-control-sm">
+                                                                                <?php } else { ?>
+                                                                                    <input type="date" style="display: none;" name="tgl_berlaku_sbu" class="form-control form-control-sm">
+                                                                                <?php } ?>
                                                                             </div>
                                                                             <div class="input-group mb-1">
                                                                                 <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                    <option selected disabled value="">Pilih...</option>
-                                                                                    <option value="1">Seumur Hidup</option>
-                                                                                    <option value="2">Tanggal</option>
+                                                                                <select onchange="pilih_syarat_izin_usaha_tender_siujk()" name="sts_masa_berlaku_siujk" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siujk']) { ?>
+                                                                                        <option value="<?= $syarat_izin_usaha_tender['sts_masa_berlaku_siujk'] ?>">
+                                                                                            <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siujk'] == 1) { ?>
+                                                                                                Tanggal
+                                                                                            <?php } else { ?>
+                                                                                                Seumur Hidup
+                                                                                            <?php } ?>
+                                                                                        </option>
+                                                                                    <?php } else { ?>
+                                                                                        <option selected disabled value="">Pilih...</option>
+                                                                                    <?php } ?>
+                                                                                    <option value="2">Seumur Hidup</option>
+                                                                                    <option value="1">Tanggal</option>
                                                                                 </select>
-                                                                                <input type="date" class="form-control form-control-sm">
+                                                                                <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_siujk'] == 1) { ?>
+                                                                                    <input type="date" value="<?= $syarat_izin_usaha_tender['tgl_berlaku_siujk'] ?>" onchange="pilih_syarat_tanggal_izin_usaha_tender_siujk()" name="tgl_berlaku_siujk" class="form-control form-control-sm">
+                                                                                <?php } else { ?>
+                                                                                    <input type="date" style="display: none;" name="tgl_berlaku_siujk" class="form-control form-control-sm">
+                                                                                <?php } ?>
                                                                             </div>
                                                                             <div class="input-group mb-1">
                                                                                 <span class="input-group-text"><i class="fa-regular fa-calendar-days"></i></span>
-                                                                                <select class="form-select form-select-sm" aria-label="Default select example">
-                                                                                    <option selected disabled value="">Pilih...</option>
-                                                                                    <option value="1">Seumur Hidup</option>
-                                                                                    <option value="2">Tanggal</option>
+                                                                                <select onchange="pilih_syarat_izin_usaha_tender_skdp()" name="sts_masa_berlaku_skdp" class="form-select form-select-sm" aria-label="Default select example">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_skdp']) { ?>
+                                                                                        <option value="<?= $syarat_izin_usaha_tender['sts_masa_berlaku_skdp'] ?>">
+                                                                                            <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_skdp'] == 1) { ?>
+                                                                                                Tanggal
+                                                                                            <?php } else { ?>
+                                                                                                Seumur Hidup
+                                                                                            <?php } ?>
+                                                                                        </option>
+                                                                                    <?php } else { ?>
+                                                                                        <option selected disabled value="">Pilih...</option>
+                                                                                    <?php } ?>
+                                                                                    <option value="2">Seumur Hidup</option>
+                                                                                    <option value="1">Tanggal</option>
                                                                                 </select>
-                                                                                <input type="date" class="form-control form-control-sm">
+                                                                                <?php if ($syarat_izin_usaha_tender['sts_masa_berlaku_skdp'] == 1) { ?>
+                                                                                    <input type="date" value="<?= $syarat_izin_usaha_tender['tgl_berlaku_skdp'] ?>" name="tgl_berlaku_skdp" onchange="pilih_syarat_tanggal_izin_usaha_tender_skdp()" class="form-control form-control-sm">
+                                                                                <?php } else { ?>
+                                                                                    <input type="date" style="display: none;" name="tgl_berlaku_skdp" class="form-control form-control-sm">
+                                                                                <?php } ?>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -1237,28 +1292,31 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
-                                                                                <input type="text" class="form-control form-control-sm">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-text"><i class="fa-solid fa-cloud-arrow-up"></i></span>
-                                                                                <input type="file" class="form-control form-control-sm" accept=".xlsx, .xls">
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <button type="submit" class="btn btn-sm btn-primary">
-                                                                                <i class="fa-solid fa-square-plus"></i>
-                                                                                Persyaratan Tambahan
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
+                                                                    <form action="javascript:;" enctype="multipart/form-data" id="form_simpan_syarat_tambahan" method="post">
+                                                                        <input type="hidden" name="id_url_rup" value="<?= $row_rup['id_url_rup'] ?>">
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="input-group">
+                                                                                    <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
+                                                                                    <input name="nama_syarat_tambahan" type="text" class="form-control form-control-sm">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="input-group">
+                                                                                    <span class="input-group-text"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+                                                                                    <input type="file" name="file_syarat_tambahan" class="form-control form-control-sm" accept=".xlsx, .xls">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="2">
+                                                                                <button type="submit" class="btn btn-sm btn-primary file_syarat_tambahan_btn">
+                                                                                    <i class="fa-solid fa-square-plus"></i>
+                                                                                    Persyaratan Tambahan
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </form>
                                                                     <tr>
                                                                         <td colspan="2">
                                                                             <table class="table table-sm table-bordered table-sm shadow-lg">
@@ -1277,6 +1335,9 @@
                                                                                         </th>
                                                                                     </tr>
                                                                                 </thead>
+                                                                                <tbody id="result_tbl_tambahan_syarat_tender">
+
+                                                                                </tbody>
                                                                             </table>
                                                                         </td>
                                                                     </tr>
