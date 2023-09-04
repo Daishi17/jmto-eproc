@@ -963,7 +963,7 @@
     function hapus_kbli_syarat(id_syarat_kbli_tender) {
         var url_hapus_syarat_kbli = $('[name="url_hapus_syarat_kbli"]').val()
         Swal.fire({
-            title: 'Apakah Anda Yakin Ingin Menhapus',
+            title: 'Apakah Anda Yakin Ingin Menghapus',
             text: 'Syarat Kbli Ini ??',
             icon: 'warning',
             showCancelButton: true,
@@ -1061,7 +1061,7 @@
     function hapus_sbu_syarat(id_syarat_sbu_tender) {
         var url_hapus_syarat_sbu = $('[name="url_hapus_syarat_sbu"]').val()
         Swal.fire({
-            title: 'Apakah Anda Yakin Ingin Menhapus',
+            title: 'Apakah Anda Yakin Ingin Menghapus',
             text: 'Syarat sbu Ini ??',
             icon: 'warning',
             showCancelButton: true,
@@ -1396,7 +1396,7 @@
                         ' File Dokumen Prakualifikasi' +
                         '</a>' + '</td>' +
                         '<td style="text-align:center;">' +
-                        '<a href="javascript:;" class="btn btn-danger btn-sm" data="' + response['dok_pengadaan'][i].id_dokumen_pengadaan + '"> <i class="fa-solid fa-trash"></i></a>' +
+                        '<a href="javascript:;" onclick="hapus_dok_pengadaan(' + response['dok_pengadaan'][i].id_dokumen_pengadaan + ')" class="btn btn-danger btn-sm" > <i class="fa-solid fa-trash"></i></a>' +
                         '</td>' +
                         '</tr>';
                 }
@@ -1404,6 +1404,37 @@
             }
         })
     }
+
+    function hapus_dok_pengadaan(id_dokumen_pengadaan) {
+        var url_hapus_dok_pengadaan = $('[name="url_hapus_dok_pengadaan"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Menghapus',
+            text: 'Dokumen Pengadaaan Ini ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_dok_pengadaan,
+                    data: {
+                        id_dokumen_pengadaan: id_dokumen_pengadaan,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Data Berhasil Di Hapus!', '', 'success')
+                        load_dok_pengadaan()
+                    }
+                })
+
+            }
+        })
+    }
+
     load_dok_prakualifikasi()
 
     function load_dok_prakualifikasi() {
@@ -1425,11 +1456,41 @@
                         ' File Dokumen Prakualifikasi' +
                         '</a>' + '</td>' +
                         '<td style="text-align:center;">' +
-                        '<a href="javascript:;" class="btn btn-danger btn-sm" data="' + response['dok_prakualifikasi'][i].id_dokumen_prakualifikasi + '"> <i class="fa-solid fa-trash"></i></a>' +
+                        '<a href="javascript:;" onclick="hapus_dok_prakualifikasi(' + response['dok_prakualifikasi'][i].id_dokumen_prakualifikasi + ')" class="btn btn-danger btn-sm" > <i class="fa-solid fa-trash"></i></a>' +
                         '</td>' +
                         '</tr>';
                 }
                 $('#tbl_prakualifikasi').html(html)
+            }
+        })
+    }
+
+    function hapus_dok_prakualifikasi(id_dokumen_prakualifikasi) {
+        var url_hapus_dok_prakualifikasi = $('[name="url_hapus_dok_prakualifikasi"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Menghapus',
+            text: 'Dokumen Pengadaaan Ini ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_dok_prakualifikasi,
+                    data: {
+                        id_dokumen_prakualifikasi: id_dokumen_prakualifikasi,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Data Berhasil Di Hapus!', '', 'success')
+                        load_dok_prakualifikasi()
+                    }
+                })
+
             }
         })
     }
@@ -1652,7 +1713,21 @@
                     var jenis_kontrak = 'Persentase( % )'
                 }
 
+                function formatRupiah(angka, prefix) {
+                    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                        split = number_string.split(','),
+                        sisa = split[0].length % 3,
+                        rupiah = split[0].substr(0, sisa),
+                        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
+                    if (ribuan) {
+                        separator = sisa ? '.' : '';
+                        rupiah += separator + ribuan.join('.');
+                    }
+
+                    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+                }
                 $('#kode_rup').text(response['row_rup'].kode_rup)
                 $('#tahun_rup').text(response['row_rup'].tahun_rup)
                 $('#nama_departemen').text(response['row_rup'].nama_departemen)
@@ -1670,6 +1745,32 @@
                 $('#jenis_kontrak').text(jenis_kontrak)
                 $('#bobot_teknis').text(response['row_rup'].bobot_teknis)
                 $('#bobot_biaya').text(response['row_rup'].bobot_biaya)
+                $('#total_pagu_rup').text('Rp. ' + formatRupiah(response['row_rup'].total_pagu_rup))
+                $('#total_hps_rup').text('Rp. ' + formatRupiah(response['row_rup'].total_hps_rup))
+
+                var html = '';
+                var i;
+                for (i = 0; i < response['panitia'].length; i++) {
+                    if (response['panitia'][i].role_panitia == 1) {
+                        var role_panitia = 'Ketua Panitia'
+                    } else if (response['panitia'][i].role_panitia == 2) {
+                        var role_panitia = 'Sekretaris Panitia'
+                    } else if (response['panitia'][i].role_panitia == 3) {
+                        var role_panitia = 'Anggota Panitia'
+                    }
+                    html += '<tr>' +
+                        '<td><small>' + response['panitia'][i].nama_pegawai + '</small></td>' +
+                        '<td><small>' + role_panitia + '</small></td>' +
+                        '</tr>';
+                }
+                $('#load_panitia').html(html);
+
+                var html2 = ''
+                var j;
+                for (j = 0; j < response['ruas'].length; j++) {
+                    html2 += '<small>' + response['ruas'][i].nama_ruas + '</small> , </td>';
+                }
+                $('#load_ruas').html('<i class="fa-solid fa-road px-2"></i>' + html2);
             }
         })
     }
@@ -1764,7 +1865,7 @@
     function hapus_tambahan_syarat(id_syarat_tambahan) {
         var url_hapus_syarat_tambahan = $('[name="url_hapus_syarat_tambahan"]').val()
         Swal.fire({
-            title: 'Apakah Anda Yakin Ingin Menhapus',
+            title: 'Apakah Anda Yakin Ingin Menghapus',
             text: 'Syarat Kbli Ini ??',
             icon: 'warning',
             showCancelButton: true,

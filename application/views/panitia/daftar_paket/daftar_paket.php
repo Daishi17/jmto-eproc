@@ -127,10 +127,11 @@
                                             <th class="bg-light">
                                                 <small>Detail Lokasi / Ruas</small>
                                             </th>
-                                            <td colspan="3">
-                                                <i class="fa-solid fa-road px-2"></i>
-                                                <small>Ruas Toll Jakarta Cikampek KM 17</small>&nbsp;&amp;
-                                                <small>Ruas Toll Jakarta Cikampek KM 37</small>
+                                            <td colspan="3" id="load_ruas">
+
+
+                                                <!-- <small>Ruas Toll Jakarta Cikampek KM 17</small>&nbsp;&amp;
+                                                <small>Ruas Toll Jakarta Cikampek KM 37</small> -->
                                             </td>
                                         </tr>
                                         <tr>
@@ -268,15 +269,15 @@
                                                                 <tr>
                                                                     <td>
                                                                         <i class="fa-solid fa-building-columns px-1"></i>
-                                                                        <small>Human Capital & General Affair</small>
+                                                                        <small>BUMN</small>
                                                                     </td>
                                                                     <td>
                                                                         <i class="fa-solid fa-money-bills px-1"></i>
-                                                                        <small>1.500.000.000</small>
+                                                                        <small id="total_pagu_rup"></small>
                                                                     </td>
                                                                     <td>
                                                                         <i class="fa-solid fa-money-bill px-1"></i>
-                                                                        <small>1.300.000.000</small>
+                                                                        <small id="total_hps_rup"></small>
                                                                     </td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-sm btn-primary">
@@ -310,31 +311,8 @@
                                                                     <th><small>Jabatan Panitia</small></th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <small>001 || 1001 || Angga Pramuja S</small>
-                                                                    </td>
-                                                                    <td>
-                                                                        <small>Ketua Panitia</small>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <small>002 || 1002 || Danang Prasetyo</small>
-                                                                    </td>
-                                                                    <td>
-                                                                        <small>Sekretaris</small>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <small>003 || 1003 || Shadi Noris</small>
-                                                                    </td>
-                                                                    <td>
-                                                                        <small>Anggota</small>
-                                                                    </td>
-                                                                </tr>
+                                                            <tbody id="load_panitia">
+
                                                             </tbody>
                                                         </table>
                                                     </div>

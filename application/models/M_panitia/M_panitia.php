@@ -414,9 +414,20 @@ class M_panitia extends CI_Model
         $this->db->insert('tbl_dokumen_pengadaan', $data);
     }
 
+    public function delete_dok_pengadaan($where)
+    {
+        $this->db->delete('tbl_dokumen_pengadaan', $where);
+    }
+
     public function insert_dok_prakualifikasi($data)
     {
         $this->db->insert('tbl_dokumen_prakualifikasi', $data);
+    }
+
+
+    public function delete_dok_prakualifikasi($where)
+    {
+        $this->db->delete('tbl_dokumen_prakualifikasi', $where);
     }
 
     public function get_dokumen_pengadaan($id_rup)
@@ -528,5 +539,15 @@ class M_panitia extends CI_Model
         $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
         $this->db->where('tbl_rup.status_paket_panitia', 1);
         return $this->db->count_all_results();
+    }
+
+    public function get_ruas($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_ruas_rup');
+        $this->db->join('mst_ruas', 'tbl_ruas_rup.id_ruas = mst_ruas.id_ruas');
+        $this->db->where('tbl_ruas_rup.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 }

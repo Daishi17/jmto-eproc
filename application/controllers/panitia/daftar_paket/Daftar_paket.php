@@ -133,8 +133,13 @@ class Daftar_paket extends CI_Controller
 
 	public function by_id_rup($id_url_rup)
 	{
+		$data_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$panitia = $this->M_panitia->get_panitia($data_rup['id_rup']);
+		$ruas = $this->M_panitia->get_ruas($data_rup['id_rup']);
 		$response = [
 			'row_rup' => $this->M_rup->get_row_rup($id_url_rup),
+			'panitia' => $panitia,
+			'ruas' => $ruas
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
@@ -985,40 +990,57 @@ class Daftar_paket extends CI_Controller
 		}
 	}
 
+	function hapus_dok_pengadaan()
+	{
+		$id_dokumen_pengadaan = $this->input->post('id_dokumen_pengadaan');
+		$where = [
+			'id_dokumen_pengadaan' => $id_dokumen_pengadaan
+		];
+		$this->M_panitia->delete_dok_pengadaan($where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
 
 	public function add_dok_prakualifikasi()
 	{
-		$id_rup  = $this->input->post('id_rup');
-		$nama_dok_prakualifikasi  = $this->input->post('nama_dok_prakualifikasi');
-		$nama_rup  = $this->input->post('nama_rup');
-		$nama_pegawai  = $this->session->userdata('nama_pegawai');
+		$id_rup = $this->input->post('id_rup');
+		$nama_dok_prakualifikasi = $this->input->post('nama_dok_prakualifikasi');
+		$nama_rup = $this->input->post('nama_rup');
+		$nama_pegawai = $this->session->userdata('nama_pegawai');
 
 		$date = date('Y');
-		if (!is_dir('file_paket/'  . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI')) {
-			mkdir('file_paket/'  . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI', 0777, TRUE);
+		if (!is_dir('file_paket/' . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI')) {
+			mkdir('file_paket/' . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI', 0777, TRUE);
 		}
 
-		$config['upload_path'] = './file_paket/'  . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI';
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI';
 		$config['allowed_types'] = 'pdf|xlsx|xls';
 		$config['max_size'] = 0;
 
-		$this->load->library('upload ', $config);
+		$this->load->library('upload', $config);
 
 		if ($this->upload->do_upload('file_dok_prakualifikasi')) {
-			$fileData  = $this->upload->data();
+			$fileData = $this->upload->data();
 
 			$upload = [
-				'nama_dok_prakualifikasi'  => $nama_dok_prakualifikasi,
-				'id_rup'  => $id_rup,
-				'file_dok_prakualifikasi'  => $fileData['file_name'],
-				'user_created'  => $nama_pegawai
+				'nama_dok_prakualifikasi' => $nama_dok_prakualifikasi,
+				'id_rup' => $id_rup,
+				'file_dok_prakualifikasi' => $fileData['file_name'],
+				'user_created' => $nama_pegawai
 			];
 
 			$this->M_panitia->insert_dok_prakualifikasi($upload);
-			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
-		} else {
-			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
 		}
+	}
+
+	function hapus_dok_prakualifikasi()
+	{
+		$id_dokumen_prakualifikasi = $this->input->post('id_dokumen_prakualifikasi');
+		$where = [
+			'id_dokumen_prakualifikasi' => $id_dokumen_prakualifikasi
+		];
+		$this->M_panitia->delete_dok_prakualifikasi($where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
 
 	public function get_dok_pengadaan($id_rup_global)

@@ -35,9 +35,11 @@
 <!-- URL UNTUK DOKUMEN PENGADAAN -->
 <input type="hidden" name="url_dokumen_pengadaan" value="<?= base_url('panitia/daftar_paket/daftar_paket/add_dok_pengadaan/') ?>">
 <input type="hidden" name="url_get_dok_pengadaan" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_dok_pengadaan/') ?>">
+<input type="hidden" name="url_hapus_dok_pengadaan" value="<?= base_url('panitia/daftar_paket/daftar_paket/hapus_dok_pengadaan/') ?>">
 
 <input type="hidden" name="url_dokumen_prakualifikasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/add_dok_prakualifikasi/') ?>">
 <input type="hidden" name="url_get_dok_prakualifikasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_dok_prakualifikasi/') ?>">
+<input type="hidden" name="url_hapus_dok_prakualifikasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/hapus_dok_prakualifikasi/') ?>">
 
 <!-- redirect setelah simpan paket -->
 <input type="hidden" name="redirect_daftar_paket" value="<?= base_url('panitia/daftar_paket/daftar_paket') ?>">
