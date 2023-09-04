@@ -62,6 +62,41 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <small>Laporan</small>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-chart-simple px-1"></i>
+                                <small>Tabel Total Tender</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-chart-pie px-1"></i>
+                                <small>Grafik & Rekap Tender</small>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-chart-column px-1"></i>
+                                <small>Penilaian Kinerja Rekanan</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-chart-area px-1"></i>
+                                <small>Progres Kinerja Rekanan</small>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <?php if ($this->session->userdata('role') == 2) { ?>
                     <li>
                         <a href="<?= base_url() ?>administrator/dashboard" class="nav-link px-2 text-white">

@@ -34,7 +34,7 @@
 
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-sm table-striped">
+                    <table id="tbl_daftar_paket" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary">
                             <tr>
                                 <th style="width:10%;"><small class="text-white">Tahun</small></th>
@@ -50,46 +50,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><small>2023</small></td>
-                                <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                <td><small>Human Capital & General Affair</small></td>
-                                <td><small>Jasa Lain</small></td>
-                                <td><small>Tender Terbatas</small></td>
-                                <td><small>1.300.000.000</small></td>
-                                <td><small><span class="badge bg-warning text-dark">Draft Paket</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                            <i class="fa-solid fa-users-viewfinder"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><small>2023</small></td>
-                                <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                <td><small>Human Capital & General Affair</small></td>
-                                <td><small>Jasa Lain</small></td>
-                                <td><small>Tender Umum</small></td>
-                                <td><small>1.300.000.000</small></td>
-                                <td><small><span class="badge bg-success text-white">Paket Sudah Diumumkan</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                            <i class="fa-solid fa-users-viewfinder"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="modal-xl-detail">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
@@ -108,7 +76,7 @@
                                     <div class="flex-grow-1 bd-highlight">
                                         <span class="text-white">
                                             <i class="fa-solid fa-business-time px-1"></i>
-                                            <small><strong>Form Data - Daftar Paket Penyedia</strong></small>
+                                            <small><strong>Detail Data - Daftar Paket Penyedia</strong></small>
                                         </span>
                                     </div>
                                 </div>
@@ -120,14 +88,14 @@
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-barcode px-2"></i>
-                                                <small>CP.2023.101.0001</small>
+                                                <small id="kode_rup"></small>
                                             </td>
                                             <th class="bg-light">
                                                 <small>Tahun</small>
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-calendar-days px-2"></i>
-                                                <small>2023</small>
+                                                <small id="tahun_rup"></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -136,14 +104,14 @@
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-building-columns px-2"></i>
-                                                <small>Human Capital & General Affair</small>
+                                                <small id="nama_departemen"></small>
                                             </td>
                                             <th class="bg-light">
                                                 <small>Sections</small>
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-map px-2"></i>
-                                                <small>Procurement</small>
+                                                <small id="nama_section"></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -152,7 +120,7 @@
                                             </th>
                                             <td colspan="3">
                                                 <i class="fa-solid fa-gift px-2"></i>
-                                                <small>Pengadaan Sewa Keamanan / Securty</small>
+                                                <small id="nama_rup"></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -171,14 +139,14 @@
                                             </th>
                                             <td>
                                                 <i class="fa-regular fa-calendar-days px-2"></i>
-                                                <small>31/07/2023</small> - <small>31/07/2024</small>
+                                                <small id="jangka_waktu_mulai_pelaksanaan"></small> s/d <small id="jangka_waktu_selesai_pelaksanaan"></small>
                                             </td>
                                             <th class="bg-light">
                                                 <small>Jangka Waktu</small>
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-clock px-2"></i>
-                                                <small>360</small>&nbsp; Hari
+                                                <small id="jangka_waktu_hari_pelaksanaan"></small>&nbsp; Hari
                                             </td>
                                         </tr>
                                         <tr>
@@ -207,23 +175,23 @@
                                                                 <tr>
                                                                     <td>
                                                                         <i class="fa-solid fa-money-bill px-1"></i>
-                                                                        <small>Capex</small>
+                                                                        <small id="nama_jenis_anggaran"></small>
                                                                     </td>
                                                                     <td>
                                                                         <i class="fa-solid fa-briefcase px-1"></i>
-                                                                        <small>Jasa Lain</small>
+                                                                        <small id="nama_jenis_pengadaan"> </small>
                                                                     </td>
                                                                     <td>
                                                                         <i class="fa-solid fa-briefcase px-1"></i>
-                                                                        <small>Tender Umum</small>
+                                                                        <small id="nama_metode_pengadaan"> </small>
                                                                     </td>
                                                                     <td>
                                                                         <i class="fa-solid fa-bars-progress px-1"></i>
-                                                                        <small>Prakualifikasi</small>
+                                                                        <small id="metode_kualifikasi"></small>
                                                                     </td>
                                                                     <td>
                                                                         <i class="fa-solid fa-folder-tree px-1"></i>
-                                                                        <small>Satu File</small>
+                                                                        <small id="metode_dokumen"> </small>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -249,14 +217,14 @@
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-building-circle-check px-1"></i>
-                                                <small>Menengah</small>
+                                                <small id="kualifikasi_usaha"></small>
                                             </td>
                                             <th class="bg-light">
                                                 <small>Jenis Kontrak</small>
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-square-pen px-1"></i>
-                                                <small>Lump Sum</small>
+                                                <small id="jenis_kontrak"></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -265,14 +233,14 @@
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-percent px-1"></i>
-                                                <small>60</small>
+                                                <small id="bobot_teknis"></small>
                                             </td>
                                             <th class="bg-light">
                                                 <small>Bobot Biaya</small>
                                             </th>
                                             <td>
                                                 <i class="fa-solid fa-percent px-1"></i>
-                                                <small>40</small>
+                                                <small id="bobot_biaya"></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -413,6 +381,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" tabindex="-1" id="modal-xl-tambah">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">

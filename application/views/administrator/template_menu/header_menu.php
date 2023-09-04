@@ -57,15 +57,25 @@
                 </small>
             </a>&nbsp;
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li>
-                    <a href="<?= base_url() ?>administrator/dashboard" class="nav-link px-2 text-white">
-                        <i class="fa-solid fa-gauge-high mb-1"></i>
-                        <small>Dashboard</small>
-                    </a>
-                </li>
-               
-              
-              
+                <?php if ($this->session->userdata('role') == 2) { ?>
+                    <li>
+                        <a href="<?= base_url() ?>administrator/dashboard" class="nav-link px-2 text-white">
+                            <i class="fa-solid fa-gauge-high mb-1"></i>
+                            <small>Dashboard</small>
+                        </a>
+                    </li>
+                <?php } else { ?>
+                    <li>
+                        <a href="<?= base_url() ?>panitia/beranda/beranda" class="nav-link px-2 text-white">
+                            <i class="fa-solid fa-gauge-high mb-1"></i>
+                            <small>Dashboard</small>
+                        </a>
+                    </li>
+                <?php }  ?>
+
+
+
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-business-time"></i>
@@ -142,7 +152,7 @@
                             <small class="text-white">Panitia</small>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="#"><small><?= $this->session->userdata('nama_pegawai');?></small></a></li>
+                            <li><a class="dropdown-item" href="#"><small><?= $this->session->userdata('nama_pegawai'); ?></small></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

@@ -12,6 +12,7 @@
 
 <input type="hidden" name="url_update_rup_hps" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_hps/') ?>">
 <input type="hidden" name="url_update_dok_hps" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_dok_hps') ?>">
+<input type="hidden" name="url_update_rup" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_update_rup') ?>">
 <input type="hidden" name="url_cek_dokumen_hps" value="<?= base_url('file_paket/') ?>">
 
 <!-- url jadwal -->
@@ -31,3 +32,15 @@
 <!-- INI UTNUK URL PERSYATAN TEKNIS ADMINISTRASI -->
 <input type="hidden" name="url_update_syarat_izin_teknis_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_syarat_izin_teknis_tender') ?>">
 
+<!-- URL UNTUK DOKUMEN PENGADAAN -->
+<input type="hidden" name="url_dokumen_pengadaan" value="<?= base_url('panitia/daftar_paket/daftar_paket/add_dok_pengadaan/') ?>">
+<input type="hidden" name="url_get_dok_pengadaan" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_dok_pengadaan/') ?>">
+
+<input type="hidden" name="url_dokumen_prakualifikasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/add_dok_prakualifikasi/') ?>">
+<input type="hidden" name="url_get_dok_prakualifikasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_dok_prakualifikasi/') ?>">
+
+<!-- redirect setelah simpan paket -->
+<input type="hidden" name="redirect_daftar_paket" value="<?= base_url('panitia/daftar_paket/daftar_paket') ?>">
+
+<!-- url daftar paket -->
+<input type="hidden" name="url_daftar_paket" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_draft_paket') ?>">

@@ -169,7 +169,7 @@ class Sirup_buat_paket extends CI_Controller
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
-	
+
 
 
 	function hapus_panitia($id_url_panitia)
@@ -199,8 +199,8 @@ class Sirup_buat_paket extends CI_Controller
 		];
 		$date = date('Y');
 		$get_nama_rup = $this->M_rup->get_nama($where);
-		if (!is_dir('file_paket/' . $get_nama_rup['nama_rup'] . '-' . $date)) {
-			mkdir('file_paket/' . $get_nama_rup['nama_rup'] . '-' . $date, 0777, TRUE);
+		if (!is_dir('file_paket/' . $get_nama_rup['nama_rup'])) {
+			mkdir('file_paket/' . $get_nama_rup['nama_rup'], 0777, TRUE);
 		}
 		$this->M_rup->update_rup($data, $where);
 
@@ -227,16 +227,14 @@ class Sirup_buat_paket extends CI_Controller
 				'id_rup' => $row_rup['id_rup'],
 			];
 			$this->M_rup->tambah_izin_usaha($data);
-		} else {
-		}
-		
+		} else { }
+
 		if (!$cek_syarat_izin_teknis) {
 			$data = [
 				'id_rup' => $row_rup['id_rup'],
 			];
 			$this->M_rup->tambah_izin_teknis($data);
-		} else {
-		}
+		} else { }
 
 		foreach ($result_jadwal as $key => $value) {
 			$id = $this->uuid->v4();
