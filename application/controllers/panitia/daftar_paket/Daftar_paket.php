@@ -57,7 +57,6 @@ class Daftar_paket extends CI_Controller
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
-		// $this->load->view('panitia/daftar_paket/cek_vendor_terundang', $data);
 		$this->load->view('administrator/template_menu/footer_menu');
 		$this->load->view('panitia/daftar_paket/file_public_daftar_paket');
 	}

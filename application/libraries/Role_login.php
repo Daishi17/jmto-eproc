@@ -53,7 +53,6 @@ class Role_login
                     }
                     // validator
                     if ($cek->role == 4) {
-
                         $sekarang = date('Y-m-d H:i');
                         $data = [
                             'waktu_login' => $sekarang,

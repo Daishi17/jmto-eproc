@@ -262,7 +262,7 @@
     }
 
 
-
+    // SIUP
     $("#cek_siup").change(function() {
         if (this.checked) {
             var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
@@ -324,6 +324,73 @@
                     $('[name="tgl_berlaku_siup"]').css('display', 'block');
                 } else {
                     $('[name="tgl_berlaku_siup"]').css('display', 'none');
+                }
+            }
+        })
+    }
+
+    // nib
+    $("#cek_nib").change(function() {
+        if (this.checked) {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_nib = 1;
+            var type = 'sts_checked_nib';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_nib: sts_checked_nib,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_nib"]').val(response['row_syarat_izin_usah_tender']['sts_checked_nib']);
+                }
+            })
+        } else {
+            var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+            var id_url_rup = $('[name="id_url_rup"]').val();
+            var sts_checked_nib = 0;
+            var type = 'sts_checked_nib';
+            $.ajax({
+                type: "POST",
+                url: url_update_syarat_izin_usaha_tender,
+                data: {
+                    id_url_rup: id_url_rup,
+                    sts_checked_nib: sts_checked_nib,
+                    type: type
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    $('[name="sts_checked_nib"]').val(response['row_syarat_izin_usah_tender']['sts_checked_nib']);
+                    $('[name="sts_masa_berlaku_nib"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_nib']);
+                }
+            })
+        }
+    });
+
+    function pilih_syarat_izin_usaha_tender_nib() {
+        var url_update_syarat_izin_usaha_tender = $('[name="url_update_syarat_izin_usaha_tender"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var sts_masa_berlaku_nib = $('[name="sts_masa_berlaku_nib"]').val();
+        var type = 'sts_masa_berlaku_nib';
+        $.ajax({
+            type: "POST",
+            url: url_update_syarat_izin_usaha_tender,
+            data: {
+                id_url_rup: id_url_rup,
+                sts_masa_berlaku_nib: sts_masa_berlaku_nib,
+                type: type
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="sts_masa_berlaku_nib"]').val(response['row_syarat_izin_usah_tender']['sts_masa_berlaku_nib']);
+                if (response['row_syarat_izin_usah_tender']['sts_masa_berlaku_nib'] == 1) {
+                    $('[name="tgl_berlaku_nib"]').css('display', 'block');
+                } else {
+                    $('[name="tgl_berlaku_nib"]').css('display', 'none');
                 }
             }
         })

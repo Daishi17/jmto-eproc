@@ -216,8 +216,28 @@ class Sirup_buat_paket extends CI_Controller
 		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$result_jadwal = $this->M_jenis_jadwal->generate_jadwal($row_rup['id_jadwal_tender']);
 		$cek_ke_jadwal_rup = $this->M_jenis_jadwal->cek_jadwal_rup($row_rup['id_rup']);
-
 		$this->M_jenis_jadwal->delete_jadwal_rup($row_rup['id_rup']);
+
+		// INI UNTUK CHECKER GENERATE PERSYARATAN 
+		$cek_syarat_izin = $this->M_rup->cek_syarat_izin_usaha($row_rup['id_rup']);
+		$cek_syarat_izin_teknis = $this->M_rup->cek_syarat_izin_teknis($row_rup['id_rup']);
+
+		if (!$cek_syarat_izin) {
+			$data = [
+				'id_rup' => $row_rup['id_rup'],
+			];
+			$this->M_rup->tambah_izin_usaha($data);
+		} else {
+		}
+		
+		if (!$cek_syarat_izin_teknis) {
+			$data = [
+				'id_rup' => $row_rup['id_rup'],
+			];
+			$this->M_rup->tambah_izin_teknis($data);
+		} else {
+		}
+
 		foreach ($result_jadwal as $key => $value) {
 			$id = $this->uuid->v4();
 			$id = str_replace('-', '', $id);
@@ -237,6 +257,7 @@ class Sirup_buat_paket extends CI_Controller
 			'sts_rup_buat_paket' => 2
 		];
 		$this->M_rup->update_rup($data, $where);
+
 		$response = [
 			'success' => 'Rup Paket Berhasil Di Buat'
 		];

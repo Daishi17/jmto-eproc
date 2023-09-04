@@ -460,4 +460,38 @@ class M_rup extends CI_Model
         $this->db->where_in('tbl_rup.sts_rup_buat_paket', [1, 2]);
         return $this->db->count_all_results();
     }
+
+
+    // INI  UNTUK GENERATE SYARAT IZIN TENDER
+    public function cek_syarat_izin_usaha($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_izin_rup');
+        $this->db->where('tbl_izin_rup.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function tambah_izin_usaha($data)
+    {
+        $this->db->insert('tbl_izin_rup', $data);
+        return $this->db->affected_rows();
+    }
+
+    public function cek_syarat_izin_teknis($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_izin_teknis_rup');
+        $this->db->where('tbl_izin_teknis_rup.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function tambah_izin_teknis($data)
+    {
+        $this->db->insert('tbl_izin_teknis_rup', $data);
+        return $this->db->affected_rows();
+    }
+    
+
 }

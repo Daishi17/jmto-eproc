@@ -26,12 +26,12 @@ class Auth extends CI_Controller
 				} else {
 					$username = $this->input->post('userName');
 					$password = $this->input->post('password');
-					// if ($this->input->post('csrf_token_name') != $this->session->csrf_token) {
-					// 	$this->session->unset_userdata('csrf_token');
-					// 	$this->load->view('not_found');
-					// } else {
+					if ($this->input->post('csrf_token_name') != $this->session->csrf_token) {
+						$this->session->unset_userdata('csrf_token');
+						$this->load->view('not_found');
+					} else {
 						$this->role_login->login($username, $password);
-					// }
+					}
 				}
 			}
 		}

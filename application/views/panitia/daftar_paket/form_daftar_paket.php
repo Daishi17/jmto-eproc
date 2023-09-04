@@ -740,25 +740,41 @@
                                                                             </div>
                                                                             <div class="input-group mb-1">
                                                                                 <div class="input-group-text">
-                                                                                    <input class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_checked_nib'] == 1) { ?>
+                                                                                        <input id="cek_nib" checked class="form-check-input mt-0" value="<?= $syarat_izin_usaha_tender['sts_checked_nib'] ?>" name="sts_checked_nib" type="checkbox">
+                                                                                    <?php } else { ?>
+                                                                                        <input id="cek_nib" name="sts_checked_nib" class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php  }  ?>
                                                                                 </div>
                                                                                 <input type="text" class="form-control form-control-sm" value="Nomor Induk Berusaha (NIB/TDP)" readonly>
                                                                             </div>
                                                                             <div class="input-group mb-1">
                                                                                 <div class="input-group-text">
-                                                                                    <input class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_checked_sbu'] == 1) { ?>
+                                                                                        <input id="cek_sbu" checked class="form-check-input mt-0" value="<?= $syarat_izin_usaha_tender['sts_checked_sbu'] ?>" name="sts_checked_sbu" type="checkbox">
+                                                                                    <?php } else { ?>
+                                                                                        <input id="cek_sbu" name="sts_checked_sbu" class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php  }  ?>
                                                                                 </div>
                                                                                 <input type="text" class="form-control form-control-sm" value="Sertifikat Badan Usaha (SBU)" readonly>
                                                                             </div>
                                                                             <div class="input-group mb-1">
                                                                                 <div class="input-group-text">
-                                                                                    <input class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_checked_siujk'] == 1) { ?>
+                                                                                        <input id="cek_siujk" checked class="form-check-input mt-0" value="<?= $syarat_izin_usaha_tender['sts_checked_siujk'] ?>" name="sts_checked_siujk" type="checkbox">
+                                                                                    <?php } else { ?>
+                                                                                        <input id="cek_siujk" name="sts_checked_siujk" class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php  }  ?>
                                                                                 </div>
                                                                                 <input type="text" class="form-control form-control-sm" value="Surat Izin Jasa Konstruksi (SIUJK)" readonly>
                                                                             </div>
                                                                             <div class="input-group mb-1">
                                                                                 <div class="input-group-text">
-                                                                                    <input class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php if ($syarat_izin_usaha_tender['sts_checked_skdp'] == 1) { ?>
+                                                                                        <input id="cek_skdp" checked class="form-check-input mt-0" value="<?= $syarat_izin_usaha_tender['sts_checked_skdp'] ?>" name="sts_checked_skdp" type="checkbox">
+                                                                                    <?php } else { ?>
+                                                                                        <input id="cek_skdp" name="sts_checked_skdp" class="form-check-input mt-0" type="checkbox">
+                                                                                    <?php  }  ?>
                                                                                 </div>
                                                                                 <input type="text" class="form-control form-control-sm" value="Surat Keterangan Domisili Perusahan (SKDP)" readonly>
                                                                             </div>
