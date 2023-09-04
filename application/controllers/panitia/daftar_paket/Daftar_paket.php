@@ -53,7 +53,7 @@ class Daftar_paket extends CI_Controller
 		$data_vendor_lolos_siup_kbli = $this->M_panitia->data_vendor_lolos_siup_kbli($cek_syarat_kbli);
 		$data_vendor_lolos_nib_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
 		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli);
-		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli);
+		// $data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli);
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
@@ -149,59 +149,59 @@ class Daftar_paket extends CI_Controller
 		$waktu_mulai = $this->input->post('waktu_mulai[]');
 		$waktu_selesai = $this->input->post('waktu_selesai[]');
 
-		$jadwal1 = 	$waktu_mulai[1];
-		$jadwal2 = 	$waktu_selesai[1];
-		$jadwal3 = 	$waktu_mulai[2];
-		$jadwal4 = 	$waktu_selesai[2];
-		$jadwal5 = 	$waktu_mulai[3];
-		$jadwal6 = 	$waktu_selesai[3];
-		$jadwal7 = 	$waktu_mulai[4];
-		$jadwal8 = 	$waktu_selesai[4];
-		$jadwal9 = 	$waktu_mulai[5];
-		$jadwal10 = $waktu_selesai[5];
-		$jadwal11 = $waktu_mulai[6];
-		$jadwal12 = $waktu_selesai[6];
-		$jadwal13 = $waktu_mulai[7];
-		$jadwal14 = $waktu_selesai[7];
-		$jadwal15 = $waktu_mulai[8];
-		$jadwal16 = $waktu_selesai[8];
-		$jadwal17 = $waktu_mulai[9];
-		$jadwal18 = $waktu_selesai[9];
-		$jadwal19 = $waktu_mulai[10];
-		$jadwal20 = $waktu_selesai[10];
-		$jadwal21 = $waktu_mulai[11];
-		$jadwal22 = $waktu_selesai[11];
-		$jadwal23 = $waktu_mulai[12];
-		$jadwal24 = $waktu_selesai[12];
-		$jadwal25 = $waktu_mulai[13];
-		$jadwal26 = $waktu_selesai[13];
-		$jadwal27 = $waktu_mulai[14];
-		$jadwal28 = $waktu_selesai[14];
-		$jadwal29 = $waktu_mulai[15];
-		$jadwal30 = $waktu_selesai[15];
-		$jadwal31 = $waktu_mulai[16];
-		$jadwal32 = $waktu_selesai[16];
-		$jadwal33 = $waktu_mulai[17];
-		$jadwal34 = $waktu_selesai[17];
-		$jadwal35 = $waktu_mulai[18];
-		$jadwal36 = $waktu_selesai[18];
-		$jadwal37 = $waktu_mulai[19];
-		$jadwal38 = $waktu_selesai[19];
-		$jadwal39 = $waktu_mulai[20];
-		$jadwal40 = $waktu_selesai[20];
+		// date('Y-m-d H:i', strtotime())
+		$jadwal1 = date('Y-m-d H:i', strtotime($waktu_mulai[1]));
+		$jadwal2 = date('Y-m-d H:i', strtotime($waktu_selesai[1]));
+		$jadwal3 = date('Y-m-d H:i', strtotime($waktu_mulai[2]));
+		$jadwal4 = date('Y-m-d H:i', strtotime($waktu_selesai[2]));
+		$jadwal5 = date('Y-m-d H:i', strtotime($waktu_mulai[3]));
+		$jadwal6 = date('Y-m-d H:i', strtotime($waktu_selesai[3]));
+		$jadwal7 = date('Y-m-d H:i', strtotime($waktu_mulai[4]));
+		$jadwal8 = date('Y-m-d H:i', strtotime($waktu_selesai[4]));
+		$jadwal9 = date('Y-m-d H:i', strtotime($waktu_mulai[5]));
+		$jadwal10 = date('Y-m-d H:i', strtotime($waktu_selesai[5]));
+		$jadwal11 = date('Y-m-d H:i', strtotime($waktu_mulai[6]));
+		$jadwal12 = date('Y-m-d H:i', strtotime($waktu_selesai[6]));
+		$jadwal13 = date('Y-m-d H:i', strtotime($waktu_mulai[7]));
+		$jadwal14 = date('Y-m-d H:i', strtotime($waktu_selesai[7]));
+		$jadwal15 = date('Y-m-d H:i', strtotime($waktu_mulai[8]));
+		$jadwal16 = date('Y-m-d H:i', strtotime($waktu_selesai[8]));
+		$jadwal17 = date('Y-m-d H:i', strtotime($waktu_mulai[9]));
+		$jadwal18 = date('Y-m-d H:i', strtotime($waktu_selesai[9]));
+		$jadwal19 = date('Y-m-d H:i', strtotime($waktu_mulai[10]));
+		$jadwal20 = date('Y-m-d H:i', strtotime($waktu_selesai[10]));
+		$jadwal21 = date('Y-m-d H:i', strtotime($waktu_mulai[11]));
+		$jadwal22 = date('Y-m-d H:i', strtotime($waktu_selesai[11]));
+		$jadwal23 = date('Y-m-d H:i', strtotime($waktu_mulai[12]));
+		$jadwal24 = date('Y-m-d H:i', strtotime($waktu_selesai[12]));
+		$jadwal25 = date('Y-m-d H:i', strtotime($waktu_mulai[13]));
+		$jadwal26 = date('Y-m-d H:i', strtotime($waktu_selesai[13]));
+		$jadwal27 = date('Y-m-d H:i', strtotime($waktu_mulai[14]));
+		$jadwal28 = date('Y-m-d H:i', strtotime($waktu_selesai[14]));
+		$jadwal29 = date('Y-m-d H:i', strtotime($waktu_mulai[15]));
+		$jadwal30 = date('Y-m-d H:i', strtotime($waktu_selesai[15]));
+		$jadwal31 = date('Y-m-d H:i', strtotime($waktu_mulai[16]));
+		$jadwal32 = date('Y-m-d H:i', strtotime($waktu_selesai[16]));
+		$jadwal33 = date('Y-m-d H:i', strtotime($waktu_mulai[17]));
+		$jadwal34 = date('Y-m-d H:i', strtotime($waktu_selesai[17]));
+		$jadwal35 = date('Y-m-d H:i', strtotime($waktu_mulai[18]));
+		$jadwal36 = date('Y-m-d H:i', strtotime($waktu_selesai[18]));
+		$jadwal37 = date('Y-m-d H:i', strtotime($waktu_mulai[19]));
+		$jadwal38 = date('Y-m-d H:i', strtotime($waktu_selesai[19]));
+		$jadwal39 = date('Y-m-d H:i', strtotime($waktu_mulai[20]));
+		$jadwal40 = date('Y-m-d H:i', strtotime($waktu_selesai[20]));
 
 
-		if (date('Y-m-d H:i', strtotime($jadwal1)) > date('Y-m-d H:i', strtotime($jadwal2))) {
-			$this->session->set_flashdata('jadwal_salah1', '<label id="validasi_c1" class="text-danger"></label>');
+
+		if ($jadwal1 > $jadwal2) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal1'));
 		} else {
 			$where = [
 				'id_jadwal_rup' => $id_jadwal_rup[1]
 			];
 			$data = [
 				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal1)),
-				// 'jam_mulai' => $time_mulai[1],
 				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal2)),
-				// 'jam_selesai' => $time_selesai[1],
 			];
 			$data2 = [
 				'batas_pendaftaran_tender' => $waktu_selesai[1],
@@ -209,6 +209,51 @@ class Daftar_paket extends CI_Controller
 
 			$this->M_panitia->update_jadwal($data, $where);
 			$this->M_panitia->update_rup_panitia($id_rup, $data2);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal3 < $jadwal2 || $jadwal4 > $jadwal3) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal2'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[2]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal3)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal4)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal5 < $jadwal4 || $jadwal6 > $jadwal5) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal2'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[3]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal5)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal6)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
+
+		if ($jadwal7 < $jadwal6 || $jadwal7 > $jadwal8) {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal2'));
+		} else {
+			$where = [
+				'id_jadwal_rup' => $id_jadwal_rup[3]
+			];
+			$data = [
+				'waktu_mulai' => date('Y-m-d H:i', strtotime($jadwal5)),
+				'waktu_selesai' => date('Y-m-d H:i', strtotime($jadwal6)),
+			];
+
+			$this->M_panitia->update_jadwal($data, $where);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		}
 	}
@@ -251,8 +296,7 @@ class Daftar_paket extends CI_Controller
 					'tgl_berlaku_siup' => NULL
 				];
 			}
-		} else {
-		}
+		} else { }
 		$this->M_panitia->update_syarat_izin_usaha_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_usah_tender' => $this->M_panitia->get_syarat_izin_usaha_tender($row_rup['id_rup'])
@@ -424,8 +468,7 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
 			];
-		} else {
-		}
+		} else { }
 		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])

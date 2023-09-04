@@ -193,34 +193,49 @@
             contentType: false,
             cache: false,
             processData: false,
-            beforeSend: function() {
-                $('.btn_jadwal').attr("disabled", true);
-            },
+            // beforeSend: function() {
+            //     $('.btn_jadwal').attr("disabled", true);
+            // },
             success: function(response) {
-                let timerInterval
-                Swal.fire({
-                    title: 'Sedang Proses Menyimpan Data!',
-                    html: 'Membuat Data <b></b>',
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading()
-                        const b = Swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {
-                            // b.textContent = Swal.getTimerRight()
-                        }, 100)
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval)
-                        Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                        $('.btn_jadwal').attr("disabled", false);
-                    }
-                }).then((result) => {
-                    /* Read more about handling dismissals below */
-                    if (result.dismiss === Swal.DismissReason.timer) {
+                if (response == 'gagal1') {
+                    $("#validasi_jadwal1").css({
+                        "background-color": "red",
+                    });
+                } else if (response == 'gagal2') {
+                    $("#validasi_jadwal2").css({
+                        "background-color": "red",
+                    });
+                } else if (response == 'gagal3') {
+                    $("#validasi_jadwal3").css({
+                        "background-color": "red",
+                    });
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('.btn_jadwal').attr("disabled", false);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
 
-                    }
-                })
+                        }
+                    })
+                }
+
             }
         })
     })
@@ -713,9 +728,9 @@
             }
         })
     }
-    
-        // Neraca Keuangan
-        $("#sts_checked_neraca_keuangan").change(function() {
+
+    // Neraca Keuangan
+    $("#sts_checked_neraca_keuangan").change(function() {
         if (this.checked) {
             var url_update_syarat_izin_teknis_tender = $('[name="url_update_syarat_izin_teknis_tender"]').val();
             var id_url_rup = $('[name="id_url_rup"]').val();
@@ -794,5 +809,4 @@
             }
         })
     }
-    
 </script>

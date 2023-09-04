@@ -603,9 +603,10 @@
                                                         $i = 1;
                                                         $j = 1;
                                                         $k = 1;
+                                                        $l = 1;
                                                         foreach ($jadwal as $key => $value) { ?>
                                                             <input type="hidden" name="id_jadwal_rup[<?= $j ?>]" value="<?= $value['id_jadwal_rup'] ?>">
-                                                            <tr>
+                                                            <tr id="validasi_jadwal<?= $l ?>">
                                                                 <td><small><?= $i++ ?></small></td>
                                                                 <td><small><?= $value['nama_jadwal_rup'] ?></small></td>
                                                                 <td>
@@ -627,6 +628,7 @@
                                                             </tr>
                                                             <?php $j++ ?>
                                                             <?php $k++ ?>
+                                                            <?php $l++ ?>
                                                         <?php  } ?>
 
                                                     </tbody>

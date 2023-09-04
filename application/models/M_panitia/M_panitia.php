@@ -355,26 +355,26 @@ class M_panitia extends CI_Model
         return $mergedResult;
     }
 
-    function result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli)
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_vendor');
-        $this->db->join('tbl_vendor_siup', 'tbl_vendor_siup.id_vendor = tbl_vendor.id_vendor', 'left');
-        $id_vendor_terundang = [];
-        foreach ($data_vendor_terundang_by_kbli as $row) {
-            $id_vendor_terundang[] = $row['id_vendor'];
-        }
-        $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang);
-        // cek siup
-        if ($syarat_izin_usaha['sts_checked_siup'] == 1) {
-            if ($syarat_izin_usaha['sts_masa_berlaku_siup'] == 1) {
-                $this->db->where('tbl_vendor_siup.tgl_berlaku <=', $syarat_izin_usaha['tgl_berlaku_siup']);
-            } else {
-                $this->db->where('tbl_vendor_siup.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_siup']);
-            }
-        }
-        $this->db->group_by('tbl_vendor.id_vendor');
-        $query = $this->db->get();
-        return $query->result_array();
-    }
+    // function result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli)
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('tbl_vendor');
+    //     $this->db->join('tbl_vendor_siup', 'tbl_vendor_siup.id_vendor = tbl_vendor.id_vendor', 'left');
+    //     $id_vendor_terundang = [];
+    //     foreach ($data_vendor_terundang_by_kbli as $row) {
+    //         $id_vendor_terundang[] = $row['id_vendor'];
+    //     }
+    //     $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang);
+    //     // cek siup
+    //     if ($syarat_izin_usaha['sts_checked_siup'] == 1) {
+    //         if ($syarat_izin_usaha['sts_masa_berlaku_siup'] == 1) {
+    //             $this->db->where('tbl_vendor_siup.tgl_berlaku <=', $syarat_izin_usaha['tgl_berlaku_siup']);
+    //         } else {
+    //             $this->db->where('tbl_vendor_siup.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_siup']);
+    //         }
+    //     }
+    //     $this->db->group_by('tbl_vendor.id_vendor');
+    //     $query = $this->db->get();
+    //     return $query->result_array();
+    // }
 }
