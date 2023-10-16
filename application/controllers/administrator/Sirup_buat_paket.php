@@ -246,8 +246,7 @@ class Sirup_buat_paket extends CI_Controller
 				'id_rup' => $row_rup['id_rup'],
 			];
 			$this->M_rup->tambah_izin_teknis($data);
-		} else {
-		}
+		} else { }
 
 		foreach ($result_jadwal as $key => $value) {
 			$id = $this->uuid->v4();
