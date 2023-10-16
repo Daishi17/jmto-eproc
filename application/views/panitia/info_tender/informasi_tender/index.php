@@ -52,6 +52,10 @@
                             <th><a href="" class="btn btn-primary btn-sm"> <i class="fa fa-calendar" aria-hidden="true"></i> Lihat</a></th>
                         </tr>
                         <tr>
+                            <th>Jumlah Peserta</th>
+                            <th><a href="" class="btn btn-primary btn-sm"> <i class="fa fa-users" aria-hidden="true"></i> 10 Peserta</a></th>
+                        </tr>
+                        <tr>
                             <th>Dokumen Lelang</th>
                             <th>
                                 <div class="row">
@@ -73,12 +77,7 @@
                                                         <tr>
                                                             <td scope="row">1</td>
                                                             <td>Dok.lelang 1</td>
-                                                            <td><a href="" class="btn btn-danger"><i class="fas fa fa-file"> View</i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row"></td>
-                                                            <td></td>
-                                                            <td></td>
+                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -90,23 +89,80 @@
                         </tr>
                         <tr>
                             <th>Bobot Biaya</th>
-                            <th>163400</th>
+                            <th>40</th>
                         </tr>
                         <tr>
                             <th>Bobot Teknis</th>
-                            <th>163400</th>
+                            <th>60</th>
                         </tr>
                         <tr>
                             <th>Undangan Pembuktian</th>
-                            <th>163400</th>
+                            <th><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-upload"></i> Upload Undangan Pembuktian</a></th>
                         </tr>
                         <tr>
                             <th>Pembukaan Penawaran</th>
-                            <th>163400</th>
+                            <th>
+
+                                <!-- Modal -->
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#buka_dokumen_penawaran">
+                                    <i class="fa fa-folder-open" aria-hidden="true"></i> Buka Dokumen Penawaran
+                                </button>
+                                <!-- Modal -->
+                            </th>
                         </tr>
                         <tr>
-                            <th>Berita Acara Tenedr</th>
-                            <th>163400</th>
+                            <th>Berita Acara Tender</th>
+                            <th>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-warning text-white">
+                                                Upload Berita Acara Tender
+                                                <a href="" style="float: right;" data-bs-toggle="modal" data-bs-target="#upload_berita_acara_tender" class="btn btn-success btn-sm"> <i class="fas fa fa-upload"></i> Upload Berita Acara</a>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama File</th>
+                                                            <th>File</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td scope="row">1</td>
+                                                            <td>Peringkat Teknis</td>
+                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td scope="row">2</td>
+                                                            <td>Peringkat Penawaran Harga</td>
+                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td scope="row">3</td>
+                                                            <td>Pengumuman Pemenang</td>
+                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td scope="row">4</td>
+                                                            <td>Undangan Presentasi</td>
+                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td scope="row">5</td>
+                                                            <td>Addendum Dokumen Pengadaan</td>
+                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
                         </tr>
                         <tr>
                             <th>Pengumuman Pemenang</th>
@@ -122,3 +178,62 @@
             </div>
         </div>
 </main>
+
+<div class="modal fade" id="buka_dokumen_penawaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-folder-open" aria-hidden="true"></i> Buka Dokumen Penawaran</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <div>
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> Silakan Masukan Username Panitia Anda Untuk Dapat Mengakses Pembukan Dokumen Penawaran !!!
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        <center>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="fas fa fa-user"></i></span>
+                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" readonly value="radxH8GTvQwcdX8sSLoAtfFJu63uCykCUjyn6x7PXeexHrMJbfE45lnRPJDC1aggY2nP7j9BUWF6DvhYbqpIOBtOsphTW0m2omFB04wb9h5stGKEzS9TLOXeNYR71KV3" aria-describedby="basic-addon1">
+                            </div>
+                            <br>
+                            <a href="" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
+                        </center>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="upload_berita_acara_tender" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Upload Berita Acara Tender</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
