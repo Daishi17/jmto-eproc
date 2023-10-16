@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require_once APPPATH . 'third_party/Spout/Autoloader/autoload.php';
+
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
 class Fm_karyawan extends CI_Controller
 {
@@ -9,6 +12,11 @@ class Fm_karyawan extends CI_Controller
 		parent::__construct();
 		$this->load->model('M_master/M_karyawan');
 		$this->load->model('M_section/M_section');
+		$role = $this->session->userdata('role');
+		if (!$role == 1) {
+			redirect('auth');
+		}
+
 	}
 
 	public function index()
@@ -205,6 +213,142 @@ class Fm_karyawan extends CI_Controller
 		echo '<option value="">--Pilih Section--</option>';
 		foreach ($data as $key => $value) {
 			echo '<option value="' . $value['id_section'] . '">' . $value['nama_section'] . '</option>';
+		}
+	}
+
+
+	public function import_data_karyawan()
+	{
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'xlsx|xls';
+		$config['file_name'] = 'doc' . time();
+		$this->load->library('upload', $config);
+		if ($this->upload->do_upload('importexcel')) {
+			$file = $this->upload->data();
+			$reader = ReaderEntityFactory::createXLSXReader();
+			$reader->open('uploads/' . $file['file_name']);
+			foreach ($reader->getSheetIterator() as $sheet) {
+				$numRow = 0;
+				foreach ($sheet->getRowIterator() as $row) {
+					if ($numRow > 1) {
+						$id = $this->uuid->v4();
+						$id = str_replace('-', '', $id);
+						$nip = $row->getCellAtIndex(0)->getValue();
+						// cek_nip
+						$jika_ada_nip = $this->M_karyawan->getByid_nip($nip);
+						$data_detaprtemen = $row->getCellAtIndex(2);
+						$nama_pegawai = $row->getCellAtIndex(1);
+						if ($data_detaprtemen == 'Customer Service') {
+							$id_departemen = 1;
+						} else if ($data_detaprtemen == 'Operation Management') {
+							$id_departemen = 2;
+						} else if ($data_detaprtemen == 'Command Center') {
+							$id_departemen = 3;
+						} else if ($data_detaprtemen == 'Payment Management') {
+							$id_departemen = 20;
+						} else if ($data_detaprtemen == 'IT Planning & Development') {
+							$id_departemen = 21;
+						} else if ($data_detaprtemen == 'IT Infrastructure & Services') {
+							$id_departemen = 22;
+						} else if ($data_detaprtemen == 'Human Capital Planing & Evaluation') {
+							$id_departemen = 23;
+						} else if ($data_detaprtemen == 'Human Capital Support') {
+							$id_departemen = 24;
+						} else if ($data_detaprtemen == 'General Affair') {
+							$id_departemen = 25;
+						} else if ($data_detaprtemen == 'Finance & Accounting') {
+							$id_departemen = 26;
+						} else if ($data_detaprtemen == 'Strategic Planning Governance, Risk & Compliance') {
+							$id_departemen = 27;
+						} else if ($data_detaprtemen == 'Businness Planning & Development') {
+							$id_departemen = 28;
+						} else if ($data_detaprtemen == 'Project Management Office') {
+							$id_departemen = 29;
+						} else {
+							$id_departemen = 2;
+						}
+						$data_section = $row->getCellAtIndex(3);
+						if ($data_section == 'Traffic Services & Security') {
+							$id_section = 1;
+						} else if ($data_section == '-') {
+							$id_section = 5;
+						} else if ($data_section == 'Transaction Environtment Services') {
+							$id_section = 9;
+						} else if ($data_section == 'Traffic Information Area') {
+							$id_section = 10;
+						} else if ($data_section == 'Traffic Information Center') {
+							$id_section = 11;
+						} else if ($data_section == 'Settlement & Reconciliation Area') {
+							$id_section = 12;
+						} else if ($data_section ==  'Transaction System Planning') {
+							$id_section = 13;
+						} else if ($data_section ==  'IT Strategy & Planning') {
+							$id_section = 14;
+						} else if ($data_section ==  'Technology Innovation') {
+							$id_section = 15;
+						} else if ($data_section ==  'IT Application & Development') {
+							$id_section = 16;
+						} else if ($data_section == 'IT Network & Infrastructure') {
+							$id_section = 17;
+						} else if ($data_section ==  'IT Services & Operation') {
+							$id_section = 18;
+						} else if ($data_section ==  'Human Capital Planning') {
+							$id_section = 19;
+						} else if ($data_section ==  'Human Capital Development') {
+							$id_section = 20;
+						} else if ($data_section ==  'Human Capital Administration') {
+							$id_section = 21;
+						} else if ($data_section ==  'Human Capital Industrial Relation') {
+							$id_section = 22;
+						} else if ($data_section ==  'Office Administration') {
+							$id_section = 23;
+						} else if ($data_section ==  'Procurement & Asset') {
+							$id_section = 24;
+						} else if ($data_section ==  'Accounting & Tax') {
+							$id_section = 25;
+						} else if ($data_section ==  'Finance') {
+							$id_section = 26;
+						} else if ($data_section ==  'Strategic Planning Risk & Quality') {
+							$id_section = 27;
+						} else if ($data_section ==  'Legal & Compliance') {
+							$id_section = 28;
+						} else if ($data_section ==  'Business Planning & Market Research') {
+							$id_section = 29;
+						} else if ($data_section ==  'Marketing & Customer Relation') {
+							$id_section = 30;
+						} else if ($data_section ==  '-') {
+							$id_section = 31;
+						} else {
+							$id_section = 2;
+						}
+						$data = array(
+							'id_url_pegawai' => $id,
+							'status' => 1,
+							'nip' => $row->getCellAtIndex(0),
+							'nama_pegawai' => $row->getCellAtIndex(1),
+							'id_departemen' => $id_departemen,
+							'id_section' => $id_section,
+							'email' => $row->getCellAtIndex(4),
+							'no_telpon' => $row->getCellAtIndex(5),
+						);
+						if ($jika_ada_nip) {
+						} else {
+							if ($nama_pegawai == '') {
+								# code...
+							} else {
+								$this->M_karyawan->insert_excel_karyawan($data);
+							}
+						}
+					}
+					$numRow++;
+				}
+				$reader->close();
+				unlink('uploads/' . $file['file_name']);
+				$this->session->set_flashdata('pesan', 'Data Berhasil Di Import');
+				redirect('administrator/Fm_karyawan');
+			}
+		} else {
+			echo "Error : " . $this->upload->display_errors();
 		}
 	}
 }

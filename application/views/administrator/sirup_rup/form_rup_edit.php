@@ -86,19 +86,20 @@
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
                                                 <select name="id_departemen" onchange="pilih_departemen()" id="select_departemen" class="form-control select2bs4">
-                                                    <option selected value="<?= $row_rup['id_departemen'] ?>"><?= $row_rup['nama_departemen'] ?></option>
+                                                    <option selected value="<?= $row_rup_edit['id_departemen'] ?>"><?= $row_rup_edit['nama_departemen'] ?></option>
                                                     <?php foreach ($result_departemen as $key => $value) { ?>
                                                         <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
+                                            <small class="text-danger id_departemen_validation"></small>
                                         </small>
                                     <?php  } else { ?>
                                         <small>
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-building-columns"></i></span>
                                                 <select name="id_departemen" onchange="pilih_departemen()" id="select_departemen" class="form-control select2bs4">
-                                                    <option selected value="<?= $row_rup['id_departemen'] ?>"><?= $row_rup['nama_departemen'] ?></option>
+                                                    <option selected value="<?= $row_rup_edit['id_departemen'] ?>"><?= $row_rup_edit['nama_departemen'] ?></option>
                                                     <?php foreach ($result_departemen as $key => $value) { ?>
                                                         <option value="<?= $value['id_departemen'] ?>"><?= $value['nama_departemen'] ?></option>
                                                     <?php } ?>
@@ -397,7 +398,7 @@
                                     <small>
                                         <div class="input-group mb-2">
                                             <span class="input-group-text">%</span>
-                                            <input name="persen_pencatatan" type="number" value="<?= $row_rup['persen_pencatatan'] ?>" class="form-control" placeholder="Persentase">
+                                            <input name="persen_pencatatan" type="number" value="<?= $row_rup['persen_pencatatan'] ?>" class="form-control persen_pencatatan" placeholder="Persentase">
                                         </div>
                                         <!-- persen_pencatatan -->
                                         <small class="text-danger persen_pencatatan_validation"></small>
@@ -405,7 +406,7 @@
                                     <small>
                                         <div class="input-group mb-2">
                                             <span class="input-group-text">Rp.</span>
-                                            <input id="nilai_pencatatan2" type="text" value="<?= $row_rup['nilai_pencatatan'] ?>" class="form-control" placeholder="Nilai Pencatatan" readonly style="background-color: #ffffe0;">
+                                            <input id="nilai_pencatatan2" type="text" value="<?= "Rp " . number_format($row_rup['nilai_pencatatan']) ?>" class="form-control" placeholder="Nilai Pencatatan" readonly style="background-color: #ffffe0;">
                                             <input type="hidden" name="nilai_pencatatan">
                                         </div>
                                         <!-- persen_pencatatan -->
@@ -515,7 +516,7 @@
                                                         <small>
                                                             <div class="input-group mb-2">
                                                                 <span class="input-group-text">Rp.</span>
-                                                                <input type="text" value="<?= "Rp " . number_format($get_row_rkap['total_pagu_rkap'], 2, ',', '.') ?>" class="form-control" placeholder="0" readonly style="background-color: #ffffe0;">
+                                                                <input type="text" value="<?= "Rp " . number_format($get_row_rkap['total_pagu_rkap']) ?>" class="form-control" placeholder="0" readonly style="background-color: #ffffe0;">
                                                             </div>
                                                             <small>
                                                     </td>
@@ -546,7 +547,7 @@
                                                             <span class="input-group-text">Rp.</span>
                                                             <input type="number" value="<?= $row_rup['total_pagu_rup'] ?>" name="total_pagu_rup" class="form-control total_pagu_rup">
                                                             <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                                                            <input type="text" value="<?= "Rp " . number_format($row_rup['total_pagu_rup'], 2, ',', '.'); ?>" id="rupiah_total_pagu_rup" class="form-control" readonly style="background-color: #ffffe0;">
+                                                            <input type="text" value="<?= "Rp " . number_format($row_rup['total_pagu_rup']); ?>" id="rupiah_total_pagu_rup" class="form-control" readonly style="background-color: #ffffe0;">
                                                         </div>
                                                         <!-- total_pagu_rup -->
                                                         <small class="text-danger total_pagu_rup_validation"></small>

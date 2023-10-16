@@ -10,6 +10,10 @@ class Sirup_rka extends CI_Controller
 		$this->load->helper(array('url', 'form'));
 		$this->load->model('M_rkap/M_rkap');
 		$this->load->model('M_departmen/M_departmen');
+		$role = $this->session->userdata('role');
+		if (!$role) {
+			redirect('auth');
+		}
 	}
 	public function index()
 	{

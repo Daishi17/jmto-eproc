@@ -7,6 +7,10 @@ class Data_sbu extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_master/M_master');
+		$role = $this->session->userdata('role');
+		if (!$role == 1 || !$role == 2) {
+			redirect('auth');
+		}
 	}
 
 	public function index()

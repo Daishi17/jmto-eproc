@@ -13,6 +13,13 @@
             </div>
             <hr>
             <div class="card border-dark">
+                <?php if ($this->session->flashdata('pesan')) { ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><?= $this->session->flashdata('pesan'); ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                    </div>
+                <?php } ?>
                 <div class="card-header border-dark bg-warning d-flex justify-content-between align-items-center">
                     <div class="flex-grow-1 bd-highlight">
                         <span class="text-dark">
@@ -24,6 +31,9 @@
                         <button type="button" class="btn btn-primary btn-sm shadow-lg" onclick="show_modal()">
                             <i class="fa-solid fa-circle-plus px-1"></i>
                             Tambah Data
+                        </button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="show_modal_import_karyawan()">
+                            Import Data Karyawan
                         </button>
                     </div>
                 </div>
@@ -52,26 +62,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <tr>
-                                <td><small>123456</small></td>
-                                <td><small>Budi</small></td>
-                                <td><small>Human Capital & General Affair</small></td>
-                                <td><small><span class="badge bg-primary">Validator</span></small></td>
-                                <td><small>Validator@budi</small></td>
-                                <td><small><span class="badge bg-success">Aktif</span></small></td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
-                                            <i class="fa-solid fa-users-viewfinder px-1"></i>
-                                            <small>Detail</small>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
-                                            <i class="fa-solid fa-trash-can px-1"></i>
-                                            <small>Non Aktif</small>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -101,12 +91,6 @@
                                             <small><strong>Form Data - Karyawan</strong></small>
                                         </span>
                                     </div>
-                                    <!-- <div class="bd-highlight">
-                                        <button type="button" class="btn btn-secondary btn-sm shadow-lg" id="button_ubah" onclick="ubah_data()">
-                                            <i class="fa-solid fa-pen-to-square px-1"></i>
-                                            Ubah Data
-                                        </button>
-                                    </div> -->
                                 </div>
                                 <div class="card-body">
                                     <form action="javascript:;" id="form_karyawan">
@@ -161,43 +145,6 @@
                                                 </div>
                                                 <small class="no_telpon text-danger"></small>
                                             </div>
-                                            <!-- <div class="col-sm-6">
-                                                <div class="input-group mb-1">
-                                                    <span class="input-group-text"><i class="fa-solid fa-user-gear"></i></span>
-                                                    <select class="form-select" aria-label="Default select example" name="id_role">
-                                                        <option value="">Pilih Role User</option>
-                                                        <option value="2">Administrator</option>
-                                                        <option value="3">Unit Kerja</option>
-                                                        <option value="4">Validator</option>
-                                                        <option value="5">Panitia</option>
-                                                    </select>
-                                                </div>
-                                                <small class="id_role text-danger"></small>
-                                            </div> -->
-                                            <!-- <div class="col-sm-6">
-                                                <div class="input-group mb-1">
-                                                    <span class="input-group-text"><i class="fa-solid fa-user-lock"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Buat Akun User">
-                                                </div>
-                                            </div> -->
-                                            <!-- <div class="col-sm-6">
-                                                <div class="input-group mb-1">
-                                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-                                                    <input type="password" class="form-control" placeholder="Buat Password (password minimal 8 karakter)" name="password">
-                                                    <button class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-eye"></i></button>
-                                                    <button class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-eye-slash"></i></button>
-                                                </div>
-                                                <small class="password text-danger"></small>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="input-group mb-1">
-                                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-                                                    <input type="password" class="form-control" placeholder="Konfirmasi Password (password minimal 8 karakter)" name="password2">
-                                                    <button class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-eye"></i></button>
-                                                    <button class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-eye-slash"></i></button>
-                                                </div>
-                                                <small class="password2 text-danger"></small>
-                                            </div> -->
                                             <div class="col-sm-2">
                                                 <button type="submit" class="btn btn-success btn-sm shadow-lg">
                                                     <i class="fa-solid fa-floppy-disk px-1"></i>
@@ -221,3 +168,32 @@
         </div>
     </div>
 </main>
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" id="import_data_karyawan">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Import Data Karyawan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <center>
+                        <a class="btn btn-success btn-sm" href="<?= base_url('file_admin/FORMAT_IMPORT KARYAWAN.xlsx')?>">Download Format</a>
+                    </center>
+                    <br>
+                    <?= form_open_multipart('administrator/fm_karyawan/import_data_karyawan') ?>
+                    <div class="input-group">
+                        <input type="file" class="form-control form-control-sm" id="importexcel" aria-describedby="inputGroupFileAddon04" accept=".xlsx,.xls" name="importexcel" aria-label="Upload">
+                        <button class="btn btn-sm btn-success" type="submit" id="inputGroupFileAddon04"><img src="<?= base_url('assets/excel.png') ?>" style="width: 20px;" alt=""> UPLOAD</button>
+                    </div>
+                    <?= form_close(); ?>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

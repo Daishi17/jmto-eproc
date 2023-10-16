@@ -96,8 +96,8 @@ class M_Rekanan_baru extends CI_Model
 
     public function update_vendor($data, $where)
     {
+	$this->db->where($where);
         $this->db->update('tbl_vendor', $data);
-        $this->db->where($where);
         return $this->db->affected_rows();
     }
 }

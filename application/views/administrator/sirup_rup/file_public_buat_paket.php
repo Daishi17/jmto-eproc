@@ -183,6 +183,7 @@
         var metode_kualifikasi = $('[name="metode_kualifikasi"]').val();
         var metode_dokumen = $('[name="metode_dokumen"]').val();
         var id_jadwal_tender = $('[name="id_jadwal_tender"]').val();
+        var url_back_rup = $('[name="url_back_rup"]').val();
         if (id_jadwal_tender == '') {
             Swal.fire('Harap isi Jenis Jadwal Pengadaan Dengan Benar!', '', 'warning')
         } else {
@@ -211,6 +212,7 @@
                             $('#modal-xl-paket').modal('hide');
                             $('#modal-xl-tambah').modal('hide');
                             Swal.fire('Paket Berhasil Dibuat!', '', 'success');
+                            location.replace('<?= base_url('administrator/Sirup_rup')?>');
                             Reload_table_rup_final();
                             Reload_table_rup();
                         }

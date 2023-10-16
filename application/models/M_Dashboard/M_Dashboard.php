@@ -3,6 +3,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Dashboard extends CI_Model
 {
+
+    function count_rup()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    function count_paket_tender()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('sts_rup_buat_paket', 1);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    function count_paket_tender_berjalan()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('status_paket_panitia', 1);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
     function count_rekanan_baru()
     {
         $this->db->select('*');
@@ -21,6 +48,8 @@ class M_Dashboard extends CI_Model
         $query = $this->db->get();
         return $query->num_rows();
     }
+
+
 
 
     function count_rekanan_terundang()

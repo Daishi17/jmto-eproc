@@ -46,7 +46,24 @@
 <script>
     $('.select2').select2()
 </script>
+ <script>
+            let log_off = new Date();
+            log_off.setHours(log_off.getHours() + 2);
+            log_off = new Date(log_off);
+            let int_logoff = setInterval(() => {
+                let now = new Date();
+                if (now > log_off) {
+                    window.location.assign("<?= base_url('auth/logout') ?>");
+                    clearInterval(int_logoff);
+                }
+            }, 5000);
 
+            $('body').on('click', function() {
+                let log_off = new Date();
+                log_off.setHours(log_off.getHours() + 2);
+                log_off = new Date(log_off);
+            })
+        </script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@
                     </div>
                     <div class="bd-highlight">
                         <a class="btn btn-primary btn-sm shadow-lg" href="<?= base_url() ?>validator/rekanan_terundang" role="button">
-                            << Kembali Kemenu Sebelumnya </a>
+                            << Kembali Ke menu Sebelumnya </a>
                     </div>
                 </div>
                 <div class="card-body">

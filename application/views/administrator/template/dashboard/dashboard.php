@@ -28,7 +28,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div>
                                                     <p class="mb-0 text-secondary"><small>Total Rekanan Belum Tervalidasi</small></p>
-                                                    <h4 class="my-1 text-danger">30</h4>
+                                                    <h4 class="my-1 text-danger"><?= $blm_tervalidasi ?></h4>
                                                 </div>
                                                 <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class="fa-solid fa-user-shield fa-beat-fade"></i>
                                                 </div>
@@ -42,7 +42,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div>
                                                     <p class="mb-0 text-secondary"><small>Total Rekanan Tervalidasi</small></p>
-                                                    <h4 class="my-1 text-info">230</h4>
+                                                    <h4 class="my-1 text-info"><?= $tervalidasi ?></h4>
                                                 </div>
                                                 <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class="fa-solid fa-user-tag fa-beat"></i></div>
                                             </div>
@@ -55,7 +55,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div>
                                                     <p class="mb-0 text-secondary"><small>Total Data RUP</small></p>
-                                                    <h4 class="my-1 text-success">30</h4>
+                                                    <h4 class="my-1 text-success"><?= $rup ?></h4>
                                                 </div>
                                                 <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class="fa-solid fa-money-check fa-fade"></i></div>
                                             </div>
@@ -68,7 +68,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div>
                                                     <p class="mb-0 text-secondary"><small>Total Paket Tender</small></p>
-                                                    <h4 class="my-1 text-warning">30</h4>
+                                                    <h4 class="my-1 text-warning"><?= $paket_tender ?></h4>
                                                 </div>
                                                 <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class="fa-solid fa-briefcase fa-flip"></i></div>
                                             </div>
@@ -81,7 +81,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div>
                                                     <p class="mb-0 text-secondary"><small>Total Paket Terder Berjalan</small></p>
-                                                    <h4 class="my-1 text-info">20</h4>
+                                                    <h4 class="my-1 text-info"><?= $paket_tender_berjalan ?></h4>
                                                 </div>
                                                 <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class="fa-solid fa-bullhorn fa-fade"></i></div>
                                             </div>
@@ -94,7 +94,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div>
                                                     <p class="mb-0 text-secondary"><small>Total Paket Tender Selesai</small></p>
-                                                    <h4 class="my-1 text-success">10</h4>
+                                                    <h4 class="my-1 text-success">0</h4>
                                                 </div>
                                                 <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class="fa-solid fa-envelope-circle-check fa-shake"></i></div>
                                             </div>
@@ -107,7 +107,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div>
                                                     <p class="mb-0 text-secondary"><small>Total Penilaian Kinerja</small></p>
-                                                    <h4 class="my-1 text-warning">10</h4>
+                                                    <h4 class="my-1 text-warning">0</h4>
                                                 </div>
                                                 <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class="fa-solid fa-pen-to-square fa-flip"></i></div>
                                             </div>
@@ -120,7 +120,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div>
                                                     <p class="mb-0 text-secondary"><small>Total Daftar Hitam Rekanan</small></p>
-                                                    <h4 class="my-1 text-danger">2</h4>
+                                                    <h4 class="my-1 text-danger">0</h4>
                                                 </div>
                                                 <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class="fa-solid fa-address-book"></i>
                                                 </div>

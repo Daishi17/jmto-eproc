@@ -9,6 +9,11 @@ class Fm_unit_kerja extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_master/M_unit_kerja');
+		$role = $this->session->userdata('role');
+		if (!$role == 1) {
+			redirect('auth');
+		}
+
 	}
 
 	public function index()

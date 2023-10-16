@@ -17,6 +17,10 @@ class Sirup_buat_paket extends CI_Controller
 		$this->load->model('M_jenis_anggaran/M_jenis_anggaran');
 		$this->load->model('Wilayah/Wilayah_model');
 		$this->load->model('M_jenis_jadwal/M_jenis_jadwal');
+		$role = $this->session->userdata('role');
+		if (!$role) {
+			redirect('auth');
+		}
 	}
 	public function index()
 	{
@@ -71,47 +75,27 @@ class Sirup_buat_paket extends CI_Controller
 		$role_panitia = $this->input->post('role_panitia');
 		$nama_panitia = $this->input->post('nama_panitia');
 		$id_url_rup = $this->input->post('random_kode');
-		$convert_nama = str_split($nama_panitia);
-		$kode_mnj_user = $convert_nama[0] . $convert_nama[1] . $convert_nama[2];
-		$row_pegawai_panitia = $this->M_rup->pegawai_panitia_by_kode_mnjm_user($kode_mnj_user);
-		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
-		$cek_data_role_ketua = $this->M_rup->cek_role_panitia($row_rup['id_rup'], $role_panitia);
-
-		$cek_user_panitia = $this->M_rup->cek_user_panitia($row_rup['id_rup'], $row_pegawai_panitia['id_pegawai']);
-
-		if ($cek_user_panitia) {
+		if ($nama_panitia == null) {
 			$response = [
-				'error' => 'User Panitia Panitia Sudah Ada',
+				'error' => 'Pilih Nama Panitia Dahulu Yaa',
 			];
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
-			if (!$cek_data_role_ketua) {
-				$id = $this->uuid->v4();
-				$id = str_replace('-', '', $id);
-				$data  = array(
-					'id_url_panitia' => $id,
-					'id_manajemen_user' => $row_pegawai_panitia['id_manajemen_user'],
-					'role_panitia' => $role_panitia,
-					'id_rup' => $row_rup['id_rup']
-				);
-				$this->db->insert('tbl_panitia', $data);
+			$convert_nama = str_split($nama_panitia);
+			$kode_mnj_user = $convert_nama[0] . $convert_nama[1] . $convert_nama[2];
+			$row_pegawai_panitia = $this->M_rup->pegawai_panitia_by_kode_mnjm_user($kode_mnj_user);
+			$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+			$cek_data_role_ketua = $this->M_rup->cek_role_panitia($row_rup['id_rup'], $role_panitia);
+
+			$cek_user_panitia = $this->M_rup->cek_user_panitia($row_rup['id_rup'], $row_pegawai_panitia['id_pegawai']);
+
+			if ($cek_user_panitia) {
 				$response = [
-					'success' => 'success'
+					'error' => 'User Panitia Panitia Sudah Ada',
 				];
 				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			} else {
-
-				if ($cek_data_role_ketua['role_panitia'] == 1) {
-					$response = [
-						'error' => 'Role Ketua Panitia Sudah Ada',
-					];
-					$this->output->set_content_type('application/json')->set_output(json_encode($response));
-				} else if ($cek_data_role_ketua['role_panitia'] == 2) {
-					$response = [
-						'error' => 'Role Sekertaris Sudah Ada',
-					];
-					$this->output->set_content_type('application/json')->set_output(json_encode($response));
-				} else {
+				if (!$cek_data_role_ketua) {
 					$id = $this->uuid->v4();
 					$id = str_replace('-', '', $id);
 					$data  = array(
@@ -125,6 +109,33 @@ class Sirup_buat_paket extends CI_Controller
 						'success' => 'success'
 					];
 					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+				} else {
+
+					if ($cek_data_role_ketua['role_panitia'] == 1) {
+						$response = [
+							'error' => 'Role Ketua Panitia Sudah Ada',
+						];
+						$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					} else if ($cek_data_role_ketua['role_panitia'] == 2) {
+						$response = [
+							'error' => 'Role Sekertaris Sudah Ada',
+						];
+						$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					} else {
+						$id = $this->uuid->v4();
+						$id = str_replace('-', '', $id);
+						$data  = array(
+							'id_url_panitia' => $id,
+							'id_manajemen_user' => $row_pegawai_panitia['id_manajemen_user'],
+							'role_panitia' => $role_panitia,
+							'id_rup' => $row_rup['id_rup']
+						);
+						$this->db->insert('tbl_panitia', $data);
+						$response = [
+							'success' => 'success'
+						];
+						$this->output->set_content_type('application/json')->set_output(json_encode($response));
+					}
 				}
 			}
 		}
@@ -169,7 +180,7 @@ class Sirup_buat_paket extends CI_Controller
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
-	
+
 
 
 	function hapus_panitia($id_url_panitia)
@@ -199,8 +210,8 @@ class Sirup_buat_paket extends CI_Controller
 		];
 		$date = date('Y');
 		$get_nama_rup = $this->M_rup->get_nama($where);
-		if (!is_dir('file_paket/' . $get_nama_rup['nama_rup'] . '-' . $date)) {
-			mkdir('file_paket/' . $get_nama_rup['nama_rup'] . '-' . $date, 0777, TRUE);
+		if (!is_dir('file_paket/' . $get_nama_rup['nama_rup'])) {
+			mkdir('file_paket/' . $get_nama_rup['nama_rup'], 0777, TRUE);
 		}
 		$this->M_rup->update_rup($data, $where);
 
@@ -229,7 +240,7 @@ class Sirup_buat_paket extends CI_Controller
 			$this->M_rup->tambah_izin_usaha($data);
 		} else {
 		}
-		
+
 		if (!$cek_syarat_izin_teknis) {
 			$data = [
 				'id_rup' => $row_rup['id_rup'],

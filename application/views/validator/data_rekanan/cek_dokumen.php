@@ -53,12 +53,17 @@
                                                             </small>
                                                         </td>
                                                     </tr>
+
                                                     <tr>
-                                                        <th class="bg-light"><small>Rincian Dokumen Upload</small></th>
+                                                        <th class="bg-light"><small>Rincian Dokumen Upload & Profil Perusahaan</small></th>
                                                         <td>
                                                             <!-- Button trigger modal -->
                                                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#rincian_dokumen">
-                                                                Lihat Rincian
+                                                                Rincian Validasi
+                                                            </button>
+
+                                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal_profil">
+                                                                Profil Perusahaan
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -74,6 +79,7 @@
 
                                             <input type="hidden" name="url_get_vendor" value="<?= base_url('validator/rekanan_tervalidasi/get_dokumen_vendor/') ?>">
                                             <input type="hidden" name="url_download_siup" value="<?= base_url('validator/rekanan_tervalidasi/url_download_siup/') ?>">
+                                            <input type="hidden" name="url_dokumen_siup" value="<?= $url_vendor ?>/SIUP/">
 
                                             <button class="nav-link active" id="nav-siup-tab" data-bs-toggle="tab" data-bs-target="#nav-siup" type="button" role="tab" aria-controls="nav-siup" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
@@ -82,6 +88,7 @@
 
 
                                             <input type="hidden" name="url_download_nib" value="<?= base_url('validator/rekanan_tervalidasi/url_download_nib/') ?>">
+                                            <input type="hidden" name="url_dokumen_nib" value="<?= $url_vendor ?>/NIB/">
                                             <button class="nav-link" id="nav-nib-tab" data-bs-toggle="tab" data-bs-target="#nav-nib" type="button" role="tab" aria-controls="nav-nib" aria-selected="false">
                                                 <i class="fa-regular fa-file-word"></i>
                                                 <small><b>NIB/TDP</b></small>
@@ -89,6 +96,7 @@
 
 
                                             <input type="hidden" name="url_download_sbu" value="<?= base_url('validator/rekanan_tervalidasi/url_download_sbu/') ?>">
+                                            <input type="hidden" name="url_dokumen_sbu" value="<?= $url_vendor ?>/SBU/">
                                             <button class="nav-link" id="nav-sbu-tab" data-bs-toggle="tab" data-bs-target="#nav-sbu" type="button" role="tab" aria-controls="nav-sbu" aria-selected="false">
                                                 <i class="fa-regular fa-file-excel"></i>
                                                 <small><b>SBU</b></small>
@@ -96,34 +104,43 @@
 
 
                                             <input type="hidden" name="url_download_siujk" value="<?= base_url('validator/rekanan_tervalidasi/url_download_siujk/') ?>">
+                                            <input type="hidden" name="url_dokumen_siujk" value="<?= $url_vendor ?>/SIUJK/">
                                             <button class="nav-link" id="nav-siujk-tab" data-bs-toggle="tab" data-bs-target="#nav-siujk" type="button" role="tab" aria-controls="nav-siujk" aria-selected="false">
                                                 <i class="fa-regular fa-file-pdf"></i>
                                                 <small><b>SIUJK</b></small>
                                             </button>
 
                                             <input type="hidden" name="url_download_skdp" value="<?= base_url('validator/rekanan_tervalidasi/url_download_skdp/') ?>">
+                                            <input type="hidden" name="url_dokumen_skdp" value="<?= $url_vendor ?>/SKDP/">
                                             <button class="nav-link" id="nav-skdp-tab" data-bs-toggle="tab" data-bs-target="#nav-skdp" type="button" role="tab" aria-controls="nav-skdp" aria-selected="false">
                                                 <i class="fa-regular fa-file-word"></i>
                                                 <small><b>SKDP</b></small>
                                             </button>
 
                                             <input type="hidden" name="url_download_lainnya" value="<?= base_url('validator/rekanan_tervalidasi/url_download_lainnya/') ?>">
+                                            <input type="hidden" name="url_dokumen_lainnya" value="<?= $url_vendor ?>/Izin_lainnya/">
                                             <button class="nav-link" id="nav-lainnya-tab" data-bs-toggle="tab" data-bs-target="#nav-lainnya" type="button" role="tab" aria-controls="nav-lainnya" aria-selected="false">
                                                 <i class="fa-regular fa-file-word"></i>
                                                 <small><b>Izin Lainnya</b></small>
                                             </button>
 
                                             <input type="hidden" name="url_download_akta_pendirian" value="<?= base_url('validator/rekanan_tervalidasi/url_download_akta_pendirian/') ?>">
+                                            <input type="hidden" name="url_dokumen_akta_pendirian" value="<?= $url_vendor ?>/Akta_pendirian/">
+
                                             <input type="hidden" name="url_download_akta_perubahan" value="<?= base_url('validator/rekanan_tervalidasi/url_download_akta_perubahan/') ?>">
+                                            <input type="hidden" name="url_dokumen_akta_perubahan" value="<?= $url_vendor ?>/Akta_perubahan/">
                                             <button class="nav-link" id="nav-akta-tab" data-bs-toggle="tab" data-bs-target="#nav-akta" type="button" role="tab" aria-controls="nav-akta" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Akta</b></small>
                                             </button>
+                                            <input type="hidden" name="url_dokumen_pemilik" value="<?= $url_vendor ?>/Pemilik/">
+                                            <input type="hidden" name="url_dokumen_pengurus" value="<?= $url_vendor ?>/Pengurus/">
                                             <button class="nav-link" id="nav-manajerial-tab" data-bs-toggle="tab" data-bs-target="#nav-manajerial" type="button" role="tab" aria-controls="nav-manajerial" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Manajerial</b></small>
                                             </button>
                                             <input type="hidden" name="url_download_spt" value="<?= base_url('validator/rekanan_tervalidasi/url_download_spt/') ?>">
+                                            <input type="hidden" name="url_dokumen_pengalaman" value="<?= $url_vendor ?>/Pengalaman/">
                                             <button class="nav-link" id="nav-pengalaman-tab" data-bs-toggle="tab" data-bs-target="#nav-pengalaman" type="button" role="tab" aria-controls="nav-pengalaman" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
                                                 <small><b>Pengalaman</b></small>
@@ -131,9 +148,12 @@
 
                                             <input type="hidden" name="url_download_neraca" value="<?= base_url('validator/rekanan_tervalidasi/url_download_neraca/') ?>">
                                             <input type="hidden" name="url_download_keuangan" value="<?= base_url('validator/rekanan_tervalidasi/url_download_keuangan/') ?>">
+
+                                            <input type="hidden" name="url_dokumen_sppkp" value="<?= $url_vendor ?>/SPPKP/">
+                                            <input type="hidden" name="url_dokumen_npwp" value="<?= $url_vendor ?>/NPWP/">
                                             <button class="nav-link" id="nav-pajak-tab" data-bs-toggle="tab" data-bs-target="#nav-pajak" type="button" role="tab" aria-controls="nav-pajak" aria-selected="true">
                                                 <i class="fa-regular fa-file-powerpoint"></i>
-                                                <small><b>Pajak</b></small>
+                                                <small><b>Pajak dan Laporan Keuangan</b></small>
                                             </button>
 
 
@@ -410,15 +430,21 @@
                                                     <label for="">Akta Pendiran</label>
                                                     <table class="table table-bordered table-sm">
                                                         <thead class="bg-warning">
+
                                                             <tr>
-                                                                <th><small>No. Surat<small></th>
-                                                                <th><small>Berlaku Sampai<small></th>
-                                                                <th><small>Jumlah Setor Modal<small></th>
-                                                                <th><small>Kualifikasi Usaha<small></th>
-                                                                <th colspan="2"><small>File Dokumen<small></th>
-                                                                <th><small>Status Validasi<small></th>
-                                                                <th><small>Nama Validator<small></th>
-                                                                <th class="text-center"><small>More Options<small></th>
+                                                                <th rowspan="2"><small>No. Surat<small></th>
+                                                                <th rowspan="2"><small>Tanggal Penyampaian<small></th>
+                                                                <th rowspan="2"><small>Jumlah Setor Modal<small></th>
+                                                                <th rowspan="2"><small>Kualifikasi Usaha<small></th>
+                                                                <th colspan="3"><small>File Dokumen<small></th>
+                                                                <th rowspan="2"><small>Status Validasi<small></th>
+                                                                <th rowspan="2"><small>Nama Validator<small></th>
+                                                                <th rowspan="2"><small>More Options<small></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>File Akta</th>
+                                                                <th>File SK KUMHAM</th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="load_akta_pendirian">
@@ -457,14 +483,19 @@
                                                     <table class="table table-bordered table-sm">
                                                         <thead class="bg-info">
                                                             <tr>
-                                                                <th><small>No. Surat<small></th>
-                                                                <th><small>Berlaku Sampai<small></th>
-                                                                <th><small>Jumlah Setor Modal<small></th>
-                                                                <th><small>Kualifikasi Usaha<small></th>
-                                                                <th colspan="2"><small>File Dokumen<small></th>
-                                                                <th><small>Status Validasi<small></th>
-                                                                <th><small>Nama Validator<small></th>
-                                                                <th class="text-center"><small>More Options<small></th>
+                                                                <th rowspan="2"><small>No. Surat<small></th>
+                                                                <th rowspan="2"><small>Tanggal Penyampaian<small></th>
+                                                                <th rowspan="2"><small>Jumlah Setor Modal<small></th>
+                                                                <th rowspan="2"><small>Kualifikasi Usaha<small></th>
+                                                                <th colspan="3"><small>File Dokumen<small></th>
+                                                                <th rowspan="2"><small>Status Validasi<small></th>
+                                                                <th rowspan="2"><small>Nama Validator<small></th>
+                                                                <th rowspan="2"><small>More Options<small></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>File Akta</th>
+                                                                <th>File SK KUMHAM</th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="load_akta_perubahan">
@@ -630,7 +661,7 @@
                                                                 <tr>
                                                                     <th class="text-white">No</th>
                                                                     <th style="width:8%;"><small class="text-white">No. Kontrak</small></th>
-                                                                    <th style="width:8%;"><small class="text-white">Tgl. Kontrak</small></th>
+                                                                    <th style="width:8%;"><small class="text-white">Tgl. Awal Kontrak</small></th>
                                                                     <th style="width:23%;"><small class="text-white">Nama Pekerjaan</small></th>
                                                                     <th style="width:9%;"><small class="text-white">Nilai (Rp.)</small></th>
                                                                     <th style="width:9%;"><small class="text-white">Jenis Tender</small></th>
@@ -933,280 +964,546 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <center>
-                    <h4 for="">SIUP</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No Surat</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_siup">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SIUP</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
 
-                    </tbody>
-                </table>
-                <center>
-                    <h4 for="">KBLI SIUP</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Kode KBLI/Jenis</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_kbli_siup">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_siup">
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <center>
-                    <h4 for="">NIB</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No Surat</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_nib">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">KBLI SIUP</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
 
-                    </tbody>
-                </table>
-                <center>
-                    <h4 for="">KBLI NIB</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Kode KBLI/Jenis</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_kbli_nib">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kode KBLI/Jenis</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_kbli_siup">
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
 
-                <center>
-                    <h4 for="">SBU</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No Surat</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_sbu">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">NIB</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_nib">
 
-                    </tbody>
-                </table>
-                <center>
-                    <h4 for="">KODE SBU</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Kode SBU/Jenis</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_kbli_sbu">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                    </tbody>
-                </table>
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">KBLI NIB</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kode KBLI/Jenis</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_kbli_nib">
 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <center>
-                    <h4 for="">SIUJK</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No Surat</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_siujk">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SBU</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_sbu">
 
-                    </tbody>
-                </table>
-                <center>
-                    <h4 for="">KBLI SIUJK</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Kode KBLI/Jenis</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_kbli_siujk">
-
-                    </tbody>
-                </table>
-
-                <center>
-                    <h4 for="">Akta Pendirian</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No Surat</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_akta_pendirian">
-
-                    </tbody>
-                </table>
-
-                <center>
-                    <h4 for="">Akta Perubahan</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No Surat</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_akta_perubahan">
-
-                    </tbody>
-                </table>
-
-                <center>
-                    <h4 for="">Pemilik Perusahaan</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Nik/Paspor</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_pemilik">
-
-                    </tbody>
-                </table>
-
-                <center>
-                    <h4 for="">Pengurus Perusahaan</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Nik/Paspor</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_pengurus">
-
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
 
-                <center>
-                    <h4 for="">Pengalaman</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No Kontrak</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_pengalaman">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">KODE SBU</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kode SBU/Jenis</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_kbli_sbu">
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <center>
-                    <h4 for="">SPPKP</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No Surat</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_sppkp">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SIUJK</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_siujk">
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <center>
-                    <h4 for="">NPWP</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No NPWP</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_npwp">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">KBLI SIUJK</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Kode KBLI/Jenis</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_kbli_siujk">
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <center>
-                    <h4 for="">SPT</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No TTE/SPT</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_spt">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Akta Pendirian</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_akta_pendirian">
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <center>
-                    <h4 for="">Laporan Keuangan</h4>
-                </center>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Tahun Laporan/Jenis Audit</th>
-                            <th>Status Validasi</th>
-                            <th>Nama Validator</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rincian_keuangan">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Akta Perubahan</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_akta_perubahan">
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Pemilik Perusahaan</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nik/Paspor</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_pemilik">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Pengurus Perusahaan</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nik/Paspor</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_pengurus">
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Pengalaman</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Kontrak</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_pengalaman">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SPPKP</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No Surat</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_sppkp">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">NPWP</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No NPWP</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_npwp">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">SPT</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No TTE/SPT</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_spt">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <center>
+                            <h4 class="text-white">Laporan Keuangan</h4>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tahun Laporan/Jenis Audit</th>
+                                    <th>Status Validasi</th>
+                                    <th>Nama Validator</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rincian_keuangan">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="modal fade" id="modal_profil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white" id="exampleModalLabel">Profil Perusahaan <?= $vendor['nama_usaha'] ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="card border-dark shadow-lg">
+                            <div class="card-header border-dark bg-danger d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1 bd-highlight">
+                                    <span class="text-dark">
+                                        <i class="fa-regular fa-rectangle-list px-1"></i>
+                                        <small><strong>View Data - Identitas Perusahaan</strong></small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <table class="table table-bordered table-sm">
+                                            <input type="hidden" name="id_vendor">
+                                            <input type="hidden" name="nama_usaha">
+                                            <tr>
+                                                <th class="bg-light"><small>Nama Perusahaan / Perorangan</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-city px-1"></i>
+                                                        <label for="" id="nama_usaha"> <?= $vendor['nama_usaha'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>Jenis Usaha</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-industry px-1"></i>
+                                                        <label for="" id="id_jenis_usaha"> <?= $nama_izin_usaha ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>Kualifikasi Usaha</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-square-poll-vertical fa-lg px-1"></i>
+                                                        <label for="" id="kualifikasi_usaha"> <?= $vendor['kualifikasi_usaha'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>NPWP</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-address-card px-1"></i>
+                                                        <label for="" id="npwp"><?= $vendor['npwp'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>Email</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-envelope fa-lg px-1"></i>
+                                                        <label for="" id="email"><?= $vendor['email'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>No. Telpon Wa</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-envelope fa-lg px-1"></i>
+                                                        <label for="" id="email"><?= $vendor['no_telpon'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>No. Telpon Kantor</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-envelope fa-lg px-1"></i>
+                                                        <label for="" id="email"><?= $vendor['no_telpon_kantor'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>Bentuk Usaha</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-tags fa-lg px-1"></i>
+                                                        <label for="" id="bentuk_usaha"><?= $vendor['bentuk_usaha'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>Alamat</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-road px-1"></i>
+                                                        <label for="" id="alamat"><?= $vendor['alamat'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>Provinsi</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-landmark px-1"></i>
+                                                        <label for="" id="nama_provinsi"><?= $vendor['nama_provinsi'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>Nama Kabupaten</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-landmark px-1"></i>
+                                                        <label for="" id="nama_provinsi"><?= $vendor['nama_kabupaten'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="bg-light"><small>Nama Kecamatan</small></th>
+                                                <td>
+                                                    <small>
+                                                        <i class="fa-solid fa-landmark px-1"></i>
+                                                        <label for="" id="nama_provinsi"><?= $vendor['nama_kecamatan'] ?></label>
+                                                    </small>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
 </div>

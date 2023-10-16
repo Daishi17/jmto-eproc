@@ -9,6 +9,10 @@ class Rekanan_baru extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_datapenyedia/M_Rekanan_baru');
+	$role = $this->session->userdata('role');
+	if (!$role == 1 || !$role == 2) {
+		redirect('auth');
+	}
     }
 
     public function index()
@@ -84,13 +88,11 @@ class Rekanan_baru extends CI_Controller
         ];
         $this->M_Rekanan_baru->update_vendor($data, $where);
         $data = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
-        $email = $data['email'];
         $no_telpon = $data['no_telpon'];
-        json_decode(file_get_contents("https://jmto-vms.kintekindo.net/send_email_jmto/kirim_email_vendor_aktif/" . $email));
         json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_aktif/" . $no_telpon));
-        // $type_email = 'TERIMA-VENDOR';
-        // $message = 'Selamat! Akun Anda Telah Aktif Pada Aplikasi E-PROCUREMENT PT. Jasamarga Tollroad Operator Silahkan Login Sebagai Penyedia https://e-tender-jmto.kintekindo.net/';
-        // $this->email_send->sen_row_email($type_email, $id_url_vendor, $message);
+        $type_email = 'TERIMA-VENDOR';
+        $message = 'Selamat! Akun Anda Telah Aktif Pada Aplikasi E-PROCUREMENT PT. Jasamarga Tollroad Operator Silahkan Login Sebagai Penyedia https://drtproc.jmto.co.id/';
+        $this->email_send->sen_row_email($type_email, $id_url_vendor, $message);
         $response = [
             'message' => 'success'
         ];

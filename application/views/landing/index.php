@@ -58,7 +58,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                         <li><a class="dropdown-item" href="https://eprocurement.jmto.co.id/auth"><i> Non Penyedia</i></a></li>
                                     </ul>
                                 </li>
-                                <a href="https://drtproc.jmto.co.id/auth" class="btn btn-warning text-white btn-round ml-3"><i>REGISTRASI PENYEDIA</i></a>
+                                <a href="https://drtproc.jmto.co.id/registrasi" class="btn btn-warning text-white btn-round ml-3"><i>REGISTRASI PENYEDIA</i></a>
                             </nav>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ header("Content-Security-Policy: img-src 'self' *");
             </li>
             <li>
                 <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
-                <p><a href="#" target="_blank">Kontak Kami<br>08978201075</a></p>
+                <p><a href="https://api.whatsapp.com/send?phone=+6281113004560&text=HALLO JASAMARGA TOLLROAD OPERATOR" target="_blank">Kontak Kami<br>081113004560</a></p>
             </li>
         </ul>
     </div>
@@ -179,7 +179,7 @@ header("Content-Security-Policy: img-src 'self' *");
                 </li>
                 <li>
                     <img src="<?= base_url('assets/img/wa_logo.png') ?>" width="32" height="32">
-                    <p><a href="#" target="_blank">Kontak Kami<br>08978201075</a></p>
+                    <p><a href="#" target="_blank">Kontak Kami<br>081113004560</a></p>
                 </li>
             </ul>
         </div>
@@ -528,7 +528,7 @@ header("Content-Security-Policy: img-src 'self' *");
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 text-center">
-                        <p class="mb-0 text-white">Â©PT Jasamarga Tollroad Operator. 2023 <a href="#"></a> Privacy & Policy</p>
+                        <p class="mb-0 text-white">©PT Jasamarga Tollroad Operator. 2023 <a href="#"></a> Privacy & Policy</p>
                     </div>
                 </div>
             </div>

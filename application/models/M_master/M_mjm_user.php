@@ -5,7 +5,7 @@ class M_mjm_user extends CI_Model
 {
 
     var $table = 'tbl_manajemen_user';
-    var $order = array('id_manajemen_user', 'kode_mjm_user', 'nik', 'email', 'role', 'status', 'id_pegawai');
+    var $order = array('id_manajemen_user', 'kode_mjm_user', 'nip', 'email', 'role', 'status', 'tbl_pegawai.id_pegawai', 'username');
 
     private function _get_data_query()
     {

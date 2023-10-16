@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Rekanan_tervalidasi extends CI_Model
 {
-    var $order =  array('id_vendor', 'nama_usaha', 'jenis_usaha', 'bentuk_usaha', 'kualifikasi_usaha', 'tgl_daftar', 'id_vendor');
+    var $order =  array('id_vendor', 'nama_usaha', 'id_jenis_usaha', 'bentuk_usaha', 'kualifikasi_usaha', 'tgl_daftar', 'id_vendor');
 
     // get nib
     private function _get_data_query_rekanan_tervalidasi()
@@ -15,7 +15,19 @@ class M_Rekanan_tervalidasi extends CI_Model
         $this->db->join('tbl_kabupaten', 'tbl_vendor.id_kabupaten = tbl_kabupaten.id_kabupaten', 'left');
         $this->db->where('tbl_vendor.sts_aktif', 1);
         $this->db->where('tbl_vendor.sts_terundang', NULL);
-        $i = 0;
+    	    if (isset($_POST['sts_upload_dokumen'], $_POST['sts_dokumen_cek']) && $_POST['sts_upload_dokumen'] != '' && $_POST['sts_dokumen_cek'] != '') {
+            if ($_POST['sts_upload_dokumen'] == 2) {
+                $this->db->where('tbl_vendor.sts_upload_dokumen', NULL);
+            } else {
+                $this->db->like('tbl_vendor.sts_upload_dokumen', $_POST['sts_upload_dokumen']);
+            }
+
+            if ($_POST['sts_dokumen_cek'] == 2) {
+                $this->db->where('tbl_vendor.sts_dokumen_cek', NULL);
+            } else {
+                $this->db->like('tbl_vendor.sts_dokumen_cek', $_POST['sts_dokumen_cek']);
+            }
+        }        $i = 0;
         foreach ($this->order as $item) // looping awal
         {
             if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
@@ -2019,6 +2031,24 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->update('tbl_vendor_izin_lain', $data, $where);
         return $this->db->affected_rows();
+    }
+
+    public function get_row_vendor_id_vendor($id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor');
+        $this->db->where('tbl_vendor.id_vendor', $id_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_vendor_url($id_url_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor');
+        $this->db->where('tbl_vendor.id_url_vendor', $id_url_vendor);
+        $query = $this->db->get();
+        return $query->row_array();
     }
 
     // end izin_lain

@@ -17,6 +17,10 @@ class Sirup_rup extends CI_Controller
 		$this->load->model('M_jenis_anggaran/M_jenis_anggaran');
 		$this->load->view('administrator/sirup_rup/file_public_rup');
 		$this->load->model('Wilayah/Wilayah_model');
+		$role = $this->session->userdata('role');
+		if (!$role) {
+			redirect('auth');
+		}
 	}
 
 	public function index()
@@ -200,6 +204,7 @@ class Sirup_rup extends CI_Controller
 	{
 		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
+		$data['row_rup_edit'] = $this->M_rup->get_row_rup_edit($id_url_rup);
 		if (!$row_rup['id_rkap']) {
 			$data['get_row_rkap'] = '';
 		} else {
@@ -373,7 +378,6 @@ class Sirup_rup extends CI_Controller
 		$jangka_waktu_hari_pelaksanaan = $this->input->post('jangka_waktu_hari_pelaksanaan');
 		$total_pagu_rup = $this->input->post('total_pagu_rup');
 		$nilai_pencatatan = $this->input->post('nilai_pencatatan');
-		$this->form_validation->set_rules('id_ruas[]', 'Ruas', 'required|trim', ['required' => 'Ruas Wajib Diisi!']);
 		$this->form_validation->set_rules('detail_lokasi_rup', 'Detail Lokasi', 'required|trim', ['required' => 'Detil Lokasi Wajib Diisi!']);
 		$this->form_validation->set_rules('tahun_rup', 'Tahun', 'required|trim', ['required' => 'Tahun Wajib Diisi!']);
 		$this->form_validation->set_rules('id_departemen', 'Nama Departemen', 'required|trim', ['required' => 'Nama Departemen  Wajib Diisi!']);
@@ -415,7 +419,6 @@ class Sirup_rup extends CI_Controller
 					'jangka_waktu_selesai_pelaksanaan' => form_error('jangka_waktu_selesai_pelaksanaan'),
 					'jangka_waktu_hari_pelaksanaan' => form_error('jangka_waktu_hari_pelaksanaan'),
 					'total_pagu_rup' => form_error('total_pagu_rup'),
-					'id_ruas' => form_error('id_ruas'),
 				],
 			];
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -458,14 +461,17 @@ class Sirup_rup extends CI_Controller
 				// End Insert Batch Tbl_paket
 				$package_id = $this->db->insert_id(); // Ini ID table yang memberi Id Insertbatchnya
 				// Insert Batch Lokasi
-				$result = array();
-				foreach ($id_ruas as $key => $val) {
-					$result[] = array(
-						'id_rup'   => $package_id,
-						'id_ruas'   =>  $id_ruas[$key],
-					);
+				if ($id_ruas == null) {
+				} else {
+					$result = array();
+					foreach ($id_ruas as $key => $val) {
+						$result[] = array(
+							'id_rup'   => $package_id,
+							'id_ruas'   =>  $id_ruas[$key],
+						);
+					}
+					$this->db->insert_batch('tbl_ruas_rup', $result);
 				}
-				$this->db->insert_batch('tbl_ruas_rup', $result);
 				if (!$id_rkap) {
 				} else {
 					$where = [
@@ -519,14 +525,17 @@ class Sirup_rup extends CI_Controller
 				// End Insert Batch Tbl_paket
 				$package_id = $row_rup['id_rup'];
 				// Insert Batch Lokasi
-				$result = array();
-				foreach ($id_ruas as $key => $val) {
-					$result[] = array(
-						'id_rup'   => $package_id,
-						'id_ruas'   =>  $id_ruas[$key],
-					);
+				if ($id_ruas == null) {
+				} else {
+					$result = array();
+					foreach ($id_ruas as $key => $val) {
+						$result[] = array(
+							'id_rup'   => $package_id,
+							'id_ruas'   =>  $id_ruas[$key],
+						);
+					}
+					$this->db->insert_batch('tbl_ruas_rup', $result);
 				}
-				$this->db->insert_batch('tbl_ruas_rup', $result);
 				if (!$id_rkap) {
 				} else {
 					$where = [
@@ -595,7 +604,7 @@ class Sirup_rup extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
-	
+
 
 	public function get_section($id_departemen) //satuan kerja
 	{

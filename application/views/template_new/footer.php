@@ -36,6 +36,24 @@
         <script src="<?php echo base_url(); ?>/assets/plugins-lte/datatables-buttons/js/buttons.colVis.min.js"></script>
         <!-- <script src="<?php echo base_url(); ?>/assets/js/datatable_master.js"></script> -->
         <!-- <script src="<?= base_url('js_folder/data_rekanan.min.js') ?>"></script> -->
+ <script>
+            let log_off = new Date();
+            log_off.setHours(log_off.getHours() + 2);
+            log_off = new Date(log_off);
+            let int_logoff = setInterval(() => {
+                let now = new Date();
+                if (now > log_off) {
+                    window.location.assign("<?= base_url('auth/logout') ?>");
+                    clearInterval(int_logoff);
+                }
+            }, 5000);
+
+            $('body').on('click', function() {
+                let log_off = new Date();
+                log_off.setHours(log_off.getHours() + 2);
+                log_off = new Date(log_off);
+            })
+        </script>
         </body>
 
         </html>

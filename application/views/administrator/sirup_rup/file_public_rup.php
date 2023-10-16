@@ -67,15 +67,48 @@
         var harga = $(".total_pagu_rup").val();
         var tanpa_rupiah = document.getElementById('rupiah_total_pagu_rup');
         tanpa_rupiah.value = formatRupiah(this.value, 'Rp. ');
-
         var persen_pencatatan = $('[name="persen_pencatatan"]').val()
-        var nilai_pencatatan = harga * persen_pencatatan / 100;
-
+        var nilai_pencatatan = (harga * persen_pencatatan) / 100;
         $('[name="nilai_pencatatan"]').val(nilai_pencatatan);
-        $('#nilai_pencatatan2').val(nilai_pencatatan)
-        var tanpa_rupiah2 = $('[name="nilai_pencatatan2"]').val(nilai_pencatatan);
-        tanpa_rupiah2.value2 = formatRupiah(this.value2, 'Rp. ');
+         $.ajax({
+            type: "GET",
+            url: '<?= base_url('get_rupiah/ambil_rupiah/')?>' + nilai_pencatatan,
+            dataType: "JSON",
+            success: function(response) {
+                $('#nilai_pencatatan2').val(response['rupiah_nilai_pencatatan'])
+            }
+        })
+        /* Fungsi */
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
+    });
+
+    $(".persen_pencatatan").keyup(function() {
+        var harga = $(".total_pagu_rup").val();
+        var persen_pencatatan = $('[name="persen_pencatatan"]').val()
+        var nilai_pencatatan = (harga * persen_pencatatan) / 100;
+        $('[name="nilai_pencatatan"]').val(nilai_pencatatan);
+         $.ajax({
+            type: "GET",
+            url: '<?= base_url('get_rupiah/ambil_rupiah/')?>' + nilai_pencatatan,
+            dataType: "JSON",
+            success: function(response) {
+                $('#nilai_pencatatan2').val(response['rupiah_nilai_pencatatan'])
+            }
+        })
         /* Fungsi */
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -263,8 +296,10 @@
                             $('.detail_lokasi_rup_validation').html('');
                             Swal.fire('Rup Berhasil Di Buat!', '', 'success')
                             form_rup[0].reset();
+                            setTimeout(() => {
+                                location.replace('<?= base_url('administrator/Sirup_rup')?>');
+                            }, 3000);
                             Get_kode_rup();
-                            location.replace('' + url_back_rup + '');
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */

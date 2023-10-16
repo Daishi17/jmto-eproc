@@ -7,6 +7,11 @@ class Fm_jenis_pengadaan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_master/M_jenis_pengadaan');
+		$role = $this->session->userdata('role');
+		if (!$role == 1) {
+			redirect('auth');
+		}
+
 	}
 
 	public function index()

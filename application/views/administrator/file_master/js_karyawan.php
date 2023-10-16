@@ -222,3 +222,9 @@
         });
     }
 </script>
+
+<script>
+    function show_modal_import_karyawan() {
+        $('#import_data_karyawan').modal('show')
+    }
+</script>

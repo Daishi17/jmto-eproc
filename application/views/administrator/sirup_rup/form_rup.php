@@ -381,7 +381,7 @@
                                     <small>
                                         <div class="input-group mb-2">
                                             <span class="input-group-text">%</span>
-                                            <input name="persen_pencatatan" type="text" pattern="\d*" maxlength="4" class="form-control" placeholder="Persentase">
+                                            <input name="persen_pencatatan" type="text" pattern="\d*" maxlength="4" class="form-control persen_pencatatan" placeholder="Persentase">
                                         </div>
                                         <!-- persen_pencatatan -->
                                         <small class="text-danger persen_pencatatan_validation"></small>

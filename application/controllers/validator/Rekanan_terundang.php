@@ -13,6 +13,10 @@ class Rekanan_terundang extends CI_Controller
 		$this->load->helper('download');
 		$this->load->model('M_datapenyedia/M_Rekanan_terundang');
 		$this->load->model('M_datapenyedia/M_Rekanan_tervalidasi');
+		$role = $this->session->userdata('role');
+		if (!$role == 1 || !$role == 2) {
+			redirect('auth');
+		}
 	}
 	public function index()
 	{
@@ -25,14 +29,12 @@ class Rekanan_terundang extends CI_Controller
 	public function pesan()
 	{
 		$id_url_vendor = $this->input->post('id_url_vendor');
-		$pesan = $this->input->post('pesan');
-		// $type_email = 'KIRIM-PESAN';
-		// $this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
+		$type_email = 'KIRIM-PESAN';
 		$data = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
-		$email = $data['email'];
+		$pesan = $this->input->post('pesan');
 		$no_telpon = $data['no_telpon'];
 		$pesanku = str_replace(" ", "-", $pesan);
-		json_decode(file_get_contents("https://jmto-vms.kintekindo.net/send_email_jmto/kirim_email_vendor_terundang/" . $email . '/' . $pesanku));
+		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
 		json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 	}
 
@@ -44,7 +46,10 @@ class Rekanan_terundang extends CI_Controller
 		$data = $this->M_Rekanan_terundang->get_row_vendor($id_url_vendor);
 		$type_email = 'KIRIM-UNDANGAN';
 		$pesan = '<i>Kepada Yth.<br><b id="nama_usaha">' . $data['nama_usaha'] . '</b><br></i><i>dokumen anda sudah tervalidasi silahkan lakukan pembuktian dokumen pada</i><br>' . 'Hari	: ' . $hari . '<br><br>' . 'Tanggal	: ' . $tanggal;
+		$no_telpon = $data['no_telpon'];
+		$pesanku = str_replace(" ", "-", $pesan);
 		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
+		json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 	}
 
 	function tidak_valid()

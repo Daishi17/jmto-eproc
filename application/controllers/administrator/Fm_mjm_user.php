@@ -8,6 +8,11 @@ class Fm_mjm_user extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_master/M_mjm_user');
+		$role = $this->session->userdata('role');
+		if (!$role == 1) {
+			redirect('auth');
+		}
+
 	}
 
 	private function _role($role)
@@ -95,6 +100,10 @@ class Fm_mjm_user extends CI_Controller
 							<i class="fa-solid fa-edit px-1"></i>
 							<small>Detail</small>
 						</button>
+						<button type="button" class="btn btn-primary btn-sm shadow-lg" onClick="byid(' . "'" . $res->id_manajemen_user  . "','ubah_pw'" . ')" title="Edit Data">
+							<i class="fas fa-lock"></i>
+							<small>Ubah Password</small>
+						</button>
 						</div>';
 			} else {
 				$row[] = '<div class="text-center">
@@ -105,6 +114,10 @@ class Fm_mjm_user extends CI_Controller
 							<button type="button" class="btn btn-info btn-sm shadow-lg" onClick="byid(' . "'" . $res->id_manajemen_user  . "','edit'" . ')" title="Edit Data">
 							<i class="fa-solid fa-edit px-1"></i>
 							<small>Detail</small>
+							<button type="button" class="btn btn-primary btn-sm shadow-lg" onClick="byid(' . "'" . $res->id_manajemen_user  . "','ubah_pw'" . ')" title="Edit Data">
+							<i class="fas fa-lock"></i>
+							<small>Ubah Password</small>
+						</button>
 						</div>';
 			}
 			$data[] = $row;
@@ -131,6 +144,31 @@ class Fm_mjm_user extends CI_Controller
 
 		$data = $this->M_mjm_user->getByid_mjm($value);
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+
+	public function ubah_password()
+	{
+		$id_manajemen_user_ubah = $this->input->post('id_manajemen_user_ubah');
+		$password = $this->input->post('password');
+
+		$this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]', ['required' => 'Password Wajib Diisi!', 'matches' => 'Password Tidak Sama']);
+		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password]', ['required' => 'Password Verifikasi Wajib Di isi!', 'matches' => 'Password Tidak Sama']);
+
+		if ($this->form_validation->run() == false) {
+			$response = [
+				'error' => [
+					'password' => form_error('password'),
+					'password2' => form_error('password2'),
+				],
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		} else {
+			$data = [
+				'password' => password_hash($password, PASSWORD_DEFAULT),
+			];
+			$this->M_mjm_user->update_data($data, $id_manajemen_user_ubah);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		}
 	}
 
 

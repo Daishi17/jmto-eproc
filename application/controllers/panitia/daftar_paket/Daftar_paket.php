@@ -22,6 +22,7 @@ class Daftar_paket extends CI_Controller
 	}
 	public function index()
 	{
+
 		$this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
@@ -29,6 +30,45 @@ class Daftar_paket extends CI_Controller
 		$this->load->view('administrator/template_menu/footer_menu');
 		$this->load->view('panitia/daftar_paket/file_public_daftar_paket');
 	}
+
+
+	public function get_draft_paket()
+	{
+		$result = $this->M_panitia->gettable_daftar_paket();
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = '<small>' . $rs->tahun_rup . '</small>';
+			$row[] = '<small>' . $rs->nama_rup . '</small>';
+			$row[] = '<small>' . $rs->nama_departemen . '</small>';
+			$row[] = '<small>' . $rs->nama_jenis_pengadaan . '</small>';
+			$row[] = '<small>' . $rs->nama_metode_pengadaan . '</small>';
+			$row[] = '<small>' . "Rp " . number_format($rs->total_hps_rup, 2, ',', '.') . '</small>';
+			if ($rs->status_paket_panitia == 1) {
+				$row[] = '<small><span class="badge bg-warning text-dark">Draft Paket</span></small>';
+			} else {
+				$row[] = '<small><span class="badge bg-success text-white">Paket Sudah Diumumkan</span></small>';
+			}
+
+
+			$row[] = '<div class="text-center">
+						<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onclick="byid_paket(' . "'" . $rs->id_url_rup . "'" . ')">
+							<i class="fa-solid fa-users-viewfinder"></i>
+							<small>Detail</small>
+						</a>
+					  </div>';
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_panitia->count_all_daftar_paket(),
+			"recordsFiltered" => $this->M_panitia->count_filtered_daftar_paket(),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
 	public function beranda()
 	{
 		$this->load->view('panitia/template_menu/header_menu');
@@ -43,6 +83,7 @@ class Daftar_paket extends CI_Controller
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$data['jadwal'] = $this->M_panitia->get_jadwal($id_url_rup);
+		$data['panitia'] = $this->M_panitia->get_panitia($data['row_rup']['id_rup']);
 
 		$data['syarat_izin_usaha_tender'] = $this->M_panitia->get_syarat_izin_usaha_tender($data['row_rup']['id_rup']);
 		$data['syarat_izin_teknis_tender'] = $this->M_panitia->get_syarat_izin_teknis_tender($data['row_rup']['id_rup']);
@@ -54,8 +95,10 @@ class Daftar_paket extends CI_Controller
 		$data_vendor_lolos_siup_kbli = $this->M_panitia->data_vendor_lolos_siup_kbli($cek_syarat_kbli);
 		$data_vendor_lolos_nib_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
 		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli);
-		// $data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli);
-		$this->load->view('administrator/template_menu/header_menu');
+		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli);
+		// var_dump($data['result_vendor_terundang']);die;
+		$this->load->view('panitia/template_menu/header_menu');
+		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
 		$this->load->view('administrator/template_menu/footer_menu');
@@ -92,8 +135,13 @@ class Daftar_paket extends CI_Controller
 
 	public function by_id_rup($id_url_rup)
 	{
+		$data_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$panitia = $this->M_panitia->get_panitia($data_rup['id_rup']);
+		$ruas = $this->M_panitia->get_ruas($data_rup['id_rup']);
 		$response = [
 			'row_rup' => $this->M_rup->get_row_rup($id_url_rup),
+			'panitia' => $panitia,
+			'ruas' => $ruas
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
@@ -116,12 +164,11 @@ class Daftar_paket extends CI_Controller
 
 
 		$date = date('Y');
-		if (!is_dir('file_paket/' . $nama_rup . '-' . $date . '/HPS-' . $date)) {
-			mkdir('file_paket/' . $nama_rup . '-' . $date . '/HPS-' . $date, 0777, TRUE);
+		if (!is_dir('file_paket/' . $nama_rup . '/HPS')) {
+			mkdir('file_paket/' . $nama_rup . '/HPS', 0777, TRUE);
 		}
 
-
-		$config['upload_path'] = './file_paket/' . $nama_rup . '-' . $date . '/HPS-' . $date;
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/HPS';
 		$config['allowed_types'] = 'pdf|xlsx|xls';
 		$config['max_size'] = 0;
 
@@ -141,6 +188,44 @@ class Daftar_paket extends CI_Controller
 		}
 	}
 
+	public function url_update_rup()
+	{
+
+		$id_rup = $this->input->post('id_rup');
+		$jenis_kontrak = $this->input->post('jenis_kontrak');
+		$beban_tahun_anggaran = $this->input->post('beban_tahun_anggaran');
+		$bobot_nilai = $this->input->post('bobot_nilai');
+		$bobot_biaya = $this->input->post('bobot_biaya');
+		$bobot_teknis = $this->input->post('bobot_teknis');
+		$status_paket_panitia = $this->input->post('status_paket_panitia');
+		if ($jenis_kontrak) {
+			$data = [
+				'jenis_kontrak' => $jenis_kontrak
+			];
+		} else if ($beban_tahun_anggaran) {
+			$data = [
+				'beban_tahun_anggaran' => $beban_tahun_anggaran
+			];
+		} else if ($bobot_nilai) {
+			$data = [
+				'bobot_nilai' => $bobot_nilai
+			];
+		} else if ($bobot_biaya) {
+			$data = [
+				'bobot_biaya' => $bobot_biaya
+			];
+		} else if ($bobot_teknis) {
+			$data = [
+				'bobot_teknis' => $bobot_teknis
+			];
+		} else if ($status_paket_panitia) {
+			$data = [
+				'status_paket_panitia' => $status_paket_panitia
+			];
+		}
+		$this->M_panitia->update_rup_panitia($id_rup, $data);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
 
 	public function simpan_jadwal_20baris()
 	{
@@ -841,8 +926,7 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
 			];
-		} else {
-		}
+		} else { }
 		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])
@@ -850,6 +934,37 @@ class Daftar_paket extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
+	public function add_dok_pengadaan()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$nama_dok_pengadaan = $this->input->post('nama_dok_pengadaan');
+		$nama_rup = $this->input->post('nama_rup');
+		$nama_pegawai = $this->session->userdata('nama_pegawai');
+
+		$date = date('Y');
+		if (!is_dir('file_paket/' . $nama_rup  . '/DOKUMEN_PENGADAAN')) {
+			mkdir('file_paket/' . $nama_rup  . '/DOKUMEN_PENGADAAN', 0777, TRUE);
+		}
+
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/DOKUMEN_PENGADAAN';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_dok_pengadaan')) {
+			$fileData = $this->upload->data();
+
+			$upload = [
+				'nama_dok_pengadaan' => $nama_dok_pengadaan,
+				'id_rup' => $id_rup,
+				'file_dok_pengadaan' => $fileData['file_name'],
+				'user_created' => $nama_pegawai
+			];
+
+			$this->M_panitia->insert_dok_pengadaan($upload);
+		}
+	}
 	public function simpan_syarat_tambahan()
 	{
 		$id_url_rup = $this->input->post('id_url_rup');
@@ -877,30 +992,98 @@ class Daftar_paket extends CI_Controller
 		}
 	}
 
+	function hapus_dok_pengadaan()
+	{
+		$id_dokumen_pengadaan = $this->input->post('id_dokumen_pengadaan');
+		$where = [
+			'id_dokumen_pengadaan' => $id_dokumen_pengadaan
+		];
+		$this->M_panitia->delete_dok_pengadaan($where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+
+	public function add_dok_prakualifikasi()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$nama_dok_prakualifikasi = $this->input->post('nama_dok_prakualifikasi');
+		$nama_rup = $this->input->post('nama_rup');
+		$nama_pegawai = $this->session->userdata('nama_pegawai');
+
+		$date = date('Y');
+		if (!is_dir('file_paket/' . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI')) {
+			mkdir('file_paket/' . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI', 0777, TRUE);
+		}
+
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/DOKUMEN_PRAKUALIFIKASI';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_dok_prakualifikasi')) {
+			$fileData = $this->upload->data();
+
+			$upload = [
+				'nama_dok_prakualifikasi' => $nama_dok_prakualifikasi,
+				'id_rup' => $id_rup,
+				'file_dok_prakualifikasi' => $fileData['file_name'],
+				'user_created' => $nama_pegawai
+			];
+
+			$this->M_panitia->insert_dok_prakualifikasi($upload);
+		}
+	}
+
+	function hapus_dok_prakualifikasi()
+	{
+		$id_dokumen_prakualifikasi = $this->input->post('id_dokumen_prakualifikasi');
+		$where = [
+			'id_dokumen_prakualifikasi' => $id_dokumen_prakualifikasi
+		];
+		$this->M_panitia->delete_dok_prakualifikasi($where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+
+	public function get_dok_pengadaan($id_rup_global)
+	{
+		$response = [
+			'dok_pengadaan'  => $this->M_panitia->get_dokumen_pengadaan($id_rup_global),
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	public function get_dok_prakualifikasi($id_rup_global)
+	{
+		$response = [
+			'dok_prakualifikasi'  => $this->M_panitia->get_dokumen_prakualifikasi($id_rup_global),
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
 	function get_syarat_tambahan()
 	{
-		$id_url_rup = $this->input->post('id_url_rup');
-		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$id_url_rup  = $this->input->post('id_url_rup');
+		$row_rup  = $this->M_rup->get_row_rup($id_url_rup);
 		$response = [
-			'result_syarat_tender_tambahan' => $this->M_panitia->result_syarat_tambahan($row_rup['id_rup'])
+			'result_syarat_tender_tambahan'  => $this->M_panitia->result_syarat_tambahan($row_rup['id_rup'])
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
 	public function url_download_syarat_tambahan($id_syarat_tambahan)
 	{
-		$row_syarat = $this->M_panitia->row_syarat_tambahan($id_syarat_tambahan);
+		$row_syarat  = $this->M_panitia->row_syarat_tambahan($id_syarat_tambahan);
 		$date = date('Y');
-		$file_url = 'file_paket/' . $row_syarat['nama_rup'] . '-' . $date .  '/SYARAT_TAMBAHAN-' . $date . '/' . $row_syarat['file_syarat_tambahan'];
-		$url = $file_url;
+		$file_url = 'file_paket/'  . $row_syarat['nama_rup'] . '-'  . $date .  '/SYARAT_TAMBAHAN-'  . $date . '/'  . $row_syarat['file_syarat_tambahan'];
+		$url  = $file_url;
 		redirect($url);
 	}
 
 	function url_hapus_syarat_tambahan()
 	{
-		$id_syarat_tambahan = $this->input->post('id_syarat_tambahan');
+		$id_syarat_tambahan  = $this->input->post('id_syarat_tambahan');
 		$where = [
-			'id_syarat_tambahan' => $id_syarat_tambahan
+			'id_syarat_tambahan'  => $id_syarat_tambahan
 		];
 		$this->M_panitia->delete_syarat_rup($where);
 		$this->output->set_content_type('application/json')->set_output(json_encode('success'));

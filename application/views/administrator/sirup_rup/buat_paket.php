@@ -435,10 +435,9 @@
                                                                     <div class="input-group mb-2">
                                                                         <span class="input-group-text"><i class="fa-solid fa-users-gear"></i></span>
                                                                         <select name="role_panitia" class="form-control">
-                                                                            <option>Pilih Role Panitia</option>
+                                                                            <option value="3">Anggota</option>
                                                                             <option value="1">Ketua Panitia</option>
                                                                             <option value="2">Sekretaris</option>
-                                                                            <option value="3">Anggota</option>
                                                                         </select>
                                                                     </div>
                                                                 </td>

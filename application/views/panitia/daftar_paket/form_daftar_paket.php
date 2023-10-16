@@ -1,5 +1,6 @@
 <main class="container-fluid">
     <input type="hidden" name="id_url_rup" value="<?= $row_rup['id_url_rup'] ?>">
+    <input type="hidden" name="id_rup_global" value="<?= $row_rup['id_rup'] ?>">
 
     <div class="row">
         <div class="col">
@@ -193,7 +194,7 @@
                                                                 <td style="vertical-align: middle;">
                                                                     <i class="fa-solid fa-rupiah-sign px-1"></i>
                                                                     <input type="hidden" name="total_pagu_rup" value="<?= $row_rup['total_pagu_rup'] ?>" class="form-control" placeholder="Total HPS">
-                                                                    <small><?= "Rp " . number_format($row_rup['total_pagu_rup'], 2, ',', '.') ?></small>
+                                                                    <small><?= number_format($row_rup['total_pagu_rup'], 2, ',', '.') ?></small>
                                                                 </td>
                                                                 <td>
                                                                     <div class="col-sm-12">
@@ -250,13 +251,46 @@
                                         <td>
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-square-pen px-1"></i></span>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected disabled value="">Pilih Jenis Kontrak..</option>
-                                                    <option value="1">Lump Sum</option>
-                                                    <option value="2">Harga Satuan</option>
-                                                    <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
-                                                    <option value="4">Terima Jadi (Trunkey)</option>
-                                                    <option value="5">Persentase (%)</option>
+                                                <select class="form-select" name="jenis_kontrak" aria-label="Default select example" onchange="jenis_kontrak()">
+                                                    <?php if (!$row_rup['jenis_kontrak']) { ?>
+                                                        <option value="">Pilih Jenis Kontrak..</option>
+                                                        <option value="1">Lump Sum</option>
+                                                        <option value="2">Harga Satuan</option>
+                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                        <option value="4">Terima Jadi (Turnkey)</option>
+                                                        <option value="5">Persentase (%)</option>
+                                                    <?php } else if ($row_rup['jenis_kontrak'] == 1) { ?>
+                                                        <option value="1" selected>Lump Sum</option>
+                                                        <option value="2">Harga Satuan</option>
+                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                        <option value="4">Terima Jadi (Turnkey)</option>
+                                                        <option value="5">Persentase (%)</option>
+                                                    <?php } else if ($row_rup['jenis_kontrak'] == 2) { ?>
+                                                        <option value="1">Lump Sum</option>
+                                                        <option value="2" selected>Harga Satuan</option>
+                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                        <option value="4">Terima Jadi (Turnkey)</option>
+                                                        <option value="5">Persentase (%)</option>
+                                                    <?php } else if ($row_rup['jenis_kontrak'] == 3) { ?>
+                                                        <option value="1">Lump Sum</option>
+                                                        <option value="2">Harga Satuan</option>
+                                                        <option value="3" selected>Gabungan Lump Sum dan Harga Satuan</option>
+                                                        <option value="4">Terima Jadi (Turnkey)</option>
+                                                        <option value="5">Persentase (%)</option>
+                                                    <?php } else if ($row_rup['jenis_kontrak'] == 4) { ?>
+                                                        <option value="1">Lump Sum</option>
+                                                        <option value="2">Harga Satuan</option>
+                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                        <option value="4" selected>Terima Jadi (Turnkey)</option>
+                                                        <option value="5">Persentase (%)</option>
+                                                    <?php } else if ($row_rup['jenis_kontrak'] == 5) { ?>
+                                                        <option value="1">Lump Sum</option>
+                                                        <option value="2">Harga Satuan</option>
+                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                        <option value="4">Terima Jadi (Turnkey)</option>
+                                                        <option value="5" selected>Persentase (%)</option>
+                                                    <?php } ?>
+
                                                 </select>
                                             </div>
                                         </td>
@@ -266,10 +300,21 @@
                                         <td>
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-calendar-plus"></i></span>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected disabled value="">Pilih...</option>
-                                                    <option value="1">Tahun Tunggal</option>
-                                                    <option value="2">Tahun Jamak</option>
+                                                <select class="form-select" name="beban_tahun_anggaran" aria-label="Default select example" onchange="beban_anggaran()">
+                                                    <?php if (!$row_rup['beban_tahun_anggaran']) { ?>
+                                                        <option value="">Pilih...</option>
+                                                        <option value="1">Tahun Tunggal</option>
+                                                        <option value="2">Tahun Jamak</option>
+                                                    <?php } else if ($row_rup['beban_tahun_anggaran'] == 1) { ?>
+                                                        <option value="">Pilih...</option>
+                                                        <option value="1" selected>Tahun Tunggal</option>
+                                                        <option value="2">Tahun Jamak</option>
+                                                    <?php } else if ($row_rup['beban_tahun_anggaran'] == 2) { ?>
+                                                        <option value="">Pilih...</option>
+                                                        <option value="1">Tahun Tunggal</option>
+                                                        <option value="2" selected>Tahun Jamak</option>
+                                                    <?php } ?>
+
                                                 </select>
                                             </div>
                                         </td>
@@ -281,22 +326,76 @@
                                         <td>
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected disabled value="">Pilih...</option>
-                                                    <option value="1">Kombinasi</option>
-                                                    <option value="2">Bobot Teknis</option>
-                                                    <option value="3">Bobot Biaya</option>
+                                                <select class="form-select" aria-label="Default select example" name="bobot_nilai" onchange="penilaian()">
+
+                                                    <?php if (!$row_rup['bobot_nilai']) { ?>
+                                                        <option value="">Pilih...</option>
+                                                        <option value="1">Kombinasi</option>
+                                                        <option value="2">Bobot Teknis</option>
+                                                        <option value="3">Bobot Biaya</option>
+                                                    <?php } else if ($row_rup['bobot_nilai'] == 1) { ?>
+                                                        <option value="">Pilih...</option>
+                                                        <option value="1" selected>Kombinasi</option>
+                                                        <option value="2">Bobot Teknis</option>
+                                                        <option value="3">Bobot Biaya</option>
+                                                    <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
+                                                        <option value="">Pilih...</option>
+                                                        <option value="1">Kombinasi</option>
+                                                        <option value="2" selected>Bobot Teknis</option>
+                                                        <option value="3">Bobot Biaya</option>
+                                                    <?php } else if ($row_rup['bobot_nilai'] == 3) { ?>
+                                                        <option value="">Pilih...</option>
+                                                        <option value="1">Kombinasi</option>
+                                                        <option value="2">Bobot Teknis</option>
+                                                        <option value="3" selected>Bobot Biaya</option>
+                                                    <?php }  ?>
+
                                                 </select>
                                             </div>
                                         </td>
                                         <td colspan="2">
                                             <div class="input-group mb-2">
-                                                <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                                                <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" readonly>
-                                                <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
-                                                <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                                                <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" readonly>
-                                                <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                <?php if (!$row_rup['bobot_nilai']) { ?>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" readonly value="<?= $row_rup['bobot_teknis'] ?>">
+                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>">
+
+                                                    <span class=" input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                <?php } else if ($row_rup['bobot_nilai'] == 1) { ?>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+
+                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
+
+                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+
+                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_biaya'] ?>">
+
+                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
+                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+
+                                                    <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>">
+
+                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+
+                                                <?php } else if ($row_rup['bobot_nilai'] == 3) { ?>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <input type="number" class="form-control  bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" readonly value="<?= $row_rup['bobot_teknis'] ?>">
+                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+
+                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_biaya'] ?>">
+
+                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+
+                                                <?php }  ?>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -338,6 +437,10 @@
                                                         </span>
                                                     </div>
                                                 </div>
+                                                <!-- download dokumen pengadaan dan prakualifikasi -->
+                                                <input type="hidden" name="open_dokumen_pengadaan" value="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/DOKUMEN_PENGADAAN' . '/') ?>">
+                                                <input type="hidden" name="open_dokumen_prakualifikasi" value="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/DOKUMEN_PRAKUALIFIKASI' . '/') ?>">
+                                                <!-- end download dokumen pengadaan dan prakualifikasi -->
                                                 <div class="card-body">
                                                     <table class="table table-bordered border-dark table-sm shadow-lg">
                                                         <thead class="bg-secondary text-white">
@@ -356,33 +459,42 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
+                                                                <form action="javascript:;" id="form_dokumen_pengadaan">
+                                                                    <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+                                                                    <input type="hidden" name="nama_rup" value="<?= $row_rup['nama_rup'] ?>">
+                                                                    <td>
+                                                                        <div class="input-group mb-2">
+                                                                            <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
+                                                                            <input type="text" class="form-control" placeholder="Nama Dokumen Pengadaan" name="nama_dok_pengadaan">
+                                                                        </div>
+                                                                        <div class="input-group mb-2">
+                                                                            <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dok_pengadaan">
+                                                                            <button class="btn btn-outline-secondary" type="button">Upload</button>
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-sm btn-success btn_dok_pengadaan">
+                                                                            <i class="fa-solid fa-square-plus"></i>
+                                                                            Tambah Dokumen Pengadaan
+                                                                        </button>
+                                                                    </td>
+                                                                </form>
                                                                 <td>
-                                                                    <div class="input-group mb-2">
-                                                                        <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
-                                                                        <input type="text" class="form-control" placeholder="Nama Dokumen Pengadaan">
-                                                                    </div>
-                                                                    <div class="input-group mb-2">
-                                                                        <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx">
-                                                                        <button class="btn btn-outline-secondary" type="button">Upload</button>
-                                                                    </div>
-                                                                    <button type="button" class="btn btn-sm btn-success">
-                                                                        <i class="fa-solid fa-square-plus"></i>
-                                                                        Tambah Dokumen Pengadaan
-                                                                    </button>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="input-group mb-2">
-                                                                        <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
-                                                                        <input type="text" class="form-control" placeholder="Nama Dokumen Prakualifikasi">
-                                                                    </div>
-                                                                    <div class="input-group mb-2">
-                                                                        <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx">
-                                                                        <button class="btn btn-outline-secondary" type="button">Upload</button>
-                                                                    </div>
-                                                                    <button type="button" class="btn btn-sm btn-success">
-                                                                        <i class="fa-solid fa-square-plus"></i>
-                                                                        Tambah Dokumen Prakualifikasi
-                                                                    </button>
+
+                                                                    <form action="javascript:;" id="form_dokumen_prakualifikasi">
+                                                                        <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+                                                                        <input type="hidden" name="nama_rup" value="<?= $row_rup['nama_rup'] ?>">
+                                                                        <div class="input-group mb-2">
+                                                                            <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
+                                                                            <input type="text" class="form-control" placeholder="Nama Dokumen Prakualifikasi" name="nama_dok_prakualifikasi">
+                                                                        </div>
+                                                                        <div class="input-group mb-2">
+                                                                            <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dok_prakualifikasi">
+                                                                            <button class="btn btn-outline-secondary" type="button">Upload</button>
+                                                                        </div>
+                                                                        <button type="sbumit" class="btn btn-sm btn-success btn_dok_prakualifikasi">
+                                                                            <i class="fa-solid fa-square-plus"></i>
+                                                                            Tambah Dokumen Prakualifikasi
+                                                                        </button>
+                                                                    </form>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -403,25 +515,8 @@
                                                                                 </th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <small>Nama Dokumen</small>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <button type="button" class="btn btn-sm btn-danger">
-                                                                                        <i class="fa-solid fa-folder-open"></i>
-                                                                                        File Dokumen Pengadaan
-                                                                                    </button>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="text-center">
-                                                                                        <button type="button" class="btn btn-sm btn-danger">
-                                                                                            <i class="fa-solid fa-trash"></i>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
+                                                                        <tbody id="tbl_dok_pengadaan">
+
                                                                         </tbody>
                                                                     </table>
                                                                 </td>
@@ -442,25 +537,7 @@
                                                                                 </th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <small>Nama Dokumen</small>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <button type="button" class="btn btn-sm btn-danger">
-                                                                                        <i class="fa-solid fa-folder-open"></i>
-                                                                                        File Dokumen Prakualifikasi
-                                                                                    </button>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div class="text-center">
-                                                                                        <button type="button" class="btn btn-sm btn-danger">
-                                                                                            <i class="fa-solid fa-trash"></i>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
+                                                                        <tbody id="tbl_prakualifikasi">
                                                                         </tbody>
                                                                     </table>
                                                                 </td>
@@ -495,30 +572,25 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <small>Ahmad Fikri Zulfikar</small>
-                                                                </td>
-                                                                <td>
-                                                                    <small>Ketua Panitia</small>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <small>Angga Pramuja S</small>
-                                                                </td>
-                                                                <td>
-                                                                    <small>Sekretaris</small>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <small>Dana Prasetyo S</small>
-                                                                </td>
-                                                                <td>
-                                                                    <small>Anggota</small>
-                                                                </td>
-                                                            </tr>
+                                                            <?php foreach ($panitia as $key => $value) { ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <small><?= $value['nama_pegawai'] ?></small>
+                                                                    </td>
+                                                                    <td>
+                                                                        <small>
+                                                                            <?php if ($value['role_panitia'] == 1) { ?>
+                                                                                Ketua Panitia
+                                                                            <?php } else if ($value['role_panitia'] == 2) { ?>
+                                                                                Sekretaris Panitia
+                                                                            <?php } else { ?>
+                                                                                Anggota Panitia
+                                                                            <?php } ?>
+                                                                        </small>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
+
                                                         </tbody>
                                                     </table>
                                                     <table class="table table-bordered border-dark table-sm shadow-lg">
@@ -548,18 +620,22 @@
                     </div>
                 </div>
                 <div class="card-footer bg-transparent border-dark">
-                    <button type="button" class="btn btn-default btn-success" disabled>
-                        <i class="fa-solid fa-floppy-disk px-1"></i>
-                        Simpan Data Paket
-                    </button>
-                    <button type="button" class="btn btn-default btn-info" disabled>
-                        <i class="fa-solid fa-bullhorn"></i>
-                        Umumkan Paket
-                    </button>
-                    <button type="button" class="btn btn-default btn-warning" onclick="history.back()">
-                        <i class="fa-solid fa-angles-left px-1"></i>
-                        Kembali Kemenu Sebelumnya
-                    </button>
+                    <form action="javascript:;" id="form_simpan_paket">
+                        <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+                        <input type="hidden" name="status_paket_panitia" value="1">
+                        <button type="submit" class="btn btn-default btn-success btn_simpan_paket">
+                            <i class="fa-solid fa-floppy-disk px-1"></i>
+                            Simpan Data Paket
+                        </button>
+                        <button type="button" class="btn btn-default btn-info" disabled>
+                            <i class="fa-solid fa-bullhorn"></i>
+                            Umumkan Paket
+                        </button>
+                        <button type="button" class="btn btn-default btn-warning" onclick="history.back()">
+                            <i class="fa-solid fa-angles-left px-1"></i>
+                            Kembali Kemenu Sebelumnya
+                        </button>
+                    </form>
                 </div>
             </div>
             <!-- modal buat jadwal -->

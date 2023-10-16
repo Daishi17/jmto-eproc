@@ -8,6 +8,12 @@ class Fm_jenis_jadwal extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_master/M_Jadwal');
+		$role = $this->session->userdata('role');
+		if (!$role == 1) {
+			redirect('auth');
+		}
+
+
 	}
 
 	public function index()

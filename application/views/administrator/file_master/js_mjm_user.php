@@ -44,6 +44,9 @@
         if (type == 'nonaktifkan') {
             saveData = 'nonaktifkan';
         }
+        if (type == 'ubah_pw') {
+            saveData = 'ubah_pw';
+        }
         var url_get_byid = $('[name="url_get_byid"]').val()
         $.ajax({
             type: "GET",
@@ -65,6 +68,11 @@
                     Question_aktifkan(response.id_manajemen_user, response.username);
                 } else if (type == 'nonaktif') {
                     Question_nonaktifkan(response.id_manajemen_user, response.username);
+                } else if (type == 'ubah_pw') {
+                    $('[name="username_ubah_pw"]').val(response.username);
+                    $('[name="id_manajemen_user_ubah"]').val(response.id_manajemen_user);
+
+                    $('#ubah_pw').modal('show')
                 }
                 // else {
                 // 	deleteQuestion(response.kd_lokasi, response.nm_lokasi);
@@ -221,6 +229,59 @@
         })
     })
 
+
+    var form_ubah_password = $('#form_ubah_password');
+    var url_ubah_password = $('[name="url_ubah_password"]').val()
+    form_ubah_password.on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: url_ubah_password,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response['error']) {
+                    $(".password").css('display', 'block');
+                    $(".password").html(response['error']['password']);
+                    $(".password2").css('display', 'block');
+                    $(".password2").html(response['error']['password2']);
+                } else {
+                    $(".role").css('display', 'none');
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Harap Tunggu <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            $('#ubah_pw').modal('hide')
+
+                            form_ubah_password[0].reset();
+                            reload_table()
+                            Swal.fire('Data Berhasil Di Masukkan!', '', 'success')
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+
+            }
+        })
+    })
+
     function Question_aktifkan(id, username) {
         var url_aktifkan_user = $('[name="url_aktifkan_user"]').val()
         Swal.fire({
@@ -291,5 +352,41 @@
 
             }
         })
+    }
+
+    function myFunction1() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction2() {
+        var x = document.getElementById("confirmPassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction3() {
+        var x = document.getElementById("password_baru");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function myFunction4() {
+        var x = document.getElementById("confirmPassword_baru");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
     }
 </script>

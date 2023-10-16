@@ -2,33 +2,68 @@
     var tbl_rekanan_tervalidasi = $('#tbl_rekanan_tervalidasi')
     var url_get_rekanan_tervalidasi = $('[name="url_get_rekanan_tervalidasi"').val()
     $(document).ready(function() {
-        tbl_rekanan_tervalidasi.DataTable({
-            "responsive": false,
-            "ordering": true,
-            "processing": true,
-            "serverSide": true,
-            "dom": 'Bfrtip',
-            "buttons": ["excel", "pdf", "print", "colvis"],
-            "order": [],
-            "ajax": {
-                "url": url_get_rekanan_tervalidasi,
-                "type": "POST",
-            },
-            "columnDefs": [{
-                "target": [-1],
-                "orderable": false
-            }],
-            "oLanguage": {
-                "sSearch": "Pencarian : ",
-                "sEmptyTable": "Data Tidak Tersedia",
-                "sLoadingRecords": "Silahkan Tunggu - loading...",
-                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
-                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                "sProcessing": "Memuat Data...."
+        fill_datatable();
+        function fill_datatable(sts_upload_dokumen = '', sts_dokumen_cek = '') {
+            tbl_rekanan_tervalidasi.DataTable({
+                "responsive": false,
+                "ordering": true,
+                "processing": true,
+                "serverSide": true,
+                lengthMenu: [
+                    [10, 25, 50, 100, 200, -1],
+                    ['10 Rows', '25 Rows', '50 Rows', '100 Rows', '200 Rows', 'Back']
+                ],
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'pdf',
+                    text: ' PDF'
+                }, {
+                    extend: 'print',
+                    text: ' Print'
+                }, {
+                    extend: 'excel',
+                    exportOption: {
+                        columns: [0, 1, 2, 3]
+                    },
+                    text: ' EXCEL'
+                }, 'pageLength'],
+                "order": [],
+                "ajax": {
+                    "url": url_get_rekanan_tervalidasi,
+                    "type": "POST",
+                    data: {
+                        sts_upload_dokumen: sts_upload_dokumen,
+                        sts_dokumen_cek: sts_dokumen_cek
+                    },
+                },
+                "columnDefs": [{
+                    "target": [-1],
+                    "orderable": false
+                }],
+                "oLanguage": {
+                    "sSearch": "Pencarian : ",
+                    "sEmptyTable": "Data Tidak Tersedia",
+                    "sLoadingRecords": "Silahkan Tunggu - loading...",
+                    "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                    "sProcessing": "Memuat Data...."
+                }
+            }).buttons().container().appendTo('#tbl_rekanan_tervalidasi .col-md-6:eq(0)');
+        }
+        // filtering select data per divisi dan per jenis pengadaan
+        $('#filter').click(function() {
+            var sts_upload_dokumen = $('#sts_upload_dokumen').val();
+            var sts_dokumen_cek = $('#sts_dokumen_cek').val();
+            if (sts_upload_dokumen != '' && sts_dokumen_cek != '') {
+                tbl_rekanan_tervalidasi.DataTable().destroy();
+                fill_datatable(sts_upload_dokumen, sts_dokumen_cek);
+            } else {
+                Swal.fire('Kesalahan Filter!', '', 'warning')
+                tbl_rekanan_tervalidasi.DataTable().destroy();
+                fill_datatable();
             }
-        }).buttons().container().appendTo('#tbl_rekanan_tervalidasi .col-md-6:eq(0)');
+        })
     });
-
     function Reload_table_rekanan_baru() {
         tbl_rekanan_tervalidasi.DataTable().ajax.reload();
     }

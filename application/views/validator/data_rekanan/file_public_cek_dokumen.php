@@ -37,11 +37,12 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siup(\'' + response['row_siup'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_siup').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siup']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_siup'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_siup']['file_dokumen'] + '</a>';
+                        var url_dokumen_siup = $('[name="url_dokumen_siup"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_siup + response['row_siup']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_siup']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siup(\'' + response['row_siup'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_siup').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siup']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_siup'].sts_seumur_hidup == 1) {
+                    if (response['row_siup'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_siup'].tgl_berlaku + '</label>'
@@ -153,11 +154,12 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_nib(\'' + response['row_nib'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_nib').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_nib']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_nib'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_nib(\'' + response['row_nib'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_nib']['file_dokumen'] + '</a>';
+                        var url_dokumen_nib = $('[name="url_dokumen_nib"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_nib + response['row_nib']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;"  class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_nib']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_nib(\'' + response['row_nib'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_nib').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_nib']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_nib'].sts_seumur_hidup == 1) {
+                    if (response['row_nib'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_nib'].tgl_berlaku + '</label>'
@@ -271,11 +273,12 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_sbu'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_sbu(\'' + response['row_sbu'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sbu']['file_dokumen'] + '</a>';
+                        var url_dokumen_sbu = $('[name="url_dokumen_sbu"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_sbu + response['row_sbu']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;"  class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sbu']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_sbu'].sts_seumur_hidup == 1) {
+                    if (response['row_sbu'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_sbu'].tgl_berlaku + '</label>'
@@ -389,11 +392,12 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siujk(\'' + response['row_siujk'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_siujk').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siujk']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_siujk'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_siujk(\'' + response['row_siujk'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_siujk']['file_dokumen'] + '</a>';
+                        var url_dokumen_siujk = $('[name="url_dokumen_siujk"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_siujk + response['row_siujk']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_siujk']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siujk(\'' + response['row_siujk'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_siujk').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siujk']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_siujk'].sts_seumur_hidup == 1) {
+                    if (response['row_siujk'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_siujk'].tgl_berlaku + '</label>'
@@ -485,69 +489,7 @@
 
 
                 // akta pendiran
-                if (response['row_akta_pendirian']) {
-                    var html_akta_pendirian = '';
-                    if (response['row_akta_pendirian'].sts_validasi == null || response['row_akta_pendirian'].sts_validasi == 0) {
-                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
-                    } else if (response['row_akta_pendirian'].sts_validasi == 1) {
-                        var tombol_validasi = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
-                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
-                    } else if (response['row_akta_pendirian'].sts_validasi == 2) {
-                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
-                    } else if (response['row_akta_pendirian'].sts_validasi == 2) {
-                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
-                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                        var sts_validasi = '<span class="badge bg-warning">Revisi</span>'
-                    }
-                    if (response['row_akta_pendirian'].sts_token_dokumen == 1) {
-                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
-                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
-                        $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
-                    } else if (response['row_akta_pendirian'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_pendirian']['file_dokumen'] + '</a>';
-                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
-                        $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
-                    }
-                    if (response['row_akta_pendirian'].sts_seumur_hidup == 1) {
-                        var tgl_berlaku = '<label>Seumur Hidup</label>'
-                    } else {
-                        var tgl_berlaku = '<label>' + response['row_akta_pendirian'].tgl_berlaku + '</label>'
-                    }
-                    if (response['row_akta_pendirian'].nama_validator) {
-                        var nama_validator = response['row_akta_pendirian'].nama_validator
-                    } else {
-                        var nama_validator = ''
-                    }
-                    html_akta_pendirian += '<tr>' +
-                        '<td>' + response['row_akta_pendirian'].no_surat + '</td>' +
-                        '<td>' + tgl_berlaku + '</td>' +
-                        '<td>' + response['row_akta_pendirian'].jumlah_setor_modal + '</td>' +
-                        '<td>' + response['row_akta_pendirian'].kualifikasi_usaha + '</td>' +
-                        '<td>' + dokumen + '</td>' +
-                        '<td>' + dekrip + '</td>' +
-                        '<td>' + sts_validasi + '</td>' +
-                        '<td>' + nama_validator + '</td>' +
-                        '<td class="text-center">' + tombol_validasi +
-                        '</td>' +
-                        '</tr>';
-                    $('#load_akta_pendirian').html(html_akta_pendirian);
 
-
-                    var html_rincian_pendirian = ''
-                    html_rincian_pendirian += '<tr>' +
-                        '<td>' + response['row_akta_pendirian'].no_surat + '</td>' +
-                        '<td>' + sts_validasi + '</td>' +
-                        '<td>' + nama_validator + '</td>' +
-                        '</tr>';
-                    $('#rincian_akta_pendirian').html(html_rincian_pendirian);
-                } else {
-
-                }
                 // end akta pendirian
 
                 // akta perubahan
@@ -572,14 +514,17 @@
                     }
                     if (response['row_akta_perubahan'].sts_token_dokumen == 1) {
                         var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dokumen2 = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_akta_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_perubahan']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_akta_perubahan'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_perubahan']['file_dokumen'] + '</a>';
+                        var url_dokumen_akta_perubahan = $('[name="url_dokumen_akta_perubahan"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_akta_perubahan + response['row_akta_perubahan']['file_dokumen'] + '"  style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_perubahan']['file_dokumen'] + '</a>';
+                        var dokumen2 = '<a target="_blank" href="' + url_dokumen_akta_perubahan + response['row_akta_perubahan']['file_dok_kumham'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;"  class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_perubahan']['file_dok_kumham'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_akta_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_perubahan']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_akta_perubahan'].sts_seumur_hidup == 1) {
+                    if (response['row_akta_perubahan'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_akta_perubahan'].tgl_berlaku + '</label>'
@@ -589,12 +534,24 @@
                     } else {
                         var nama_validator = ''
                     }
+                    var bilangan = response['row_akta_perubahan'].jumlah_setor_modal;
+
+                    var number_string = bilangan.toString(),
+                        sisa = number_string.length % 3,
+                        rupiah = number_string.substr(0, sisa),
+                        ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+                    if (ribuan) {
+                        separator = sisa ? '.' : '';
+                        rupiah += separator + ribuan.join('.');
+                    }
                     html_akta_perubahan += '<tr>' +
                         '<td>' + response['row_akta_perubahan'].no_surat + '</td>' +
-                        '<td>' + tgl_berlaku + '</td>' +
-                        '<td>' + response['row_akta_perubahan'].jumlah_setor_modal + '</td>' +
+                        '<td>' + response['row_akta_perubahan'].tgl_berlaku_akta + '</td>' +
+                        '<td>' + 'Rp. ' + rupiah + '</td>' +
                         '<td>' + response['row_akta_perubahan'].kualifikasi_usaha + '</td>' +
                         '<td>' + dokumen + '</td>' +
+                        '<td>' + dokumen2 + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
                         '<td>' + nama_validator + '</td>' +
@@ -614,6 +571,87 @@
 
                 }
                 // end akta perubahan
+
+                // akta pendirian
+                if (response['row_akta_pendirian']) {
+                    var html_akta_pendirian = '';
+                    if (response['row_akta_pendirian'].sts_validasi == '' || response['row_akta_pendirian'].sts_validasi == 0) {
+                        var tombol_validasi_pendirian = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' + '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else if (response['row_akta_pendirian'].sts_validasi == 1) {
+                        var tombol_validasi_pendirian = '<button href="javascript:;" class="btn btn-success btn-sm shadow-lg" disabled><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></button> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-success">Sudah Valid</span>'
+                    } else if (response['row_akta_pendirian'].sts_validasi == 2) {
+                        var tombol_validasi_pendirian = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-danger">Tidak Valid</span>'
+                    } else if (response['row_akta_pendirian'].sts_validasi == 3) {
+                        var tombol_validasi_pendirian = '<a href="javascript:;" onclick="Valid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-warning">Revisi</span>'
+                    }
+                    if (response['row_akta_pendirian'].sts_token_dokumen == 1) {
+                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dokumen2 = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
+                        $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
+                    } else if (response['row_akta_pendirian'].sts_token_dokumen == 2) {
+                        var url_dokumen_akta_pendirian = $('[name="url_dokumen_akta_pendirian"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_akta_pendirian + response['row_akta_pendirian']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_pendirian']['file_dokumen'] + '</a>';
+                        var dokumen2 = '<a target="_blank" href="' + url_dokumen_akta_pendirian + response['row_akta_pendirian']['file_dok_kumham'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;"  class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_akta_pendirian']['file_dok_kumham'] + '</a>';
+                        var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
+                        $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
+                    }
+                    if (response['row_akta_pendirian'].sts_seumur_hidup == 2) {
+                        var tgl_berlaku = '<label>Seumur Hidup</label>'
+                    } else {
+                        var tgl_berlaku = '<label>' + response['row_akta_pendirian'].tgl_berlaku_akta + '</label>'
+                    }
+                    if (response['row_akta_pendirian'].nama_validator) {
+                        var nama_validator = response['row_akta_pendirian'].nama_validator
+                    } else {
+                        var nama_validator = ''
+                    }
+                    var bilangan = response['row_akta_pendirian'].jumlah_setor_modal;
+
+                    var number_string = bilangan.toString(),
+                        sisa = number_string.length % 3,
+                        rupiah = number_string.substr(0, sisa),
+                        ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+                    if (ribuan) {
+                        separator = sisa ? '.' : '';
+                        rupiah += separator + ribuan.join('.');
+                    }
+                    html_akta_pendirian += '<tr>' +
+                        '<td>' + response['row_akta_pendirian'].no_surat + '</td>' +
+                        '<td>' + response['row_akta_pendirian'].tgl_berlaku_akta + '</td>' +
+                        '<td>' + 'Rp ' + rupiah + '</td>' +
+                        '<td>' + response['row_akta_pendirian'].kualifikasi_usaha + '</td>' +
+                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dokumen2 + '</td>' +
+                        '<td>' + dekrip + '</td>' +
+
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
+                        '<td class="text-center">' + tombol_validasi_pendirian +
+                        '</td>' +
+                        '</tr>';
+                    $('#load_akta_pendirian').html(html_akta_pendirian);
+
+
+                    var html_rincian_pendirian = ''
+                    html_rincian_pendirian += '<tr>' +
+                        '<td>' + response['row_akta_pendirian'].no_surat + '</td>' +
+                        '<td>' + sts_validasi + '</td>' +
+                        '<td>' + nama_validator + '</td>' +
+                        '</tr>';
+                    $('#rincian_akta_pendirian').html(html_rincian_pendirian);
+                } else {
+
+                }
+                // end akta pendirian
 
                 // MANAJERIAL
 
@@ -751,7 +789,11 @@
                             "serverSide": true,
                             "bDestroy": true,
                             "dom": 'Bfrtip',
-                            "buttons": ["excel", "pdf", "print", "colvis"],
+                             lengthMenu: [
+                                [10, 25, 50, 200, -1],
+                                ['10 rows', '25 rows', '50 rows', '200 rows', 'Show all']
+                            ],
+                            "buttons": ["excel", "pdf", "print", "colvis", 'pageLength'],
                             "order": [],
                             "ajax": {
                                 "url": url_get_pengalaman + response['row_pengalaman'].id_vendor,
@@ -823,11 +865,12 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sppkp(\'' + response['row_sppkp'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_sppkp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sppkp']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_sppkp'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_sppkp(\'' + response['row_sppkp'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sppkp']['file_dokumen'] + '</a>';
+                        var url_dokumen_sppkp = $('[name="url_dokumen_sppkp"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_sppkp + response['row_sppkp']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;"  class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sppkp']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sppkp(\'' + response['row_sppkp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_sppkp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sppkp']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_sppkp'].sts_seumur_hidup == 1) {
+                    if (response['row_sppkp'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_sppkp'].tgl_berlaku + '</label>'
@@ -884,11 +927,12 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_npwp(\'' + response['row_npwp'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_npwp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_npwp']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_npwp'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_npwp(\'' + response['row_npwp'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_npwp']['file_dokumen'] + '</a>';
+                        var url_dokumen_npwp = $('[name="url_dokumen_npwp"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_npwp + response['row_npwp']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;"  class="btn btn-sm btn-light btn-block text-dark""><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_npwp']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_npwp(\'' + response['row_npwp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_npwp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_npwp']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_npwp'].sts_seumur_hidup == 1) {
+                    if (response['row_npwp'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_npwp'].tgl_berlaku + '</label>'
@@ -1097,11 +1141,12 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_skdp(\'' + response['row_skdp'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_skdp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_skdp']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_skdp'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_skdp(\'' + response['row_skdp'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_skdp']['file_dokumen'] + '</a>';
+                        var url_dokumen_skdp = $('[name="url_dokumen_skdp"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_skdp + response['row_skdp']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_skdp']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_skdp(\'' + response['row_skdp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_skdp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_skdp']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_skdp'].sts_seumur_hidup == 1) {
+                    if (response['row_skdp'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_skdp'].tgl_berlaku + '</label>'
@@ -1206,11 +1251,12 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_lainnya(\'' + response['row_lainnya'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_lainnya').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_lainnya']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_lainnya'].sts_token_dokumen == 2) {
-                        var dokumen = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_lainnya(\'' + response['row_lainnya'].id_url + '\')" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_lainnya']['file_dokumen'] + '</a>';
+                        var url_dokumen_lainnya = $('[name="url_dokumen_lainnya"]').val()
+                        var dokumen = '<a target="_blank" href="' + url_dokumen_lainnya + response['row_lainnya']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_lainnya']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_lainnya(\'' + response['row_lainnya'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_lainnya').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_lainnya']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_lainnya'].sts_seumur_hidup == 1) {
+                    if (response['row_lainnya'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_lainnya'].tgl_berlaku + '</label>'
@@ -1222,6 +1268,7 @@
                     }
                     html_lainnya += '<tr>' +
                         '<td>' + response['row_lainnya'].nomor_surat + '</td>' +
+                        '<td>' + response['row_lainnya'].nama_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
                         '<td>' + dokumen + '</td>' +
                         '<td>' + dekrip + '</td>' +
@@ -1265,10 +1312,10 @@
             url: url_encryption_siup + id_url,
             dataType: "JSON",
             data: $('#form_enkrip_siup').serialize(),
-            // beforeSend: function() {
-            //     $('#button_dekrip_generate').css('display', 'none');
-            //     $('#button_dekrip_generate_manipulasi').css('display', 'block');
-            // },
+            beforeSend: function() {
+                $('#button_enkrip_generate_siup').css('pointer-events', 'none');
+                $('#button_enkrip_generate_siup').css('cursor', 'default');
+            },
             success: function(response) {
                 if (response['maaf']) {
                     Swal.fire(response['maaf'], 'Token Tidak Valid!', 'warning')
@@ -1297,6 +1344,7 @@
                             // $('#button_dekrip_generate').css('display', 'block');
                             // $('#button_dekrip_generate_manipulasi').css('display', 'none');
                             modal_enkrip_siup.modal('hide');
+                            $('#button_enkrip_generate_siup').removeAttr('style');
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */
@@ -1318,10 +1366,11 @@
             url: url_encryption_siup + id_url,
             dataType: "JSON",
             data: $('#form_dekrip_siup').serialize(),
-            // beforeSend: function() {
-            //     $('#button_dekrip_generate').css('display', 'none');
-            //     $('#button_dekrip_generate_manipulasi').css('display', 'block');
-            // },
+            beforeSend: function() {
+                $('#button_dekrip_generate_siup').css('pointer-events', 'none');
+                $('#button_dekrip_generate_siup').css('cursor', 'default');
+                // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            },
             success: function(response) {
                 if (response['maaf']) {
                     Swal.fire(response['maaf'], 'Token Tidak Valid!', 'warning')
@@ -1350,6 +1399,7 @@
                             // $('#button_dekrip_generate').css('display', 'block');
                             // $('#button_dekrip_generate_manipulasi').css('display', 'none');
                             modal_dekrip_siup.modal('hide');
+                            $('#button_dekrip_generate_siup').removeAttr('style');
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */
@@ -1427,6 +1477,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_siup').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_siup[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -1468,6 +1519,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_siup').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_siup[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -1666,6 +1718,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_nib').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_nib[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -1707,6 +1760,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_nib').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_nib[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -1905,6 +1959,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_sbu').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_sbu[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -1946,6 +2001,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_sbu').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_sbu[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -2145,6 +2201,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_siujk').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_siujk[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -2186,6 +2243,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_siujk').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_siujk[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -2201,18 +2259,9 @@
 
     // AKTA PENDIRIAN
     function Valid_akta_pendirian(id_url, type = '') {
-        if (type == 'terima_kbli') {
-            $('#modal_valid_akta_pendirian').modal('show')
-            $('[name="url_validasi_akta_pendirian"]').val();
-            $('[name="id_url_akta_pendirian"]').val(id_url);
-            $('#kbli_valid_akta_pendirian').val(type)
-        } else {
-            $('#modal_valid_akta_pendirian').modal('show')
-            $('[name="url_validasi_akta_pendirian"]').val();
-            $('[name="id_url_akta_pendirian"]').val(id_url);
-            $('#kbli_valid_akta_pendirian').val('')
-        }
-
+        $('#modal_valid_akta_pendirian').modal('show')
+        $('[name="url_validasi_akta_pendirian"]').val();
+        $('[name="id_url_akta_pendirian"]').val(id_url);
     }
 
     function NonValid_akta_pendirian(id_url, type = '') {
@@ -2259,6 +2308,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_akta_pendirian').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_akta_pendirian[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -2299,7 +2349,8 @@
                     willClose: () => {
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_akta_pendirian').modal('hide')
-                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        Swal.fire('Dokumen Tidak Valid!', '', 'success')
+                        form_nonvalid_akta_pendirian[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -2314,21 +2365,23 @@
 
     function DekripEnkrip_akta_pendirian(id_url, type) {
         if (type == 'dekrip') {
-            var id_url_akta_pendirian = $('[name="id_url_akta_pendirian"]').val(id_url)
-            $('#modal_dekrip_akta_pendirian').modal('show');
-            $('#form_dekrip_akta_pendirian')[0].reset();
+            GenerateDekrip_akta_pendirian(id_url)
+            // var id_url_akta_pendirian = $('[name="id_url_akta_pendirian"]').val(id_url)
+            // $('#modal_dekrip_akta_pendirian').modal('show');
+            // $('#form_dekrip_akta_pendirian')[0].reset();
         } else {
-            var id_url_akta_pendirian = $('[name="id_url_akta_pendirian"]').val(id_url)
-            $('#modal_enkrip_akta_pendirian').modal('show');
-            $('#form_enkrip_akta_pendirian')[0].reset();
+            GenerateEnkrip_akta_pendirian(id_url)
+            // var id_url_akta_pendirian = $('[name="id_url_akta_pendirian"]').val(id_url)
+            // $('#modal_enkrip_akta_pendirian').modal('show');
+            // $('#form_enkrip_akta_pendirian')[0].reset();
         }
 
     }
 
-    function GenerateEnkrip_akta_pendirian() {
+    function GenerateEnkrip_akta_pendirian(id_url) {
         var url_encryption_akta_pendirian = $('[name="url_encryption_akta_pendirian"]').val();
         var modal_enkrip_akta_pendirian = $('#modal_enkrip_akta_pendirian');
-        var id_url = $('[name="id_url_akta_pendirian"]').val();
+        // var id_url = $('[name="id_url_akta_pendirian"]').val();
         $.ajax({
             method: "POST",
             url: url_encryption_akta_pendirian + id_url,
@@ -2374,10 +2427,10 @@
         })
     }
 
-    function GenerateDekrip_akta_pendirian() {
+    function GenerateDekrip_akta_pendirian(id_url) {
         var url_encryption_akta_pendirian = $('[name="url_encryption_akta_pendirian"]').val();
         var modal_dekrip_akta_pendirian = $('#modal_dekrip_akta_pendirian');
-        var id_url = $('[name="id_url_akta_pendirian"]').val();
+        // var id_url = $('[name="id_url_akta_pendirian"]').val();
         $.ajax({
             method: "POST",
             url: url_encryption_akta_pendirian + id_url,
@@ -2489,6 +2542,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_akta_perubahan').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_akta_perubahan[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -2529,7 +2583,8 @@
                     willClose: () => {
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_akta_perubahan').modal('hide')
-                        Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        Swal.fire('Dokumen Tidak Valid!', '', 'success')
+                        form_nonvalid_akta_perubahan[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -2544,21 +2599,23 @@
 
     function DekripEnkrip_akta_perubahan(id_url, type) {
         if (type == 'dekrip') {
-            var id_url_akta_perubahan = $('[name="id_url_akta_perubahan"]').val(id_url)
-            $('#modal_dekrip_akta_perubahan').modal('show');
-            $('#form_dekrip_akta_perubahan')[0].reset();
+            GenerateDekrip_akta_perubahan(id_url)
+            // var id_url_akta_perubahan = $('[name="id_url_akta_perubahan"]').val(id_url)
+            // $('#modal_dekrip_akta_perubahan').modal('show');
+            // $('#form_dekrip_akta_perubahan')[0].reset();
         } else {
-            var id_url_akta_perubahan = $('[name="id_url_akta_perubahan"]').val(id_url)
-            $('#modal_enkrip_akta_perubahan').modal('show');
-            $('#form_enkrip_akta_perubahan')[0].reset();
+            GenerateEnkrip_akta_perubahan(id_url)
+            // var id_url_akta_perubahan = $('[name="id_url_akta_perubahan"]').val(id_url)
+            // $('#modal_enkrip_akta_perubahan').modal('show');
+            // $('#form_enkrip_akta_perubahan')[0].reset();
         }
 
     }
 
-    function GenerateEnkrip_akta_perubahan() {
+    function GenerateEnkrip_akta_perubahan(id_url) {
         var url_encryption_akta_perubahan = $('[name="url_encryption_akta_perubahan"]').val();
         var modal_enkrip_akta_perubahan = $('#modal_enkrip_akta_perubahan');
-        var id_url = $('[name="id_url_akta_perubahan"]').val();
+        // var id_url = $('[name="id_url_akta_perubahan"]').val();
         $.ajax({
             method: "POST",
             url: url_encryption_akta_perubahan + id_url,
@@ -2604,10 +2661,10 @@
         })
     }
 
-    function GenerateDekrip_akta_perubahan() {
+    function GenerateDekrip_akta_perubahan(id_url) {
         var url_encryption_akta_perubahan = $('[name="url_encryption_akta_perubahan"]').val();
         var modal_dekrip_akta_perubahan = $('#modal_dekrip_akta_perubahan');
-        var id_url = $('[name="id_url_akta_perubahan"]').val();
+        // var id_url = $('[name="id_url_akta_perubahan"]').val();
         $.ajax({
             method: "POST",
             url: url_encryption_akta_perubahan + id_url,
@@ -2681,6 +2738,7 @@
             dataType: "JSON",
             success: function(response) {
                 if (type == 'edit') {
+                    var url_dokumen_pemilik = $('[name="url_dokumen_pemilik"]').val()
                     $('#modal_pemilik_manajerial').modal('show');
                     $('[name="type_edit_pemilik"]').val('edit_biasa');
                     $('[name="validasi_enkripsi_pemilik"]').val(response['row_pemilik_manajerial'].sts_token_dokumen_pemilik);
@@ -2689,8 +2747,15 @@
                     } else {
                         $('.button_enkrip_pemilik').html('<a href="javascript:;" onclick="DekripEnkrip_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
                     }
-                    $('.button_nama_file_ktp').html('<a href="javascript:;"  onclick="Download_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'pemilik_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_ktp + '</a>');
-                    $('.button_nama_file_npwp').html('<a href="javascript:;"  onclick="Download_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'pemilik_npwp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_npwp + '</a>');
+                    if (response['row_pemilik_manajerial']['sts_token_dokumen_pemilik'] == 1) {
+                        $('.button_nama_file_ktp').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fa-solid fa-lock"></i> Dokumen Terenkripsi</a>');
+                        $('.button_nama_file_npwp').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fa-solid fa-lock"></i> Dokumen Terenkripsi</a>');
+                    } else {
+                        $('.button_nama_file_ktp').html('<a target="_blank" href="' + url_dokumen_pemilik + response['row_pemilik_manajerial']['file_ktp'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_ktp + '</a>');
+                        $('.button_nama_file_npwp').html('<a target="_blank" href="' + url_dokumen_pemilik + response['row_pemilik_manajerial']['file_npwp'] + '" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_npwp + '</a>');
+
+                    }
+
                     $('[name="id_pemilik"]').val(response['row_pemilik_manajerial'].id_pemilik);
                     $('[name="id_url"]').val(response['row_pemilik_manajerial'].id_url);
                     $('[name="nik"]').val(response['row_pemilik_manajerial'].nik);
@@ -2710,6 +2775,7 @@
     function DekripEnkrip_pemilik(id_url, type) {
         var type_edit_pemilik = $('[name="type_edit_pemilik"]').val();
         var url_encryption_pemilik = $('[name="url_encryption_pemilik"]').val()
+        var url_dokumen_pemilik = $('[name="url_dokumen_pemilik"]').val()
         if (type == 'dekrip') {
             $.ajax({
                 method: "POST",
@@ -2735,15 +2801,21 @@
                         },
                         willClose: () => {
                             clearInterval(timerInterval)
-                            Swal.fire('Dokumen Berhasil Di Dekripsi', '', 'success');
+                            Swal.fire('Dokumen Berhasil Di Enkripsi', '', 'success')
                             $('[name="validasi_enkripsi_pemilik"]').val(response['row_pemilik_manajerial']['sts_token_dokumen_pemilik']);
                             if (response['row_pemilik_manajerial']['sts_token_dokumen_pemilik'] == 1) {
                                 $('.button_enkrip_pemilik').html('<a href="javascript:;"  onclick="DekripEnkrip_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
                             } else {
                                 $('.button_enkrip_pemilik').html('<a href="javascript:;" onclick="DekripEnkrip_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
                             }
-                            $('.button_nama_file_ktp').html('<a href="javascript:;"  onclick="Download_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'pemilik_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_ktp + '</a>');
-                            $('.button_nama_file_npwp').html('<a href="javascript:;"  onclick="Download_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'pemilik_npwp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_npwp + '</a>');
+                            if (response['row_pemilik_manajerial']['sts_token_dokumen_pemilik'] == 1) {
+                                $('.button_nama_file_ktp').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fa-solid fa-lock"></i> Dokumen Terenkripsi</a>');
+                                $('.button_nama_file_npwp').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fa-solid fa-lock"></i> Dokumen Terenkripsi</a>');
+                            } else {
+                                $('.button_nama_file_ktp').html('<a target="_blank" href="' + url_dokumen_pemilik + response['row_pemilik_manajerial']['file_ktp'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_ktp + '</a>');
+                                $('.button_nama_file_npwp').html('<a target="_blank" href="' + url_dokumen_pemilik + response['row_pemilik_manajerial']['file_npwp'] + '" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_npwp + '</a>');
+
+                            }
                             load_data();
                         }
                     }).then((result) => {
@@ -2786,8 +2858,14 @@
                             } else {
                                 $('.button_enkrip_pemilik').html('<a href="javascript:;" onclick="DekripEnkrip_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
                             }
-                            $('.button_nama_file_ktp').html('<a href="javascript:;"  onclick="Download_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'pemilik_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_ktp + '</a>');
-                            $('.button_nama_file_npwp').html('<a href="javascript:;"  onclick="Download_pemilik(\'' + response['row_pemilik_manajerial'].id_url + '\'' + ',' + '\'' + 'pemilik_npwp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_npwp + '</a>');
+                            if (response['row_pemilik_manajerial']['sts_token_dokumen_pemilik'] == 1) {
+                                $('.button_nama_file_ktp').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fa-solid fa-lock"></i> Dokumen Terenkripsi</a>');
+                                $('.button_nama_file_npwp').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fa-solid fa-lock"></i> Dokumen Terenkripsi</a>');
+                            } else {
+                                $('.button_nama_file_ktp').html('<a target="_blank" href="' + url_dokumen_pemilik + response['row_pemilik_manajerial']['file_ktp'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_ktp + '</a>');
+                                $('.button_nama_file_npwp').html('<a target="_blank" href="' + url_dokumen_pemilik + response['row_pemilik_manajerial']['file_npwp'] + '" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pemilik_manajerial'].file_npwp + '</a>');
+
+                            }
                             load_data();
                         }
                     }).then((result) => {
@@ -2861,6 +2939,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_pemilik').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_pemilik[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -2936,6 +3015,7 @@
             dataType: "JSON",
             success: function(response) {
                 if (type == 'edit') {
+                    var url_dokumen_pengurus = $('[name="url_dokumen_pengurus"]').val()
                     $('#modal_pengurus_manajerial').modal('show');
                     $('[name="type_edit_pengurus"]').val('edit_excel');
                     $('[name="validasi_enkripsi_pengurus"]').val(response['row_pengurus_manajerial'].sts_token_dokumen_pengurus);
@@ -2944,8 +3024,14 @@
                     } else {
                         $('.button_enkrip_pengurus').html('<a href="javascript:;" onclick="DekripEnkrip_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
                     }
-                    $('.button_nama_file_ktp_pengurus').html('<a href="javascript:;"  onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_ktp_pengurus + '</a>');
-                    $('.button_nama_file_npwp_pengurus').html('<a href="javascript:;"  onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_npwp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_npwp_pengurus + '</a>');
+                    if (response['row_pengurus_manajerial']['sts_token_dokumen_pengurus'] == 1) {
+                        $('.button_nama_file_ktp_pengurus').html('<a href="javascript:;" class="btn btn-danger btn-sm"><i class="fas fa-lock "></i> Dokumen Terenkripsi</a>');
+                        $('.button_nama_file_npwp_pengurus').html('<a href="javascript:;" class="btn btn-danger btn-sm"><i class="fas fa-lock "></i> Dokumen Terenkripsi</a>');
+                    } else {
+                        $('.button_nama_file_ktp_pengurus').html('<a target="_blank" href="' + url_dokumen_pengurus + response['row_pengurus_manajerial']['file_ktp_pengurus'] + '" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_ktp_pengurus + '</a>');
+                        $('.button_nama_file_npwp_pengurus').html('<a target="_blank" href="' + url_dokumen_pengurus + response['row_pengurus_manajerial']['file_npwp_pengurus'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_npwp_pengurus + '</a>');
+                    }
+
                     $('[name="id_pengurus"]').val(response['row_pengurus_manajerial'].id_pengurus);
                     $('[name="id_url"]').val(response['row_pengurus_manajerial'].id_url);
                     $('[name="nik_pengurus"]').val(response['row_pengurus_manajerial'].nik);
@@ -2968,6 +3054,7 @@
     function DekripEnkrip_pengurus(id_url, type) {
         var type_edit_pengurus = $('[name="type_edit_pengurus"]').val();
         var url_encryption_pengurus = $('[name="url_encryption_pengurus"]').val()
+        var url_dokumen_pengurus = $('[name="url_dokumen_pengurus"]').val()
         if (type == 'dekrip') {
             $.ajax({
                 method: "POST",
@@ -2997,12 +3084,17 @@
                             $('[name="validasi_enkripsi_pengurus"]').val(response['row_pengurus_manajerial']['sts_token_dokumen_pengurus']);
                             if (response['row_pengurus_manajerial']['sts_token_dokumen_pengurus'] == 1) {
                                 $('.button_enkrip_pengurus').html('<a href="javascript:;" onclick="DekripEnkrip_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
-                                $('.button_nama_file_ktp_pengurus').html('<a href="javascript:;" onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_ktp_pengurus + '</a>');
-                                $('.button_nama_file_npwp_pengurus').html('<a href="javascript:;" onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_npwp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_npwp_pengurus + '</a>');
+
                             } else {
                                 $('.button_enkrip_pengurus').html('<a href="javascript:;" onclick="DekripEnkrip_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
-                                $('.button_nama_file_ktp_pengurus').html('<a href="javascript:;" onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_ktp_pengurus + '</a>');
-                                $('.button_nama_file_npwp_pengurus').html('<a href="javascript:;" onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_npwp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_npwp_pengurus + '</a>');
+                            }
+
+                            if (response['row_pengurus_manajerial']['sts_token_dokumen_pengurus'] == 1) {
+                                $('.button_nama_file_ktp_pengurus').html('<a href="javascript:;" class="btn btn-danger btn-sm"><i class="fas fa-lock "></i> Dokumen Terenkripsi</a>');
+                                $('.button_nama_file_npwp_pengurus').html('<a href="javascript:;" class="btn btn-danger btn-sm"><i class="fas fa-lock "></i> Dokumen Terenkripsi</a>');
+                            } else {
+                                $('.button_nama_file_ktp_pengurus').html('<a target="_blank" href="' + url_dokumen_pengurus + response['row_pengurus_manajerial']['file_ktp_pengurus'] + '" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_ktp_pengurus + '</a>');
+                                $('.button_nama_file_npwp_pengurus').html('<a target="_blank" href="' + url_dokumen_pengurus + response['row_pengurus_manajerial']['file_npwp_pengurus'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_npwp_pengurus + '</a>');
                             }
 
                             load_data();
@@ -3044,12 +3136,16 @@
                             $('[name="validasi_enkripsi_pengurus"]').val(response['row_pengurus_manajerial']['sts_token_dokumen_pengurus']);
                             if (response['row_pengurus_manajerial']['sts_token_dokumen_pengurus'] == 1) {
                                 $('.button_enkrip_pengurus').html('<a href="javascript:;" onclick="DekripEnkrip_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
-                                $('.button_nama_file_ktp_pengurus').html('<a href="javascript:;" onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_ktp_pengurus + '</a>');
-                                $('.button_nama_file_npwp_pengurus').html('<a href="javascript:;" onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_npwp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_npwp_pengurus + '</a>');
                             } else {
                                 $('.button_enkrip_pengurus').html('<a href="javascript:;" onclick="DekripEnkrip_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
-                                $('.button_nama_file_ktp_pengurus').html('<a href="javascript:;" onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_ktp_pengurus + '</a>');
-                                $('.button_nama_file_npwp_pengurus').html('<a href="javascript:;" onclick="Download_pengurus(\'' + response['row_pengurus_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_npwp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_npwp_pengurus + '</a>');
+                            }
+
+                            if (response['row_pengurus_manajerial']['sts_token_dokumen_pengurus'] == 1) {
+                                $('.button_nama_file_ktp_pengurus').html('<a href="javascript:;" class="btn btn-danger btn-sm"><i class="fas fa-lock "></i> Dokumen Terenkripsi</a>');
+                                $('.button_nama_file_npwp_pengurus').html('<a href="javascript:;" class="btn btn-danger btn-sm"><i class="fas fa-lock "></i> Dokumen Terenkripsi</a>');
+                            } else {
+                                $('.button_nama_file_ktp_pengurus').html('<a target="_blank" href="' + url_dokumen_pengurus + response['row_pengurus_manajerial']['file_ktp_pengurus'] + '" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_ktp_pengurus + '</a>');
+                                $('.button_nama_file_npwp_pengurus').html('<a target="_blank" href="' + url_dokumen_pengurus + response['row_pengurus_manajerial']['file_npwp_pengurus'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengurus_manajerial'].file_npwp_pengurus + '</a>');
                             }
 
                             load_data();
@@ -3125,6 +3221,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_pengurus').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_pengurus[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -3240,6 +3337,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_pengalaman').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_pengalaman[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -3314,6 +3412,7 @@
             url: url_by_id_pengalaman + id_pengalaman,
             dataType: "JSON",
             success: function(response) {
+                var url_dokumen_pengalaman = $('[name="url_dokumen_pengalaman"]').val()
                 if (type == 'edit') {
                     modal_pengalaman.modal('show');
                     $('[name="type_edit_pengalaman"]').val('edit_biasa');
@@ -3323,7 +3422,22 @@
                     } else {
                         $('.button_enkrip_pengalaman').html('<a href="javascript:;" onclick="DekripEnkrip_pengalaman(\'' + response['row_pengalaman'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
                     }
-                    $('.button_nama_file_pengalaman').html('<a href="javascript:;" onclick="Download_pengalaman(\'' + response['row_pengalaman'].id_url + '\'' + ',' + '\'' + 'pengalaman_kontrak_biasa' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengalaman'].file_kontrak_pengalaman + '</a>');
+                    if (response['row_pengalaman']['sts_token_dokumen_pengalaman'] == 1) {
+                        $('.button_nama_file_pengalaman').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fas fa-lock mr-2"></i> Dokumen Terenkripsi</a>');
+                    } else {
+                        $('.button_nama_file_pengalaman').html('<a target="_blank" href="' + url_dokumen_pengalaman + response['row_pengalaman']['file_kontrak_pengalaman'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengalaman'].file_kontrak_pengalaman + '</a>');
+                    }
+                    var bilangan = response['row_pengalaman'].nilai_kontrak;
+
+                    var number_string = bilangan.toString(),
+                        sisa = number_string.length % 3,
+                        rupiah = number_string.substr(0, sisa),
+                        ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+                    if (ribuan) {
+                        separator = sisa ? '.' : '';
+                        rupiah += separator + ribuan.join('.');
+                    }
                     $('[name="id_pengalaman"]').val(response['row_pengalaman'].id_pengalaman);
                     $('[name="id_url"]').val(response['row_pengalaman'].id_url);
                     $('[name="no_kontrak"]').val(response['row_pengalaman'].no_kontrak);
@@ -3331,7 +3445,7 @@
                     $('[name="id_jenis_usaha"]').val(response['row_pengalaman'].id_jenis_usaha);
                     $('[name="tanggal_kontrak"]').val(response['row_pengalaman'].tanggal_kontrak);
                     $('[name="instansi_pemberi"]').val(response['row_pengalaman'].instansi_pemberi);
-                    $('[name="nilai_kontrak"]').val(response['row_pengalaman'].nilai_kontrak);
+                    $('[name="nilai_kontrak"]').val('Rp. ' + rupiah);
                     $('[name="lokasi_pekerjaan"]').val(response['row_pengalaman'].lokasi_pekerjaan);
                 }
             }
@@ -3341,6 +3455,7 @@
     function DekripEnkrip_pengalaman(id_url, type) {
         var type_edit_pengalaman = $('[name="type_edit_pengalaman"]').val();
         var url_encryption_pengalaman = $('[name="url_encryption_pengalaman"]').val()
+        var url_dokumen_pengalaman = $('[name="url_dokumen_pengalaman"]').val()
         if (type == 'dekrip') {
             $.ajax({
                 method: "POST",
@@ -3370,11 +3485,17 @@
                             $('[name="validasi_enkripsi_pengalaman"]').val(response['row_pengalaman_manajerial']['sts_token_dokumen_pengalaman']);
                             if (response['row_pengalaman_manajerial']['sts_token_dokumen_pengalaman'] == 1) {
                                 $('.button_enkrip_pengalaman').html('<a href="javascript:;" onclick="DekripEnkrip_pengalaman(\'' + response['row_pengalaman_manajerial'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
-                                $('.button_nama_file_pengalaman').html('<a href="javascript:;" onclick="Download_pengalaman(\'' + response['row_pengalaman_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengalaman_manajerial'].file_kontrak_pengalaman + '</a>');
+
 
                             } else {
                                 $('.button_enkrip_pengalaman').html('<a href="javascript:;" onclick="DekripEnkrip_pengalaman(\'' + response['row_pengalaman_manajerial'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
-                                $('.button_nama_file_pengalaman').html('<a href="javascript:;" onclick="Download_pengalaman(\'' + response['row_pengalaman_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengalaman_manajerial'].file_kontrak_pengalaman + '</a>');
+
+                            }
+
+                            if (response['row_pengalaman_manajerial']['sts_token_dokumen_pengalaman'] == 1) {
+                                $('.button_nama_file_pengalaman').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fas fa-lock mr-2"></i> Dokumen Terenkripsi</a>');
+                            } else {
+                                $('.button_nama_file_pengalaman').html('<a target="_blank" href="' + url_dokumen_pengalaman + response['row_pengalaman_manajerial']['file_kontrak_pengalaman'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengalaman_manajerial'].file_kontrak_pengalaman + '</a>');
                             }
 
                             load_data();
@@ -3416,12 +3537,16 @@
                             $('[name="validasi_enkripsi_pengalaman"]').val(response['row_pengalaman_manajerial']['sts_token_dokumen_pengalaman']);
                             if (response['row_pengalaman_manajerial']['sts_token_dokumen_pengalaman'] == 1) {
                                 $('.button_enkrip_pengalaman').html('<a href="javascript:;" onclick="DekripEnkrip_pengalaman(\'' + response['row_pengalaman_manajerial'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
-                                $('.button_nama_file_pengalaman').html('<a href="javascript:;" onclick="Download_pengalaman(\'' + response['row_pengalaman_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengalaman_manajerial'].file_kontrak_pengalaman + '</a>');
 
                             } else {
                                 $('.button_enkrip_pengalaman').html('<a href="javascript:;" onclick="DekripEnkrip_pengalaman(\'' + response['row_pengalaman_manajerial'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
-                                $('.button_nama_file_pengalaman').html('<a href="javascript:;" onclick="Download_pengalaman(\'' + response['row_pengalaman_manajerial'].id_url + '\'' + ',' + '\'' + 'pengurus_ktp' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengalaman_manajerial'].file_kontrak_pengalaman + '</a>');
 
+                            }
+
+                            if (response['row_pengalaman_manajerial']['sts_token_dokumen_pengalaman'] == 1) {
+                                $('.button_nama_file_pengalaman').html('<a href="javascript:;"  class="btn btn-danger btn-sm"><i class="fas fa-lock mr-2"></i> Dokumen Terenkripsi</a>');
+                            } else {
+                                $('.button_nama_file_pengalaman').html('<a target="_blank" href="' + url_dokumen_pengalaman + response['row_pengalaman_manajerial']['file_kontrak_pengalaman'] + '"  class="btn btn-warning btn-sm"><i class="fas fa-file mr-2"></i> ' + response['row_pengalaman'].file_kontrak_pengalaman + '</a>');
                             }
 
                             load_data();
@@ -3616,6 +3741,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_sppkp').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_sppkp[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -3657,6 +3783,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_sppkp').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_sppkp[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -3847,6 +3974,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_npwp').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_npwp[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -3888,6 +4016,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_npwp').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_npwp[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -4006,6 +4135,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_spt').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_spt[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -4047,6 +4177,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_spt').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_spt[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -4272,6 +4403,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_neraca').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_neraca[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -4313,6 +4445,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_neraca').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_neraca[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -4465,18 +4598,121 @@
 
 
                 } else if (type == 'dekrip') {
-                    modal_dekrip_keuangan.modal('show');
-                    $('[name="id_url_keuangan"]').val(response['row_keuangan'].id_url);
-                    $('.button_enkrip_keuangan').html('<a href="javascript:;" onclick="DekripEnkrip_keuangan(\'' + response['row_keuangan'].file_dokumen_keuangan + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
-                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
-                        response['row_keuangan'].file_dokumen_keuangan + '</a>';
-                    $('.token_generate_keuangan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_keuangan'].token_dokumen + '</textarea></div>');
+                    GenerateDekrip_keuangan(id)
+                    // // modal_dekrip_keuangan.modal('show');
+                    // $('[name="id_url_keuangan"]').val(response['row_keuangan'].id_url);
+                    // $('.button_enkrip_keuangan').html('<a href="javascript:;" onclick="DekripEnkrip_keuangan(\'' + response['row_keuangan'].file_dokumen_keuangan + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>');
+                    // var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" class="btn btn-sm btn-info btn-block">' +
+                    //     response['row_keuangan'].file_dokumen_keuangan + '</a>';
+                    // $('.token_generate_keuangan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_keuangan'].token_dokumen + '</textarea></div>');
                 } else if (type == 'enkrip') {
-                    modal_enkrip_keuangan.modal('show');
-                    $('[name="id_url_keuangan"]').val(response['row_keuangan'].id_url);
-                    $('.button_enkrip_keuangan').html('<a href="javascript:;" onclick="DekripEnkrip_keuangan(\'' + response['row_keuangan'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
-                    var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' + response['row_keuangan'].id_url + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_keuangan'].file_dokumen_keuangan + '</a>';
-                    $('.token_generate_keuangan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_keuangan'].token_dokumen + '</textarea></div>');
+                    GenerateEnkrip_keuangan(id)
+                    // modal_enkrip_keuangan.modal('show');
+                    // $('[name="id_url_keuangan"]').val(response['row_keuangan'].id_url);
+                    // $('.button_enkrip_keuangan').html('<a href="javascript:;" onclick="DekripEnkrip_keuangan(\'' + response['row_keuangan'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock mr-2"></i> Enkripsi Dokumen</a>');
+                    // var html2 = '<a href="javascript:;" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;" onclick="DownloadFile_keuangan(\'' + response['row_keuangan'].id_url + '\')" class="btn btn-sm btn-warning btn-block">' + response['row_keuangan'].file_dokumen_keuangan + '</a>';
+                    // $('.token_generate_keuangan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_keuangan'].token_dokumen + '</textarea></div>');
+                }
+            }
+        })
+    }
+
+    function GenerateDekrip_keuangan(id_url) {
+        var url_encryption_keuangan = $('[name="url_encryption_keuangan"]').val();
+        var modal_dekrip_keuangan = $('#modal_dekrip_keuangan');
+        // var id_url = $('[name="id_url_keuangan"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_keuangan + id_url,
+            dataType: "JSON",
+            data: $('#form_dekrip_keuangan').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            modal_dekrip_keuangan.modal('hide');
+                            $('#form_dekrip_keuangan')[0].reset()
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+
+    function GenerateEnkrip_keuangan(id_url) {
+        var url_encryption_keuangan = $('[name="url_encryption_keuangan"]').val();
+        var modal_enkrip_keuangan = $('#modal_enkrip_keuangan');
+        // var id_url = $('[name="id_url_keuangan"]').val();
+        $.ajax({
+            method: "POST",
+            url: url_encryption_keuangan + id_url,
+            dataType: "JSON",
+            data: $('#form_enkrip_keuangan').serialize(),
+            // beforeSend: function() {
+            // $('#button_dekrip_generate').css('display', 'none');
+            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
+            // },
+            success: function(response) {
+                if (response['maaf']) {
+                    Swal.fire(response['maaf'], '', 'warning')
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Deskripsi!',
+                        html: 'Proses Deksripsi <b></b>',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
+                            load_data();
+                            $('#button_dekrip_generate').css('display', 'block');
+                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
+                            $('#form_enkrip_keuangan')[0].reset()
+                            modal_enkrip_keuangan.modal('hide');
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
                 }
             }
         })
@@ -4540,6 +4776,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_keuangan').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_keuangan[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -4581,6 +4818,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_keuangan').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_keuangan[0].reset()
                         load_data()
                     }
                 }).then((result) => {
@@ -4594,106 +4832,7 @@
     })
 
 
-    function GenerateDekrip_keuangan() {
-        var url_encryption_keuangan = $('[name="url_encryption_keuangan"]').val();
-        var modal_dekrip_keuangan = $('#modal_dekrip_keuangan');
-        var id_url = $('[name="id_url_keuangan"]').val();
-        $.ajax({
-            method: "POST",
-            url: url_encryption_keuangan + id_url,
-            dataType: "JSON",
-            data: $('#form_dekrip_keuangan').serialize(),
-            // beforeSend: function() {
-            // $('#button_dekrip_generate').css('display', 'none');
-            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
-            // },
-            success: function(response) {
-                if (response['maaf']) {
-                    Swal.fire(response['maaf'], '', 'warning')
-                } else {
-                    let timerInterval
-                    Swal.fire({
-                        title: 'Sedang Proses Deskripsi!',
-                        html: 'Proses Deksripsi <b></b>',
-                        timer: 2000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading()
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                                // b.textContent = Swal.getTimerRight()
-                            }, 100)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
-                            load_data();
-                            $('#button_dekrip_generate').css('display', 'block');
-                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
-                            modal_dekrip_keuangan.modal('hide');
-                            $('#form_dekrip_keuangan')[0].reset()
-                        }
-                    }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
 
-                        }
-                    })
-                }
-            }
-        })
-    }
-
-
-    function GenerateEnkrip_keuangan() {
-        var url_encryption_keuangan = $('[name="url_encryption_keuangan"]').val();
-        var modal_enkrip_keuangan = $('#modal_enkrip_keuangan');
-        var id_url = $('[name="id_url_keuangan"]').val();
-        $.ajax({
-            method: "POST",
-            url: url_encryption_keuangan + id_url,
-            dataType: "JSON",
-            data: $('#form_enkrip_keuangan').serialize(),
-            // beforeSend: function() {
-            // $('#button_dekrip_generate').css('display', 'none');
-            // $('#button_dekrip_generate_manipulasi').css('display', 'block');
-            // },
-            success: function(response) {
-                if (response['maaf']) {
-                    Swal.fire(response['maaf'], '', 'warning')
-                } else {
-                    let timerInterval
-                    Swal.fire({
-                        title: 'Sedang Proses Deskripsi!',
-                        html: 'Proses Deksripsi <b></b>',
-                        timer: 2000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading()
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                                // b.textContent = Swal.getTimerRight()
-                            }, 100)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                            Swal.fire('Dokumen Berhasil Di Deskripsi!', '', 'success')
-                            load_data();
-                            $('#button_dekrip_generate').css('display', 'block');
-                            $('#button_dekrip_generate_manipulasi').css('display', 'none');
-                            $('#form_enkrip_keuangan')[0].reset()
-                            modal_enkrip_keuangan.modal('hide');
-                        }
-                    }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
-
-                        }
-                    })
-                }
-            }
-        })
-    }
 
     function Download_pemilik(id_url, type) {
         var type_edit_pemilik = 'edit_biasa';
@@ -4897,6 +5036,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_skdp').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_skdp[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -4938,6 +5078,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_skdp').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_skdp[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -5134,6 +5275,7 @@
                         clearInterval(timerInterval)
                         $('#modal_valid_lainnya').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_valid_lainnya[0].reset();
                         load_data()
                     }
                 }).then((result) => {
@@ -5175,6 +5317,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_lainnya').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_lainnya[0].reset();
                         load_data()
                     }
                 }).then((result) => {

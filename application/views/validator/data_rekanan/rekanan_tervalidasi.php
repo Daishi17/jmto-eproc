@@ -14,40 +14,38 @@
                     <div class="col-sm-6">
                         <div class="card border-dark shadow-lg">
                             <div class="card-body">
-                                <from>
+                              <from>
                                     <div class="row g-1">
                                         <div class="col-sm-6">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Filter Dokumen Upload</option>
-                                                    <option value="all">All</option>
-                                                    <option value="sudah">Sudah Upload</option>
-                                                    <option value="belum">Belum Upload</option>
+                                                <select class="form-select" id="sts_upload_dokumen" name="sts_upload_dokumen" aria-label="Default select example">
+                                                    <option value="">Filter Dokumen Upload</option>
+                                                    <option value="">All</option>
+                                                    <option value="1">Sudah Upload</option>
+                                                    <option value="2">Belum Upload</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Filter Dokumen Cek</option>
-                                                    <option value="all">All</option>
-                                                    <option value="belum">Belum Tervalidasi</option>
-                                                    <option value="valid">Dokumen Tervalidasi</option>
-                                                    <option value="tidak">Dokumen Tidak Valid</option>
+                                                <select class="form-select" id="sts_dokumen_cek" name="sts_dokumen_cek" aria-label="Default select example">
+                                                    <option value="">Filter Dokumen Cek</option>
+                                                    <option value="">All</option>
+                                                    <option value="1">Sudah DiPeriksa</option>
+                                                    <option value="2">Belum Diperiksa</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <button type="button" class="btn btn-primary btn-sm shadow-lg">
+                                            <button type="button" name="filter" id="filter" class="btn btn-primary btn-sm shadow-lg">
                                                 <i class="fa-solid fa-list px-1"></i>
                                                 <small>Filtering</small>
                                             </button>
                                         </div>
                                     </div>
-                                </from>
-                            </div>
+                                </from>                            </div>
                         </div>
                     </div>
                     <hr>

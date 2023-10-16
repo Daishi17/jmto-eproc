@@ -269,7 +269,15 @@ class M_rup extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
-
+    public function get_row_rup_edit($id_url_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->join('tbl_departemen', 'tbl_rup.id_departemen = tbl_departemen.id_departemen', 'left');
+        $this->db->where('id_url_rup', $id_url_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
     public function cek_user_panitia($id_rup, $id_pegawai)
     {
         $this->db->select('*');
@@ -492,6 +500,5 @@ class M_rup extends CI_Model
         $this->db->insert('tbl_izin_teknis_rup', $data);
         return $this->db->affected_rows();
     }
-    
 
 }

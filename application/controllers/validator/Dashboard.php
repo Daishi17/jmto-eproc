@@ -10,6 +10,10 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_Dashboard/M_Dashboard');
+		$role = $this->session->userdata('role');
+		if (!$role == 1 || !$role == 2) {
+			redirect('auth');
+		}
 	}
 
 	public function index()

@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_karyawan extends CI_Model
 {
     var $table = 'tbl_pegawai';
-    var $order = array('id_pegawai', 'npp', 'nama_karyawan', 'nama_departemen', 'id_role', 'email', 'status', 'id_pegawai');
+    var $order = array('id_pegawai', 'nip', 'nama_pegawai', 'nama_departemen', 'id_role', 'email', 'status', 'id_pegawai');
 
     private function _get_data_query()
     {
@@ -102,4 +102,28 @@ class M_karyawan extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function updatepassword($data, $id_pegawai)
+	{
+		$this->db->where('id_pegawai', $id_pegawai);
+		$this->db->update('tbl_manajemen_user', $data);
+	}
+
+    public function getByid_nip($nip)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_pegawai');
+        $this->db->where('nip', $nip);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    function insert_excel_karyawan($data)
+    {
+        $jumlah = count($data);
+        if ($jumlah > 0) {
+            $this->db->replace('tbl_pegawai', $data);
+        }
+    }
+
 }

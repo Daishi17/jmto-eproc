@@ -41,7 +41,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siup(\'' + response['row_siup'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_siup').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siup']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_siup'].sts_seumur_hidup == 1) {
+                    if (response['row_siup'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_siup'].tgl_berlaku + '</label>'
@@ -157,7 +157,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_nib(\'' + response['row_nib'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_nib').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_nib']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_nib'].sts_seumur_hidup == 1) {
+                    if (response['row_nib'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_nib'].tgl_berlaku + '</label>'
@@ -275,7 +275,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_sbu'].sts_seumur_hidup == 1) {
+                    if (response['row_sbu'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_sbu'].tgl_berlaku + '</label>'
@@ -393,7 +393,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_siujk(\'' + response['row_siujk'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_siujk').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_siujk']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_siujk'].sts_seumur_hidup == 1) {
+                    if (response['row_siujk'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_siujk'].tgl_berlaku + '</label>'
@@ -512,7 +512,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_skdp(\'' + response['row_skdp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_skdp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_skdp']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_skdp'].sts_seumur_hidup == 1) {
+                    if (response['row_skdp'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_skdp'].tgl_berlaku + '</label>'
@@ -634,7 +634,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_izin_lain(\'' + response['row_izin_lain'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_izin_lain').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_izin_lain']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_izin_lain'].sts_seumur_hidup == 1) {
+                    if (response['row_izin_lain'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_izin_lain'].tgl_berlaku + '</label>'
@@ -700,7 +700,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_pendirian(\'' + response['row_akta_pendirian'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_akta_pendirian').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_pendirian']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_akta_pendirian'].sts_seumur_hidup == 1) {
+                    if (response['row_akta_pendirian'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_akta_pendirian'].tgl_berlaku + '</label>'
@@ -766,7 +766,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_akta_perubahan(\'' + response['row_akta_perubahan'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_akta_perubahan').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_akta_perubahan']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_akta_perubahan'].sts_seumur_hidup == 1) {
+                    if (response['row_akta_perubahan'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_akta_perubahan'].tgl_berlaku + '</label>'
@@ -1014,7 +1014,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sppkp(\'' + response['row_sppkp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_sppkp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sppkp']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_sppkp'].sts_seumur_hidup == 1) {
+                    if (response['row_sppkp'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_sppkp'].tgl_berlaku + '</label>'
@@ -1075,7 +1075,7 @@
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_npwp(\'' + response['row_npwp'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_npwp').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_npwp']['token_dokumen'] + '</textarea></div>');
                     }
-                    if (response['row_npwp'].sts_seumur_hidup == 1) {
+                    if (response['row_npwp'].sts_seumur_hidup == 2) {
                         var tgl_berlaku = '<label>Seumur Hidup</label>'
                     } else {
                         var tgl_berlaku = '<label>' + response['row_npwp'].tgl_berlaku + '</label>'
