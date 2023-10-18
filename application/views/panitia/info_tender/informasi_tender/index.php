@@ -701,7 +701,7 @@
                     <tbody>
                         <tr>
                             <td scope="row">1</td>
-                            <td>Pengumuman Pascakualifikasi</td>
+                            <td>Pengumuman Prakualifikasi</td>
                             <td><span class="badge bg-success"> <i class="fas fa fa-check"></i> Tahap Sudah Selesai</span>
                             <td>01 April 2022 16:00 </td>
                             <td>05 April 2022 23:59 </td>
@@ -710,7 +710,7 @@
                         </tr>
                         <tr>
                             <td scope="row">2</td>
-                            <td> Download Dokumen Pengadaan</td>
+                            <td> Download Dokumen Kualifikasi </td>
                             <td><span class="badge bg-secondary"> <i class="fas fa fa-clock"></i> Tahap Sedang Berlangsung</span>
                             <td>01 April 2022 16:00 </td>
                             <td>05 April 2022 23:59 </td>
@@ -719,7 +719,160 @@
                         </tr>
                         <tr>
                             <td scope="row">3</td>
+                            <td>Upload Dokumen Prakualifikasi </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">4</td>
+                            <td>Evaluasi Dokumen Kualifikasi </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">5</td>
+                            <td>Pembuktian Kualifikasi </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">6</td>
+                            <td>Penetapan Hasil Kualifikasi </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">7</td>
+                            <td>Pengumuman Hasil Prakualifikasi </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">8</td>
+                            <td>Masa Sanggah Prakualifikasi </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">9</td>
+                            <td>Download Dokumen Pengadaan </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">10</td>
                             <td>Pemberian Penjelasan </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">11</td>
+                            <td>Upload Dokumen Penawaran </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">12</td>
+                            <td>Pembukaan dan Evaluasi Penawaran File I : Administrasi dan Teknis </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">13</td>
+                            <td>Pemberitahuan/Pengumuman Peringkat Teknis </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">14</td>
+                            <td>Pembukaan dan Evaluasi Penawaran File II : Harga </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">15</td>
+                            <td>Upload Berita Acara Hasil Pengadaan </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">16</td>
+                            <td>Penetapan Pemenang </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">17</td>
+                            <td>Pengumuman Pemenang </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">18</td>
+                            <td>Masa Sanggah Hasil Pengadaan </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">19</td>
+                            <td>Surat Penunjukkan Penyedia Barang/Jasa </td>
+                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
+                            <td>01 April 2022 16:00 </td>
+                            <td>05 April 2022 23:59 </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">20</td>
+                            <td>Penandatanganan Kontrak </td>
                             <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
                             <td>01 April 2022 16:00 </td>
                             <td>05 April 2022 23:59 </td>
