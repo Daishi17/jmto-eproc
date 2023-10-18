@@ -4,11 +4,11 @@
             <div class="card border-dark">
                 <div class="card-header border-dark bg-white text-black">
                     <ul class="nav nav-tabs">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link " aria-current="page"><i class="fa fa-list-alt" aria-hidden="true"> </i> Menu Tender</a>
+                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page"><i class="fa fa-list-alt" aria-hidden="true"> </i> Menu Tender</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="#"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Tender</a>
+                            <a class="nav-link active" style="margin-left: 5px;" href="#"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Pengadaan</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="#"><i class="fa fa-comments" aria-hidden="true"></i> Pertanyaan</a>
@@ -36,14 +36,14 @@
                 <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
                     <div class="flex-grow-1 bd-highlight">
                         <span class="text-dark">
-                            <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Info Tender</strong></small>
+                            <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Info Pengadaan</strong></small>
                         </span>
                     </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th style="width: 300px;">Kode Tender</th>
+                            <th style="width: 300px;">Kode Pengadaan</th>
                             <th> B.04.003.0001.00001.JMTM.280320220002</th>
                         </tr>
                         <tr>
@@ -51,7 +51,7 @@
                             <th>PAKET KEMERDEKAAN 78 RI BOGOR</th>
                         </tr>
                         <tr>
-                            <th>Jadwal Tender</th>
+                            <th>Jadwal Pengadaan</th>
                             <th><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#lihat_jadwal_tender">
                                     <i class="fa fa-calendar" aria-hidden="true"></i> Lihat
                                 </button></th>
@@ -234,6 +234,12 @@
                                 </button></th>
                         </tr>
                         <tr>
+                            <th>Pengumuman Hasil Prakualifikasi</th>
+                            <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hasil_prakualifikasi">
+                                    <i class="fa fa-upload" aria-hidden="true"></i> Upload Hasil Prakualifikasi
+                                </button></th>
+                        </tr>
+                        <tr>
                             <th>Pembukaan Penawaran</th>
                             <th>
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#buka_dokumen_penawaran">
@@ -242,13 +248,13 @@
                             </th>
                         </tr>
                         <tr>
-                            <th>Berita Acara Tender</th>
+                            <th>Berita Acara Pengadaan</th>
                             <th>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
-                                                Upload Berita Acara Tender
+                                                Upload Berita Acara Pengadaan
                                                 <a href="" style="float: right;" data-bs-toggle="modal" data-bs-target="#upload_berita_acara_tender" class="btn btn-danger btn-sm"> <i class="fas fa fa-upload"></i> Upload</a>
                                             </div>
                                             <div class="card-body">
@@ -340,7 +346,7 @@
                                     <div class="col-md-4">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
-                                                Upload Evaluasi Hasil Tender
+                                                Upload Evaluasi Hasil Pengadaan
                                                 <a href="" style="float: right;" data-bs-toggle="modal" data-bs-target="#upload_berita_acara_tender" class="btn btn-danger btn-sm"> <i class="fas fa fa-upload"></i> Upload</a>
                                             </div>
                                             <div class="card-body">
@@ -377,7 +383,7 @@
                                 </button></th>
                         </tr>
                         <tr>
-                            <th>Surat Penunjukan Pemenang Tender</th>
+                            <th>Surat Penunjukan Pemenang Pengadaan</th>
                             <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#surat_penunjukan">
                                     <i class="fa fa-upload" aria-hidden="true"></i> Upload Surat Penunjukan
                                 </button></th>
@@ -417,7 +423,7 @@
                                 <input type="text" class="form-control" readonly value="radxH8GTvQwcdX8sSLoAtfFJu63uCykCUjyn6x7PXeexHrMJbfE45lnRPJDC1aggY2nP7j9BUWF6DvhYbqpIOBtOsphTW0m2omFB04wb9h5stGKEzS9TLOXeNYR71KV3" aria-describedby="basic-addon1">
                             </div>
                             <br>
-                            <a href="" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
+                            <a target="_blank" href="<?= base_url('panitia/info_tender/informasi_tender/buka_penawaran') ?>" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
                         </center>
                     </div>
                     <div class="col-md-2">
@@ -436,7 +442,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-secondary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara Tender</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara Pengadaan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -475,7 +481,7 @@
             <div class="modal-body">
                 <div class="alert alert-primary d-flex align-items-center" role="alert">
                     <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Kirim Pengumuman Pemenang Tender !!! <br>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Kirim Pengumuman Pemenang Pengadaan !!! <br>
                     </div>
                 </div>
                 <table class="table table-bordered">
@@ -521,7 +527,7 @@
             <div class="modal-body">
                 <div class="alert alert-primary d-flex align-items-center" role="alert">
                     <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Undangan Pembuktian Tender !!! <br>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Undangan Pembuktian Pengadaan !!! <br>
                     </div>
                 </div>
                 <form id="form_upload_undangan_pembuktian" action="javascript:;" enctype="multipart/form-data">
@@ -555,6 +561,49 @@
     </div>
 </div>
 
+<div class="modal fade" id="hasil_prakualifikasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Pengumuman Hasil Prakualifikasi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-primary d-flex align-items-center" role="alert">
+                    <div>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Pengumuman Hasil Prakualifikasi Pengadaan !!! <br>
+                    </div>
+                </div>
+                <form id="form_upload_hasil_rakualifikasi" action="javascript:;" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
+                        <button class="btn btn-outline-secondary file_hps_btn" type="submit">Upload</button>
+                    </div>
+                </form>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama File</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>Pengumuman Hasil Prakualifikasi</td>
+                            <td><label for="" class="btn btn-sm btn-danger"> Belum Upload</label></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="surat_penunjukan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -566,7 +615,7 @@
             <div class="modal-body">
                 <div class="alert alert-primary d-flex align-items-center" role="alert">
                     <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i>Upload Surat Penunjukan Pemenang Tender !!! <br>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i>Upload Surat Penunjukan Pemenang Pengadaan !!! <br>
                     </div>
                 </div>
                 <form id="form_upload_surat_penunjukan" action="javascript:;" enctype="multipart/form-data">
@@ -628,13 +677,13 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Jadwal Tender Berlangsung</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Jadwal Pengadaan Berlangsung</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-primary d-flex align-items-center" role="alert">
                     <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Jadwal Tender Berlangsung !!! <br>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Jadwal Pengadaan Berlangsung !!! <br>
                     </div>
                 </div>
                 <table class="table table-bordered">
@@ -687,19 +736,17 @@
     </div>
 </div>
 
-
-
 <div class="modal fade" id="lihat_peserta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Peserta Tender</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Peserta Pengadaan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-primary d-flex align-items-center" role="alert">
                     <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Peserta Ini Merupakan Peserta Yang Mengikuti Tender Paket !!! <br>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Peserta Ini Merupakan Peserta Yang Mengikuti Pengadaan !!! <br>
                     </div>
                 </div>
                 <table class="table table-bordered">

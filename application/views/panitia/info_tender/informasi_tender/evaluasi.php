@@ -4,9 +4,9 @@
             <div class="card border-dark">
                 <div class="card-header border-dark bg-white text-black">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white" aria-current="page"><i class="fa fa-list-alt" aria-hidden="true"> </i> Menu Tender</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender') ?>"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Tender</a>
                         </li>
@@ -33,21 +33,28 @@
             </div>
             <hr>
             <div class="card border-dark">
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Nama Paket</th>
-                        <td>PAKET KEMERDEKAAN 78 RI BOGOR</td>
-                    </tr>
-                    <tr>
-                        <th>Nama Jenis Pengadaan</th>
-                        <td>JASA KONSTRUKSI</td>
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4>Informasi Pengadaan</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Nama Paket</th>
+                                <td>PAKET KEMERDEKAAN 78 RI BOGOR</td>
+                            </tr>
+                            <tr>
+                                <th>Nama Jenis Pengadaan</th>
+                                <td>JASA KONSTRUKSI</td>
 
-                    </tr>
-                    <tr>
-                        <th>Nama Metode Pemilihan </th>
-                        <td>Prakualifikasi 2 file</td>
-                    </tr>
-                </table>
+                            </tr>
+                            <tr>
+                                <th>Nama Metode Pemilihan </th>
+                                <td>Prakualifikasi 2 file</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
                 <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
                     <div class="flex-grow-1 bd-highlight">
                         <span class="text-dark">

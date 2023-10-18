@@ -55,4 +55,12 @@ class Informasi_tender extends CI_Controller
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
+
+	public function buka_penawaran()
+	{
+		$this->load->view('template_tender/header_penawaran');
+		$this->load->view('panitia/info_tender/informasi_tender/buka_penawaran');
+		$this->load->view('template_tender/footer');
+		$this->load->view('panitia/info_tender/informasi_tender/ajax');
+	}
 }
