@@ -11,19 +11,19 @@
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender') ?>"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Tender</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/aanwijzing') ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
+                            <a class="nav-link active" style="margin-left: 5px;" href="#"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white  " style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/evaluasi') ?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Evaluasi</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/evaluasi') ?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Evaluasi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/negosiasi') ?>"><i class="fa fa-tags" aria-hidden="true"></i> Negosiasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white " style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_prakualifikasi') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan Prakualifikasi</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_prakualifikasi') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan Prakualifikasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_akhir') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_akhir') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="#"><i class="fa fa-suitcase" aria-hidden="true"></i> Berita Acara</a>
@@ -35,7 +35,7 @@
             <div class="card border-dark">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
-                        <h4>Informasi Pengadaan</h4>
+                        <h4>Aanwijzing Pengadaan</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
@@ -52,41 +52,24 @@
                                 <th>Nama Metode Pemilihan </th>
                                 <td>Prakualifikasi 2 file</td>
                             </tr>
+                            <tr>
+                                <th>Nama Tempat </th>
+                                <td><input type="text" class="form-control" placeholder="Nama Tempat"></td>
+                            </tr>
+                            <tr>
+                                <th>Tanggal </th>
+                                <td><input type="datetime-local" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <th>Link Meet (Jika Daring) </th>
+                                <td><input type="text" class="form-control" placeholder="Link Meet"></td>
+                            </tr>
+                            <tr>
+                                <th>Upload Bukti </th>
+                                <td><input type="file" class="form-control"></td>
+                            </tr>
                         </table>
                     </div>
-                </div>
-                <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
-                    <div class="flex-grow-1 bd-highlight">
-                        <span class="text-dark">
-                            <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Sanggahan Akhir</strong></small>
-                        </span>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered" id="tbl_evaluasi">
-                        <thead class="bg-primary text-white">
-                            <tr>
-                                <th>No</th>
-                                <th width="200px">Nama Peserta</th>
-                                <th>Nama File</th>
-                                <th>Download File</th>
-                                <th>File Balasan</th>
-                                <th>Keterangan Panitia</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td widtd="200px">PT. PANGRANGO</td>
-                                <td>FILE SANGGAHAN</td>
-                                <td><a href="#"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a> </td>
-                                <td><a href="#"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a></td>
-                                <td>Sanggahan Diterima Tender akan segera diulang</td>
-                                <td><a href="#" class="btn btn-sm btn-success">Balas</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

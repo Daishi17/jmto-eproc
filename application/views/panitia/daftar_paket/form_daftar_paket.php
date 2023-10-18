@@ -772,7 +772,7 @@
                                                             <option value="Besar">Besar</option>
                                                             <option value="Minimal Menengah">Minimal Menengah</option>
                                                             <option value="Maksimal Menengah">Maksimal Menengah</option>
-                                                            <option value="Kecil/UMKM">Kecil/UMKM</option>
+                                                            <option value="Kecil">Kecil</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1355,10 +1355,10 @@
                     </div>
                     <div class="modal-footer justify-content-start">
                         <div class="container">
-                            <button type="submit" class="btn btn-success">
+                            <!-- <button type="submit" class="btn btn-success">
                                 <i class="fa-solid fa-hard-drive"></i>
                                 Simpan Data
-                            </button>
+                            </button> -->
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <i class="fa-solid fa-angles-left"></i>
                                 Kembali
@@ -1435,10 +1435,10 @@
                     </div>
                     <div class="modal-footer justify-content-start">
                         <div class="container-fluid">
-                            <button type="submit" class="btn btn-success">
+                            <!-- <button type="submit" class="btn btn-success">
                                 <i class="fa-solid fa-hard-drive"></i>
                                 Simpan Data
-                            </button>
+                            </button> -->
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <i class="fa-solid fa-angles-left"></i>
                                 Kembali

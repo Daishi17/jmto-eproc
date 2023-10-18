@@ -11,13 +11,13 @@
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender') ?>"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Tender</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="#"><i class="fa fa-comments" aria-hidden="true"></i> Pertanyaan</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/aanwijzing') ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  active" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/evaluasi') ?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Evaluasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="#"><i class="fa fa-tags" aria-hidden="true"></i> Negosiasi</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/negosiasi') ?>"><i class="fa fa-tags" aria-hidden="true"></i> Negosiasi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_prakualifikasi') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan Prakualifikasi</a>

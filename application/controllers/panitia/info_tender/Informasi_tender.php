@@ -63,4 +63,20 @@ class Informasi_tender extends CI_Controller
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
+
+	public function aanwijzing()
+	{
+		$this->load->view('template_tender/header');
+		$this->load->view('panitia/info_tender/informasi_tender/aanwijzing');
+		$this->load->view('template_tender/footer');
+		$this->load->view('panitia/info_tender/informasi_tender/ajax');
+	}
+
+	public function negosiasi()
+	{
+		$this->load->view('template_tender/header');
+		$this->load->view('panitia/info_tender/informasi_tender/negosiasi');
+		$this->load->view('template_tender/footer');
+		$this->load->view('panitia/info_tender/informasi_tender/ajax');
+	}
 }

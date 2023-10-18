@@ -308,6 +308,7 @@ class M_panitia extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
     public function cek_syarat_kbli($id_rup)
     {
         $this->db->select('*');
@@ -333,6 +334,9 @@ class M_panitia extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+
+
     function data_vendor_lolos_siup_kbli($cek_syarat_kbli)
     {
         $cek_kbli_vendor_siup = $this->cek_kbli_siup_vendor();
@@ -346,6 +350,26 @@ class M_panitia extends CI_Model
         }
         return $tampung_data_vendor_siup;
     }
+
+    public function cek_kualifikasi($row_paket)
+    {
+        $this->db->select('tbl_vendor.nama_usaha,tbl_vendor.kualifikasi_usaha');
+        $this->db->from('tbl_vendor');
+        if ($row_paket['syarat_tender_kualifikasi'] == 'Minimal Menengah') {
+            $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Besar', 'Menengah']);
+        } else if ($row_paket['syarat_tender_kualifikasi'] == 'Maksimal Menengah') {
+            $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Kecil', 'Menengah']);
+        } else if ($row_paket['syarat_tender_kualifikasi'] == 'Kecil') {
+            $this->db->where('tbl_vendor.kualifikasi_usaha', 'Kecil');
+        } else if ($row_paket['syarat_tender_kualifikasi'] == 'Besar') {
+            $this->db->where('tbl_vendor.kualifikasi_usaha', 'Besar');
+        } else { }
+        $this->db->group_by('tbl_vendor.id_vendor');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
     private function cek_kbli_siujk_vendor()
     {
         $this->db->select('tbl_vendor.id_vendor,tbl_vendor_kbli_siujk.id_kbli');
@@ -372,11 +396,12 @@ class M_panitia extends CI_Model
     // ini untuk mengabungkan data vendor terundang
     function gabung_keseluruhan_vendor_terundang($array_kbli_siup, $array_kbli_siujk)
     {
+        // lolos kbli siup
         $mergedResult = [];
         foreach ($array_kbli_siup as $row) {
             $mergedResult[$row['id_vendor']] = $row;
         }
-
+        // kbli siujk
         foreach ($array_kbli_siujk as $row) {
             if (isset($mergedResult[$row['id_vendor']])) {
                 $mergedResult[$row['id_vendor']] = array_merge($mergedResult[$row['id_vendor']], $row);
@@ -385,24 +410,49 @@ class M_panitia extends CI_Model
         return $mergedResult;
     }
 
-    function result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli)
+    function result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli, $rup)
     {
         $this->db->select('*');
         $this->db->from('tbl_vendor');
         $this->db->join('tbl_vendor_siup', 'tbl_vendor.id_vendor = tbl_vendor_siup.id_vendor', 'left');
-        $id_vendor_terundang = [];
-        foreach ($data_vendor_terundang_by_kbli as $row) {
-            $id_vendor_terundang[] = $row['id_vendor'];
+        $this->db->where('tbl_vendor.sts_terundang', 1);
+        $this->db->where('tbl_vendor.sts_daftar_hitam', NULL);
+        // cek_kualifikasi
+        if ($rup['syarat_tender_kualifikasi'] == 'Minimal Menengah') {
+            $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Besar', 'Menengah']);
+        } else if ($rup['syarat_tender_kualifikasi'] == 'Maksimal Menengah') {
+            $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Kecil', 'Menengah']);
+        } else if ($rup['syarat_tender_kualifikasi'] == 'Kecil') {
+            $this->db->where('tbl_vendor.kualifikasi_usaha', 'Kecil');
+        } else if ($rup['syarat_tender_kualifikasi'] == 'Besar') {
+            $this->db->where('tbl_vendor.kualifikasi_usaha', 'Besar');
+        } else {
+            $this->db->where('tbl_vendor.id_vendor', null);
         }
-        $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang);
-        // cek siup
-        // if ($syarat_izin_usaha['sts_checked_siup'] == 1) {
-        //     if ($syarat_izin_usaha['sts_masa_berlaku_siup'] == 1) {
-        //         $this->db->where('tbl_vendor_siup.tgl_berlaku <=', $syarat_izin_usaha['tgl_berlaku_siup']);
-        //     } else {
-        //         $this->db->where('tbl_vendor_siup.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_siup']);
-        //     }
-        // }
+
+        // cek siup syart izin
+        if ($syarat_izin_usaha['sts_checked_siup'] == 1) {
+            if ($syarat_izin_usaha['sts_masa_berlaku_siup'] == 2) {
+                $this->db->where('tbl_vendor_siup.tgl_berlaku >=', $syarat_izin_usaha['tgl_berlaku_siup']);
+                $this->db->where_in('tbl_vendor_siup.sts_seumur_hidup', [1, 2]);
+            } else {
+                $this->db->where('tbl_vendor_siup.tgl_berlaku >=', $syarat_izin_usaha['tgl_berlaku_siup']);
+                $this->db->where('tbl_vendor_siup.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_siup']);
+            }
+        } else {
+            $this->db->where('tbl_vendor.id_vendor', null);
+        }
+        // cek_vendor terundang by_kbli
+        if ($data_vendor_terundang_by_kbli) {
+            $id_vendor_terundang = [];
+            foreach ($data_vendor_terundang_by_kbli as $row) {
+                $id_vendor_terundang[] = $row['id_vendor'];
+            }
+            $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang);
+        } else {
+            $this->db->where('tbl_vendor.id_vendor', null);
+        }
+
         $query = $this->db->get();
         return $query->result_array();
     }
