@@ -64,6 +64,10 @@
                     $('[name="nama_usaha"]').val(response['row_vendor'].nama_usaha)
                 } else if (type == 'terima') {
                     Question_terima(id_vendor, response['row_vendor'].nama_usaha)
+                } else if (type == 'tolak') {
+                    $('#nama_usaha_tolak').text(response['row_vendor'].nama_usaha)
+                    $('[name="id_vendor"]').val(response['row_vendor'].id_url_vendor)
+                    $('#modal_tolak').modal('show')
                 } else {
 
                 }
@@ -111,6 +115,15 @@
         })
     }
 
+    function Question_tolak_modal() {
+        var id_vendor = $('[name="id_vendor"]').val()
+        var url_terima_rekanan_baru = $('[name="url_terima_rekanan_baru"]').val()
+        var nama_usaha = $('[name="nama_usaha"]').val()
+        $('#modal_tolak').modal('show')
+        $('#nama_usaha_tolak').text(nama_usaha)
+        $('[name="id_vendor"]').val(id_vendor)
+    }
+
     function Question_terima(id_vendor, nm_vendor) {
         var url_terima_rekanan_baru = $('[name="url_terima_rekanan_baru"]').val()
         Swal.fire({
@@ -146,4 +159,82 @@
             }
         })
     }
+
+    function Question_tolak(id_vendor, nm_vendor) {
+        var url_tolak_rekanan_baru = $('[name="url_tolak_rekanan_baru"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Tolak Penyedia? ' + nm_vendor,
+            text: "Penyedia Yang Sudah Di Tolak Tidak Bisa Daftar Ulang Menggunakan Email Yang Sama!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Tolak!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_terima_rekanan_baru,
+                    data: {
+                        id_vendor: id_vendor,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response['message'] == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Penyedia ' + nm_vendor + ' Berhasil Di Tolak!',
+                                'success'
+                            )
+                            Reload_table_rekanan_baru();
+                        }
+                    }
+                })
+
+            }
+        })
+    }
+
+    var form_tolak = $('#form_tolak')
+    form_tolak.on('submit', function(e) {
+        e.preventDefault();
+        var url_tolak_rekanan_baru = $('[name="url_tolak_rekanan_baru"]').val()
+        $.ajax({
+            url: url_tolak_rekanan_baru,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Mengirim Pesan!',
+                    html: 'Harap Tunggu <b></b>',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        $('#modal_tolak').modal('hide')
+                        Swal.fire('Pesan Berhasil Terkirim!', '', 'success')
+                        Reload_table_rekanan_baru()
+                        url_tolak_rekanan_baru[0].reset();
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
+            }
+        })
+    })
 </script>
