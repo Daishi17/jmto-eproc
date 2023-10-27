@@ -1006,7 +1006,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $rs->kode_sbu;
-			$row[] = $rs->ket_kbli_sbu;
+			$row[] = $rs->nama_sbu;
 			$row[] = $rs->nama_kualifikasi;
 			// nanti main kondisi hitung dokumen dimari
 			if ($rs->sts_kbli_sbu == 0 || $rs->sts_kbli_sbu == null) {
@@ -2324,7 +2324,7 @@ class Rekanan_tervalidasi extends CI_Controller
 			$row[] = $rs->jabatan_selesai;
 
 
-			if ($rs->file_ktp_pengurus || $rs->file_npwp_pengurus == '') {
+			if ($rs->file_ktp_pengurus == '' || $rs->file_npwp_pengurus == '') {
 				$row[] = '<small><span class="badge bg-secondary text-white">Belum Upload Dokumen</span></small>';
 			} else {
 				if ($rs->sts_validasi == 0 || $rs->sts_validasi == null) {
