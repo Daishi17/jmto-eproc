@@ -420,7 +420,6 @@ class M_panitia extends CI_Model
         $this->db->join('tbl_vendor_siup', 'tbl_vendor.id_vendor = tbl_vendor_siup.id_vendor', 'left');
         $this->db->where('tbl_vendor.sts_terundang', 1);
         $this->db->where('tbl_vendor.sts_daftar_hitam', NULL);
-
         // cek_kualifikasi
         if ($rup['syarat_tender_kualifikasi'] == 'Minimal Menengah') {
             $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Besar', 'Menengah']);

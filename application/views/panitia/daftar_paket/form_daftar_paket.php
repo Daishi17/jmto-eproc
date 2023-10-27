@@ -1357,10 +1357,10 @@
                     </div>
                     <div class="modal-footer justify-content-start">
                         <div class="container">
-                            <button type="submit" class="btn btn-success">
+                            <!-- <button type="submit" class="btn btn-success">
                                 <i class="fa-solid fa-hard-drive"></i>
                                 Simpan Data
-                            </button>
+                            </button> -->
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <i class="fa-solid fa-angles-left"></i>
                                 Kembali

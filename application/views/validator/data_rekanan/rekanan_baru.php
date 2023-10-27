@@ -57,6 +57,7 @@
                     <input type="hidden" name="url_get_rekanan_baru" value="<?= base_url('validator/rekanan_baru/get_rekanan_baru') ?>">
                     <input type="hidden" name="url_get_rekanan_baru_by_id" value="<?= base_url('validator/rekanan_baru/get_id_rekanan_baru/') ?>">
                     <input type="hidden" name="url_terima_rekanan_baru" value="<?= base_url('validator/rekanan_baru/terima') ?>">
+                    <input type="hidden" name="url_tolak_rekanan_baru" value="<?= base_url('validator/rekanan_baru/tolak') ?>">
                     <table id="tbl_rekanan_baru" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary">
                             <tr>
@@ -66,12 +67,14 @@
                                 <th style="width:20%;"><small class="text-white">Bentuk Usaha</small></th>
                                 <th style="width:10%;"><small class="text-white">Kualifikasi</small></th>
                                 <th style="width:10%;"><small class="text-white">Tgl. Daftar</small></th>
+                                <th style="width:10%;"><small class="text-white">Status</th>
                                 <th style="width:20%;"><small class="text-white">
                                         <div class="text-center">Aksi</div>
                                     </small>
                                 </th>
                             </tr>
                         </thead>
+
                         <tbody>
                             <!-- <tr>
                                 <td><small>1</small></td>
@@ -210,7 +213,7 @@
                                                             <i class="fa-solid fa-square-check px-1"></i>
                                                             <small>Terima</small>
                                                         </button>
-                                                        <button type="button" class="btn btn-danger btn-sm shadow-lg">
+                                                        <button type="button" onclick="Question_tolak_modal()" class="btn btn-danger btn-sm shadow-lg">
                                                             <i class="fa-solid fa-trash-can px-1"></i>
                                                             <small>Tolak</small>
                                                         </button>
@@ -234,3 +237,27 @@
         </div>
     </div>
 </main>
+
+<!-- Modal -->
+<div class="modal fade" id="modal_tolak" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Alasan Tolak Rekanan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="javascript:;" id="form_tolak">
+                <input type="hidden" name="id_vendor">
+                <div class="modal-body">
+                    <h5 for="">Isi Alasan Mengapa Anda Tolak Rekanan <label id="nama_usaha_tolak"></label></h5>
+                    <br>
+                    <textarea name="alasan_tolak" id="" cols="60" rows="6"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
