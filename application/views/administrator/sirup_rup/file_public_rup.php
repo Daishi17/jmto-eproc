@@ -70,9 +70,9 @@
         var persen_pencatatan = $('[name="persen_pencatatan"]').val()
         var nilai_pencatatan = (harga * persen_pencatatan) / 100;
         $('[name="nilai_pencatatan"]').val(nilai_pencatatan);
-         $.ajax({
+        $.ajax({
             type: "GET",
-            url: '<?= base_url('get_rupiah/ambil_rupiah/')?>' + nilai_pencatatan,
+            url: '<?= base_url('get_rupiah/ambil_rupiah/') ?>' + nilai_pencatatan,
             dataType: "JSON",
             success: function(response) {
                 $('#nilai_pencatatan2').val(response['rupiah_nilai_pencatatan'])
@@ -101,9 +101,9 @@
         var persen_pencatatan = $('[name="persen_pencatatan"]').val()
         var nilai_pencatatan = (harga * persen_pencatatan) / 100;
         $('[name="nilai_pencatatan"]').val(nilai_pencatatan);
-         $.ajax({
+        $.ajax({
             type: "GET",
-            url: '<?= base_url('get_rupiah/ambil_rupiah/')?>' + nilai_pencatatan,
+            url: '<?= base_url('get_rupiah/ambil_rupiah/') ?>' + nilai_pencatatan,
             dataType: "JSON",
             success: function(response) {
                 $('#nilai_pencatatan2').val(response['rupiah_nilai_pencatatan'])
@@ -297,7 +297,7 @@
                             Swal.fire('Rup Berhasil Di Buat!', '', 'success')
                             form_rup[0].reset();
                             setTimeout(() => {
-                                location.replace('<?= base_url('administrator/Sirup_rup')?>');
+                                location.replace('<?= base_url('administrator/Sirup_rup') ?>');
                             }, 3000);
                             Get_kode_rup();
                         }
@@ -380,8 +380,11 @@
                 $('#nama_jenis_anggaran').text(response['row_rup']['nama_jenis_anggaran']);
                 $('#total_pagu_rup').text(formatRupiah(response['row_rup']['total_pagu_rup'], 'Rp.'));
                 $('#waktu_pelakasanaan').text(response['row_rup']['jangka_waktu_mulai_pelaksanaan'] +
-                    ' s/d ' + response['row_rup']['jangka_waktu_mulai_pelaksanaan']);
+                    ' s/d ' + response['row_rup']['jangka_waktu_selesai_pelaksanaan']);
                 $('#hari_pelaksanaan').text(response['row_rup']['jangka_waktu_hari_pelaksanaan']);
+                $('#status_pencatatan').text(response['row_rup']['status_pencatatan']);
+                $('#persen_pencatatan').text(response['row_rup']['persen_pencatatan'] + '%');
+                $('#nilai_pencatatan').text(formatRupiah(response['row_rup']['nilai_pencatatan'], 'Rp.'));
                 if (response['row_rup']['sts_rup'] == 1) {
                     $('.btn-finalisasi').hide()
                     $('.btn-rup').hide()
@@ -525,4 +528,34 @@
             }
         });
     })
+</script>
+
+<script>
+    var form_import_rup = $('#form_import_rup');
+    form_import_rup.on('submit', function(e) {
+        console.log('berhasil');
+        e.preventDefault();
+        $.ajax({
+            url: "<?php echo base_url(); ?>administrator/Sirup_rup/import_rup",
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $('.btn_simpan').attr('disabled', 'disabled');
+            },
+            success: function(response) {
+                $('.btn_simpan').attr('disabled', false);
+                if (response['success']) {
+                    Swal.fire('Good job!', 'Berhasil Import Excel', 'success');
+                    Reload_table_rup()
+                    form_import_rup[0].reset();
+                } else {
+                    Swal.fire('Maaf!', 'Kesalahan', 'warning');
+                    form_import_rup[0].reset();
+                }
+            }
+        });
+    });
 </script>

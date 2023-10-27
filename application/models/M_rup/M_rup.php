@@ -501,4 +501,11 @@ class M_rup extends CI_Model
         return $this->db->affected_rows();
     }
 
+    function insert_rup_excel($data)
+    {
+        $jumlah = count($data);
+        if ($jumlah > 0) {
+            $this->db->replace('tbl_rup', $data);
+        }
+    }
 }

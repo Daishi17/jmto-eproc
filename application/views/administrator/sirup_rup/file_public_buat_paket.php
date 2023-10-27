@@ -294,6 +294,7 @@
                 } else {
                     Swal.fire('Panitia Berhasil Di Tambah!', '', 'success')
                     by_id_rup(random_kode)
+                    var nama_panitia = $('[name="nama_panitia"]').val('');
                 }
             }
         })

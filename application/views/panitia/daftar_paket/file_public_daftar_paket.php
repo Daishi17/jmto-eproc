@@ -102,7 +102,7 @@
                 },
                 dataType: "JSON",
                 success: function(response) {
-
+                    load_dok_hps()
                 }
             })
         }
@@ -175,10 +175,15 @@
             url: url_by_id_rup + id_url_rup,
             dataType: "JSON",
             success: function(response) {
-                console.log(response);
+                $('.total_hps').val("Rp " + response['row_rup'].total_hps_rup.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ',00');
                 var html = ''
-                html += '<a target="_blank" href="' + url_cek_dokumen_hps + nama_rup + '/HPS' + '/' + response['row_rup'].file_hps + '" class="btn btn-default btn-info">' + '<i class="fa-solid fa-file px-1"></i>' + 'Dokumen HPS' + '</a>';
-                $('.load_dok_Hps').html(html);
+                if (response['row_rup'].file_hps) {
+                    html += '<a target="_blank" href="' + url_cek_dokumen_hps + nama_rup + '/HPS' + '/' + response['row_rup'].file_hps + '" class="btn btn-default btn-info">' + '<i class="fa-solid fa-file px-1"></i>' + response['row_rup'].file_hps + '</a>';
+                    $('.load_dok_Hps').html(html);
+                } else {
+                    html += '<a class="btn btn-danger btn-sm">' + '<i class="fa-solid fa-file px-1"></i>' + 'Belum Upload' + '</a>';
+                    $('.load_dok_Hps').html(html);
+                }
             }
         })
     }

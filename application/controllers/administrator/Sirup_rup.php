@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require_once APPPATH . 'third_party/Spout/Autoloader/autoload.php';
+
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
 class Sirup_rup extends CI_Controller
 {
@@ -44,7 +47,10 @@ class Sirup_rup extends CI_Controller
 			$row[] = $rs->tahun_rup;
 			$row[] = $rs->nama_rup;
 			$row[] = $rs->nama_departemen;
+			$row[] = $rs->jangka_waktu_mulai_pelaksanaan;
+			$row[] = $rs->persen_pencatatan . '%';
 			$row[] = "Rp " . number_format($rs->total_pagu_rup, 2, ',', '.');
+
 			if ($rs->sts_rup == 0) {
 				$row[] = '<small><span class="badge bg-danger text-white">Draft RUP</span></small>';
 			} else {
@@ -85,6 +91,249 @@ class Sirup_rup extends CI_Controller
 			'row_rup' => $this->M_rup->get_row_rup($id_url_rup),
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
+
+	function import_rup()
+	{
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'xlsx|xls';
+		$config['file_name'] = 'doc' . time();
+		$this->load->library('upload', $config);
+		if ($this->upload->do_upload('importexcel')) {
+			$file = $this->upload->data();
+			$reader = ReaderEntityFactory::createXLSXReader();
+			$reader->open('uploads/' . $file['file_name']);
+			foreach ($reader->getSheetIterator() as $sheet) {
+				$numRow = 1;
+				foreach ($sheet->getRowIterator() as $row) {
+					if ($numRow > 2) {
+						$table = "tbl_rup";
+						$field = "kode_urut_rup";
+						$text = date('Y') . '.';
+						$get_all_rup = $this->M_rup->get_all_rup();
+						if (!$get_all_rup) {
+							$kode_terakhirnya = $this->M_rup->get_kode_rup($text, $table, $field);
+							$no_urut = (int) substr($kode_terakhirnya, -4, 4);
+							$no_urut++;
+							$hasilnya = $text . sprintf('%04s', $no_urut);
+						} else {
+							$kode_terakhirnya = $this->M_rup->get_kode_rup($text, $table, $field);
+							$no_urut = (int) substr($kode_terakhirnya, -4, 4);
+							$no_urut++;
+							$hasilnya = $text . sprintf('%04s', $no_urut);
+						}
+						$id = $this->uuid->v4();
+						$id = str_replace('-', '', $id);
+						// data post
+						$nama_rup = $row->getCellAtIndex(1);
+						$data_detaprtemen = $row->getCellAtIndex(2);
+						$data_section = $row->getCellAtIndex(3);
+						$data_jenis_pengadaan = $row->getCellAtIndex(4);
+						$data_metode_pengadaan = $row->getCellAtIndex(5);
+						$total_pagu_rup = $row->getCellAtIndex(6)->getValue();
+						$jangka_waktu_mulai_pelaksanaan = $row->getCellAtIndex(7);
+						$jangka_waktu_selesai_pelaksanaan = $row->getCellAtIndex(8);
+
+						$start = new DateTime($jangka_waktu_mulai_pelaksanaan);
+						$end = new DateTime($jangka_waktu_selesai_pelaksanaan);
+						$perbedaan = $start->diff($end);
+						$jangka_waktu_hari_pelaksanaan = $perbedaan->days;
+						$data_jenis_anggaran = $row->getCellAtIndex(9);
+						$tahun_rup = $row->getCellAtIndex(10)->getValue();
+						$kualifikasi_usaha = $row->getCellAtIndex(11);
+						$jenis_produk = $row->getCellAtIndex(12);
+						$status_pencatatan = $row->getCellAtIndex(13);
+						$persen_pencatatan = $row->getCellAtIndex(14)->getValue();
+						$nilai_pencatatan = ((int)$total_pagu_rup * (int)$persen_pencatatan) / 100;
+						$deskripsi_rup = $row->getCellAtIndex(15);
+
+
+
+
+						// data_jenis_anggaran
+						if ($data_jenis_anggaran == 'Capex') {
+							$id_jenis_anggaran = 1;
+							$row_jenis_anggaran = 'CP';
+						} else if ($data_jenis_anggaran == 'Opex') {
+							$id_jenis_anggaran = 2;
+							$row_jenis_anggaran = 'OP';
+						} else {
+							$id_jenis_anggaran = 3;
+							$row_jenis_anggaran = 'CP.OP';
+						}
+
+						// data_jenis_pengadaan
+						if ($data_jenis_pengadaan == 'Jasa Lain') {
+							$id_jenis_pengadaan = 1;
+						} else if ($data_jenis_pengadaan == 'Jasa Konsultasi') {
+							$id_jenis_pengadaan = 2;
+						} else if ($data_jenis_pengadaan == 'Jasa Pemborongan / Konstruksi') {
+							$id_jenis_pengadaan = 3;
+						} else if ($data_jenis_pengadaan == 'Pengadaan Barang') {
+							$id_jenis_pengadaan = 4;
+						} else {
+						}
+
+
+						// data_metode_pengadaan
+						if ($data_metode_pengadaan == 'Tender Umum') {
+							$id_metode_pengadaan = 1;
+						} else if ($data_metode_pengadaan == 'Seleksi Umum') {
+							$id_metode_pengadaan = 2;
+						} else if ($data_metode_pengadaan == 'Penunjukan Langsung') {
+							$id_metode_pengadaan = 3;
+						} else if ($data_metode_pengadaan == 'Tender Terbatas') {
+							$id_metode_pengadaan = 4;
+						} else if ($data_metode_pengadaan == 'Seleksi Terbatas') {
+							$id_metode_pengadaan = 5;
+						} else if ($data_metode_pengadaan == 'Pengadaan Langsung') {
+							$id_metode_pengadaan = 6;
+						} else {
+						}
+
+
+						// data section
+						if ($data_section == 'Traffic Services & Security') {
+							$id_section = 2;
+						} else if ($data_section == '-') {
+							$id_section = 5;
+						} else if ($data_section == 'Transaction Environtment Services') {
+							$id_section = 9;
+						} else if ($data_section == 'Traffic Information Area') {
+							$id_section = 10;
+						} else if ($data_section == 'Traffic Information Center') {
+							$id_section = 11;
+						} else if ($data_section == 'Settlement & Reconciliation Area') {
+							$id_section = 12;
+						} else if ($data_section ==  'Transaction System Planning') {
+							$id_section = 13;
+						} else if ($data_section ==  'IT Strategy & Planning') {
+							$id_section = 14;
+						} else if ($data_section ==  'Technology Innovation') {
+							$id_section = 15;
+						} else if ($data_section ==  'IT Application & Development') {
+							$id_section = 16;
+						} else if ($data_section == 'IT Network & Infrastructure') {
+							$id_section = 17;
+						} else if ($data_section ==  'IT Services & Operation') {
+							$id_section = 18;
+						} else if ($data_section ==  'Human Capital Planning') {
+							$id_section = 19;
+						} else if ($data_section ==  'Human Capital Development') {
+							$id_section = 20;
+						} else if ($data_section ==  'Human Capital Administration') {
+							$id_section = 21;
+						} else if ($data_section ==  'Human Capital Industrial Relation') {
+							$id_section = 22;
+						} else if ($data_section ==  'Office Administration') {
+							$id_section = 23;
+						} else if ($data_section ==  'Procurement & Asset') {
+							$id_section = 24;
+						} else if ($data_section ==  'Accounting & Tax') {
+							$id_section = 25;
+						} else if ($data_section ==  'Finance') {
+							$id_section = 26;
+						} else if ($data_section ==  'Strategic Planning Risk & Quality') {
+							$id_section = 27;
+						} else if ($data_section ==  'Legal & Compliance') {
+							$id_section = 28;
+						} else if ($data_section ==  'Business Planning & Market Research') {
+							$id_section = 29;
+						} else if ($data_section ==  'Marketing & Customer Relation') {
+							$id_section = 30;
+						} else if ($data_section ==  '-') {
+							$id_section = 31;
+						} else {
+						}
+
+						// data departemen
+						if ($data_detaprtemen == 'Customer Service') {
+							$id_departemen = 1;
+							$row_departemen = '001';
+						} else if ($data_detaprtemen == 'Operation Management') {
+							$row_departemen = '002';
+							$id_departemen = 2;
+						} else if ($data_detaprtemen == 'Command Center') {
+							$row_departemen = '003';
+							$id_departemen = 3;
+						} else if ($data_detaprtemen == 'Payment Management') {
+							$row_departemen = '004';
+							$id_departemen = 20;
+						} else if ($data_detaprtemen == 'IT Planning & Development') {
+							$row_departemen = '005';
+							$id_departemen = 21;
+						} else if ($data_detaprtemen == 'IT Infrastructure & Services') {
+							$row_departemen = '006';
+							$id_departemen = 22;
+						} else if ($data_detaprtemen == 'Human Capital Planing & Evaluation') {
+							$row_departemen = '007';
+							$id_departemen = 23;
+						} else if ($data_detaprtemen == 'Human Capital Support') {
+							$row_departemen = '008';
+							$id_departemen = 24;
+						} else if ($data_detaprtemen == 'General Affair') {
+							$row_departemen = '009';
+							$id_departemen = 25;
+						} else if ($data_detaprtemen == 'Finance & Accounting') {
+							$row_departemen = '010';
+							$id_departemen = 26;
+						} else if ($data_detaprtemen == 'Strategic Planning Governance, Risk & Compliance') {
+							$row_departemen = '011';
+							$id_departemen = 27;
+						} else if ($data_detaprtemen == 'Businness Planning & Development') {
+							$row_departemen = '012';
+							$id_departemen = 28;
+						} else if ($data_detaprtemen == 'Project Management Office') {
+							$row_departemen = '013';
+							$id_departemen = 29;
+						} else {
+						}
+						$data = array(
+							'id_url_rup' => $id,
+							'kode_rup' => $row_jenis_anggaran . '.' . $row_departemen . '.' . $hasilnya,
+							'id_jenis_pengadaan' => $id_jenis_pengadaan,
+							'id_metode_pengadaan' => $id_metode_pengadaan,
+							'id_jenis_anggaran' => $id_jenis_anggaran,
+							'id_departemen' => $id_departemen,
+							'id_section' => $id_section,
+							'kode_urut_rup' => $hasilnya,
+							'tahun_rup' => $tahun_rup,
+							'nama_rup' => $nama_rup,
+							'deskripsi_rup' => $deskripsi_rup,
+							'kualifikasi_usaha' => $kualifikasi_usaha,
+							'jenis_produk' => $jenis_produk,
+							'status_pencatatan' => $status_pencatatan,
+							'persen_pencatatan' => $persen_pencatatan,
+							'nilai_pencatatan' => $nilai_pencatatan,
+							'jangka_waktu_mulai_pelaksanaan' => $jangka_waktu_mulai_pelaksanaan,
+							'jangka_waktu_selesai_pelaksanaan' => $jangka_waktu_selesai_pelaksanaan,
+							'jangka_waktu_hari_pelaksanaan' => $jangka_waktu_hari_pelaksanaan,
+							'total_pagu_rup' => $total_pagu_rup,
+							'user_created' => $this->session->userdata('nama_pegawai'),
+						);
+
+						if ($nama_rup == '') {
+						} else {
+							$this->M_rup->insert_rup_excel($data);
+						}
+					}
+					$numRow++;
+				}
+				$reader->close();
+				unlink('uploads/' . $file['file_name']);
+				$response = [
+					'success' => 'Data Berhasil Di Upload',
+				];
+				$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			}
+		} else {
+			$response = [
+				'error' => 'error',
+			];
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		}
 	}
 
 	function finalisasi_rup()

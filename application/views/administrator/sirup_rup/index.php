@@ -21,6 +21,10 @@
                         </span>
                     </div>
                     <div class="bd-highlight">
+                        <button type="button" class="btn btn-success btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-rup">
+                            <i class="fa-solid fa-file px-1"></i>
+                            Import Excel RUP
+                        </button>
                         <button type="button" class="btn btn-primary btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-tambah">
                             <i class="fa-solid fa-circle-plus px-1"></i>
                             Tambah Data RUP
@@ -34,7 +38,9 @@
                                 <th style="width:5%;"><small class="text-white">Kode</small></th>
                                 <th style="width:10%;"><small class="text-white">Tahun</small></th>
                                 <th style="width:20%;"><small class="text-white">Nama Paket RUP</small></th>
-                                <th style="width:20%;"><small class="text-white">Departemen</small></th>
+                                <th style="width:20%;"><small class="text-white">Department</small></th>
+                                <th style="width:20%;"><small class="text-white">Waktu Pelaksanaan</small></th>
+                                <th style="width:20%;"><small class="text-white">Persentase TKDN</small></th>
                                 <th style="width:10%;"><small class="text-white">Total Pagu (Rp)</small></th>
                                 <th style="width:10%;"><small class="text-white">Status</small></th>
                                 <th style="width:15%;"><small class="text-white">
@@ -276,6 +282,34 @@
                                         </tr>
                                         <tr>
                                             <th class="bg-light">
+                                                <small>Status Pencatatan (TKDN/PDN/Import)</small>
+                                            </th>
+                                            <td>
+                                                <i class="fa-solid fa-money-check-dollar px-2"></i>
+                                                <small id="status_pencatatan"></small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">
+                                                <small>Persentase TKDN</small>
+                                            </th>
+                                            <td>
+                                                <i class="fa-solid fa-money-check-dollar px-2"></i>
+                                                <small id="persen_pencatatan"></small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">
+                                                <small>Nilai Persentase TKDN</small>
+                                            </th>
+                                            <td>
+                                                <i class="fa-solid fa-money-check-dollar px-2"></i>
+                                                <small id="nilai_pencatatan"></small>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th class="bg-light">
                                                 <small>Total Pagu (Rp.)</small>
                                             </th>
                                             <td>
@@ -323,3 +357,33 @@
         </div>
     </div>
 </main>
+<!-- Modal -->
+<div class="modal fade" id="modal-xl-rup" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Import Data Rup</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <center>
+                        <a href="<?= base_url('format_excel/FORMAT_IMPORT_RUP.xlsx') ?>" class="btn btn-success"> <img src="<?= base_url('assets/excel.png') ?>" style="width: 20px;" alt=""> Download Format Excel</a>
+                    </center>
+                    <br>
+                    <br>
+                    <form action="javascript:;" id="form_import_rup" enctype="multipart/form-data" method="post">
+                        <div class="input-group">
+                            <input type="file" class="form-control form-control-sm" id="importexcel" aria-describedby="inputGroupFileAddon04" accept=".xlsx,.xls" name="importexcel" aria-label="Upload" required>
+                            <button class="btn btn-sm btn-success btn_simpan" type="submit" id="inputGroupFileAddon04"><img src="<?= base_url('assets/excel.png') ?>" style="width: 20px;" alt=""> UPLOAD</button>
+                        </div>
+                    </form>
+                </div>
+                <br><br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

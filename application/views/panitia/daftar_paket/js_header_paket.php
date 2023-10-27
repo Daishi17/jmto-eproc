@@ -22,7 +22,7 @@
 
     <!-- sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link href="<?= base_url('assets/datetimepicekernew/plugins/'); ?>jquery.datetimepicker.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>/assets/css/bs5-style.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>/assets/css/bs4-card.css" rel="stylesheet">
 </head>

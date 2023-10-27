@@ -214,7 +214,6 @@ class Sirup_buat_paket extends CI_Controller
 			mkdir('file_paket/' . $get_nama_rup['nama_rup'], 0777, TRUE);
 		}
 		$this->M_rup->update_rup($data, $where);
-
 		$response = [
 			'success' => 'Rup Paket Berhasil Di Buat'
 		];

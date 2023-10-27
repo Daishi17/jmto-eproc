@@ -89,20 +89,56 @@ class Daftar_paket extends CI_Controller
 		$data['syarat_izin_teknis_tender'] = $this->M_panitia->get_syarat_izin_teknis_tender($data['row_rup']['id_rup']);
 		$data['result_kbli'] = $this->M_panitia->result_kbli();
 		$data['result_sbu'] = $this->M_panitia->result_sbu();
+		// // lolos kualifikasi
 		// cek vendor terundang
+		// lolos izin_usaha paket
 		$syarat_izin_usaha = $this->M_panitia->cek_syarat_izin_usaha($data['row_rup']['id_rup']);
+
 		$cek_syarat_kbli = $this->M_panitia->cek_syarat_kbli($data['row_rup']['id_rup']);
 		$data_vendor_lolos_siup_kbli = $this->M_panitia->data_vendor_lolos_siup_kbli($cek_syarat_kbli);
 		$data_vendor_lolos_nib_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
 		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli);
-		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli);
-		// var_dump($data['result_vendor_terundang']);die;
+		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli, $data['row_rup']);
 		$this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
 		$this->load->view('administrator/template_menu/footer_menu');
 		$this->load->view('panitia/daftar_paket/file_public_daftar_paket');
+	}
+
+	// management jadwal
+	public function buat_jadwal($id_url_rup)
+	{
+		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
+		$data['jadwal'] = $this->M_panitia->get_jadwal($id_url_rup);
+		$data['panitia'] = $this->M_panitia->get_panitia($data['row_rup']['id_rup']);
+
+		$data['syarat_izin_usaha_tender'] = $this->M_panitia->get_syarat_izin_usaha_tender($data['row_rup']['id_rup']);
+		$data['syarat_izin_teknis_tender'] = $this->M_panitia->get_syarat_izin_teknis_tender($data['row_rup']['id_rup']);
+		$data['result_kbli'] = $this->M_panitia->result_kbli();
+		$data['result_sbu'] = $this->M_panitia->result_sbu();
+		// // lolos kualifikasi
+		// cek vendor terundang
+		// lolos izin_usaha paket
+		$syarat_izin_usaha = $this->M_panitia->cek_syarat_izin_usaha($data['row_rup']['id_rup']);
+
+		$cek_syarat_kbli = $this->M_panitia->cek_syarat_kbli($data['row_rup']['id_rup']);
+		$data_vendor_lolos_siup_kbli = $this->M_panitia->data_vendor_lolos_siup_kbli($cek_syarat_kbli);
+		$data_vendor_lolos_nib_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
+		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli);
+		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $data_vendor_terundang_by_kbli, $data['row_rup']);
+		$this->load->view('panitia/template_menu/header_menu');
+		$this->load->view('panitia/daftar_paket/js_header_paket');
+		$this->load->view('panitia/daftar_paket/base_url_panitia');
+		if ($data['row_rup']['id_jadwal_tender'] == 2) {
+			// tender terbatas dengan 18 jadwal
+			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/index', $data);
+			$this->load->view('administrator/template_menu/footer_menu');
+			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/ajax');
+		} else {
+			
+		}
 	}
 
 	public function get_rup_terfinalisasi()
@@ -276,8 +312,6 @@ class Daftar_paket extends CI_Controller
 		$jadwal39 = date('Y-m-d H:i', strtotime($waktu_mulai[20]));
 		$jadwal40 = date('Y-m-d H:i', strtotime($waktu_selesai[20]));
 
-
-
 		if ($jadwal1 > $jadwal2) {
 			$this->output->set_content_type('application/json')->set_output(json_encode('gagal1'));
 		} else {
@@ -292,7 +326,7 @@ class Daftar_paket extends CI_Controller
 				'batas_pendaftaran_tender' => $waktu_selesai[1],
 			];
 
-			$this->M_panitia->update_jadwal($data, $where);
+			$this->M_panitia->update_jadwal_rup_tender_terbatas_18_jadwal($data, $where);
 			$this->M_panitia->update_rup_panitia($id_rup, $data2);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		}
@@ -926,7 +960,8 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
 			];
-		} else { }
+		} else {
+		}
 		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])

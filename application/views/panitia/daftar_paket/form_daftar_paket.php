@@ -201,7 +201,7 @@
                                                                         <div class="input-group">
                                                                             <span class="input-group-text">Rp.</span>
                                                                             <input type="number" name="total_hps_rup" onkeyup="total_hps_validasi('<?= $row_rup['id_url_rup'] ?>')" class="form-control " placeholder="Total HPS" value="<?= $row_rup['total_hps_rup'] ?>">
-                                                                            <input type="text" id="rupiah_total_hps" class="form-control bg-light" readonly value="<?= "Rp " . number_format($row_rup['total_hps_rup'], 2, ',', '.') ?>">
+                                                                            <input type="text" id="rupiah_total_hps" class="form-control total_hps bg-light" readonly value="<?= "Rp " . number_format($row_rup['total_hps_rup'], 2, ',', '.') ?>">
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -221,9 +221,11 @@
                                                                 </td>
 
                                                                 <td>
-                                                                    <div class="text-center load_dok_Hps">
+                                                                    <center>
+                                                                        <div class="text-center load_dok_Hps">
 
-                                                                    </div>
+                                                                        </div>
+                                                                    </center>
                                                                 </td>
 
                                                             </tr>
@@ -238,10 +240,10 @@
                                             <small>Jadwal Pengadaan</small>
                                         </th>
                                         <td class="bg-default" colspan="3">
-                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-xl-jadwal">
+                                            <a href="<?= base_url('panitia/daftar_paket/daftar_paket/buat_jadwal/') . $row_rup['id_url_rup'] ?>" class="btn btn-sm btn-primary">
                                                 <i class="fa-solid fa-calendar-days px-1"></i>
                                                 Buat Jadwal Pengadaan
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -327,7 +329,6 @@
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
                                                 <select class="form-select" aria-label="Default select example" name="bobot_nilai" onchange="penilaian()">
-
                                                     <?php if (!$row_rup['bobot_nilai']) { ?>
                                                         <option value="">Pilih...</option>
                                                         <option value="1">Kombinasi</option>
@@ -770,9 +771,10 @@
                                                             <?php } ?>
 
                                                             <option value="Besar">Besar</option>
-                                                            <option value="Minimal Menengah">Minimal Menengah</option>
-                                                            <option value="Maksimal Menengah">Maksimal Menengah</option>
-                                                            <option value="Kecil/UMKM">Kecil/UMKM</option>
+                                                            <option value="Menengah Besar">Menengah - Besar</option>
+                                                            <option value="Menengah">Menengah</option>
+                                                            <option value="Kecil Menengah">Kecil - Menengah</option>
+                                                            <option value="Kecil">Kecil</option>
                                                         </select>
                                                     </div>
                                                 </td>
@@ -1406,7 +1408,7 @@
                                                     <tr>
                                                         <td>
                                                             <small>
-                                                                <span><?= $value['username'] ?></span>
+                                                                <span><?= $value['nama_usaha'] ?></span>
                                                             </small>
                                                         </td>
                                                         <td>
@@ -1435,13 +1437,9 @@
                     </div>
                     <div class="modal-footer justify-content-start">
                         <div class="container-fluid">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa-solid fa-hard-drive"></i>
-                                Simpan Data
-                            </button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 <i class="fa-solid fa-angles-left"></i>
-                                Kembali
+                                Close
                             </button>
                         </div>
                     </div>
