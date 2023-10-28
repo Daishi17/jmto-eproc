@@ -61,7 +61,7 @@
                                     </table>
                                     <center>
                                         <a href="<?= base_url('panitia/daftar_paket/daftar_paket/form_daftar_paket/') . $row_rup['id_url_rup'] ?>" class="btn btn-danger"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Kembali</a>
-                                        <button type="submit" id="btnSave" class="btn btn-success">Update Jadwal</button>
+                                        <button type="submit" class="btnSave btn btn-success">Update Jadwal</button>
                                     </center>
                                 </form>
                             </div>

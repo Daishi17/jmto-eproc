@@ -411,21 +411,25 @@
                                             </button>
                                             <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modal-xl-rekomendasi">
                                                 <i class="fa-solid fa-building-user px-1"></i>
-                                                Lihat Rekanan Terrekomendasi
+                                                Lihat Rekanan Terekomendasi
                                             </button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th class="bg-light">
-                                            <small>Daftar Rekanan Tervalidasi (DRT)</small>
-                                        </th>
-                                        <td class="bg-default" colspan="3">
-                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
-                                                <i class="fa-solid fa-building-user px-1"></i>
-                                                Pilih Rekanan Tervalidasi
-                                            </button>
-                                            <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
-                                        </td>
+                                        <?php if ($row_rup['id_metode_pengadaan'] == 3 || $row_rup['id_metode_pengadaan'] == 4 || $row_rup['id_metode_pengadaan'] == 5 || $row_rup['id_metode_pengadaan'] == 6) { ?>
+                                            <th class="bg-light">
+                                                <small>Daftar Rekanan Tervalidasi (DRT)</small>
+                                            </th>
+                                            <td class="bg-default" colspan="3">
+                                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
+                                                    <i class="fa-solid fa-building-user px-1"></i>
+                                                    Pilih Rekanan Tervalidasi
+                                                </button>
+                                                <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
+                                            </td>
+                                        <?php  } else { ?>
+
+                                        <?php  }   ?>
                                     </tr>
                                     <tr>
                                         <th colspan="4">
@@ -470,7 +474,6 @@
                                                                         </div>
                                                                         <div class="input-group mb-2">
                                                                             <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dok_pengadaan">
-                                                                            <button class="btn btn-outline-secondary" type="button">Upload</button>
                                                                         </div>
                                                                         <button type="submit" class="btn btn-sm btn-success btn_dok_pengadaan">
                                                                             <i class="fa-solid fa-square-plus"></i>
@@ -489,7 +492,6 @@
                                                                         </div>
                                                                         <div class="input-group mb-2">
                                                                             <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dok_prakualifikasi">
-                                                                            <button class="btn btn-outline-secondary" type="button">Upload</button>
                                                                         </div>
                                                                         <button type="sbumit" class="btn btn-sm btn-success btn_dok_prakualifikasi">
                                                                             <i class="fa-solid fa-square-plus"></i>
@@ -623,15 +625,16 @@
                 <div class="card-footer bg-transparent border-dark">
                     <form action="javascript:;" id="form_simpan_paket">
                         <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+                        <input type="hidden" name="id_url_rup" value="<?= $row_rup['id_url_rup'] ?>">
                         <input type="hidden" name="status_paket_panitia" value="1">
-                        <button type="submit" class="btn btn-default btn-success btn_simpan_paket">
-                            <i class="fa-solid fa-floppy-disk px-1"></i>
-                            Simpan Data Paket
-                        </button>
-                        <button type="button" class="btn btn-default btn-info" disabled>
-                            <i class="fa-solid fa-bullhorn"></i>
-                            Umumkan Paket
-                        </button>
+                        <?php if ($row_rup['status_paket_panitia'] == 1 || $row_rup['status_paket_panitia'] == NULL) { ?>
+                            <button type="submit" class="btn btn-default btn-success btn_simpan_paket">
+                                <i class="fa-solid fa-floppy-disk px-1"></i>
+                                Simpan Data Paket
+                            </button>
+                        <?php } else { ?>
+
+                        <?php  }  ?>
                         <button type="button" class="btn btn-default btn-warning" onclick="history.back()">
                             <i class="fa-solid fa-angles-left px-1"></i>
                             Kembali Kemenu Sebelumnya
@@ -1398,9 +1401,10 @@
                                             <thead class="bg-secondary text-white text-center">
                                                 <tr>
                                                     <th class="col-sm-4"><small>Nama Perusahaan</small></th>
-                                                    <th class="col-sm-3"><small>Jenis Usaha</small></th>
+                                                    <th class="col-sm-2"><small>Email</small></th>
                                                     <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
-                                                    <th class="col-sm-2"><small>NIK Pelaksana</small></th>
+                                                    <th class="col-sm-2"><small>Rating</small></th>
+                                                    <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1413,18 +1417,39 @@
                                                         </td>
                                                         <td>
                                                             <small>
-                                                                <span>Jasa Lain & Jasa Konsultasi & Pengadaan Barang</span>
+                                                                <span><?= $value['email'] ?></span>
                                                             </small>
                                                         </td>
                                                         <td>
                                                             <small>
-                                                                <span>Menengah</span>
+                                                                <span><?= $value['kualifikasi_usaha'] ?></span>
                                                             </small>
                                                         </td>
                                                         <td>
-                                                            <small>
-                                                                <span>36740711223344</span>
-                                                            </small>
+                                                            <center>
+                                                                <small>
+                                                                    <span class="text-warning"><i class="fas fa fa-star"></i></span>
+                                                                </small>
+                                                                <small>
+                                                                    <span class="text-warning"><i class="fas fa fa-star"></i></span>
+                                                                </small>
+                                                                <small>
+                                                                    <span class="text-warning"><i class="fas fa fa-star"></i></span>
+                                                                </small>
+                                                                <small>
+                                                                    <span class="text-warning"><i class="fas fa fa-star"></i></span>
+                                                                </small>
+                                                                <small>
+                                                                    <span class="text-warning"><i class="fas fa fa-star"></i></span>
+                                                                </small>
+                                                            </center>
+                                                        </td>
+                                                        <td>
+                                                            <center>
+                                                                <small>
+                                                                    <span>80</span>
+                                                                </small>
+                                                            </center>
                                                         </td>
                                                     </tr>
                                                 <?php   } ?>

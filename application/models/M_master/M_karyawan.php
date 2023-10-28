@@ -126,4 +126,13 @@ class M_karyawan extends CI_Model
         }
     }
 
+    public function ambil_role_2()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_manajemen_user');
+        $this->db->where('role', 2);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 }

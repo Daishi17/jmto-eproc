@@ -939,6 +939,7 @@
     document.getElementById("mulai18").onchange = function() {
         validasi_mulai18()
     };
+
     // validasi mulai
     function validasi_mulai18() {
         const mulai18 = new Date($('#mulai18').val());
@@ -970,10 +971,174 @@
     }
 </script>
 
+<!-- row ke 19 -->
+<!-- 18 -->
+<!-- mulai19 -->
+<!-- selesai19 -->
+<!-- selesai18 -->
+<script>
+    $('#mulai19').datetimepicker({
+        timepicker: true,
+        datetimepicker: true,
+        format: 'Y-m-d H:i',
+    })
+
+    $('#selesai19').datetimepicker({
+        timepicker: true,
+        datetimepicker: true,
+        format: 'Y-m-d H:i',
+    })
+    document.getElementById("selesai19").onchange = function() {
+        validasi_selesai19()
+    };
+    document.getElementById("mulai19").onchange = function() {
+        validasi_mulai19()
+    };
+    
+    // validasi mulai
+    function validasi_mulai19() {
+        const mulai19 = new Date($('#mulai19').val());
+        const selesai18 = new Date($('#selesai18').val());
+        if (mulai19.getTime() < selesai18.getTime()) {
+            $('#error-jadwal19').show();
+            $("#erorr_jadwal_row19").css("background-color", "red");
+            $("#erorr_jadwal_row19").css("color", "white");
+        } else {
+            $('#error-jadwal19').hide();
+            $("#erorr_jadwal_row19").css("background-color", "transparent");
+            $("#erorr_jadwal_row19").css("color", "black");
+        }
+    }
+
+    // validasi selesai
+    function validasi_selesai19() {
+        const mulai19 = new Date($('#mulai19').val());
+        const selesai19 = new Date($('#selesai19').val());
+        if (mulai19.getTime() > selesai19.getTime()) {
+            $('#error-jadwal19').show();
+            $("#erorr_jadwal_row19").css("background-color", "red");
+            $("#erorr_jadwal_row19").css("color", "white");
+        } else {
+            $('#error-jadwal19').hide();
+            $("#erorr_jadwal_row19").css("background-color", "transparent");
+            $("#erorr_jadwal_row19").css("color", "black");
+        }
+    }
+</script>
+
+<!-- row ke 20 -->
+<!-- 19 -->
+<!-- mulai20 -->
+<!-- selesai20 -->
+<!-- selesai19 -->
+<script>
+    $('#mulai20').datetimepicker({
+        timepicker: true,
+        datetimepicker: true,
+        format: 'Y-m-d H:i',
+    })
+
+    $('#selesai20').datetimepicker({
+        timepicker: true,
+        datetimepicker: true,
+        format: 'Y-m-d H:i',
+    })
+    document.getElementById("selesai20").onchange = function() {
+        validasi_selesai20()
+    };
+    document.getElementById("mulai20").onchange = function() {
+        validasi_mulai20()
+    };
+    
+    // validasi mulai
+    function validasi_mulai20() {
+        const mulai20 = new Date($('#mulai20').val());
+        const selesai19 = new Date($('#selesai19').val());
+        if (mulai20.getTime() < selesai19.getTime()) {
+            $('#error-jadwal20').show();
+            $("#erorr_jadwal_row20").css("background-color", "red");
+            $("#erorr_jadwal_row20").css("color", "white");
+        } else {
+            $('#error-jadwal20').hide();
+            $("#erorr_jadwal_row20").css("background-color", "transparent");
+            $("#erorr_jadwal_row20").css("color", "black");
+        }
+    }
+
+    // validasi selesai
+    function validasi_selesai20() {
+        const mulai20 = new Date($('#mulai20').val());
+        const selesai20 = new Date($('#selesai20').val());
+        if (mulai20.getTime() > selesai20.getTime()) {
+            $('#error-jadwal20').show();
+            $("#erorr_jadwal_row20").css("background-color", "red");
+            $("#erorr_jadwal_row20").css("color", "white");
+        } else {
+            $('#error-jadwal20').hide();
+            $("#erorr_jadwal_row20").css("background-color", "transparent");
+            $("#erorr_jadwal_row20").css("color", "black");
+        }
+    }
+</script>
+
+<!-- row ke 21 -->
+<!-- 20 -->
+<!-- mulai21 -->
+<!-- selesai21 -->
+<!-- selesai20 -->
+<script>
+    $('#mulai21').datetimepicker({
+        timepicker: true,
+        datetimepicker: true,
+        format: 'Y-m-d H:i',
+    })
+
+    $('#selesai21').datetimepicker({
+        timepicker: true,
+        datetimepicker: true,
+        format: 'Y-m-d H:i',
+    })
+    document.getElementById("selesai21").onchange = function() {
+        validasi_selesai21()
+    };
+    document.getElementById("mulai21").onchange = function() {
+        validasi_mulai21()
+    };
+    
+    // validasi mulai
+    function validasi_mulai21() {
+        const mulai21 = new Date($('#mulai21').val());
+        const selesai20 = new Date($('#selesai20').val());
+        if (mulai21.getTime() < selesai20.getTime()) {
+            $('#error-jadwal21').show();
+            $("#erorr_jadwal_row21").css("background-color", "red");
+            $("#erorr_jadwal_row21").css("color", "white");
+        } else {
+            $('#error-jadwal21').hide();
+            $("#erorr_jadwal_row21").css("background-color", "transparent");
+            $("#erorr_jadwal_row21").css("color", "black");
+        }
+    }
+
+    // validasi selesai
+    function validasi_selesai21() {
+        const mulai21 = new Date($('#mulai21').val());
+        const selesai21 = new Date($('#selesai21').val());
+        if (mulai21.getTime() > selesai21.getTime()) {
+            $('#error-jadwal21').show();
+            $("#erorr_jadwal_row21").css("background-color", "red");
+            $("#erorr_jadwal_row21").css("color", "white");
+        } else {
+            $('#error-jadwal21').hide();
+            $("#erorr_jadwal_row21").css("background-color", "transparent");
+            $("#erorr_jadwal_row21").css("color", "black");
+        }
+    }
+</script>
+
 <script>
     // live_jadwal()
     function live_jadwal() {
-        console.log('angga');
         const mulai1 = new Date($('#mulai1').val());
         const selesai1 = new Date($('#selesai1').val());
 
@@ -1030,201 +1195,246 @@
         // 18
         const mulai18 = new Date($('#mulai18').val());
         const selesai18 = new Date($('#selesai18').val());
-
-
-
         if (selesai2.getTime() < mulai2.getTime()) {
             $('#error-jadwal2').show();
             $("#erorr_jadwal_row2").css("background-color", "red");
             $("#erorr_jadwal_row2").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai2.getTime() < selesai1.getTime()) {
             $('#error-jadwal2').show();
             $("#erorr_jadwal_row2").css("background-color", "red");
             $("#erorr_jadwal_row2").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (selesai3.getTime() < mulai3.getTime()) {
             $('#error-jadwal3').show();
             $("#erorr_jadwal_row3").css("background-color", "red");
             $("#erorr_jadwal_row3").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai3.getTime() < selesai2.getTime()) {
             $('#error-jadwal3').show();
             $("#erorr_jadwal_row3").css("background-color", "red");
             $("#erorr_jadwal_row3").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (selesai4.getTime() < mulai4.getTime()) {
             $('#error-jadwal4').show();
             $("#erorr_jadwal_row4").css("background-color", "red");
             $("#erorr_jadwal_row4").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai4.getTime() < selesai3.getTime()) {
             $('#error-jadwal4').show();
             $("#erorr_jadwal_row4").css("background-color", "red");
             $("#erorr_jadwal_row4").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (selesai5.getTime() < mulai5.getTime()) {
             $('#error-jadwal5').show();
             $("#erorr_jadwal_row5").css("background-color", "red");
             $("#erorr_jadwal_row5").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai5.getTime() < selesai4.getTime()) {
             $('#error-jadwal5').show();
             $("#erorr_jadwal_row5").css("background-color", "red");
             $("#erorr_jadwal_row5").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (selesai6.getTime() < mulai6.getTime()) {
             $('#error-jadwal6').show();
             $("#erorr_jadwal_row6").css("background-color", "red");
             $("#erorr_jadwal_row6").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai6.getTime() < selesai5.getTime()) {
             $('#error-jadwal6').show();
             $("#erorr_jadwal_row6").css("background-color", "red");
             $("#erorr_jadwal_row6").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (selesai7.getTime() < mulai7.getTime()) {
             $('#error-jadwal7').show();
             $("#erorr_jadwal_row7").css("background-color", "red");
             $("#erorr_jadwal_row7").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai7.getTime() < selesai6.getTime()) {
             $('#error-jadwal7').show();
             $("#erorr_jadwal_row7").css("background-color", "red");
             $("#erorr_jadwal_row7").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (selesai8.getTime() < mulai8.getTime()) {
             $('#error-jadwal8').show();
             $("#erorr_jadwal_row8").css("background-color", "red");
             $("#erorr_jadwal_row8").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai8.getTime() < selesai7.getTime()) {
             $('#error-jadwal8').show();
             $("#erorr_jadwal_row8").css("background-color", "red");
             $("#erorr_jadwal_row8").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 9
             // 8
         } else if (selesai9.getTime() < mulai9.getTime()) {
             $('#error-jadwal9').show();
             $("#erorr_jadwal_row9").css("background-color", "red");
             $("#erorr_jadwal_row9").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai9.getTime() < selesai8.getTime()) {
             $('#error-jadwal9').show();
             $("#erorr_jadwal_row9").css("background-color", "red");
             $("#erorr_jadwal_row9").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 10
             // 9
         } else if (selesai10.getTime() < mulai10.getTime()) {
             $('#error-jadwal10').show();
             $("#erorr_jadwal_row10").css("background-color", "red");
             $("#erorr_jadwal_row10").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai10.getTime() < selesai9.getTime()) {
             $('#error-jadwal10').show();
             $("#erorr_jadwal_row10").css("background-color", "red");
             $("#erorr_jadwal_row10").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 11
             // 10
         } else if (selesai11.getTime() < mulai11.getTime()) {
             $('#error-jadwal11').show();
             $("#erorr_jadwal_row11").css("background-color", "red");
             $("#erorr_jadwal_row11").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai11.getTime() < selesai10.getTime()) {
             $('#error-jadwal11').show();
             $("#erorr_jadwal_row11").css("background-color", "red");
             $("#erorr_jadwal_row11").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 12
             // 11
         } else if (selesai12.getTime() < mulai12.getTime()) {
             $('#error-jadwal12').show();
             $("#erorr_jadwal_row12").css("background-color", "red");
             $("#erorr_jadwal_row12").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai12.getTime() < selesai11.getTime()) {
             $('#error-jadwal12').show();
             $("#erorr_jadwal_row12").css("background-color", "red");
             $("#erorr_jadwal_row12").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 13
             // 12
         } else if (selesai13.getTime() < mulai13.getTime()) {
             $('#error-jadwal13').show();
             $("#erorr_jadwal_row13").css("background-color", "red");
             $("#erorr_jadwal_row13").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai13.getTime() < selesai12.getTime()) {
             $('#error-jadwal13').show();
             $("#erorr_jadwal_row13").css("background-color", "red");
             $("#erorr_jadwal_row13").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 14
             // 13
         } else if (selesai14.getTime() < mulai14.getTime()) {
             $('#error-jadwal14').show();
             $("#erorr_jadwal_row14").css("background-color", "red");
             $("#erorr_jadwal_row14").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai14.getTime() < selesai13.getTime()) {
             $('#error-jadwal14').show();
             $("#erorr_jadwal_row14").css("background-color", "red");
             $("#erorr_jadwal_row14").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 15
             // 14
         } else if (selesai15.getTime() < mulai15.getTime()) {
             $('#error-jadwal15').show();
             $("#erorr_jadwal_row15").css("background-color", "red");
             $("#erorr_jadwal_row15").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai15.getTime() < selesai14.getTime()) {
             $('#error-jadwal15').show();
             $("#erorr_jadwal_row15").css("background-color", "red");
             $("#erorr_jadwal_row15").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 16
             // 15
         } else if (selesai16.getTime() < mulai16.getTime()) {
             $('#error-jadwal16').show();
             $("#erorr_jadwal_row16").css("background-color", "red");
             $("#erorr_jadwal_row16").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai16.getTime() < selesai15.getTime()) {
             $('#error-jadwal16').show();
             $("#erorr_jadwal_row16").css("background-color", "red");
             $("#erorr_jadwal_row16").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 17
             // 16
         } else if (selesai17.getTime() < mulai17.getTime()) {
             $('#error-jadwal17').show();
             $("#erorr_jadwal_row17").css("background-color", "red");
             $("#erorr_jadwal_row17").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai17.getTime() < selesai16.getTime()) {
             $('#error-jadwal17').show();
             $("#erorr_jadwal_row17").css("background-color", "red");
             $("#erorr_jadwal_row17").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
             // 18
             // 17
         } else if (selesai18.getTime() < mulai18.getTime()) {
             $('#error-jadwal18').show();
             $("#erorr_jadwal_row18").css("background-color", "red");
             $("#erorr_jadwal_row18").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
         } else if (mulai18.getTime() < selesai17.getTime()) {
             $('#error-jadwal18').show();
             $("#erorr_jadwal_row18").css("background-color", "red");
             $("#erorr_jadwal_row18").css("color", "white");
-            $('#btnSave').attr('disabled', 'disabled');
+            $('.btnSave').attr('disabled', 'disabled');
+            // 19
+            // 18
+        } else if (selesai19.getTime() < mulai19.getTime()) {
+            $('#error-jadwal19').show();
+            $("#erorr_jadwal_row19").css("background-color", "red");
+            $("#erorr_jadwal_row19").css("color", "white");
+            $('.btnSave').attr('disabled', 'disabled');
+        } else if (mulai19.getTime() < selesai18.getTime()) {
+            $('#error-jadwal19').show();
+            $("#erorr_jadwal_row19").css("background-color", "red");
+            $("#erorr_jadwal_row19").css("color", "white");
+            $('.btnSave').attr('disabled', 'disabled');
+            // 20
+            // 19
+        } else if (selesai20.getTime() < mulai20.getTime()) {
+            $('#error-jadwal20').show();
+            $("#erorr_jadwal_row20").css("background-color", "red");
+            $("#erorr_jadwal_row20").css("color", "white");
+            $('.btnSave').attr('disabled', 'disabled');
+        } else if (mulai20.getTime() < selesai19.getTime()) {
+            $('#error-jadwal20').show();
+            $("#erorr_jadwal_row20").css("background-color", "red");
+            $("#erorr_jadwal_row20").css("color", "white");
+            $('.btnSave').attr('disabled', 'disabled');
+            // 21
+            // 20
+        } else if (selesai21.getTime() < mulai21.getTime()) {
+            $('#error-jadwal21').show();
+            $("#erorr_jadwal_row21").css("background-color", "red");
+            $("#erorr_jadwal_row21").css("color", "white");
+            $('.btnSave').attr('disabled', 'disabled');
+        } else if (mulai21.getTime() < selesai20.getTime()) {
+            $('#error-jadwal21').show();
+            $("#erorr_jadwal_row21").css("background-color", "red");
+            $("#erorr_jadwal_row21").css("color", "white");
+            $('.btnSave').attr('disabled', 'disabled');
+              // 22
+            // 21
+        } else if (selesai22.getTime() < mulai22.getTime()) {
+            $('#error-jadwal22').show();
+            $("#erorr_jadwal_row22").css("background-color", "red");
+            $("#erorr_jadwal_row22").css("color", "white");
+            $('.btnSave').attr('disabled', 'disabled');
+        } else if (mulai22.getTime() < selesai21.getTime()) {
+            $('#error-jadwal22').show();
+            $("#erorr_jadwal_row22").css("background-color", "red");
+            $("#erorr_jadwal_row22").css("color", "white");
+            $('.btnSave').attr('disabled', 'disabled');
         } else {
-            $('#btnSave').attr('disabled', false);
+            $('.btnSave').attr('disabled', false);
         }
     }
     setInterval(() => {
@@ -1246,13 +1456,13 @@
             cache: false,
             processData: false,
             beforeSend: function() {
-                $('#btnSave').attr('disabled', 'disabled');
+                $('.btnSave').attr('disabled', 'disabled');
             },
             success: function(response) {
                 if (response == 'success') {
                     Swal.fire('Jadwal Berhasil Di Update!', '', 'success')
                     form_jadwal_tender_terbatas[0].reset();
-                    $('#btnSave').attr('disabled', false);
+                    $('.btnSave').attr('disabled', false);
                     location.reload();
                 }
             }

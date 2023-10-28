@@ -203,6 +203,7 @@ class M_rup extends CI_Model
         $this->db->join('tbl_manajemen_user', 'tbl_manajemen_user.id_manajemen_user = tbl_panitia.id_manajemen_user', 'left');
         $this->db->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_manajemen_user.id_pegawai', 'left');
         $this->db->where('tbl_panitia.id_rup', $id_rup);
+        $this->db->where('tbl_manajemen_user.role', 5);
         $i = 0;
         foreach ($this->order_panitia as $item) // looping awal
         {

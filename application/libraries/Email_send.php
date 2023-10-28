@@ -10,6 +10,8 @@ class Email_send
     {
         $this->ci = &get_instance();
         $this->ci->load->model('M_datapenyedia/M_Rekanan_tervalidasi');
+        $this->ci->load->model('M_datapenyedia/M_Rekanan_terundang');
+        $this->ci->load->model('M_rup/M_rup');
     }
 
     public function sen_row_email($type, $data, $message)
@@ -106,6 +108,39 @@ class Email_send
             $this->ci->email->subject("E-PROCUREMENT JMTO : UNDANGAN VERIFIKASI KELENGKAPAN DOKUMEN");
             $this->ci->email->message("$message ");
         }
+        $this->ci->email->send();
+    }
+
+    public function sen_umumkan_paket($id_url_rup)
+    {
+        $row_rup = $this->ci->M_rup->get_row_rup($id_url_rup);
+        $nama_rup = $row_rup['nama_rup'];
+        $data_vendor = $row_rup['data_vendor_terundang'];
+        $result_vendor = $this->ci->M_Rekanan_terundang->get_all_vendor_terundang($data_vendor);
+        $this->ci->load->library('email');
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'mail.jmto.co.id',
+            'smtp_port' => 26,
+            'smtp_user' => 'e-procurement@jmto.co.id',
+            'smtp_pass' => 'jmt02023!#',
+            'mailtype'  => 'html',
+            'smtp_crypto'  => 'tls',
+            'charset'   => 'utf-8'
+        );
+        $this->ci->email->initialize($config);
+        $this->ci->email->set_newline("\r\n");
+        // Email dan nama pengirim
+        $this->ci->email->from('e-procurement@jmto.co.id', 'JMTO');
+
+        // Email penerima
+
+        foreach ($result_vendor as $key => $value) {
+            $this->ci->email->to($value['email']);
+        }
+        // Ganti dengan email tujuan
+        $this->ci->email->subject("E-PROCUREMENT JMTO : PENGUMUMAN PAKET TENDER BARU UNTUK ANDA SEGERA IKUTI !!!");
+        $this->ci->email->message("NAMA PAKET : $nama_rup Silakan Ikuti Tender Sebelum Batas Waktu Pendaftaran Berakhir");
         $this->ci->email->send();
     }
 }

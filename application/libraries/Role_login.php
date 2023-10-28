@@ -40,6 +40,7 @@ class Role_login
                         $userdata = [
                             'id_pegawai' => $cek->id_pegawai,
                             'id_url_pegawai' => $cek->id_url_pegawai,
+                            'id_manajemen_user' => $cek->id_manajemen_user,
                             'nama_pegawai' => $cek->nama_pegawai,
                             'email' => $cek->email,
                             'nip' => $cek->nip,
@@ -64,6 +65,7 @@ class Role_login
                         $userdata = [
                             'id_pegawai' => $cek->id_pegawai,
                             'id_url_pegawai' => $cek->id_url_pegawai,
+                            'id_manajemen_user' => $cek->id_manajemen_user,
                             'nama_pegawai' => $cek->nama_pegawai,
                             'email' => $cek->email,
                             'nip' => $cek->nip,
@@ -88,6 +90,7 @@ class Role_login
                         $userdata = [
                             'id_pegawai' => $cek->id_pegawai,
                             'id_url_pegawai' => $cek->id_url_pegawai,
+                            'id_manajemen_user' => $cek->id_manajemen_user,
                             'nama_pegawai' => $cek->nama_pegawai,
                             'email' => $cek->email,
                             'nip' => $cek->nip,

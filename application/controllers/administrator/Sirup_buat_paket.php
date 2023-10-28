@@ -11,6 +11,7 @@ class Sirup_buat_paket extends CI_Controller
 		$this->load->model('M_rkap/M_rkap');
 		$this->load->model('M_rup/M_rup');
 		$this->load->model('M_departmen/M_departmen');
+		$this->load->model('M_master/M_karyawan');
 		$this->load->model('M_section/M_section');
 		$this->load->model('M_jenis_pengadaan/M_jenis_pengadaan');
 		$this->load->model('M_metode_pengadaan/M_metode_pengadaan');
@@ -198,6 +199,7 @@ class Sirup_buat_paket extends CI_Controller
 		$id_jadwal_tender = $this->input->post('id_jadwal_tender');
 		$metode_kualifikasi = $this->input->post('metode_kualifikasi');
 		$metode_dokumen = $this->input->post('metode_dokumen');
+
 		$where = [
 			'id_url_rup' => $id_url_rup
 		];
@@ -214,6 +216,7 @@ class Sirup_buat_paket extends CI_Controller
 			mkdir('file_paket/' . $get_nama_rup['nama_rup'], 0777, TRUE);
 		}
 		$this->M_rup->update_rup($data, $where);
+
 		$response = [
 			'success' => 'Rup Paket Berhasil Di Buat'
 		];
@@ -245,7 +248,8 @@ class Sirup_buat_paket extends CI_Controller
 				'id_rup' => $row_rup['id_rup'],
 			];
 			$this->M_rup->tambah_izin_teknis($data);
-		} else { }
+		} else {
+		}
 
 		foreach ($result_jadwal as $key => $value) {
 			$id = $this->uuid->v4();
@@ -266,6 +270,21 @@ class Sirup_buat_paket extends CI_Controller
 			'sts_rup_buat_paket' => 2
 		];
 		$this->M_rup->update_rup($data, $where);
+
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$ambil_role_2 = $this->M_karyawan->ambil_role_2();
+		// ini menambah admin sebagai panitia
+		foreach ($ambil_role_2 as $key => $value) {
+			$id = $this->uuid->v4();
+			$id = str_replace('-', '', $id);
+			$data  = array(
+				'id_url_panitia' => $id,
+				'id_manajemen_user' => $value['id_manajemen_user'],
+				'role_panitia' => 1,
+				'id_rup' => $row_rup['id_rup']
+			);
+			$this->db->insert('tbl_panitia', $data);
+		}
 
 		$response = [
 			'success' => 'Rup Paket Berhasil Di Buat'

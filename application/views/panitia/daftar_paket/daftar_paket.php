@@ -1,4 +1,6 @@
 <main class="container-fluid">
+    <input type="hidden" name="id_url_rup">
+    <input type="hidden" name="nama_rup">
     <div class="row">
         <div class="col">
             <div class="card border-dark">
@@ -206,10 +208,10 @@
                                                 <small>Jadwal Pengadaan</small>
                                             </th>
                                             <td class="bg-default" colspan="3">
-                                                <button type="button" class="btn btn-sm btn-primary">
-                                                    <i class="fa-solid fa-calendar-days px-1"></i>
-                                                    Detail Jadwal Pengadaan
-                                                </button>
+                                                <div id="detail_jadwal">
+
+                                                </div>
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -280,10 +282,7 @@
                                                                         <small id="total_hps_rup"></small>
                                                                     </td>
                                                                     <td>
-                                                                        <button type="button" class="btn btn-sm btn-primary">
-                                                                            <i class="fa-solid fa-file px-1"></i>
-                                                                            Dokumen HPS
-                                                                        </button>
+                                                                        <div class="load_dok_Hps"></div>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -323,7 +322,11 @@
                                             <th class="bg-light">
                                                 <small>Status Publikasi Paket</small>
                                             </th>
-                                            <td colspan="3"><small><span class="badge bg-warning text-dark">Draft Paket</span></small></td>
+                                            <td colspan="3">
+                                                <div class="load_status_paket">
+
+                                                </div>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -336,14 +339,14 @@
                                     </div>
                                 <?php  } else { ?>
                                     <div class="card-footer bg-transparent border-dark">
-                                        <button type="button" class="btn btn-default btn-info">
+                                        <button onclick="Umumkan_paket()" class="status_dimumkan btn_umumkan_paket btn btn-default btn-info">
                                             <i class="fa-solid fa-bullhorn"></i>
                                             Umumkan Paket
                                         </button>
-                                        <a type="button" class="btn btn-default btn-warning" href="<?= base_url() ?>panitia/form_daftar_paket">
+                                        <button onclick="Edit_paket()" class="btn btn-default btn-warning">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Edit Paket
-                                        </a>
+                                        </button>
                                         <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
                                             <i class="fa-solid fa-rectangle-xmark"></i>
                                             Keluar
@@ -355,6 +358,58 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="modal_detail_jadwal">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="navbar-brand">
+                        <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                        <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+                    </a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card border-dark shadow-lg">
+                                <div class="card-header border-dark bd-blue-700 d-flex justify-content-between align-items-center">
+                                    <div class="flex-grow-1 bd-highlight">
+                                        <span class="text-white">
+                                            <i class="fa-regular fa-rectangle-list px-1"></i>
+                                            <small><strong>Detail Jadwal</strong></small>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered table-sm shadow-lg">
+                                        <thead class="bg-secondary text-white">
+                                            <tr>
+                                                <th><small>No</small></th>
+                                                <th><small>Nama Jadwal</small></th>
+                                                <th><small>Waktu Mulai</small></th>
+                                                <th><small>Waktu Selesai</small></th>
+                                                <th><small>Status Tahap</small></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="load_jadwal">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-start">
+                    <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-rectangle-xmark"></i>
+                        Keluar
+                    </button>
                 </div>
             </div>
         </div>

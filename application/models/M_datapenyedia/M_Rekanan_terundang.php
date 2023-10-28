@@ -1870,6 +1870,15 @@ class M_Rekanan_terundang extends CI_Model
         return $query->num_rows();
     }
 
+    public function get_all_vendor_terundang($data_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor');
+        $this->db->where_in('tbl_vendor.id_vendor', [$data_vendor]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 
     // END RAJA TERAKHIR
 }
