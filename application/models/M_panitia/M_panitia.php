@@ -212,7 +212,7 @@ class M_panitia extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_syarat_tambahan_rup');
-        $this->db->join('tbl_paket', 'tbl_syarat_tambahan_rup.id_rup = tbl_paket.id_rup', 'left');
+        $this->db->join('tbl_rup', 'tbl_syarat_tambahan_rup.id_rup = tbl_rup.id_rup', 'left');
         $this->db->where('tbl_syarat_tambahan_rup.id_syarat_tambahan', $id_syarat_tambahan);
         $query = $this->db->get();
         return $query->row_array();
@@ -351,8 +351,7 @@ class M_panitia extends CI_Model
             $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Kecil', 'Menengah']);
         } else if ($row_paket['syarat_tender_kualifikasi'] == 'Kecil') {
             $this->db->where('tbl_vendor.kualifikasi_usaha', 'Kecil');
-        } else {
-        }
+        } else { }
         $this->db->group_by('tbl_vendor.id_vendor');
         $query = $this->db->get();
         return $query->result_array();
@@ -822,7 +821,7 @@ class M_panitia extends CI_Model
     // INI UNTUK BERANDA
 
     // TENDER UMUM TABLE
-        // get datatable paket draft
+    // get datatable paket draft
 
     // GET RUP PAKET FINAL
     var $order_paket_tender_umum =  array('id_rup', 'kode_rup', 'tahun_rup', 'nama_program_rup', 'kode_departemen', 'total_pagu_rup', 'id_rup', 'id_rup', 'id_rup');
@@ -906,5 +905,4 @@ class M_panitia extends CI_Model
         $this->db->where('tbl_rup.status_paket_panitia', 1);
         return $this->db->count_all_results();
     }
-
 }

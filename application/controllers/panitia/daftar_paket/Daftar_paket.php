@@ -1068,10 +1068,10 @@ class Daftar_paket extends CI_Controller
 		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$nama_syarat_tambahan = $this->input->post('nama_syarat_tambahan');
 		$date = date('Y');
-		if (!is_dir('file_paket/' . $row_rup['nama_rup'] . '-' . $date . '/SAYARAT_TAMBAHAN-' . $date)) {
-			mkdir('file_paket/' . $row_rup['nama_rup'] . '-' . $date . '/SAYARAT_TAMBAHAN-' . $date, 0777, TRUE);
+		if (!is_dir('file_paket/' . $row_rup['nama_rup'] . '/SYARAT_TAMBAHAN')) {
+			mkdir('file_paket/' . $row_rup['nama_rup'] . '/SYARAT_TAMBAHAN', 0777, TRUE);
 		}
-		$config['upload_path'] = './file_paket/' . $row_rup['nama_rup'] . '-' . $date . '/SAYARAT_TAMBAHAN-' . $date;
+		$config['upload_path'] = './file_paket/' . $row_rup['nama_rup'] . '/SYARAT_TAMBAHAN';
 		$config['allowed_types'] = 'pdf|xlsx|xls';
 		$config['max_size'] = 0;
 		$this->load->library('upload', $config);
@@ -1170,8 +1170,7 @@ class Daftar_paket extends CI_Controller
 	public function url_download_syarat_tambahan($id_syarat_tambahan)
 	{
 		$row_syarat  = $this->M_panitia->row_syarat_tambahan($id_syarat_tambahan);
-		$date = date('Y');
-		$file_url = 'file_paket/'  . $row_syarat['nama_rup'] . '-'  . $date .  '/SYARAT_TAMBAHAN-'  . $date . '/'  . $row_syarat['file_syarat_tambahan'];
+		$file_url = 'file_paket/'  . $row_syarat['nama_rup']  .  '/SYARAT_TAMBAHAN' . '/'  . $row_syarat['file_syarat_tambahan'];
 		$url  = $file_url;
 		redirect($url);
 	}
