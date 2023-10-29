@@ -905,4 +905,17 @@ class M_panitia extends CI_Model
         $this->db->where('tbl_rup.status_paket_panitia', 1);
         return $this->db->count_all_results();
     }
+
+
+    // get vendor mengikuti
+
+    public function get_peserta_tender($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

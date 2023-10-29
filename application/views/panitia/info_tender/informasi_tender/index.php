@@ -4,30 +4,24 @@
             <div class="card border-dark">
                 <div class="card-header border-dark bg-white text-black">
                     <ul class="nav nav-tabs">
-                        <!-- <li class="nav-item">
-                            <a class="nav-link " aria-current="page"><i class="fa fa-list-alt" aria-hidden="true"> </i> Menu Tender</a>
-                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link active" style="margin-left: 5px;" href="#"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Pengadaan</a>
+                            <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/informasi_pengadaan/' . $row_rup['id_url_rup']) ?>"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Pengadaan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/aanwijzing') ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/aanwijzing/' . $row_rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/evaluasi') ?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Evaluasi</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/evaluasi/' . $row_rup['id_url_rup']) ?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Evaluasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/negosiasi') ?>"><i class="fa fa-tags" aria-hidden="true"></i> Negosiasi</a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/negosiasi/' . $row_rup['id_url_rup']) ?>"><i class="fa fa-tags" aria-hidden="true"></i> Negosiasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white " style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_prakualifikasi') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan Prakualifikasi</a>
+                            <a class="nav-link bg-primary text-white " style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_prakualifikasi/' . $row_rup['id_url_rup']) ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan Prakualifikasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_akhir') ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
+                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/sanggahan_akhir/' . $row_rup['id_url_rup']) ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="#"><i class="fa fa-suitcase" aria-hidden="true"></i> Berita Acara</a>
-                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -44,21 +38,23 @@
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th style="width: 300px;">Kode Pengadaan</th>
-                            <th> B.04.003.0001.00001.JMTM.280320220002</th>
+                            <th> <?= $row_rup['kode_rup'] ?></th>
                         </tr>
                         <tr>
                             <th>Nama Paket</th>
-                            <th>PAKET KEMERDEKAAN 78 RI BOGOR</th>
+                            <th> <?= $row_rup['nama_rup'] ?></th>
                         </tr>
                         <tr>
                             <th>TKDN/PDN/IMPORT</th>
-                            <th>TKDN (80%)</th>
+                            <th> <?= $row_rup['status_pencatatan'] ?> (<?= $row_rup['persen_pencatatan'] ?>%)</th>
                         </tr>
                         <tr>
                             <th>Jadwal Pengadaan</th>
-                            <th><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#lihat_jadwal_tender">
+                            <th>
+                                <button type="button" class="btn btn-sm btn-warning" onclick="lihat_detail_jadwal('<?= $row_rup['id_url_rup'] ?>')">
                                     <i class="fa fa-calendar" aria-hidden="true"></i> Lihat
-                                </button></th>
+                                </button>
+                            </th>
                         </tr>
                         <tr>
                             <th>Jumlah Peserta</th>
@@ -85,11 +81,14 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Dok.lelang 1</td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
-                                                        </tr>
+                                                        <?php $no = 1;
+                                                        foreach ($dok_lelang as $key => $value) { ?>
+                                                            <tr>
+                                                                <td scope="row"><?= $no++ ?></td>
+                                                                <td><?= $value['nama_dok_pengadaan'] ?></td>
+                                                                <td><a target="_blank" href="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/DOKUMEN_PENGADAAN' . '/' . $value['file_dok_pengadaan']) ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a> </td>
+                                                            </tr>
+                                                        <?php } ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -111,18 +110,14 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Iso 5000</td>
-                                                            <td>Keternagan </td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">2</td>
-                                                            <td>Iso 1200</td>
-                                                            <td>Keternagan </td>
-                                                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a></td>
-                                                        </tr>
+                                                        <?php $no = 1;
+                                                        foreach ($dok_tambahan as $key => $value) { ?>
+                                                            <tr>
+                                                                <td scope="row"><?= $no++ ?></td>
+                                                                <td><?= $value['nama_syarat_tambahan'] ?></td>
+                                                                <td><a target="_blank" href="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/DOKUMEN_PRAKUALIFIKASI' . '/' . $value['file_syarat_tambahan']) ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a> </td>
+                                                            </tr>
+                                                        <?php } ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -224,8 +219,14 @@
                             </th>
                         </tr>
                         <tr>
-                            <th>Bobot Penilaian</th>
-                            <th>80</th>
+                            <th>Bobot Penilaian </th>
+                            <th><?php
+                                $nilai_bobot_teknis = $row_rup['bobot_teknis'];
+                                $nilai_bobot_teknis = $row_rup['bobot_biaya'];
+                                $total_bobot = $nilai_bobot_teknis + $nilai_bobot_teknis;
+                                ?>
+                                <?= $total_bobot ?>
+                            </th>
                         </tr>
                         <!-- <tr>
                             <th>Bobot Teknis</th>
@@ -427,7 +428,7 @@
                                 <input type="text" class="form-control" readonly value="radxH8GTvQwcdX8sSLoAtfFJu63uCykCUjyn6x7PXeexHrMJbfE45lnRPJDC1aggY2nP7j9BUWF6DvhYbqpIOBtOsphTW0m2omFB04wb9h5stGKEzS9TLOXeNYR71KV3" aria-describedby="basic-addon1">
                             </div>
                             <br>
-                            <a target="_blank" href="<?= base_url('panitia/info_tender/informasi_tender/buka_penawaran') ?>" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
+                            <a target="_blank" href="<?= base_url('panitia/info_tender/informasi_tender/buka_penawaran/' . $row_rup['id_url_rup']) ?>" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
                         </center>
                     </div>
                     <div class="col-md-2">
@@ -677,7 +678,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="lihat_jadwal_tender" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_detail_jadwal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
@@ -691,198 +692,19 @@
                     </div>
                 </div>
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="bg-secondary text-white">
                         <tr>
-                            <th>No</th>
-                            <th>Nama Tahap</th>
-                            <th>Status Tahap</th>
-                            <th>Tanggal Mulai</th>
-                            <th>Tanggal Selesai</th>
-                            <th>Diubah Oleh</th>
-                            <th>Alasan Perubahan</th>
+                            <th><small>No</small></th>
+                            <th><small>Nama Jadwal</small></th>
+                            <th><small>Waktu Mulai</small></th>
+                            <th><small>Waktu Selesai</small></th>
+                            <th><small>Status Tahap</small></th>
+                            <th><small>Dibuat Oleh</small></th>
+                            <th><small>Alasan Perubahan</small></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Pengumuman Prakualifikasi</td>
-                            <td><span class="badge bg-success"> <i class="fas fa fa-check"></i> Tahap Sudah Selesai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td>Ferry</td>
-                            <td>Mau Ubah Ajah</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td> Download Dokumen Kualifikasi </td>
-                            <td><span class="badge bg-secondary"> <i class="fas fa fa-clock"></i> Tahap Sedang Berlangsung</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">3</td>
-                            <td>Upload Dokumen Prakualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">4</td>
-                            <td>Evaluasi Dokumen Kualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">5</td>
-                            <td>Pembuktian Kualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">6</td>
-                            <td>Penetapan Hasil Kualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">7</td>
-                            <td>Pengumuman Hasil Prakualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">8</td>
-                            <td>Masa Sanggah Prakualifikasi </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">9</td>
-                            <td>Download Dokumen Pengadaan </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">10</td>
-                            <td>Pemberian Penjelasan </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">11</td>
-                            <td>Upload Dokumen Penawaran </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">12</td>
-                            <td>Pembukaan dan Evaluasi Penawaran File I : Administrasi dan Teknis </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">13</td>
-                            <td>Pemberitahuan/Pengumuman Peringkat Teknis </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">14</td>
-                            <td>Pembukaan dan Evaluasi Penawaran File II : Harga </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">15</td>
-                            <td>Upload Berita Acara Hasil Pengadaan </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">16</td>
-                            <td>Penetapan Pemenang </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">17</td>
-                            <td>Pengumuman Pemenang </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">18</td>
-                            <td>Masa Sanggah Hasil Pengadaan </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">19</td>
-                            <td>Surat Penunjukkan Penyedia Barang/Jasa </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">20</td>
-                            <td>Penandatanganan Kontrak </td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tahap Belum Dimulai</span>
-                            <td>01 April 2022 16:00 </td>
-                            <td>05 April 2022 23:59 </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                    <tbody id="load_jadwal">
+
                     </tbody>
                 </table>
             </div>
@@ -916,18 +738,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>METRINDOCRB</td>
-                            <td>metrindocirebon@yahoo.co.id</td>
-                            <td>08978201075</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>PT Agung Solusi Trans </td>
-                            <td>bambang.triyono@agungrent.co.id</td>
-                            <td>08127459175</td>
-                        </tr>
+                        <?php $no = 1;
+                        foreach ($peserta_tender as $key => $value) { ?>
+                            <tr>
+                                <td scope="row"><?= $no++ ?></td>
+                                <td><?= $value['nama_usaha'] ?></td>
+                                <td><?= $value['email'] ?></td>
+                                <td><?= $value['no_telpon'] ?></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

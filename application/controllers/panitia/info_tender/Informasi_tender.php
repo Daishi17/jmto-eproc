@@ -20,62 +20,70 @@ class Informasi_tender extends CI_Controller
 		$this->load->model('M_jenis_jadwal/M_jenis_jadwal');
 		$this->load->model('M_panitia/M_panitia');
 	}
-	public function index()
+	public function informasi_pengadaan($id_url_rup)
 	{
+		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 
+		$data['peserta_tender'] = $this->M_panitia->get_peserta_tender($data['row_rup']['id_rup']);
+		$data['dok_lelang'] = $this->M_panitia->get_dokumen_pengadaan($data['row_rup']['id_rup']);
+		$data['dok_tambahan'] = $this->M_panitia->result_syarat_tambahan($data['row_rup']['id_rup']);
 		$this->load->view('template_tender/header');
-		$this->load->view('panitia/info_tender/informasi_tender/index');
+		$this->load->view('panitia/info_tender/informasi_tender/base_url_global');
+		$this->load->view('panitia/info_tender/informasi_tender/index', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
 
-	public function evaluasi()
+	public function evaluasi($id_url_rup)
 	{
-
+		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$this->load->view('template_tender/header');
-		$this->load->view('panitia/info_tender/informasi_tender/evaluasi');
+		$this->load->view('panitia/info_tender/informasi_tender/evaluasi', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
 
-	public function sanggahan_prakualifikasi()
+	public function sanggahan_prakualifikasi($id_url_rup)
 	{
-
+		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$this->load->view('template_tender/header');
-		$this->load->view('panitia/info_tender/informasi_tender/sanggahan_prakualifikasi');
+		$this->load->view('panitia/info_tender/informasi_tender/sanggahan_prakualifikasi', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
 
-	public function sanggahan_akhir()
+	public function sanggahan_akhir($id_url_rup)
 	{
-
+		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$this->load->view('template_tender/header');
-		$this->load->view('panitia/info_tender/informasi_tender/sanggahan_akhir');
+		$this->load->view('panitia/info_tender/informasi_tender/sanggahan_akhir', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
 
-	public function buka_penawaran()
+	public function buka_penawaran($id_url_rup)
 	{
+		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$this->load->view('template_tender/header_penawaran');
-		$this->load->view('panitia/info_tender/informasi_tender/buka_penawaran');
+		$this->load->view('panitia/info_tender/informasi_tender/buka_penawaran', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
 
-	public function aanwijzing()
+	public function aanwijzing($id_url_rup)
 	{
+		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$this->load->view('template_tender/header');
-		$this->load->view('panitia/info_tender/informasi_tender/aanwijzing');
+		$this->load->view('panitia/info_tender/informasi_tender/aanwijzing', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
 
-	public function negosiasi()
+	public function negosiasi($id_url_rup)
 	{
+		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$this->load->view('template_tender/header');
-		$this->load->view('panitia/info_tender/informasi_tender/negosiasi');
+		$this->load->view('panitia/info_tender/informasi_tender/negosiasi', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
