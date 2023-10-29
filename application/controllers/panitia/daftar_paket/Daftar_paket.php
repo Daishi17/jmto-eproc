@@ -136,8 +136,7 @@ class Daftar_paket extends CI_Controller
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/index', $data);
 			$this->load->view('administrator/template_menu/footer_menu');
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/ajax');
-		} else {
-		}
+		} else { }
 	}
 
 	public function get_rup_terfinalisasi()
@@ -1024,8 +1023,7 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
 			];
-		} else {
-		}
+		} else { }
 		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])
