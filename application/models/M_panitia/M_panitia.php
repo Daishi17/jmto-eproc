@@ -822,7 +822,7 @@ class M_panitia extends CI_Model
     // INI UNTUK BERANDA
 
     // TENDER UMUM TABLE
-        // get datatable paket draft
+    // get datatable paket draft
 
     // GET RUP PAKET FINAL
     var $order_paket_tender_umum =  array('id_rup', 'kode_rup', 'tahun_rup', 'nama_program_rup', 'kode_departemen', 'total_pagu_rup', 'id_rup', 'id_rup', 'id_rup');
@@ -907,4 +907,16 @@ class M_panitia extends CI_Model
         return $this->db->count_all_results();
     }
 
+
+    // get vendor mengikuti
+
+    public function get_peserta_tender($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

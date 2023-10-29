@@ -172,17 +172,19 @@ class Daftar_paket extends CI_Controller
 	{
 		$data_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$panitia = $this->M_panitia->get_panitia($data_rup['id_rup']);
+		$syarat_tambahan = $this->M_panitia->result_syarat_tambahan($data_rup['id_rup']);
 		$ruas = $this->M_panitia->get_ruas($data_rup['id_rup']);
 		$jadwal = $this->M_panitia->get_jadwal($id_url_rup);
 		$row_syarat_administrasi_rup = $this->M_panitia->get_syarat_izin_usaha_tender($data_rup['id_rup']);
 		$row_syarat_teknis_rup = $this->M_panitia->get_syarat_izin_teknis_tender($data_rup['id_rup']);
 		$response = [
-			'row_rup' => $this->M_rup->get_row_rup($id_url_rup),
+			'row_rup' => $data_rup,
 			'panitia' => $panitia,
 			'ruas' => $ruas,
 			'jadwal' => $jadwal,
 			'row_syarat_administrasi_rup' => $row_syarat_administrasi_rup,
-			'row_syarat_teknis_rup' => $row_syarat_teknis_rup
+			'row_syarat_teknis_rup' => $row_syarat_teknis_rup,
+			'syarat_tambahan' => $syarat_tambahan,
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}

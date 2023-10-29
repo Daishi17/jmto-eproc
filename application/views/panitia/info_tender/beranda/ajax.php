@@ -213,7 +213,7 @@
 
                 }
 
-                
+
                 // skdp
                 if (response['row_syarat_administrasi_rup'].sts_checked_skdp == 1) {
                     $('#skdp_izin').css('display', 'block')
@@ -226,8 +226,53 @@
                     $('#skdp_izin').css('display', 'none')
                     $('#sts_masa_berlaku_skdp').text('Tidak Diperlukan')
                 }
+
+                // spt
+                if (response['row_syarat_teknis_rup'].sts_checked_spt == 1) {
+                    $('#spt_izin').css('display', 'block')
+                    $('#tahun_spt').text('Tahun Lapor ' + response['row_syarat_teknis_rup'].tahun_lapor_spt)
+                } else {
+                    $('#spt_izin').css('display', 'none')
+                    $('#tahun_spt').text('Tidak Diperlukan')
+                }
+
+                // keuangan
+                if (response['row_syarat_teknis_rup'].sts_checked_laporan_keuangan == 1) {
+                    $('#keuangan_izin').css('display', 'block')
+                    $('#tahun_keuangan').text(response['row_syarat_teknis_rup'].sts_audit_laporan_keuangan + ' ' + 'Tahun Awal ' + response['row_syarat_teknis_rup'].tahun_awal_laporan_keuangan + ' ' + 'Tahun Akhir ' + response['row_syarat_teknis_rup'].tahun_akhir_laporan_keuangan)
+                } else {
+                    $('#keuangan_izin').css('display', 'none')
+                    $('#tahun_keuangan').text('Tidak Diperlukan')
+                }
+
+                // neraca
+                if (response['row_syarat_teknis_rup'].sts_checked_neraca_keuangan == 1) {
+                    $('#neraca_izin').css('display', 'block')
+                    $('#tahun_neraca').text('Tahun Awal ' + response['row_syarat_teknis_rup'].tahun_awal_neraca_keuangan + ' ' + 'Tahun Akhir ' + response['row_syarat_teknis_rup'].tahun_akhir_neraca_keuangan)
+                } else {
+                    $('#neraca_izin').css('display', 'none')
+                    $('#tahun_neraca').text('Tidak Diperlukan')
+                }
+
+                var html_syarat_tambahan = '';
+                var i;
+                for (i = 0; i < response['syarat_tambahan'].length; i++) {
+                    html_syarat_tambahan += '<tr>' +
+                        '<td>' + response['syarat_tambahan'][i].nama_syarat_tambahan + '</td>' +
+                        '<td><a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['syarat_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-donwload"></i> Download File</a></td>' +
+                        '</tr>'
+                }
+                $('#load_syarat_tambahan').html(html_syarat_tambahan);
+                $('#button_ke_info_tender').html('<a href="<?= base_url('panitia/info_tender/informasi_tender/informasi_pengadaan/') ?>' + response['row_rup'].id_url_rup + '" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i>Halaman Informasi Tender</a>');
+                // view on button
             }
         })
+    }
+
+
+    function download_file_syarat_tambahan(id_syarat_tambahan) {
+        var url_download_syarat_tambahan = $('[name="url_download_syarat_tambahan"]').val()
+        location.href = url_download_syarat_tambahan + id_syarat_tambahan;
     }
 
     function lihat_detail_jadwal(id_url_rup) {

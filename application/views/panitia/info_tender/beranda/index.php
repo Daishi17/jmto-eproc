@@ -1,6 +1,7 @@
 <main class="container-fluid">
     <input type="hidden" name="url_cek_dokumen_hps" value="<?= base_url('file_paket/') ?>">
     <input type="hidden" name="url_by_id_rup" value="<?= base_url('panitia/daftar_paket/daftar_paket/by_id_rup/') ?>">
+    <input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_download_syarat_tambahan') ?>">
     <div class="row">
         <div class="col">
             <div class="card border-dark">
@@ -628,30 +629,37 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Kualifikasi Usaha</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>Minimal Menengah</small>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Nomor Induk Berusaha (NIB)</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>dd/mm/yyyy</small>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>KBLI</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>66209 || Jasa Komputer Lainnya</small>
-                                                            </td>
-                                                        </tr>
+                                                        <div id="spt_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Surat Pemberitahuan Tahunan (SPT) Badan</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="tahun_spt"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+                                                        <div id="keuangan_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Laporan Keuangan</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="tahun_keuangan"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
+                                                        <!-- neraca -->
+                                                        <div id="neraca_izin" style="display: none;">
+                                                            <tr>
+                                                                <td>
+                                                                    <small>Neraca Keuangan</small>
+                                                                </td>
+                                                                <td>
+                                                                    <small><label for="" id="tahun_neraca"></label></small>
+                                                                </td>
+                                                            </tr>
+                                                        </div>
                                                     </tbody>
                                                 </table>
                                                 <table class="table table-bordered border-dark table-sm shadow-lg">
@@ -665,9 +673,6 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="text-white bg-secondary" style="text-align:left; vertical-align:middle;">
-                                                                <small>Jenis Persyaratan</small>
-                                                            </th>
-                                                            <th class="text-white bg-secondary" style="text-align:left; vertical-align:middle;">
                                                                 <small>Keterangan Persyaratan</small>
                                                             </th>
                                                             <th class="text-white bg-secondary" style="text-align:left; vertical-align:middle;">
@@ -675,37 +680,7 @@
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Kualifikasi Usaha</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>Minimal Menengah</small>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-sm btn-success">
-                                                                    <i class="fa-solid fa-file px-1"></i>
-                                                                    Nama File Dokumen
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>Nomor Induk Berusaha (NIB)</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>dd/mm/yyyy</small>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <small>KBLI</small>
-                                                            </td>
-                                                            <td>
-                                                                <small>66209 || Jasa Komputer Lainnya</small>
-                                                            </td>
-                                                        </tr>
+                                                    <tbody id="load_syarat_tambahan">
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -718,10 +693,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-start">
-                    <a type="button" class="btn btn-default btn-warning" href="<?= base_url('panitia/info_tender/informasi_tender') ?>">
-                        <i class="fa-solid fa-circle-up px-1"></i>
-                        Halaman Paket Penyedia
-                    </a>
+                    <div id="button_ke_info_tender"></div>
                     <button type="button" class="btn btn-default btn-danger" data-bs-dismiss="modal">
                         <i class="fa-solid fa-rectangle-xmark"></i>
                         Keluar
