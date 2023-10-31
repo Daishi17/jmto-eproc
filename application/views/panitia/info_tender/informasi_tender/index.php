@@ -1,4 +1,7 @@
 <main class="container-fluid">
+    <!-- id rup global -->
+    <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+
     <div class="row">
         <div class="col">
             <div class="card border-dark">
@@ -51,25 +54,26 @@
                         <tr>
                             <th>Jadwal Pengadaan</th>
                             <th>
-                                <button type="button" class="btn btn-sm btn-warning" onclick="lihat_detail_jadwal('<?= $row_rup['id_url_rup'] ?>')">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i> Lihat
+                                <button type="button" class="btn btn-sm btn-primary" onclick="lihat_detail_jadwal('<?= $row_rup['id_url_rup'] ?>')">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i> Lihat Jadwal
                                 </button>
                             </th>
                         </tr>
                         <tr>
                             <th>Jumlah Peserta</th>
                             <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta">
-                                    <i class="fa fa-users" aria-hidden="true"></i> 2 Peserta
+                                    <i class="fa fa-users" aria-hidden="true"></i> <?= $hitung_peserta ?> Peserta
                                 </button></th>
                         </tr>
                         <tr>
-                            <th>Dokumen Lelang</th>
+                            <th>Dokumen Pengadaan</th>
                             <th>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
-                                                List Dokumen Lelang
+                                                List Dokumen Pengadaan
                                             </div>
                                             <div class="card-body">
                                                 <table class="table table-bordered">
@@ -97,6 +101,36 @@
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
+                                                List Dokumen Prakualifikasi
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama File</th>
+                                                            <th>File</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $no = 1;
+                                                        foreach ($dok_prakualifikasi as $key => $value) { ?>
+                                                            <tr>
+                                                                <td scope="row"><?= $no++ ?></td>
+                                                                <td><?= $value['nama_dok_prakualifikasi'] ?></td>
+                                                                <td><a target="_blank" href="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/DOKUMEN_PRAKUALIFIKASI' . '/' . $value['file_dok_prakualifikasi']) ?>" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> View</a> </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header bg-primary text-white">
                                                 Persyaratan Tambahan
                                             </div>
                                             <div class="card-body">
@@ -105,7 +139,6 @@
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Nama Persyaratan</th>
-                                                            <th>Keterangan</th>
                                                             <th>File</th>
                                                         </tr>
                                                     </thead>
@@ -171,67 +204,14 @@
                             </th>
                         </tr>
                         <tr>
-                            <th>Peralatan & Tenaga Ahli Penyedia</th>
-                            <th>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <div class="card">
-                                            <div class="card-header bg-primary text-white">
-                                                Peralatan & Tenaga Ahli Penyedia
-                                            </div>
-                                            <div class="card-body">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama Penyedia</th>
-                                                            <th>Peralatan</th>
-                                                            <th>Tenaga Ahli</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>METRINDOCRB</td>
-                                                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peralatan_penyedia">
-                                                                    <i class="fa fa-suitcase" aria-hidden="true"></i> Peralatan
-                                                                </button></td>
-                                                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_tenaga_ahli_penyedia">
-                                                                    <i class="fa fa-suitcase" aria-hidden="true"></i> Tenaga Ahli
-                                                                </button></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">2</td>
-                                                            <td>PT Agung Solusi Trans</td>
-                                                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peralatan_penyedia">
-                                                                    <i class="fa fa-suitcase" aria-hidden="true"></i> Peralatan
-                                                                </button></td>
-                                                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_tenaga_ahli_penyedia">
-                                                                    <i class="fa fa-suitcase" aria-hidden="true"></i> Tenaga Ahli
-                                                                </button></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <th>Bobot Teknis</th>
+                            <th><?= $row_rup['bobot_teknis'] ?>
                             </th>
                         </tr>
                         <tr>
-                            <th>Bobot Penilaian </th>
-                            <th><?php
-                                $nilai_bobot_teknis = $row_rup['bobot_teknis'];
-                                $nilai_bobot_teknis = $row_rup['bobot_biaya'];
-                                $total_bobot = $nilai_bobot_teknis + $nilai_bobot_teknis;
-                                ?>
-                                <?= $total_bobot ?>
-                            </th>
+                            <th>Bobot Biaya</th>
+                            <th><?= $row_rup['bobot_biaya'] ?></th>
                         </tr>
-                        <!-- <tr>
-                            <th>Bobot Teknis</th>
-                            <th>60</th>
-                        </tr> -->
                         <tr>
                             <th>Undangan Pembuktian</th>
                             <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">

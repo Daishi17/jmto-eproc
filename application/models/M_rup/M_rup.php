@@ -151,6 +151,7 @@ class M_rup extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_rup');
         $this->db->join('tbl_departemen', 'tbl_rup.id_departemen = tbl_departemen.id_departemen', 'left');
+        $this->db->join('tbl_jadwal_tender', 'tbl_rup.id_jadwal_tender = tbl_jadwal_tender.id_jadwal_tender', 'left');
         $this->db->join('tbl_section', 'tbl_rup.id_section = tbl_section.id_section', 'left');
         $this->db->join('tbl_rkap', 'tbl_rup.id_rkap = tbl_rkap.id_rkap', 'left');
         $this->db->join('tbl_provinsi', 'tbl_rup.id_provinsi = tbl_provinsi.id_provinsi', 'left');
