@@ -219,6 +219,7 @@
                             $('#modal_evaluasi_kualifikasi').modal('hide')
                             form_evaluasi_kualifikasi[0].reset();
                             reload_evaluasi_kualifikasi()
+                            reload_evaluasi_penawaran()
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */
