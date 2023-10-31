@@ -54,8 +54,8 @@ header("Content-Security-Policy: img-src 'self' *");
                                     </a>
                                     <!-- Dropdown Menu -->
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="https://drtproc.jmto.co.id/auth"><i> Penyedia</i></a></li>
-                                        <li><a class="dropdown-item" href="https://eprocurement.jmto.co.id/auth"><i> Non Penyedia</i></a></li>
+                                        <li><a class="dropdown-item" href="https://jmto-vms.kintekindo.net/auth"><i> Penyedia</i></a></li>
+                                        <li><a class="dropdown-item" href="<?= base_url('auth') ?>"><i> Non Penyedia</i></a></li>
                                     </ul>
                                 </li>
                                 <a href="https://drtproc.jmto.co.id/registrasi" class="btn btn-warning text-white btn-round ml-3"><i>REGISTRASI PENYEDIA</i></a>
@@ -314,7 +314,7 @@ header("Content-Security-Policy: img-src 'self' *");
                             </tr>
                         </thead>
                         <tbody>
-                          
+
                         </tbody>
                     </table>
                 </div>
@@ -367,7 +367,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -391,7 +391,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                              
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -415,7 +415,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -439,7 +439,7 @@ header("Content-Security-Policy: img-src 'self' *");
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -528,7 +528,7 @@ header("Content-Security-Policy: img-src 'self' *");
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 text-center">
-                        <p class="mb-0 text-white">©PT Jasamarga Tollroad Operator. 2023 <a href="#"></a> Privacy & Policy</p>
+                        <p class="mb-0 text-white">ï¿½PT Jasamarga Tollroad Operator. 2023 <a href="#"></a> Privacy & Policy</p>
                     </div>
                 </div>
             </div>
