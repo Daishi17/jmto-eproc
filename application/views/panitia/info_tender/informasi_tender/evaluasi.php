@@ -1,10 +1,12 @@
 <main class="container-fluid">
+    <!-- id rup global -->
+    <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
     <div class="row">
         <div class="col">
             <div class="card border-dark">
                 <div class="card-header border-dark bg-white text-black">
                     <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/informasi_tender/informasi_pengadaan/' . $row_rup['id_url_rup']) ?>"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Pengadaan</a>
                         </li>
                         <li class="nav-item">
@@ -35,16 +37,19 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nama Paket</th>
-                                <td>PAKET KEMERDEKAAN 78 RI BOGOR</td>
+                                <td><?= $row_rup['nama_rup'] ?></td>
                             </tr>
                             <tr>
                                 <th>Nama Jenis Pengadaan</th>
-                                <td>JASA KONSTRUKSI</td>
-
+                                <td><?= $row_rup['nama_jenis_pengadaan'] ?></td>
                             </tr>
                             <tr>
-                                <th>Nama Metode Pemilihan </th>
-                                <td>Prakualifikasi 2 file</td>
+                                <th>Nama Metode Pemilihan</th>
+                                <td><?= $row_rup['metode_kualifikasi'] ?> (<?= $row_rup['metode_dokumen'] ?>)</td>
+                            </tr>
+                            <tr>
+                                <th>HPS</th>
+                                <td>Rp. <?= number_format($row_rup['total_hps_rup'], 2, ',', '.')  ?> </td>
                             </tr>
                         </table>
                     </div>
@@ -52,124 +57,176 @@
                 <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
                     <div class="flex-grow-1 bd-highlight">
                         <span class="text-dark">
-                            <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Evalusi Pengadaan</strong></small>
+                            <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i>Evalusi Pengadaan</strong></small>
                         </span>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div style="overflow-x: auto;">
-                        <table class="table table-bordered" id="tbl_evaluasi">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th>No</th>
-                                    <th width="200px">Nama Peserta</th>
-                                    <th>Status Kelengkapan Dokumen Administrasi</th>
-                                    <th>Status Kelengkapan Dokumen Kualifikasi</th>
-                                    <th>Nilai Prakualifikasi</th>
-                                    <th>Nilai Teknis</th>
-                                    <th>Penawaran</th>
-                                    <th>Penawaran Terkoreksi</th>
-                                    <th>Negosiasi</th>
-                                    <th>Peringkat Teknis</th>
-                                    <th>Nilai Akhir</th>
-                                    <th>Sanggahan Prakualifikasi</th>
-                                    <th>Sanggahan Akhir</th>
-                                    <th>Pemenang</th>
-                                    <th>Mengundurkan Diri</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><a style="text-decoration:none" href="javascirpt:;" data-bs-toggle="modal" data-bs-target="#modal_evaluasi"> PT. KINTEK</a></td>
-                                    <td>
-                                        <span class="badge bg-success"><i class="fa fa-check" aria-hidden="true"></i>
-                                            Dokumen Lengkap</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-success"><i class="fa fa-check" aria-hidden="true"></i>
-                                            Dokumen Lengkap</span>
-                                    </td>
-                                    <td><span class="badge bg-primary">80.50</span> </td>
-                                    <td><span class="badge bg-primary">75.50</span> </td>
-                                    <td><span class="badge bg-primary">1.000.000.000</span> </td>
-                                    <td><span class="badge bg-primary">1.000.000.000</span> </td>
-                                    <td>-</td>
-                                    <td><span class="badge bg-primary">1</span></td>
-                                    <td><span class="badge bg-primary">80.00</span></td>
-                                    <td><button class="btn btn-sm btn-info text-white"><i class="fa fa-eye" aria-hidden="true"></i> Lihat</button></td>
-                                    <td><button class="btn btn-sm btn-info text-white"><i class="fa fa-eye" aria-hidden="true"></i> Lihat</button></td>
-                                    <td>
-                                        <span class="text-warning"><i class="fa fa-star" aria-hidden="true"></i>
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#evkualifikasi" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Evaluasi Akhir Kualifikasi</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#evakhirpenawaran" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Evaluasi Akhir Penawaran</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#evheatkdn" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Evaluasi HEA TKDN</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#peringkatakhirhea" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Peringkat Akhir HEA</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="evkualifikasi" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="container-fluid">
+                                <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                    <div class="flex-grow-1 bd-highlight">
+                                        <span class="text-dark">
+                                            <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Evalusi Akhir Kualifikasi</strong></small>
                                         </span>
-                                    </td>
-                                    <td>
-                                        <span class="text-danger"><i class="fa fa-times" aria-hidden="true"></i>
-                                        </span>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div style="overflow-x: auto;">
+                                        <table class="table table-bordered" id="tbl_evaluasi_kualifikasi" aria-describedby="tbl_evaluasi_info">
+                                            <thead style="text-align: center;">
+                                                <tr>
+                                                    <th rowspan="3">No</th>
+                                                    <th rowspan="3">Perusahaan</th>
+                                                    <th rowspan="3">Evaluasi Administrasi</th>
+                                                    <th colspan="2">Evaluasi Keuangan</th>
+                                                    <th colspan="2">Evaluasi Teknis</th>
+                                                    <th colspan="2">Evaluasi Akhir</th>
+                                                    <th rowspan="3">Aksi</th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">50%</th>
+                                                    <th colspan="2">50%</th>
+                                                    <th colspan="2">100%</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Nilai</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Nilai</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Nilai</th>
+                                                    <th>Keterangan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align: center;">
 
-                                <tr>
-                                    <td>2</td>
-                                    <td><a style="text-decoration:none" href="javascirpt:;" data-bs-toggle="modal" data-bs-target="#modal_evaluasi"> PT. PANGRANGO</a></td>
-                                    <td>
-                                        <span class="badge bg-success"><i class="fa fa-check" aria-hidden="true"></i>
-                                            Dokumen Lengkap</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-success"><i class="fa fa-check" aria-hidden="true"></i>
-                                            Dokumen Lengkap</span>
-                                    </td>
-                                    <td><span class="badge bg-primary">60.50</span> </td>
-                                    <td><span class="badge bg-primary">65.50</span> </td>
-                                    <td><span class="badge bg-primary">2.000.000.000</span> </td>
-                                    <td><span class="badge bg-primary">2.000.000.000</span> </td>
-                                    <td>-</td>
-                                    <td><span class="badge bg-primary">2</span></td>
-                                    <td><span class="badge bg-primary">64.00</span></td>
-                                    <td><button class="btn btn-sm btn-info text-white"><i class="fa fa-eye" aria-hidden="true"></i> Lihat</button></td>
-                                    <td><button class="btn btn-sm btn-info text-white"><i class="fa fa-eye" aria-hidden="true"></i> Lihat</button></td>
-                                    <td>
-                                        <span class="text-danger"><i class="fa fa-times" aria-hidden="true"></i>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="text-danger"><i class="fa fa-times" aria-hidden="true"></i>
-                                        </span>
-                                    </td>
-                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                <tr>
-                                    <td>3</td>
-                                    <td><a style="text-decoration:none" href="javascirpt:;" data-bs-toggle="modal" data-bs-target="#modal_evaluasi"> PT. Ciledug</a></td>
-                                    <td>
-                                        <span class="badge bg-success"><i class="fa fa-check" aria-hidden="true"></i>
-                                            Dokumen Lengkap</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-danger"><i class="fa fa-times" aria-hidden="true"></i>
-                                            Dokumen Tidak Lengkap</span>
-                                    </td>
-                                    <td><span class="badge bg-danger">Gugur</span> </td>
-                                    <td><span class="badge bg-danger">Gugur</span></td>
-                                    <td><span class="badge bg-danger">Gugur</span> </td>
-                                    <td><span class="badge bg-danger">Gugur</span> </td>
-                                    <td>-</td>
-                                    <td><span class="badge bg-danger">Gugur</span></td>
-                                    <td><span class="badge bg-danger">Gugur</span></td>
-                                    <td><button class="btn btn-sm btn-info text-white"><i class="fa fa-eye" aria-hidden="true"></i> Lihat</button></td>
-                                    <td><button class="btn btn-sm btn-info text-white"><i class="fa fa-eye" aria-hidden="true"></i> Lihat</button></td>
-                                    <td>
-                                        <span class="text-danger"><i class="fa fa-times" aria-hidden="true"></i>
+                        <div class="tab-pane fade" id="evakhirpenawaran" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="container-fluid">
+                                <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                    <div class="flex-grow-1 bd-highlight">
+                                        <span class="text-dark">
+                                            <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Evalusi Akhir Penawaran</strong></small>
                                         </span>
-                                    </td>
-                                    <td>
-                                        <span class="text-danger"><i class="fa fa-times" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div style="overflow-x: auto;">
+                                        <table class="table table-bordered" id="tbl_evaluasi_penawaran" aria-describedby="tbl_evaluasi_info">
+                                            <thead style="text-align: center;">
+                                                <tr>
+                                                    <th rowspan="2">No</th>
+                                                    <th rowspan="2">Nama Perusahaan</th>
+                                                    <th rowspan="2">Harga Penawaran <br> (Setelah Koreksi Aritmatika)</th>
+                                                    <th>Nilai Teknis</th>
+                                                    <th rowspan="2">% Terhadap HPS</th>
+                                                    <th>Nilai Usulan Biaya</th>
+                                                    <th rowspan="2">Nilai Akhir</th>
+                                                    <th rowspan="2">Peringkat Akhir</th>
+                                                    <th rowspan="2">Keterangan</th>
+                                                    <th rowspan="2">Aksi</th>
+                                                </tr>
+                                                <tr>
+                                                    <th><?= $row_rup['bobot_teknis'] ?>%</th>
+                                                    <th><?= $row_rup['bobot_biaya'] ?>%</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align: center;">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="evheatkdn" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div style="overflow-x: auto;">
+                                <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                    <div class="flex-grow-1 bd-highlight">
+                                        <span class="text-dark">
+                                            <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Evalusi HEA TKDN</strong></small>
                                         </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div style="overflow-x: auto;">
+
+                                        <table class="table table-bordered" id="tbl_evaluasi" aria-describedby="tbl_evaluasi_info">
+                                            <thead style="text-align: center;">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama Perusahaan</th>
+                                                    <th>Harga Penawaran <br> (Setelah Koreksi Aritmatika)</th>
+                                                    <th>Nilai TKDN Penawaran</th>
+                                                    <th>Harga Evaluasi Akhir (HEA)<br>(Setelah Koreksi Aritmatika)</th>
+                                                    <th>Peringkat Sementara HEA</th>
+                                                    <th>Keterangan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="peringkatakhirhea" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1 bd-highlight">
+                                    <span class="text-dark">
+                                        <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Peringkat Akhir HEA</strong></small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div style="overflow-x: auto;">
+                                    <table class="table table-bordered" id="tbl_evaluasi" aria-describedby="tbl_evaluasi_info">
+                                        <thead style="text-align: center;">
+                                            <tr>
+                                                <th rowspan="2">No</th>
+                                                <th rowspan="2">Nama Perusahaan</th>
+                                                <th rowspan="2">Harga Penawaran <br> (Setelah Koreksi Aritmatika)</th>
+                                                <th>Nilai Teknis</th>
+                                                <th rowspan="2">% Terhadap HPS</th>
+                                                <th>Nilai Usulan Biaya</th>
+                                                <th rowspan="2">Nilai Akhir</th>
+                                                <th rowspan="2">Peringkat Akhir</th>
+                                                <th rowspan="2">Keterangan</th>
+                                            </tr>
+                                            <tr>
+                                                <th><?= $row_rup['bobot_teknis'] ?>%</th>
+                                                <th><?= $row_rup['bobot_biaya'] ?>%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -178,8 +235,8 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modal_evaluasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+<div class="modal fade" id="modal_evaluasi_kualifikasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <a class="navbar-brand">
@@ -189,222 +246,94 @@
                 </a>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="card p-2 bg-primary">
-                    <b><span class="text-white">Evaluasi PT. Kintek</span></b>
-                </div>
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-administrasi" type="button" role="tab" aria-controls="pills-administrasi" aria-selected="true">1. Evaluasi Dokumen Administrasi</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-tambahan" type="button" role="tab" aria-controls="pills-tambahan" aria-selected="false">2. Evaluasi Persyaratan Tambahan</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-prakualifikasi" type="button" role="tab" aria-controls="pills-prakualifikasi" aria-selected="false">3. Evaluasi Nilai Prakualifikasi</button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-teknis" type="button" role="tab" aria-controls="pills-teknis" aria-selected="false">4. Evaluasi Nilai Teknis</button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-peringkat" type="button" role="tab" aria-controls="pills-peringkat" aria-selected="false">5. Evaluasi Peringkat Teknis</button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-terkoreksi" type="button" role="tab" aria-controls="pills-terkoreksi" aria-selected="false">6. Evaluasi Harga Terkoreksi</button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-negosiasi" type="button" role="tab" aria-controls="pills-negosiasi" aria-selected="false">7. Evaluasi Negosiasi</button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-akhir" type="button" role="tab" aria-controls="pills-akhir" aria-selected="false">8. Evaluasi Nilai Akhir</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-administrasi" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                Evaluasi Dokumen Administrasi
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Status Dokumen Persyaratan Dari Vms</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Dokumen Sesuai Vms/Dokumen Lengkap</td>
-                                        <td><span class="btn btn-sm btn-success"><i class="fa fa-check"></i> Lengkap</span></td>
-                                    </tr>
-                                </table>
-
+            <form id="form_evaluasi_kualifikasi" action="javascript:;">
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                            <div class="flex-grow-1 bd-highlight">
+                                <span class="text-dark">
+                                    <small class="text-white">
+                                        <strong><i class="fa-solid fa-edit px-1"></i>
+                                            Evaluasi Akhir Kualifikasi <label for="" id="nama_usaha"></label>
+                                        </strong>
+                                    </small>
+                                </span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-tambahan" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                Evaluasi Persyaratan Tambahan
+                        <div class="card-body">
+                            <input type="hidden" name="id_vendor_mengikuti_paket">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Evaluasi Keuangan</label>
+                                <input type="text" class="form-control number_only" name="ev_keuangan" placeholder="Evaluasi Keuangan">
+                                <label for="" id="error_ev_keuangan" class="text-danger"></label>
                             </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Persyaratan</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>On Going Project</td>
-                                            <td><span class="btn btn-sm btn-success"><i class="fa fa-check"></i> Valid</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Dokumen_Kualifikasi_Paket IX</td>
-                                            <td><span class="btn btn-sm btn-success"><i class="fa fa-check"></i> Valid</span></td>
-                                        </tr>
-                                    </tbody>
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-prakualifikasi" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                Evaluasi Nilai Prakualifikasi
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center; vertical-align: middle;">Nilai Prakualifikasi</th>
-                                            <th><input type="text" class="form-control" placeholder="Nilai Prakualifikasi"></th>
-                                        </tr>
-                                    </thead>
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-teknis" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                Evaluasi Nilai Teknis
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center; vertical-align: middle;">Nilai Teknis</th>
-                                            <th><input type="text" class="form-control" placeholder="Nilai Teknis"></th>
-                                        </tr>
-                                    </thead>
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-peringkat" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                Evaluasi Peringkat Teknis
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center; vertical-align: middle;">Peringkat Teknis</th>
-                                            <th><input type="text" class="form-control" placeholder="Peringkat Teknis"></th>
-                                        </tr>
-                                    </thead>
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-terkoreksi" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                Evaluasi Penawaran Terkoreksi
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center; vertical-align: middle;">Penawaran Terkoreksi</th>
-                                            <th><input type="text" class="form-control" placeholder="Penawaran Terkoreksi"></th>
-                                            <th><input type="text" class="form-control" placeholder="RP" disabled></th>
-                                        </tr>
-                                    </thead>
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-negosiasi" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                Evaluasi Negosiasi
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center; vertical-align: middle;">Negosiasi</th>
-                                            <th><input type="text" class="form-control" placeholder="Nilai Negosiasi"></th>
-                                            <th><input type="text" class="form-control" placeholder="RP" disabled></th>
-                                        </tr>
-                                    </thead>
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="pills-akhir" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="card">
-                            <div class="card-header bg-primary text-white">
-                                Evaluasi Nilai Akhir
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align: center; vertical-align: middle;">Nilai Akhir</th>
-                                            <th><input type="text" class="form-control" placeholder="Nilai Akhir"></th>
-                                        </tr>
-                                    </thead>
-
-                                </table>
-
+                            <div class="mb-3" style="margin-top: -10px;">
+                                <label for="" class="form-label">Evaluasi Teknis</label>
+                                <input type="text" class="form-control number_only" name="ev_teknis" placeholder="Evaluasi Teknis">
+                                <label for="" id="error_ev_teknis" class="text-danger"></label>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success" id="btn_ev_kualifikasi">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_evaluasi_penawaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="navbar-brand">
+                    <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                    <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+            <form id="form_evaluasi_penawaran" action="javascript:;">
+                <input type="hidden" value="<?= $row_rup['total_hps_rup'] ?>" name="total_hps_rup">
+                <input type="hidden" value="<?= $row_rup['id_rup'] ?>" name="id_rup_post">
+                <input type="hidden" value="<?= $row_rup['bobot_teknis'] ?>" name="bobot_teknis">
+                <input type="hidden" value="<?= $row_rup['bobot_biaya'] ?>" name="bobot_biaya">
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                            <div class="flex-grow-1 bd-highlight">
+                                <span class="text-dark">
+                                    <small class="text-white">
+                                        <strong><i class="fa-solid fa-edit px-1"></i>
+                                            Evaluasi Akhir Penawaran <label for="" id="nama_usaha"></label>
+                                        </strong>
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" name="id_vendor_mengikuti_paket">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Harga Penawaran (Setelah Koreksi Aritmatika)</label>
+                                <input type="text" class="form-control number_only" name="nilai_penawaran" placeholder="Harga Penawaran (Setelah Koreksi Aritmatika)" onkeyup="format_rupiah()">
+                                <input type="text" class="form-control" placeholder="Rp." name="penawaran_rp" disabled>
+                                <label for="" id="error_ev_keuangan" class="text-danger"></label>
+                            </div>
+                            <div class="mb-3" style="margin-top: -10px;">
+                                <label for="" class="form-label">Nilai Teknis</label>
+                                <input type="text" class="form-control number_only" name="ev_penawaran_teknis" placeholder="Nilai Teknis">
+                                <label for="" id="error_ev_teknis" class="text-danger"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success" id="btn_ev_penawaran">Simpan</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

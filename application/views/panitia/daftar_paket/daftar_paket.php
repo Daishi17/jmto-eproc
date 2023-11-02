@@ -8,7 +8,7 @@
                     <h6 class="card-title">
                         <span class="text-white">
                             <i class="fa-solid fa-business-time"></i>
-                            <small><strong>Transaksi Tender / Pengadaan</strong></small>
+                            <small><strong>Transaksi Pengadaan</strong></small>
                         </span>
                     </h6>
                 </div>
@@ -440,7 +440,7 @@
                                 <div class="card-body">
                                     <div class="col-md-12">
                                         <div class="card border-primary shadow-lg">
-                                            <div class="card-header border-primary"><small class="text-primary"><b><i class="fa-solid fa-money-check-dollar px-1"></i>Daftar Paket Tender / Pengadaan Yang Sudah Finalisasi</b></small></div>
+                                            <div class="card-header border-primary"><small class="text-primary"><b><i class="fa-solid fa-money-check-dollar px-1"></i>Daftar Paket Pengadaan Yang Sudah Finalisasi</b></small></div>
                                             <div class="card-body">
                                                 <form>
                                                     <div class="row g-1">
