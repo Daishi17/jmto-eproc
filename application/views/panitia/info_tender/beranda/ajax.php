@@ -272,7 +272,7 @@
 
     function download_file_syarat_tambahan(id_syarat_tambahan) {
         var url_download_syarat_tambahan = $('[name="url_download_syarat_tambahan"]').val()
-        location.href = url_download_syarat_tambahan + id_syarat_tambahan;
+        location.href = url_download_syarat_tambahan + '/' + id_syarat_tambahan;
     }
 
     function lihat_detail_jadwal(id_url_rup) {

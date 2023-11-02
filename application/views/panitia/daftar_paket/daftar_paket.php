@@ -1,5 +1,5 @@
 <main class="container-fluid">
-    <input type="hidden" name="id_url_rup">
+    <input type="text" name="id_url_rup">
     <input type="hidden" name="nama_rup">
     <div class="row">
         <div class="col">

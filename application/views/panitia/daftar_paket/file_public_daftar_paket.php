@@ -1710,6 +1710,8 @@
             dataType: "JSON",
             success: function(response) {
                 $('#modal-xl-detail').modal('show')
+                $('[name="id_url_rup"]').val(id_url_rup)
+                $('[name="nama_rup"]').val(response['row_rup'].nama_rup)
                 if (response['row_rup'].jenis_kontrak == 1) {
                     var jenis_kontrak = 'Lump Sum'
                 } else if (response['row_rup'].jenis_kontrak == 2) {
@@ -1805,8 +1807,6 @@
                     $('.status_dimumkan').attr("disabled", true);
                 }
                 // bagian ini khusus untuk umumkan paket
-                $('[name="id_url_rup"]').val(response['row_rup'].id_url_rup)
-                $('[name="nama_rup"]').val(response['row_rup'].nama_rup)
             }
         })
     }

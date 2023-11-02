@@ -238,6 +238,11 @@ class Sirup_buat_paket extends CI_Controller
 		if (!$cek_syarat_izin) {
 			$data = [
 				'id_rup' => $row_rup['id_rup'],
+				'tgl_berlaku_siup' => date('Y-m-d'),
+				'tgl_berlaku_nib' => date('Y-m-d'),
+				'tgl_berlaku_sbu' => date('Y-m-d'),
+				'tgl_berlaku_siujk' => date('Y-m-d'),
+				'tgl_berlaku_skdp' => date('Y-m-d'),
 			];
 			$this->M_rup->tambah_izin_usaha($data);
 		} else {
@@ -246,6 +251,12 @@ class Sirup_buat_paket extends CI_Controller
 		if (!$cek_syarat_izin_teknis) {
 			$data = [
 				'id_rup' => $row_rup['id_rup'],
+				'id_rup' => $row_rup['id_rup'],
+				'tahun_lapor_spt' => date('Y'),
+				'tahun_awal_laporan_keuangan' => '2020',
+				'tahun_akhir_laporan_keuangan' => '2020',
+				'tahun_awal_neraca_keuangan' => '2020',
+				'tahun_akhir_neraca_keuangan' => '2020',
 			];
 			$this->M_rup->tambah_izin_teknis($data);
 		} else {

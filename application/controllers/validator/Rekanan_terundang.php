@@ -465,6 +465,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen SIUP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
 				$type_email = 'SIUP';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -496,6 +502,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen SIUP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SIUP Anda";
 				$type_email = 'SIUP';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -534,6 +546,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KBLI-SIUP';
 				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -565,6 +583,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KBLI-SIUP';
 				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen SIUP";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -738,6 +762,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen NIB dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
 				$type_email = 'NIB';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -769,6 +799,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen NIB dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen NIB Anda";
 				$type_email = 'NIB';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -807,6 +843,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KBLI-NIB';
 				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -838,6 +880,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KBLI-NIB';
 				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen NIB";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -1010,6 +1058,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen SBU dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
 				$type_email = 'SBU';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1042,6 +1096,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen SBU dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SBU Anda";
 				$type_email = 'SBU';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -1080,6 +1140,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KODE-SBU';
 				$message = "Jenis SBU dengan kode SBU "  . $id_vendor['kode_sbu'] . "-" . $id_vendor['nama_sbu'] . " Telah Berhasil Di Validasi";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1111,6 +1177,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KODE-SBU';
 				$message = "Jenis SBU dengan kode SBU "  . $id_vendor['kode_sbu'] . "-" . $id_vendor['nama_sbu'] . " Gagal Di Validasi Silahkan Segera Ubah KODE sbu anda pada dokumen SIUP";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -1280,6 +1352,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen SIUJK dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
 				$type_email = 'SIUJK';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1311,6 +1389,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen SIUJK dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SIUJK Anda";
 				$type_email = 'SIUJK';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
@@ -1349,6 +1433,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KBLI-SIUJK';
 				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1380,6 +1470,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KBLI-SIUJK';
 				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen SIUJK";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
@@ -1549,6 +1645,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen SKDP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
 				$type_email = 'SKDP';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1580,6 +1682,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen SKDP dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SKDP Anda";
 				$type_email = 'SKDP';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
@@ -1618,6 +1726,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KBLI-SKDP';
 				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Telah Berhasil Di Validasi";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1649,6 +1763,12 @@ class Rekanan_terundang extends CI_Controller
 				$type_email = 'KBLI-SKDP';
 				$message = "Jenis KBLI dengan kode KBLI "  . $id_vendor['kode_kbli'] . "-" . $id_vendor['nama_kbli'] . " Gagal Di Validasi Silahkan Segera Ubah KODE KBLI anda pada dokumen skdp";
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
@@ -1780,6 +1900,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen AKTA-PENDIRIAN dengan nomor surat "  . $id_vendor['no_surat'] . " Telah Berhasil Di Validasi";
 				$type_email = 'AKTA-PENDIRIAN';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -1811,6 +1937,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen AKTA-PENDIRIAN dengan nomor surat "  . $id_vendor['no_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen AKTA-PENDIRIAN Anda";
 				$type_email = 'AKTA-PENDIRIAN';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -1981,6 +2113,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen AKTA-PERUBAHAN dengan nomor surat "  . $id_vendor['no_surat'] . " Telah Berhasil Di Validasi";
 				$type_email = 'AKTA-PERUBAHAN';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
@@ -2012,6 +2150,12 @@ class Rekanan_terundang extends CI_Controller
 				$message = "Dokumen AKTA-PERUBAHAN dengan nomor surat "  . $id_vendor['no_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen AKTA-PERUBAHAN Anda";
 				$type_email = 'AKTA-PERUBAHAN';
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+				// ambil di sini
+				$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+				$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor['no_telpon'];
+				$pesanku = str_replace(" ", "-", $alasan_validator);
+				json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 			}
 			$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 			$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -2238,6 +2382,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen PEMILIK dengan nomor NIK/PASPOR "  . $id_vendor['nik'] . " Telah Berhasil Di Validasi";
 			$type_email = 'PEMILIK';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2269,6 +2419,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen PEMILIK dengan nomor NIK/PASPOR "  . $id_vendor['nik'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen PEMILIK Anda";
 			$type_email = 'PEMILIK';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -2447,6 +2603,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen PENGURUS dengan nomor NIK/PASPOR "  . $id_vendor['nik'] . " Telah Berhasil Di Validasi";
 			$type_email = 'PENGURUS';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2478,6 +2640,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen PENGURUS dengan nomor NIK/PASPOR "  . $id_vendor['nik'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen PENGURUS Anda";
 			$type_email = 'PENGURUS';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -2613,6 +2781,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen PENGALAMAN dengan NOMOR KONTRAK "  . $id_vendor['no_kontrak'] . " Telah Berhasil Di Validasi Silahkan Segera Upload Ulang Dokumen PENGALAMAN Anda";
 			$type_email = 'PENGALAMAN';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2644,6 +2818,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen PENGALAMAN dengan NOMOR KONTRAK "  . $id_vendor['no_kontrak'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen PENGALAMAN Anda";
 			$type_email = 'PENGALAMAN';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -2810,6 +2990,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen SPPKP dengan nomor surat "  . $id_vendor['no_surat'] . " Telah Berhasil Di Validasi";
 			$type_email = 'SPPKP';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2841,6 +3027,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen SPPKP dengan nomor surat "  . $id_vendor['no_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SPPKP Anda";
 			$type_email = 'SPPKP';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -2967,6 +3159,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen NPWP dengan nomor NPWP "  . $id_vendor['no_npwp'] . " Telah Berhasil Di Validasi";
 			$type_email = 'NPWP';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2998,6 +3196,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen NPWP dengan nomor NPWP "  . $id_vendor['no_npwp'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen NPWP Anda";
 			$type_email = 'NPWP';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -3207,6 +3411,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen SPT dengan nomor surat "  . $id_vendor['nomor_surat'] . " Telah Berhasil Di Validasi";
 			$type_email = 'SPT';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -3238,6 +3448,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen SPT dengan nomor surat "  . $id_vendor['nomor_surat'] . " Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen SPT Anda";
 			$type_email = 'SPT';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -3451,6 +3667,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen Neraca Keuangan Telah Berhasil Di Validasi";
 			$type_email = 'NERACA-KEUANGAN';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -3481,6 +3703,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen Neraca Keuangan Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen Neraca Keuangan";
 			$type_email = 'NERACA-KEUANGAN';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -3708,6 +3936,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen Laporan Keuangan Telah Berhasil Di Validasi";
 			$type_email = 'LAPORAN-KEUANGAN';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -3738,6 +3972,12 @@ class Rekanan_terundang extends CI_Controller
 			$message = "Dokumen Laporan Keuangan Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen Laporan Keuangan Anda";
 			$type_email = 'LAPORAN-KEUANGAN';
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
+			// ambil di sini
+			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
+			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor['no_telpon'];
+			$pesanku = str_replace(" ", "-", $alasan_validator);
+			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);

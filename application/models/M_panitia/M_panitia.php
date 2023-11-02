@@ -434,10 +434,11 @@ class M_panitia extends CI_Model
         foreach ($cek_syarat_kbli_sbu as $data_syarat_sbu) {
             $data_kbli_tampung[] = $data_syarat_sbu['id_sbu'];
         }
+        $implode = implode(',', $data_kbli_tampung);
         $this->db->select('tbl_vendor.id_vendor,tbl_vendor_kbli_sbu.id_sbu');
         $this->db->from('tbl_vendor');
         $this->db->join('tbl_vendor_kbli_sbu', 'tbl_vendor_kbli_sbu.id_vendor = tbl_vendor.id_vendor', 'left');
-        $this->db->where_in('tbl_vendor_kbli_sbu.id_sbu', $data_kbli_tampung);
+        $this->db->where_in('tbl_vendor_kbli_sbu.id_sbu', [$implode]);
         $this->db->group_by('tbl_vendor.id_vendor');
         $query = $this->db->get();
         return $query->result_array();
@@ -504,8 +505,7 @@ class M_panitia extends CI_Model
         foreach ($array_kbli_skdp as $row) {
             $mergedResult[$row['id_vendor']] = $row;
         }
-
-        // kbli sbu
+        
         foreach ($array_kbli_sbu as $row) {
             $mergedResult[$row['id_vendor']] = $row;
         }
