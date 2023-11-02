@@ -3699,6 +3699,7 @@ class Rekanan_terundang extends CI_Controller
 				'nama_validator' => $nm_validator,
 				'tgl_periksa' => date('Y-m-d H:i'),
 				'notifikasi' => 1
+				// ini test baruu
 			];
 			$message = "Dokumen Neraca Keuangan Gagal Di Validasi Silahkan Segera Upload Ulang Dokumen Neraca Keuangan";
 			$type_email = 'NERACA-KEUANGAN';
