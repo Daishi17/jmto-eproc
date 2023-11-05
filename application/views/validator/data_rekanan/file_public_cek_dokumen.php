@@ -789,7 +789,7 @@
                             "serverSide": true,
                             "bDestroy": true,
                             "dom": 'Bfrtip',
-                             lengthMenu: [
+                            lengthMenu: [
                                 [10, 25, 50, 200, -1],
                                 ['10 rows', '25 rows', '50 rows', '200 rows', 'Show all']
                             ],
@@ -3379,6 +3379,7 @@
                         clearInterval(timerInterval)
                         $('#modal_nonvalid_pengalaman').modal('hide')
                         Swal.fire('Dokumen Berhasil Di Validasi!', '', 'success')
+                        form_nonvalid_pengalaman[0].reset()
                         load_data()
                     }
                 }).then((result) => {

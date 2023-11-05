@@ -994,7 +994,7 @@
     document.getElementById("mulai19").onchange = function() {
         validasi_mulai19()
     };
-    
+
     // validasi mulai
     function validasi_mulai19() {
         const mulai19 = new Date($('#mulai19').val());
@@ -1049,7 +1049,7 @@
     document.getElementById("mulai20").onchange = function() {
         validasi_mulai20()
     };
-    
+
     // validasi mulai
     function validasi_mulai20() {
         const mulai20 = new Date($('#mulai20').val());
@@ -1104,7 +1104,7 @@
     document.getElementById("mulai21").onchange = function() {
         validasi_mulai21()
     };
-    
+
     // validasi mulai
     function validasi_mulai21() {
         const mulai21 = new Date($('#mulai21').val());
@@ -1137,7 +1137,8 @@
 </script>
 
 <script>
-    // live_jadwal()
+    live_jadwal()
+
     function live_jadwal() {
         const mulai1 = new Date($('#mulai1').val());
         const selesai1 = new Date($('#selesai1').val());
@@ -1168,9 +1169,6 @@
         // 10
         const mulai10 = new Date($('#mulai10').val());
         const selesai10 = new Date($('#selesai10').val());
-        // 9
-        const mulai9 = new Date($('#mulai9').val());
-        const selesai9 = new Date($('#selesai9').val());
         // 11
         const mulai11 = new Date($('#mulai11').val());
         const selesai11 = new Date($('#selesai11').val());
@@ -1195,6 +1193,18 @@
         // 18
         const mulai18 = new Date($('#mulai18').val());
         const selesai18 = new Date($('#selesai18').val());
+        // 19
+        const mulai19 = new Date($('#mulai19').val());
+        const selesai19 = new Date($('#selesai19').val());
+        // 20
+        const mulai20 = new Date($('#mulai20').val());
+        const selesai20 = new Date($('#selesai20').val());
+        // 21
+        const mulai21 = new Date($('#mulai21').val());
+        const selesai21 = new Date($('#selesai21').val());
+        // 22
+        const mulai22 = new Date($('#mulai22').val());
+        const selesai22 = new Date($('#selesai22').val());
         if (selesai2.getTime() < mulai2.getTime()) {
             $('#error-jadwal2').show();
             $("#erorr_jadwal_row2").css("background-color", "red");
@@ -1392,6 +1402,7 @@
             $("#erorr_jadwal_row19").css("background-color", "red");
             $("#erorr_jadwal_row19").css("color", "white");
             $('.btnSave').attr('disabled', 'disabled');
+
         } else if (mulai19.getTime() < selesai18.getTime()) {
             $('#error-jadwal19').show();
             $("#erorr_jadwal_row19").css("background-color", "red");
@@ -1421,7 +1432,7 @@
             $("#erorr_jadwal_row21").css("background-color", "red");
             $("#erorr_jadwal_row21").css("color", "white");
             $('.btnSave').attr('disabled', 'disabled');
-              // 22
+            // 22
             // 21
         } else if (selesai22.getTime() < mulai22.getTime()) {
             $('#error-jadwal22').show();
@@ -1439,7 +1450,7 @@
     }
     setInterval(() => {
         live_jadwal()
-    }, 500);
+    }, 1000);
 </script>
 
 
@@ -1467,5 +1478,33 @@
                 }
             }
         });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#table_jadwal').DataTable({
+            "searching": false,
+            "paging": false,
+            "info": false,
+            "ordering": false,
+            fixedHeader: {
+                header: true,
+            },
+        });
+    });
+
+    var tableOffset = $("#table_jadwal").offset().top;
+    var $header = $("#table_jadwal > thead").clone();
+    var $fixedHeader = $("#header-fixed").append($header);
+
+    $(window).bind("scroll", function() {
+        var offset = $(this).scrollTop();
+
+        if (offset >= tableOffset && $fixedHeader.is(":hidden")) {
+            $fixedHeader.show();
+        } else if (offset < tableOffset) {
+            $fixedHeader.hide();
+        }
     });
 </script>

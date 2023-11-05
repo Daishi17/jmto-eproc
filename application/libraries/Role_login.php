@@ -22,14 +22,16 @@ class Role_login
             $this->ci->session->set_flashdata('salah', 'Pegawai Tidak Terdaftar!');
             redirect('auth');
         } else {
-            if ($cek->status == 0) {
-                $this->ci->session->set_flashdata('salah', 'Pegawai Sedang Menunggu Di Aktivasi!');
+            if ($cek->sts_aktif == 0) {
+                $this->ci->session->set_flashdata('salah', 'Pegawai Belum Di Aktivasi!');
+                redirect('auth');
+            } else if ($cek->sts_aktif == 2) {
+                $this->ci->session->set_flashdata('salah', 'Pegawai Belum Di Aktivasi!');
                 redirect('auth');
             } else {
                 if ($cek && password_verify($password, $cek->password)) {
                     // administrator
                     if ($cek->role == 2) {
-
                         $sekarang = date('Y-m-d H:i');
                         $data = [
                             'waktu_login' => $sekarang,
