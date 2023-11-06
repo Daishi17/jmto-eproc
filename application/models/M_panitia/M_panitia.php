@@ -1015,7 +1015,7 @@ class M_panitia extends CI_Model
     }
 
 
-    // get nib
+    // get evaluasi penawaran
     private function _get_data_query_evaluasi_penawaran($id_rup)
     {
         $this->db->select('*');
@@ -1116,6 +1116,199 @@ class M_panitia extends CI_Model
         return $query->result_array();
     }
 
+    // get evaluasi tkdn
+    var $order_evaluasi_hea_tkdn =  array('tbl_vendor_mengikuti_paket.id_rup', 'tbl_vendor_mengikuti_paket.nama_usaha', 'tbl_vendor_mengikuti_paket.ev_hea_penawaran', 'tbl_vendor_mengikuti_paket.ev_hea_tkdn', 'tbl_vendor_mengikuti_paket.ev_hea_harga', 'tbl_vendor_mengikuti_paket.ev_hea_peringkat', 'tbl_vendor_mengikuti_paket.ev_hea_keterangan', 'tbl_rup.id_rup');
+    private function _get_data_query_evaluasi_hea_tkdn($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_vendor_mengikuti_paket.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_kualifikasi_akhir >', 60);
+        $i = 0;
+        foreach ($this->order_evaluasi_hea_tkdn as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_evaluasi_hea_tkdn) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_evaluasi_hea_tkdn[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_rup.id_rup', 'DESC');
+        }
+    }
+
+    public function gettable_evaluasi_hea_tkdn($id_rup) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_evaluasi_hea_tkdn($id_rup); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_all_evaluasi_hea_tkdn($id_rup)
+    {
+        $this->_get_data_query_evaluasi_hea_tkdn($id_rup); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_filtered_evaluasi_hea_tkdn($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_vendor_mengikuti_paket.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_kualifikasi_akhir >', 60);
+        return $this->db->count_all_results();
+    }
+
+    public function get_peserta_tender_hea_tkdn($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_hea_tkdn !=', NULL);
+        $this->db->order_by('tbl_vendor_mengikuti_paket.ev_hea_harga', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_rup($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('tbl_rup.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    // evaluasi akhir hea
+    var $order_evaluasi_akhir_hea =  array('tbl_vendor_mengikuti_paket.id_rup', 'tbl_vendor_mengikuti_paket.nama_usaha', 'tbl_vendor_mengikuti_paket.ev_hea_penawaran', 'tbl_vendor_mengikuti_paket.ev_hea_tkdn', 'tbl_vendor_mengikuti_paket.ev_hea_harga', 'tbl_vendor_mengikuti_paket.ev_hea_peringkat', 'tbl_vendor_mengikuti_paket.ev_hea_keterangan', 'tbl_rup.id_rup');
+    private function _get_data_query_evaluasi_akhir_hea($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_vendor_mengikuti_paket.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_kualifikasi_akhir >', 60);
+        $i = 0;
+        foreach ($this->order_evaluasi_akhir_hea as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_evaluasi_akhir_hea) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_evaluasi_akhir_hea[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_rup.id_rup', 'DESC');
+        }
+    }
+
+    public function gettable_evaluasi_akhir_hea($id_rup) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_evaluasi_akhir_hea($id_rup); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_all_evaluasi_akhir_hea($id_rup)
+    {
+        $this->_get_data_query_evaluasi_akhir_hea($id_rup); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_filtered_evaluasi_akhir_hea($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_vendor_mengikuti_paket.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_kualifikasi_akhir >', 60);
+        return $this->db->count_all_results();
+    }
+
+    public function get_min_penawaran_hea($id_rup_post)
+    {
+        $this->db->select_min('tbl_vendor_mengikuti_paket.ev_hea_harga', 'min_nilai_hea');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_vendor_mengikuti_paket.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup_post);
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_kualifikasi_akhir >', 60);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_peserta_nilai_akhir_hea($id_rup_post)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_vendor_mengikuti_paket.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup_post);
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_akhir_hea_teknis !=', NULL);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_peserta_nilai_akhir_hea2($id_rup_post)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_vendor_mengikuti_paket.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup_post);
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_akhir_hea_akhir !=', NULL);
+        $this->db->order_by('tbl_vendor_mengikuti_paket.ev_akhir_hea_akhir', 'DESC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    // end evaluasi 
+
     // syarat tambahan
     var $order_syarat_tambahan =  array('tbl_vendor_mengikuti_paket.id_vendor_mengikuti_paket, tbl_vendor_mengikuti_paket.nama_usaha, tbl_vendor_mengikuti_paket.id_vendor_mengikuti_paket,tbl_vendor_mengikuti_paket.id_vendor_mengikuti_paket');
     // get nib
@@ -1176,6 +1369,104 @@ class M_panitia extends CI_Model
         $this->db->from('tbl_vendor_mengikuti_paket');
         $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', $id_rup);
         $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        return $this->db->count_all_results();
+    }
+
+
+    var $order_dokumen_syarat_tambahan =  array('tbl_vendor_mengikuti_paket.id_vendor_mengikuti_paket, tbl_vendor_mengikuti_paket.nama_usaha, tbl_vendor_mengikuti_paket.id_vendor_mengikuti_paket,tbl_vendor_mengikuti_paket.id_vendor_mengikuti_paket');
+    // get nib
+    private function _get_data_query_dokumen_syarat_tambahan($id_vendor, $id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_syarat_tambahan');
+        $this->db->where('tbl_vendor_syarat_tambahan.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_syarat_tambahan.id_vendor', $id_vendor);
+        $i = 0;
+        foreach ($this->order_dokumen_syarat_tambahan as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like(
+                        $item,
+                        $_POST['search']['value']
+                    );
+                }
+
+                if (count($this->order_dokumen_syarat_tambahan) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->order_dokumen_syarat_tambahan[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('tbl_vendor_syarat_tambahan.id_rup', 'DESC');
+        }
+    }
+
+    public function gettable_dokumen_syarat_tambahan($id_vendor, $id_rup) //nam[ilin data pake ini
+    {
+        $this->_get_data_query_dokumen_syarat_tambahan($id_vendor, $id_rup); //ambil data dari get yg di atas
+        if ($_POST['length'] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_filtered_dokumen_syarat_tambahan($id_vendor, $id_rup)
+    {
+        $this->_get_data_query_dokumen_syarat_tambahan($id_vendor, $id_rup); //ambil data dari get yg di atas
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    public function count_all_dokumen_syarat_tambahan($id_vendor, $id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_syarat_tambahan');
+        $this->db->where('tbl_vendor_syarat_tambahan.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_syarat_tambahan.id_vendor', $id_vendor);
+        return $this->db->count_all_results();
+    }
+
+    public function row_vendor_syarat_tambahan($id_vendor_syarat_tambahan)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_syarat_tambahan');
+        $this->db->join('tbl_vendor', 'tbl_vendor_syarat_tambahan.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_syarat_tambahan.id_vendor_syarat_tambahan', $id_vendor_syarat_tambahan);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function update_syarat_tambahan($data, $where)
+    {
+        $this->db->where($where);
+        $this->db->update('tbl_vendor_syarat_tambahan', $data);
+    }
+
+    // untuk cek
+    public function hitung_total_syarat($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_syarat_tambahan_rup');
+        $this->db->where('tbl_syarat_tambahan_rup.id_rup', $id_rup);
+        return $this->db->count_all_results();
+    }
+
+    public function cek_valid_vendor($id_rup, $id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_syarat_tambahan');
+        $this->db->where('tbl_vendor_syarat_tambahan.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_syarat_tambahan.id_vendor', $id_vendor);
+        $this->db->where('tbl_vendor_syarat_tambahan.status', 1);
         return $this->db->count_all_results();
     }
 

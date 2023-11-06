@@ -726,7 +726,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Syarat Tambahan Penyedia</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Syarat Tambahan Penyedia <label for="" id="nama_usaha_tambahan"></label></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -735,7 +735,7 @@
                         <i class="fa fa-info-circle" aria-hidden="true"> </i> Lakukan Validasi Syarat Tambahan Penyedia !!! <br>
                     </div>
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="get_dokumen_syarat_tambahan">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -746,24 +746,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Iso 5000</td>
-                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> File</a></td>
-                            <td><span class="badge bg-success"> <i class="fas fa fa-check"></i> Lulus</span></td>
-                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#evaluasi_syarat_tambahan">
-                                    <i class="fa fa-edit" aria-hidden="true"></i> Evaluasi
-                                </button></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>Iso 1200</td>
-                            <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa fa-file"></i> File</a></td>
-                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tidak Lulus</span></td>
-                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#evaluasi_syarat_tambahan">
-                                    <i class="fa fa-edit" aria-hidden="true"></i> Evaluasi
-                                </button></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -775,28 +757,32 @@
 </div>
 
 <div class="modal fade" id="evaluasi_syarat_tambahan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Evaluasi Hasil Syarat Tambahan</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Evaluasi Syarat Tambahan <label for="" class="nama_usaha_evaluasi_tambahan"></label></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-                    <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Berikan Evaluasi Dan Validasi Syarat Tambahan Penyedia !!! <br>
+            <form action="javascript:;" id="form_persyaratan_tambahan">
+                <input type="hidden" name="id_vendor_syarat_tambahan">
+                <input type="hidden" name="status">
+                <div class="modal-body">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <div>
+                            <i class="fa fa-info-circle" aria-hidden="true"> </i> Berikan Evaluasi Dan Validasi Syarat Tambahan Penyedia <label for="" class="nama_persyaratan_tambahan"></label>, <label for="" class="nama_usaha_evaluasi_tambahan"></label>!!! <br>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Keterangan Evaluasi Syarat Tambahan</label>
+                        <textarea type="text" name="keterangan" id="" class="form-control" placeholder="" aria-describedby="helpId"></textarea>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Keterngan Evaluasi Syarat Tambahan</label>
-                    <textarea type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId"> </textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close</button>
+                    <button type="submit" onclick="lulus_syarat_tambahan()" class="btn btn-success btn_lulus"> <i class="fas fa fa-check"></i> Lulus Evaluasi</button>
+                    <button type="submit" onclick="tidak_lulus_syarat_tambahan()" class="btn btn-danger btn_tidak_lulus"> <i class="fas fa fa-times"></i> Tidak Lulus Evaluasi</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close</button>
-                <button type="button" class="btn btn-success"> <i class="fas fa fa-check"></i>Lulus Evaluasi</button>
-                <button type="button" class="btn btn-danger"> <i class="fas fa fa-times"></i> Tidak Lulus Evaluasi</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
