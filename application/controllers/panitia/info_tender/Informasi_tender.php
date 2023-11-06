@@ -19,6 +19,8 @@ class Informasi_tender extends CI_Controller
 		$this->load->model('Wilayah/Wilayah_model');
 		$this->load->model('M_jenis_jadwal/M_jenis_jadwal');
 		$this->load->model('M_panitia/M_panitia');
+		// model tender
+		$this->load->model('M_tender/M_tender');
 	}
 	public function informasi_pengadaan($id_url_rup)
 	{
@@ -387,11 +389,76 @@ class Informasi_tender extends CI_Controller
 	public function aanwijzing($id_url_rup)
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
+		$data['jadwal_aanwizing'] = $this->M_tender->jadwal_aanwizing($data['row_rup']['id_rup']);
+		$data['data2'] = $this->M_tender->getDataById($data['row_rup']['id_rup']);
 		$this->load->view('template_tender/header');
 		$this->load->view('panitia/info_tender/informasi_tender/aanwijzing', $data);
 		$this->load->view('template_tender/footer');
-		$this->load->view('panitia/info_tender/informasi_tender/ajax');
+		// $this->load->view('panitia/info_tender/informasi_tender/ajax');
+		$this->load->view('panitia/info_tender/informasi_tender/ajax_chat', $data);
 	}
+
+	public function ngeload_chatnya($id_rup)
+	{
+		$data = $this->M_tender->getPesan($id_rup);
+		echo json_encode(array(
+			'data' => $data
+		));
+	}
+
+	public function kirim_pesanya($id_rup)
+    {
+        $isi = $this->input->post('isi');
+        $id_pengirim = $this->input->post('id_pengirim');
+        $id_penerima = $this->input->post('id_penerima');
+        $id_rup = $this->input->post('id_rup');
+        $config['upload_path'] = './file_chat/';
+        $config['allowed_types'] = 'pdf|jpeg|jpg|png|jfif|gif|xlsx|docx';
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('dokumen_chat')) {
+
+            $fileData = $this->upload->data();
+
+            $upload = [
+                'id_pengirim' => $id_pengirim,
+                'isi' => $isi,
+                'id_penerima' => $id_penerima,
+                'id_rup' => $id_rup,
+                'dokumen_chat' => $fileData['file_name'],
+            ];
+            $this->M_tender->tambah_chat($upload);
+            $log = array('status' => true);
+            echo json_encode($log);
+            return true;
+        } else if ($this->upload->do_upload('img_chat')) {
+
+            $fileData2 = $this->upload->data();
+
+            $upload = [
+                'id_pengirim' => $id_pengirim,
+                'isi' => $isi,
+                'id_penerima' => $id_penerima,
+                'id_rup' => $id_rup,
+                'img_chat' => $fileData2['file_name'],
+            ];
+            $this->M_tender->tambah_chat($upload);
+            $log = array('status' => true);
+            echo json_encode($log);
+            return true;
+        } else {
+            $upload = [
+                'id_pengirim' => $id_pengirim,
+                'isi' => $isi,
+                'id_penerima' => $id_penerima,
+                'id_rup' => $id_rup,
+            ];
+            $this->M_tender->tambah_chat($upload);
+            $log = array('status' => true);
+            echo json_encode($log);
+            return true;
+        }
+    }
 
 	public function negosiasi($id_url_rup)
 	{
