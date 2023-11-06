@@ -328,6 +328,35 @@ class Informasi_tender extends CI_Controller
 	}
 	// end evaluasi
 
+	// persyaratan tambahan
+	public function get_syarat_tambahan($id_rup)
+	{
+		$result = $this->M_panitia->gettable_syarat_tambahan($id_rup);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $rs->nama_usaha;
+			$row[] = $rs->id_vendor;
+			$row[] = '<div class="text-center">
+						<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_mengikuti(' . "'" . $rs->id_vendor_mengikuti_paket . "','kualifikasi'" . ')">
+							<i class="fa-solid fa-edit"></i>
+							<small>Evaluasi</small>
+						</a>
+					  </div>';
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_panitia->count_filtered_syarat_tambahan($id_rup),
+			"recordsFiltered" => $this->M_panitia->count_all_syarat_tambahan($id_rup),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+	// 
+
 	public function sanggahan_prakualifikasi($id_url_rup)
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);

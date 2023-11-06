@@ -169,32 +169,17 @@
                                                 Persyaratan Tambahan Penyedia
                                             </div>
                                             <div class="card-body">
-                                                <table class="table table-bordered">
+                                                <table class="table table-bordered" id="tbl_persyaratan_tambahan_vendor">
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Nama Penyedia</th>
+                                                            <th>Status</th>
                                                             <th>Aksi</th>
-                                                            <th>File</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>METRINDOCRB</td>
-                                                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_syarat_tambahan_vendor">
-                                                                    <i class="fa fa-eye" aria-hidden="true"></i> Lihat Syarat
-                                                                </button></td>
-                                                            <td><span class="badge bg-success"> <i class="fas fa fa-check"></i> Lulus</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">2</td>
-                                                            <td>PT Agung Solusi Trans</td>
-                                                            <td><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_syarat_tambahan_vendor">
-                                                                    <i class="fa fa-eye" aria-hidden="true"></i> Lihat Syarat
-                                                                </button></td>
-                                                            <td><span class="badge bg-danger"> <i class="fas fa fa-times"></i> Tidak Lulus</span></td>
-                                                        </tr>
+
                                                     </tbody>
                                                 </table>
                                             </div>

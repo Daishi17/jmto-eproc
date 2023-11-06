@@ -44,6 +44,8 @@
             dataType: "JSON",
             success: function(response) {
                 $('#modal-xl-detail').modal('show')
+                $('#load_syarat_tambahan').html(html_syarat_tambahan);
+                $('#button_ke_info_tender').html('<a href="<?= base_url('panitia/info_tender/informasi_tender/informasi_pengadaan/') ?>' + response['row_rup'].id_url_rup + '" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i>Halaman Informasi Tender</a>');
                 if (response['row_rup'].jenis_kontrak == 1) {
                     var jenis_kontrak = 'Lump Sum'
                 } else if (response['row_rup'].jenis_kontrak == 2) {
@@ -262,8 +264,7 @@
                         '<td><a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['syarat_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-donwload"></i> Download File</a></td>' +
                         '</tr>'
                 }
-                $('#load_syarat_tambahan').html(html_syarat_tambahan);
-                $('#button_ke_info_tender').html('<a href="<?= base_url('panitia/info_tender/informasi_tender/informasi_pengadaan/') ?>' + response['row_rup'].id_url_rup + '" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i>Halaman Informasi Tender</a>');
+
                 // view on button
             }
         })
