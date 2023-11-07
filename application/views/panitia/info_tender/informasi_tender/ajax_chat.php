@@ -327,6 +327,7 @@
                         $('.search_btn').trigger('click');
                         $('[name="dokumen_chat"]').val('');
                         $('[name="img_chat"]').val('');
+                        $('.nongol_dok').css("display", "none");
                         isi.val('');
                         scrollToBottom()
                     }

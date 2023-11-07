@@ -75,6 +75,9 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#peringkatakhirhea" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Peringkat Akhir HEA</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#peringkatakhirterendah" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Peringkat Akhir Harga Terendah</button>
+                        </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="evkualifikasi" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -160,6 +163,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="evheatkdn" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div style="overflow-x: auto;">
                                 <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
@@ -170,9 +174,22 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5 for=""> Nilai TKDN Minimum : <?= $row_rup['persen_pencatatan'] ?>%</h5>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5 for="">Preferensi Maksimum : 25.00%</h5>
+                                            <h5 for="">Preferensi Minimum : 00.00%</h5>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5 for="">Jika TKDN Penawaran >= 25%</h5>
+                                            <h5 for="">Jika TKDN Penawaran < 25%</h5> <br>
+                                        </div>
+                                    </div>
                                     <div style="overflow-x: auto;">
 
-                                        <table class="table table-bordered" id="tbl_evaluasi" aria-describedby="tbl_evaluasi_info">
+                                        <table class="table table-bordered" id="tbl_hea_tkdn" aria-describedby="tbl_evaluasi_info">
                                             <thead style="text-align: center;">
                                                 <tr>
                                                     <th>No</th>
@@ -182,6 +199,7 @@
                                                     <th>Harga Evaluasi Akhir (HEA)<br>(Setelah Koreksi Aritmatika)</th>
                                                     <th>Peringkat Sementara HEA</th>
                                                     <th>Keterangan</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -192,6 +210,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="peringkatakhirhea" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
                                 <div class="flex-grow-1 bd-highlight">
@@ -202,22 +221,58 @@
                             </div>
                             <div class="card-body">
                                 <div style="overflow-x: auto;">
-                                    <table class="table table-bordered" id="tbl_evaluasi" aria-describedby="tbl_evaluasi_info">
+                                    <table class="table table-bordered" id="tbl_akhir_hea">
                                         <thead style="text-align: center;">
                                             <tr>
                                                 <th rowspan="2">No</th>
                                                 <th rowspan="2">Nama Perusahaan</th>
-                                                <th rowspan="2">Harga Penawaran <br> (Setelah Koreksi Aritmatika)</th>
+                                                <th rowspan="2">Harga Penawaran (HEA) <br> (Setelah Koreksi Aritmatika)</th>
                                                 <th>Nilai Teknis</th>
-                                                <th rowspan="2">% Terhadap HPS</th>
-                                                <th>Nilai Usulan Biaya</th>
+                                                <th rowspan="2">%HEA Terhadap HPS</th>
+                                                <th>Nilai HEA</th>
                                                 <th rowspan="2">Nilai Akhir</th>
                                                 <th rowspan="2">Peringkat Akhir</th>
                                                 <th rowspan="2">Keterangan</th>
+                                                <th rowspan="2">Aksi</th>
                                             </tr>
                                             <tr>
                                                 <th><?= $row_rup['bobot_teknis'] ?>%</th>
                                                 <th><?= $row_rup['bobot_biaya'] ?>%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="peringkatakhirterendah" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1 bd-highlight">
+                                    <span class="text-dark">
+                                        <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Peringkat Akhir HEA</strong></small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div style="overflow-x: auto;">
+                                    <table class="table table-bordered" id="tbl_peringkat_akhir_terendah">
+                                        <thead style="text-align: center;">
+                                            <tr>
+                                                <th rowspan="2">No</th>
+                                                <th rowspan="2">Nama Perusahaan</th>
+                                                <th rowspan="2">Kelengkapan Dokumen Administrasi dan Teknis </th>
+                                                <th rowspan="2">Harga Penawaran <br> (Setelah Koreksi Aritmatika)</th>
+                                                <th rowspan="2">% Penawaran Terhadap HPS</th>
+                                                <th>Nilai Biaya</th>
+                                                <th rowspan="2">Peringkat Akhir</th>
+                                                <th rowspan="2">Keterangan</th>
+                                                <!-- <th rowspan="2">Aksi</th> -->
+                                            </tr>
+                                            <tr>
+                                                <th>100%</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -235,6 +290,7 @@
 
 
 <!-- Modal -->
+<!-- kaulifikasi -->
 <div class="modal fade" id="modal_evaluasi_kualifikasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -254,7 +310,7 @@
                                 <span class="text-dark">
                                     <small class="text-white">
                                         <strong><i class="fa-solid fa-edit px-1"></i>
-                                            Evaluasi Akhir Kualifikasi <label for="" id="nama_usaha"></label>
+                                            Evaluasi Akhir Kualifikasi <label for="" class="nama_usaha"></label>
                                         </strong>
                                     </small>
                                 </span>
@@ -284,6 +340,7 @@
     </div>
 </div>
 
+<!-- penawaran -->
 <div class="modal fade" id="modal_evaluasi_penawaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -307,7 +364,7 @@
                                 <span class="text-dark">
                                     <small class="text-white">
                                         <strong><i class="fa-solid fa-edit px-1"></i>
-                                            Evaluasi Akhir Penawaran <label for="" id="nama_usaha"></label>
+                                            Evaluasi Akhir Penawaran <label for="" class="nama_usaha"></label>
                                         </strong>
                                     </small>
                                 </span>
@@ -332,6 +389,111 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-success" id="btn_ev_penawaran">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- hea_tkdn -->
+<div class="modal fade" id="modal_evaluasi_hea_tkdn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="navbar-brand">
+                    <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                    <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form_evaluasi_hea_tkdn" action="javascript:;">
+                <input type="hidden" value="<?= $row_rup['total_hps_rup'] ?>" name="total_hps_rup">
+                <input type="hidden" value="<?= $row_rup['id_rup'] ?>" name="id_rup_post">
+                <input type="hidden" value="<?= $row_rup['bobot_teknis'] ?>" name="bobot_teknis">
+                <input type="hidden" value="<?= $row_rup['bobot_biaya'] ?>" name="bobot_biaya">
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                            <div class="flex-grow-1 bd-highlight">
+                                <span class="text-dark">
+                                    <small class="text-white">
+                                        <strong><i class="fa-solid fa-edit px-1"></i>
+                                            Evaluasi HEA TKDN <label for="" class="nama_usaha"></label>
+                                        </strong>
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" name="id_vendor_mengikuti_paket">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Harga Penawaran (Setelah Koreksi Aritmatika)</label>
+                                <input type="text" class="form-control number_only" name="ev_hea_penawaran" placeholder="Harga Penawaran (Setelah Koreksi Aritmatika)" onkeyup="format_rupiah2()">
+                                <input type="text" class="form-control" placeholder="Rp." name="penawaran_rp2" disabled>
+                                <label for="" id="error_ev_keuangan" class="text-danger"></label>
+                            </div>
+                            <div class="mb-3" style="margin-top: -10px;">
+                                <label for="" class="form-label">Nilai TKDN</label>
+                                <input type="text" class="form-control number_only" name="ev_hea_tkdn" placeholder="Nilai TKDN">
+                                <label for="" id="error_ev_teknis" class="text-danger"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success" id="btn_ev_tkdn">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- akhir_hea -->
+<div class="modal fade" id="modal_evaluasi_akhir_hea" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="navbar-brand">
+                    <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                    <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form_evaluasi_akhir_hea" action="javascript:;">
+                <input type="hidden" value="<?= $row_rup['total_hps_rup'] ?>" name="total_hps_rup">
+                <input type="hidden" value="<?= $row_rup['id_rup'] ?>" name="id_rup_post">
+                <input type="hidden" value="<?= $row_rup['bobot_teknis'] ?>" name="bobot_teknis">
+                <input type="hidden" value="<?= $row_rup['bobot_biaya'] ?>" name="bobot_biaya">
+                <input type="hidden" name="ev_hea_harga">
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                            <div class="flex-grow-1 bd-highlight">
+                                <span class="text-dark">
+                                    <small class="text-white">
+                                        <strong><i class="fa-solid fa-edit px-1"></i>
+                                            Evaluasi Peringkat Akhir HEA <label for="" class="nama_usaha"></label>
+                                        </strong>
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" name="id_vendor_mengikuti_paket">
+                            <div class="mb-3" style="margin-top: 10px;">
+                                <label for="" class="form-label">Nilai Teknis</label>
+                                <input type="text" class="form-control number_only" name="ev_akhir_hea_teknis" placeholder="Nilai Teknis">
+                                <label for="" id="error_ev_teknis" class="text-danger"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success" id="btn_ev_hea_akhir">Simpan</button>
                 </div>
             </form>
         </div>

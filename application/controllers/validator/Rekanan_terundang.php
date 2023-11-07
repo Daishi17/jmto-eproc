@@ -2386,8 +2386,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2423,8 +2422,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -2607,8 +2605,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2644,8 +2641,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -2785,8 +2781,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -2822,8 +2817,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -2994,8 +2988,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -3031,8 +3024,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -3163,8 +3155,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -3200,8 +3191,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -3415,8 +3405,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -3452,8 +3441,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -3671,8 +3659,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -3708,8 +3695,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);
@@ -3941,8 +3927,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		} else {
 			$data = [
 				'alasan_validator' => $alasan_validator,
@@ -3977,8 +3962,7 @@ class Rekanan_terundang extends CI_Controller
 			$get_row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_id_vendor($id_vendor['id_vendor']);
 			$data_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor_url($get_row_vendor['id_url_vendor']);
 			$no_telpon = $data_vendor['no_telpon'];
-			$pesanku = str_replace(" ", "-", $alasan_validator);
-			json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_terdaftar/" . $no_telpon . '/' . $pesanku));
+			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 		}
 		$this->M_Rekanan_terundang->insert_monitoring($data_monitoring);
 		$this->M_Rekanan_terundang->update_vendor($data_vendor, $where_vendor);

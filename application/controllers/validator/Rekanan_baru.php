@@ -95,7 +95,7 @@ class Rekanan_baru extends CI_Controller
         $this->M_Rekanan_baru->update_vendor($data, $where);
         $data = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
         $no_telpon = $data['no_telpon'];
-        json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_aktif/" . $no_telpon));
+        $this->kirim_wa->kirim_wa_vendor_aktif($no_telpon);
         $type_email = 'TERIMA-VENDOR';
         $message = 'Selamat! Akun Anda Telah Aktif Pada Aplikasi E-PROCUREMENT PT. Jasamarga Tollroad Operator Silahkan Login Sebagai Penyedia https://drtproc.jmto.co.id/';
         $this->email_send->sen_row_email($type_email, $id_url_vendor, $message);
@@ -121,7 +121,7 @@ class Rekanan_baru extends CI_Controller
         $this->M_Rekanan_baru->update_vendor($data, $where);
         $data = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
         $no_telpon = $data['no_telpon'];
-        json_decode(file_get_contents("https://jmto-vms.kintekindo.net/Api_wa/kirim_wa_vendor_aktif/" . $no_telpon));
+        $this->kirim_wa->kirim_wa_vendor_aktif($no_telpon);
         $type_email = 'TERIMA-VENDOR';
         $message = 'Registrasi Akun Anda Di Tolak Pada Aplikasi E-PROCUREMENT PT. Jasamarga Tollroad Operator, Untuk Melakukan Daftar Ulang Silahkan Gunakan Email Yang Lain!';
         $this->email_send->sen_row_email($type_email, $id_url_vendor, $message);
