@@ -753,8 +753,98 @@ class Informasi_tender extends CI_Controller
 		$this->load->view('template_tender/header_penawaran');
 		$this->load->view('panitia/info_tender/informasi_tender/buka_penawaran', $data);
 		$this->load->view('template_tender/footer');
-		$this->load->view('panitia/info_tender/informasi_tender/ajax');
+		$this->load->view('panitia/info_tender/informasi_tender/ajax_penawaran');
 	}
+
+	public function get_vendor_mengikuti_paket_penawaran()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$result = $this->M_panitia->gettable_vendor_mengikuti_paket_penawaran($id_rup);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $rs->nama_usaha;
+			$row[] = '<div class="text-center">
+			<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_mengikuti(' . "'" . $rs->id_vendor_mengikuti_paket . "','lihat_dokumen_penawaran_1'" . ')">
+				<i class="fa-solid fa-eye"></i>
+				<small>Lihat</small>
+			</a>
+		  </div>';
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_panitia->count_filtered_vendor_mengikuti_paket_penawaran($id_rup),
+			"recordsFiltered" => $this->M_panitia->count_all_vendor_mengikuti_paket_penawaran($id_rup),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+
+	public function get_vendor_mengikuti_paket_penawaran_file_II()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$result = $this->M_panitia->gettable_vendor_mengikuti_paket_penawaran($id_rup);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $rs->nama_usaha;
+			$row[] = "Rp " . number_format($rs->nilai_penawaran_vendor, 2, ',', '.');
+			$row[] = '<div class="text-center">
+			<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_mengikuti(' . "'" . $rs->id_vendor_mengikuti_paket . "','lihat_dokumen_penawaran_1'" . ')">
+				<i class="fa-solid fa-eye"></i>
+				<small>Lihat</small>
+			</a>
+		  </div>';
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_panitia->count_filtered_vendor_mengikuti_paket_penawaran($id_rup),
+			"recordsFiltered" => $this->M_panitia->count_all_vendor_mengikuti_paket_penawaran($id_rup),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+
+	public function get_dokumen_penawaran_file_I_vendor()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$id_vendor = $this->input->post('id_vendor');
+		$result = $this->M_panitia->gettable_vendor_dokumen_penawaran_file_I($id_rup, $id_vendor);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $rs) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $rs->nama_dokumen_pengadaan_vendor;
+			$row[] = $rs->tkdn_dokumen_pengadaan;
+			$row[] = $rs->persentase_tkdn_dokumen_pengadaan . '%';
+			$row[] = '<div class="text-center">
+			<a href="#" class="btn btn-info btn-sm shadow-lg text-white">
+				<i class="fa-solid fa-file"></i>
+				<small>Lihat</small>
+			</a>
+		  </div>';
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_panitia->count_filtered_vendor_dokumen_penawaran_file_I($id_rup, $id_vendor),
+			"recordsFiltered" => $this->M_panitia->count_all_vendor_dokumen_penawaran_file_I($id_rup, $id_vendor),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+
+
 
 	public function aanwijzing($id_url_rup)
 	{

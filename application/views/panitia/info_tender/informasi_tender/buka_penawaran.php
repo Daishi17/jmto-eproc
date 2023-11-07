@@ -1,4 +1,6 @@
 <main class="container-fluid">
+    <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+    <input type="hidden" name="url_byid_mengikuti" value="<?= base_url('panitia/info_tender/informasi_tender/get_byid_mengikuti/') ?>">
     <div class="row">
         <div class="col">
             <div class="card border-dark">
@@ -11,22 +13,21 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>Nama Paket</th>
-                                    <td>PAKET KEMERDEKAAN 78 RI BOGOR</td>
+                                    <td><?= $row_rup['nama_rup'] ?></td>
                                 </tr>
                                 <tr>
                                     <th>Nama Jenis Pengadaan</th>
-                                    <td>JASA KONSTRUKSI</td>
+                                    <td><?= $row_rup['nama_jenis_pengadaan'] ?></td>
 
                                 </tr>
                                 <tr>
                                     <th>Nama Metode Pemilihan </th>
-                                    <td>Prakualifikasi 2 file</td>
+                                    <td><?= $row_rup['nama_metode_pengadaan'] ?></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-
-
+                    <!-- test -->
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-file1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dokumen Pengadaan File I</button>
@@ -55,31 +56,16 @@
                                     Dokumen Pengadaan File I
                                 </div>
                                 <div class="card-body">
-                                    <table class="table table-stripped table-bordered">
+                                    <table id="table_vendor_mengikuti_paket" class="table table-stripped table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama Peserta</th>
-                                                <th>TKDN/PDN/IMPOR</th>
-                                                <th>Persentase TKDN/PDN/IMPOR</th>
                                                 <th>Lihat & Download Dokumen Pengadaan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>METRINDOCRB</td>
-                                                <td>TKDN</td>
-                                                <td>75.99</td>
-                                                <td><a href="#" data-bs-toggle="modal" data-bs-target="#buka_penawaran1" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i> Lihat</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>PT Agung Solusi Trans</td>
-                                                <td>TKDN</td>
-                                                <td>70.99</td>
-                                                <td><a href="#" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i> Lihat</a></td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -91,28 +77,17 @@
                                     Dokumen Pengadaan File II
                                 </div>
                                 <div class="card-body">
-                                    <table class="table table-bordered">
+                                    <table id="table_vendor_mengikuti_paket_penawaran_II" class="table table-stripped table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama Peserta</th>
                                                 <th>Nilai Penawaran</th>
-                                                <th>Lihat Penawaran</th>
+                                                <th>Lihat Dok Penawaran</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>METRINDOCRB</td>
-                                                <td>Rp. 6.000.000.000</td>
-                                                <td><a href="#" data-bs-toggle="modal" data-bs-target="#buka_penawaran2" class="btn btn-sm btn-danger text-white"><i class="fa fa-eye"></i> Lihat</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>PT Agung Solusi Trans</td>
-                                                <td>Rp. 7.000.000.000</td>
-                                                <td><a href="#" class="btn btn-sm btn-danger text-white"><i class="fa fa-eye"></i> Lihat</a></td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -125,7 +100,7 @@
 </main>
 
 <div class="modal fade" id="buka_penawaran1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-file" aria-hidden="true"></i> Dokumen File I</h5>
@@ -134,15 +109,17 @@
             <div class="modal-body">
                 <div class="alert alert-primary d-flex align-items-center" role="alert">
                     <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Pembukaan Dokumen File I Penyedia METRINDOCRB!!! <br>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Pembukaan Dokumen File I Penyedia <label for="" class="nama_usaha_vendor"></label> <br>
                     </div>
                 </div>
                 <br>
-                <table class="table table-bordered">
+                <table id="table_dokumen_penawaran_file_I_vendor" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama File</th>
+                            <th>TKDN/PDN/IMPORT</th>
+                            <th>Persentase TKDN/PDN/IMPORT</th>
                             <th>File</th>
                         </tr>
                     </thead>
@@ -150,44 +127,6 @@
                         <tr>
                             <td scope="row">1</td>
                             <td>Dokumen File 1</td>
-                            <td><a href="#" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i> Download</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="buka_penawaran2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-file" aria-hidden="true"></i> Dokumen File II</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-                    <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Pembukaan Dokumen File II Penyedia METRINDOCRB!!! <br>
-                    </div>
-                </div>
-                <br>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama File</th>
-                            <th>File</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Dokumen File 2</td>
                             <td><a href="#" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i> Download</a></td>
                         </tr>
                     </tbody>
