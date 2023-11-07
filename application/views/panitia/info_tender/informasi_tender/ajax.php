@@ -671,4 +671,388 @@
         $('[name="status"]').val(2)
     }
     // end persyaratan tambahan
+
+    // berita acara pengadaan
+    var form_upload_berita_acara_tender = $('#form_upload_berita_acara_tender')
+    form_upload_berita_acara_tender.on('submit', function(e) {
+        var url_simpan_berita_acara_tender = $('[name="url_simpan_berita_acara_tender"]').val();
+        e.preventDefault();
+        var file_ba = $('[name="file_ba"]').val()
+        if (file_ba == '') {
+            Swal.fire({
+                title: "Gagal!",
+                text: "File Masih Kosong!",
+                icon: "warning"
+            });
+        } else {
+            $.ajax({
+                url: url_simpan_berita_acara_tender,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#btn_file_ba').attr("disabled", true);
+                },
+                success: function(response) {
+
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Proses Data <b></b>',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('#btn_file_ba').attr("disabled", false);
+                            $('#upload_berita_acara_tender').modal('hide')
+                            load_dok_ba_tender()
+                            form_upload_berita_acara_tender[0].reset();
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+
+                }
+            })
+        }
+
+    })
+    load_dok_ba_tender()
+
+    function load_dok_ba_tender() {
+        var id_rup = $('[name="id_rup"]').val()
+        var url_get_berita_acara_tender = $('[name="url_get_berita_acara_tender"]').val()
+        var url_open_berita_acara_tender = $('[name="url_open_berita_acara_tender"]').val()
+        $.ajax({
+            type: "GET",
+            url: url_get_berita_acara_tender + id_rup,
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                var i;
+                var no = 1;
+                for (i = 0; i < response.length; i++) {
+                    html += '<tr>' +
+                        '<td><small>' + no++ + '</small></td>' +
+                        '<td><small>' + response[i].nama_file + '</small></td>' +
+                        '<td><small>' + '<a target="_blank" href="' + url_open_berita_acara_tender + response[i].file_ba + '" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a>' + '</small></td>' +
+                        '<td><small>' + '<a href="javascript:;" onclick="delete_ba(\'' + response[i].id_berita_acara_tender + '\'' + ',' + '\'' + response[i].nama_file + '\')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>' + '</small></td>' +
+                        '</tr>';
+
+                }
+                $('#tbl_ba_tender').html(html)
+            }
+        })
+    }
+
+    function delete_ba(id_berita_acara_tender, nama_file) {
+        var url_hapus_berita_acara_tender = $('[name="url_hapus_berita_acara_tender"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Menghapus Berita Acara ? ',
+            text: nama_file,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_berita_acara_tender,
+                    data: {
+                        id_berita_acara_tender: id_berita_acara_tender,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'success') {
+                            Swal.fire(
+                                'Berhasil!',
+                                'File Berita Acara ' + nama_file + ' Berhasil Di Hapus!',
+                                'success'
+                            )
+                            load_dok_ba_tender()
+                        }
+                    }
+                })
+
+            }
+        })
+    }
+    // end berita acara
+
+    // upload undangan pembuktian
+    var form_upload_undangan_pembuktian = $('#form_upload_undangan_pembuktian')
+    form_upload_undangan_pembuktian.on('submit', function(e) {
+        var url_simpan_undangan_pembuktian = $('[name="url_simpan_undangan_pembuktian"]').val();
+        e.preventDefault();
+        var file_undangan_pembuktian = $('[name="file_undangan_pembuktian"]').val()
+        if (file_undangan_pembuktian == '') {
+            Swal.fire({
+                title: "Gagal!",
+                text: "File Masih Kosong!",
+                icon: "warning"
+            });
+        } else {
+            $.ajax({
+                url: url_simpan_undangan_pembuktian,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.btn_undangan').attr("disabled", true);
+                },
+                success: function(response) {
+
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Proses Data <b></b>',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('.btn_undangan').attr("disabled", false);
+                            $('#upload_berita_acara_tender').modal('hide')
+                            load_dok_undangan_pembuktian()
+                            form_upload_undangan_pembuktian[0].reset();
+
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+
+                }
+            })
+        }
+
+    })
+    load_dok_undangan_pembuktian()
+
+    function load_dok_undangan_pembuktian() {
+        var id_rup = $('[name="id_rup"]').val()
+        var url_row_rup = $('[name="url_row_rup"]').val()
+        var url_open_undangan = $('[name="url_open_undangan"]').val()
+        $.ajax({
+            type: "GET",
+            url: url_row_rup + id_rup,
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                if (response.file_undangan_pembuktian) {
+                    var file = '<a target="_blank" href="' + url_open_undangan + response.file_undangan_pembuktian + '" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> Lihat Undangan</a>'
+                } else {
+                    var file = '<span class="badge bg-danger">Belum Upload Undangan</span>'
+                }
+                html += '<tr>' +
+                    '<td><small>' + '1' + '</small></td>' +
+                    '<td><small>' + 'Undangan Pembuktian' + '</small></td>' +
+                    '<td><small>' + file + '</small></td>' +
+                    '</tr>';
+
+
+                $('#tbl_undangan_pembuktian').html(html)
+            }
+        })
+    }
+    // end upload undangan pembuktian
+
+    // upload hasil prakualifikasi
+    var form_upload_hasil_prakualifikasi = $('#form_upload_hasil_prakualifikasi')
+    form_upload_hasil_prakualifikasi.on('submit', function(e) {
+        var url_simpan_hasil_prakualifikasi = $('[name="url_simpan_hasil_prakualifikasi"]').val();
+        e.preventDefault();
+        var file_pengumuman_prakualifikasi = $('[name="file_pengumuman_prakualifikasi"]').val()
+        if (file_pengumuman_prakualifikasi == '') {
+            Swal.fire({
+                title: "Gagal!",
+                text: "File Masih Kosong!",
+                icon: "warning"
+            });
+        } else {
+            $.ajax({
+                url: url_simpan_hasil_prakualifikasi,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.btn_hasil_pra').attr("disabled", true);
+                },
+                success: function(response) {
+
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Proses Data <b></b>',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('.btn_hasil_pra').attr("disabled", false);
+                            load_dok_hasil_prakualifikasi()
+                            form_upload_hasil_prakualifikasi[0].reset();
+
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+
+                }
+            })
+        }
+
+    })
+    load_dok_hasil_prakualifikasi()
+
+    function load_dok_hasil_prakualifikasi() {
+        var id_rup = $('[name="id_rup"]').val()
+        var url_row_rup = $('[name="url_row_rup"]').val()
+        var url_open_hasil_prakualifikasi = $('[name="url_open_hasil_prakualifikasi"]').val()
+        $.ajax({
+            type: "GET",
+            url: url_row_rup + id_rup,
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                if (response.file_pengumuman_prakualifikasi) {
+                    var file = '<a target="_blank" href="' + url_open_hasil_prakualifikasi + response.file_pengumuman_prakualifikasi + '" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> Lihat File</a>'
+                } else {
+                    var file = '<span class="badge bg-danger">Belum Upload Hasil Prakualifikasi</span>'
+                }
+                html += '<tr>' +
+                    '<td><small>' + '1' + '</small></td>' +
+                    '<td><small>' + 'Undangan Prakualifikasi' + '</small></td>' +
+                    '<td><small>' + file + '</small></td>' +
+                    '</tr>';
+
+
+                $('#tbl_hasil_prakualifikasi').html(html)
+            }
+        })
+    }
+    // end upload hasil prakualifikasi
+
+    // upload penunjukan pemenang
+    var form_upload_surat_penunjukan = $('#form_upload_surat_penunjukan')
+    form_upload_surat_penunjukan.on('submit', function(e) {
+        var url_simpan_penunjukan_pemenang = $('[name="url_simpan_penunjukan_pemenang"]').val();
+        e.preventDefault();
+        var file_surat_penunjukan_pemenang = $('[name="file_surat_penunjukan_pemenang"]').val()
+        if (file_surat_penunjukan_pemenang == '') {
+            Swal.fire({
+                title: "Gagal!",
+                text: "File Masih Kosong!",
+                icon: "warning"
+            });
+        } else {
+            $.ajax({
+                url: url_simpan_penunjukan_pemenang,
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.btn_penunjukan').attr("disabled", true);
+                },
+                success: function(response) {
+
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Proses Data <b></b>',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('.btn_penunjukan').attr("disabled", false);
+                            load_dok_surat_penunjukan()
+                            form_upload_surat_penunjukan[0].reset();
+
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+
+                }
+            })
+        }
+
+    })
+    load_dok_surat_penunjukan()
+
+    function load_dok_surat_penunjukan() {
+        var id_rup = $('[name="id_rup"]').val()
+        var url_row_rup = $('[name="url_row_rup"]').val()
+        var url_open_penunjukan_pemenang = $('[name="url_open_penunjukan_pemenang"]').val()
+        $.ajax({
+            type: "GET",
+            url: url_row_rup + id_rup,
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                if (response.file_surat_penunjukan_pemenang) {
+                    var file = '<a target="_blank" href="' + url_open_penunjukan_pemenang + response.file_surat_penunjukan_pemenang + '" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> Lihat File</a>'
+                } else {
+                    var file = '<span class="badge bg-danger">Belum Upload Surat Penunjukan Pemenang</span>'
+                }
+                html += '<tr>' +
+                    '<td><small>' + '1' + '</small></td>' +
+                    '<td><small>' + 'Surat Penunjukan Pemenang' + '</small></td>' +
+                    '<td><small>' + file + '</small></td>' +
+                    '</tr>';
+
+
+                $('#tbl_penunjukan_pemenang').html(html)
+            }
+        })
+    }
+    // end upload penjukan pemenang
 </script>

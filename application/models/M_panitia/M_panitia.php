@@ -1596,4 +1596,49 @@ class M_panitia extends CI_Model
         $this->db->where('tbl_vendor_dokumen_pengadaan.id_vendor', $id_vendor);
         return $this->db->count_all_results();
     }
+
+    // berita acara pengadaan
+    public function insert_ba_tender($data)
+    {
+        $this->db->insert('tbl_ba_tender', $data);
+    }
+
+    public function get_ba_tender($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_ba_tender');
+        $this->db->where('tbl_ba_tender.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function hapus_ba_tender($id_berita_acara_tender)
+    {
+        $this->db->where('tbl_ba_tender.id_berita_acara_tender', $id_berita_acara_tender);
+        $this->db->delete('tbl_ba_tender');
+    }
+    // end berita acara pengadaan
+
+    // get pesertam pemenang
+    public function get_peserta_pemenang($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', $id_rup);
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $this->db->order_by('tbl_vendor_mengikuti_paket.ev_hea_peringkat', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_peserta_rank1($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', $id_rup);
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $this->db->order_by('tbl_vendor_mengikuti_paket.ev_hea_peringkat', 'ASC');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }
