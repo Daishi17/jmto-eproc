@@ -1,3 +1,6 @@
+<!-- row_rup -->
+<input type="hidden" name="url_row_rup" value="<?= base_url('panitia/info_tender/informasi_tender/get_row_rup/') ?>">
+
 <!-- url evaluasi ya -->
 <input type="hidden" name="url_byid_mengikuti" value="<?= base_url('panitia/info_tender/informasi_tender/get_byid_mengikuti/') ?>">
 <input type="hidden" name="url_simpan_evaluasi_kualifikasi" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_evaluasi_kualifikasi/') ?>">
@@ -8,3 +11,21 @@
 <input type="hidden" name="url_byid_syarat_tambahan" value="<?= base_url('panitia/info_tender/informasi_tender/get_byid_syarat_tambahan/') ?>">
 
 <input type="hidden" name="url_simpan_evaluasi_syarat_tambahan" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_evaluasi_syarat_tambahan/') ?>">
+
+<!-- berita acara url -->
+<input type="hidden" name="url_simpan_berita_acara_tender" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_berita_acara_tender/') ?>">
+<input type="hidden" name="url_hapus_berita_acara_tender" value="<?= base_url('panitia/info_tender/informasi_tender/hapus_berita_acara_tender/') ?>">
+<input type="hidden" name="url_get_berita_acara_tender" value="<?= base_url('panitia/info_tender/informasi_tender/get_berita_acara_tender/') ?>">
+<input type="hidden" name="url_open_berita_acara_tender" value="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/BERITA_ACARA_PENGADAAN' . '/') ?>">
+
+<!-- undangan pembuktian -->
+<input type="hidden" name="url_simpan_undangan_pembuktian" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_undangan_pembuktian/') ?>">
+<input type="hidden" name="url_open_undangan" value="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/UNDANGAN_PEMBUKTIAN' . '/') ?>">
+
+<!-- pengumuman hasi prakualifikasi -->
+<input type="hidden" name="url_simpan_hasil_prakualifikasi" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_hasil_prakualifikasi/') ?>">
+<input type="hidden" name="url_open_hasil_prakualifikasi" value="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/SURAT_PENUNJUKAN_PEMENANG' . '/') ?>">
+
+<!-- surat penunjukan pemenang -->
+<input type="hidden" name="url_simpan_penunjukan_pemenang" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_penunjukan_pemenang/') ?>">
+<input type="hidden" name="url_open_penunjukan_pemenang" value="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/SURAT_PENUNJUKAN_PEMENANG' . '/') ?>">

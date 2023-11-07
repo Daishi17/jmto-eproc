@@ -218,10 +218,11 @@
                             </th>
                         </tr>
                         <tr>
+
                             <th>Berita Acara Pengadaan</th>
                             <th>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
                                                 Upload Berita Acara Pengadaan
@@ -237,57 +238,17 @@
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Peringkat Teknis</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-                                                            <td>
-                                                                <a href="" class="btn btn-sm btn-danger btn-success"> <i class="fas fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">2</td>
-                                                            <td>Peringkat Penawaran Harga</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-                                                            <td>
-                                                                <a href="" class="btn btn-sm btn-danger btn-success"> <i class="fas fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">3</td>
-                                                            <td>Pengumuman Pemenang</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-                                                            <td>
-                                                                <a href="" class="btn btn-sm btn-danger btn-success"> <i class="fas fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">4</td>
-                                                            <td>Undangan Presentasi</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-                                                            <td>
-                                                                <a href="" class="btn btn-sm btn-danger btn-success"> <i class="fas fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td scope="row">5</td>
-                                                            <td>Addendum Dokumen Pengadaan</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-                                                            <td>
-                                                                <a href="" class="btn btn-sm btn-danger btn-success"> <i class="fas fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
+                                                    <tbody id="tbl_ba_tender">
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                         <div class="card">
                                             <div class="card-header bg-warning text-white">
                                                 Upload Evaluasi Hasil Penawaran
-                                                <a href="" style="float: right;" data-bs-toggle="modal" data-bs-target="#upload_berita_acara_tender" class="btn btn-danger btn-sm"> <i class="fas fa fa-upload"></i> Upload</a>
+                                                <a href="javascript:;" style="float: right;" data-bs-toggle="modal" data-bs-target="#upload_berita_acara_penawaran" class="btn btn-danger btn-sm"> <i class="fas fa fa-upload"></i> Upload</a>
                                             </div>
                                             <div class="card-body">
                                                 <table class="table table-bordered">
@@ -300,14 +261,6 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Berita Acara Evaluasi Penawaran</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> </a></td>
-                                                            <td>
-                                                                <a href="" class="btn btn-sm btn-danger btn-success"> <i class="fas fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -342,7 +295,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </th>
                         </tr>
@@ -408,38 +361,86 @@
     </div>
 </div>
 
+<!-- modal ba tender -->
 <div class="modal fade" id="upload_berita_acara_tender" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-secondary text-white">
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara Pengadaan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-primary d-flex align-items-center" role="alert">
-                    <div>
-                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Dokumen Umum Untuk Di Upload !!! <br>
-                        <label>1. Peringkat Teknis</label>
-                        <label>2. Peringkat Penawaran Harga</label>
-                        <label>3. Pengumuman Pemenang</label>
-                        <label>4. Undangan Presentasi</label>
-                        <label>5. Addendum Dokumen Pengadaan</label>
+            <form id="form_upload_berita_acara_tender" action="javascript:;" enctype="multipart/form-data">
+                <input type="hidden" name="id_rup_ba_tender" value="<?= $row_rup['id_rup'] ?>">
+                <input type="hidden" name="nama_rup_ba_tender" value="<?= $row_rup['nama_rup'] ?>">
+                <div class="modal-body">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <div>
+                            <i class="fa fa-info-circle" aria-hidden="true"> </i> Dokumen Umum Untuk Di Upload !!! <br>
+                            <ol>
+                                <li>Peringkat Teknis</li>
+                                <li>Peringkat Penawaran Harga</li>
+                                <li>Pengumuman Pemenang</li>
+                                <li>Undangan Presentasi</li>
+                                <li>Addendum Dokumen Pengadaan</li>
+                                <li>Informasi Lainnya</li>
+                            </ol>
+                        </div>
                     </div>
+                    <br>
+                    <label>Nama File</label>
+                    <input type="text" class="form-control" name="nama_file" placeholder="Nama File">
+                    <br>
+                    <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_ba">
                 </div>
-                <br>
-                <form id="form_upload_berita_acara_tender" action="javascript:;" enctype="multipart/form-data">
-                    <div class="input-group">
-                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
-                        <button class="btn btn-outline-secondary file_hps_btn" type="submit">Upload</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-outline-success btn_file_ba" type="submit">Upload</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<!-- end modal ba tender -->
+
+<!-- modal ba penawaran -->
+<div class="modal fade" id="upload_berita_acara_penawaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara Pengadaan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form_upload_berita_acara_tender" action="javascript:;" enctype="multipart/form-data">
+                <input type="hidden" name="id_rup_ba_tender" value="<?= $row_rup['id_rup'] ?>">
+                <input type="hidden" name="nama_rup_ba_tender" value="<?= $row_rup['nama_rup'] ?>">
+                <div class="modal-body">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <div>
+                            <i class="fa fa-info-circle" aria-hidden="true"> </i> Dokumen Umum Untuk Di Upload !!! <br>
+                            <ol>
+                                <li>Peringkat Teknis</li>
+                                <li>Peringkat Penawaran Harga</li>
+                                <li>Pengumuman Pemenang</li>
+                                <li>Undangan Presentasi</li>
+                                <li>Addendum Dokumen Pengadaan</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <br>
+                    <label>Nama File</label>
+                    <input type="text" class="form-control" name="nama_file" placeholder="Nama File">
+                    <br>
+                    <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_ba">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-outline-success btn_file_ba" type="submit">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end modal ba penawaran -->
 
 <div class="modal fade" id="pengumuman_pemenang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -464,18 +465,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>METRINDOCRB</td>
-                            <td>metrindocirebon@yahoo.co.id</td>
-                            <td><i class="fas fa fa-star text-warning"></i></td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td>PT Agung Solusi Trans </td>
-                            <td>bambang.triyono@agungrent.co.id</td>
-                            <td><i class="fas fa fa-times text-danger"></i></td>
-                        </tr>
+                        <?php $i = 1;
+                        foreach ($get_pemenang as $key => $value) { ?>
+                            <tr>
+                                <td scope="row"><?= $i++ ?></td>
+                                <td><?= $value['nama_usaha'] ?></td>
+                                <td><?= $value['email'] ?></td>
+                                <td>
+                                    <?php if ($value['ev_hea_peringkat'] == 1) { ?>
+                                        <i class="fas fa fa-star text-warning"></i>
+                                    <?php   } else { ?>
+                                        <i class="fas fa fa-times text-danger"></i>
+                                    <?php   }  ?>
+
+                                </td>
+                            </tr>
+                        <?php } ?>
+
                     </tbody>
                 </table>
             </div>
@@ -501,9 +507,11 @@
                     </div>
                 </div>
                 <form id="form_upload_undangan_pembuktian" action="javascript:;" enctype="multipart/form-data">
+                    <input type="hidden" name="id_rup_pembuktian" value="<?= $row_rup['id_rup'] ?>">
+                    <input type="hidden" name="nama_rup_pembuktian" value="<?= $row_rup['nama_rup'] ?>">
                     <div class="input-group">
-                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
-                        <button class="btn btn-outline-secondary file_hps_btn" type="submit">Upload</button>
+                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_undangan_pembuktian">
+                        <button class="btn btn-outline-secondary btn_undangan" type="submit">Upload</button>
                     </div>
                 </form>
                 <br>
@@ -515,12 +523,12 @@
                             <th>File</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="tbl_undangan_pembuktian">
+                        <!-- <tr>
                             <td scope="row">1</td>
                             <td>Undangan Pembuktian</td>
                             <td><label for="" class="btn btn-sm btn-danger"> Belum Upload Undangan</label></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -544,10 +552,12 @@
                         <i class="fa fa-info-circle" aria-hidden="true"> </i> Pengumuman Hasil Prakualifikasi Pengadaan !!! <br>
                     </div>
                 </div>
-                <form id="form_upload_hasil_rakualifikasi" action="javascript:;" enctype="multipart/form-data">
+                <form id="form_upload_hasil_prakualifikasi" action="javascript:;" enctype="multipart/form-data">
                     <div class="input-group">
-                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
-                        <button class="btn btn-outline-secondary file_hps_btn" type="submit">Upload</button>
+                        <input type="hidden" name="id_rup_prakualifikasi" value="<?= $row_rup['id_rup'] ?>">
+                        <input type="hidden" name="nama_rup_prakualifikasi" value="<?= $row_rup['nama_rup'] ?>">
+                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_pengumuman_prakualifikasi">
+                        <button class="btn btn-outline-secondary btn_hasil_pra" type="submit">Upload</button>
                     </div>
                 </form>
                 <br>
@@ -559,12 +569,12 @@
                             <th>File</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="tbl_hasil_prakualifikasi">
+                        <!-- <tr>
                             <td scope="row">1</td>
                             <td>Pengumuman Hasil Prakualifikasi</td>
                             <td><label for="" class="btn btn-sm btn-danger"> Belum Upload</label></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -589,9 +599,11 @@
                     </div>
                 </div>
                 <form id="form_upload_surat_penunjukan" action="javascript:;" enctype="multipart/form-data">
+                    <input type="hidden" name="id_rup_penunjukan" value="<?= $row_rup['id_rup'] ?>">
+                    <input type="hidden" name="nama_rup_penunjukan" value="<?= $row_rup['nama_rup'] ?>">
                     <div class="input-group">
-                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
-                        <button class="btn btn-outline-secondary file_hps_btn" type="submit">Upload</button>
+                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_surat_penunjukan_pemenang">
+                        <button class="btn btn-outline-secondary btn_penunjukan" type="submit">Upload</button>
                     </div>
                 </form>
                 <br>
@@ -603,12 +615,8 @@
                             <th>File</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Surat Penunjukan</td>
-                            <td><label for="" class="btn btn-sm btn-danger"> Belum Upload Undangan</label></td>
-                        </tr>
+                    <tbody id="tbl_penunjukan_pemenang">
+
                     </tbody>
                 </table>
                 <br>
@@ -629,8 +637,8 @@
                     <tbody>
                         <tr>
                             <td scope="row">1</td>
-                            <td>METRINDOCRB</td>
-                            <td>metrindocirebon@yahoo.co.id</td>
+                            <td><?= $get_rank1['nama_usaha'] ?></td>
+                            <td><?= $get_rank1['email'] ?></td>
                             <td><i class="fas fa fa-star text-warning"></i></td>
                         </tr>
                     </tbody>

@@ -32,20 +32,29 @@ class Informasi_tender extends CI_Controller
 		$data['dok_tambahan'] = $this->M_panitia->result_syarat_tambahan($data['row_rup']['id_rup']);
 		$data['hitung_peserta'] = $this->M_panitia->get_peserta_tender_count($data['row_rup']['id_rup']);
 
+		$data['get_pemenang'] = $this->M_panitia->get_peserta_pemenang($data['row_rup']['id_rup']);
+		$data['get_rank1'] = $this->M_panitia->get_peserta_rank1($data['row_rup']['id_rup']);
+
 		$this->load->view('template_tender/header');
 		$this->load->view('panitia/info_tender/informasi_tender/base_url_global');
-		$this->load->view('panitia/info_tender/informasi_tender/base_url_info_tender');
+		$this->load->view('panitia/info_tender/informasi_tender/base_url_info_tender', $data);
 		$this->load->view('panitia/info_tender/informasi_tender/index', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
 	}
 
+	// global id rup for ajax
+	public function get_row_rup($id_rup)
+	{
+		$response = $this->M_panitia->get_rup($id_rup);
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
 	// evaluasi
 	public function evaluasi($id_url_rup)
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$this->load->view('template_tender/header');
-		$this->load->view('panitia/info_tender/informasi_tender/base_url_info_tender');
+		$this->load->view('panitia/info_tender/informasi_tender/base_url_info_tender', $data);
 		$this->load->view('panitia/info_tender/informasi_tender/evaluasi', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
@@ -727,7 +736,154 @@ class Informasi_tender extends CI_Controller
 		$this->M_panitia->update_syarat_tambahan($data, $where);
 		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
+
+	// end persyaratan tambahan
+
+	// berita acara pengadaan
+	public function simpan_berita_acara_tender()
+	{
+		$id_rup = $this->input->post('id_rup_ba_tender');
+		$nama_rup = $this->input->post('nama_rup_ba_tender');
+
+
+		$date = date('Y');
+		if (!is_dir('file_paket/' . $nama_rup . '/BERITA_ACARA_PENGADAAN')) {
+			mkdir('file_paket/' . $nama_rup . '/BERITA_ACARA_PENGADAAN', 0777, TRUE);
+		}
+
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/BERITA_ACARA_PENGADAAN';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_ba')) {
+			$fileData = $this->upload->data();
+
+			$upload = [
+				'id_rup' => $id_rup,
+				'nama_file' => $this->input->post('nama_file'),
+				'file_ba' => $fileData['file_name'],
+				'user_upload' => $this->session->userdata('nama_pegawai')
+			];
+
+			$this->M_panitia->insert_ba_tender($upload);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
+	}
+
+	public function get_berita_acara_tender($id_rup)
+	{
+		$response = $this->M_panitia->get_ba_tender($id_rup);
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
 	// 
+
+	public function hapus_berita_acara_tender()
+	{
+		$id_berita_acara_tender = $this->input->post('id_berita_acara_tender');
+		$this->M_panitia->hapus_ba_tender($id_berita_acara_tender);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+	// end berita acara pengadaan
+
+	// upload undangan pembuktian 
+	public function simpan_undangan_pembuktian()
+	{
+		$id_rup = $this->input->post('id_rup_pembuktian');
+		$nama_rup = $this->input->post('nama_rup_pembuktian');
+
+
+		$date = date('Y');
+		if (!is_dir('file_paket/' . $nama_rup . '/UNDANGAN_PEMBUKTIAN')) {
+			mkdir('file_paket/' . $nama_rup . '/UNDANGAN_PEMBUKTIAN', 0777, TRUE);
+		}
+
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/UNDANGAN_PEMBUKTIAN';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_undangan_pembuktian')) {
+			$fileData = $this->upload->data();
+
+			$upload = [
+				'file_undangan_pembuktian' => $fileData['file_name']
+			];
+			$this->M_panitia->update_rup_panitia($id_rup, $upload);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
+	}
+	// end upload undangan pembuktian
+
+	// upload hasil prakualifikasi
+	public function simpan_hasil_prakualifikasi()
+	{
+		$id_rup = $this->input->post('id_rup_prakualifikasi');
+		$nama_rup = $this->input->post('nama_rup_prakualifikasi');
+
+
+		$date = date('Y');
+		if (!is_dir('file_paket/' . $nama_rup . '/HASIL_PRAKUALIFIKASI')) {
+			mkdir('file_paket/' . $nama_rup . '/HASIL_PRAKUALIFIKASI', 0777, TRUE);
+		}
+
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/HASIL_PRAKUALIFIKASI';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_pengumuman_prakualifikasi')) {
+			$fileData = $this->upload->data();
+
+			$upload = [
+				'file_pengumuman_prakualifikasi' => $fileData['file_name']
+			];
+			$this->M_panitia->update_rup_panitia($id_rup, $upload);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
+	}
+	// end hasil prakualifikasi
+
+	// upload penunjukan pemenang
+	public function simpan_penunjukan_pemenang()
+	{
+		$id_rup = $this->input->post('id_rup_penunjukan');
+		$nama_rup = $this->input->post('nama_rup_penunjukan');
+
+
+		$date = date('Y');
+		if (!is_dir('file_paket/' . $nama_rup . '/SURAT_PENUNJUKAN_PEMENANG')) {
+			mkdir('file_paket/' . $nama_rup . '/SURAT_PENUNJUKAN_PEMENANG', 0777, TRUE);
+		}
+
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/SURAT_PENUNJUKAN_PEMENANG';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_surat_penunjukan_pemenang')) {
+			$fileData = $this->upload->data();
+
+			$upload = [
+				'file_surat_penunjukan_pemenang' => $fileData['file_name']
+			];
+			$this->M_panitia->update_rup_panitia($id_rup, $upload);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
+	}
+	// end penunjukan pemenang
 
 	public function sanggahan_prakualifikasi($id_url_rup)
 	{
