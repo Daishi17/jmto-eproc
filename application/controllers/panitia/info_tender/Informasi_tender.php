@@ -336,7 +336,6 @@ class Informasi_tender extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));
 	}
 
-
 	public function get_evaluasi_akhir_harga_terendah($id_rup)
 	{
 		$result = $this->M_panitia->gettable_evaluasi_akhir_hea($id_rup);
@@ -568,7 +567,7 @@ class Informasi_tender extends CI_Controller
 		$this->M_panitia->update_evaluasi($data, $where);
 
 		$peserta = $this->M_panitia->get_peserta_tender_hea_tkdn($id_rup_post);
-		$i = 1;
+		$i = 0;
 		foreach ($peserta as $key => $value) {
 			$data2 = [
 				'ev_hea_peringkat' => $i++
