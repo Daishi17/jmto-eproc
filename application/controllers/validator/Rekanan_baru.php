@@ -121,9 +121,9 @@ class Rekanan_baru extends CI_Controller
         $this->M_Rekanan_baru->update_vendor($data, $where);
         $data = $this->M_Rekanan_tervalidasi->get_row_vendor($id_url_vendor);
         $no_telpon = $data['no_telpon'];
-        $this->kirim_wa->kirim_wa_vendor_aktif($no_telpon);
         $type_email = 'TERIMA-VENDOR';
-        $message = 'Registrasi Akun Anda Di Tolak Pada Aplikasi E-PROCUREMENT PT. Jasamarga Tollroad Operator, Untuk Melakukan Daftar Ulang Silahkan Gunakan Email Yang Lain!';
+        $message = $this->input->post('alasan_tolak');
+        $this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $message);
         $this->email_send->sen_row_email($type_email, $id_url_vendor, $message);
         $response = [
             'message' => 'success'
