@@ -114,7 +114,7 @@ class Daftar_paket extends CI_Controller
 		$data_vendor_lolos_neraca_keuangan = $this->M_panitia->data_vendor_lolos_neraca_keuangan($cek_syarat_teknis);
 		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli, $data_vendor_lolos_siujk_kbli, $data_vendor_lolos_skdp_kbli, $data_vendor_lolos_sbu_kbli);
 		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $cek_syarat_teknis, $data_vendor_lolos_spt, $data_vendor_lolos_laporan_keuangan, $data_vendor_lolos_neraca_keuangan, $data_vendor_terundang_by_kbli, $data['row_rup']);
-		
+
 		$this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
@@ -137,7 +137,8 @@ class Daftar_paket extends CI_Controller
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/index', $data);
 			$this->load->view('administrator/template_menu/footer_menu');
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/ajax');
-		} else { }
+		} else {
+		}
 	}
 
 	public function get_rup_terfinalisasi()
@@ -723,8 +724,6 @@ class Daftar_paket extends CI_Controller
 		$sts_checked_siup = $this->input->post('sts_checked_siup');
 		$sts_masa_berlaku_siup = $this->input->post('sts_masa_berlaku_siup');
 		$tgl_berlaku_siup = $this->input->post('tgl_berlaku_siup');
-
-
 		// bagian nib
 		$sts_checked_nib = $this->input->post('sts_checked_nib');
 		$sts_masa_berlaku_nib = $this->input->post('sts_masa_berlaku_nib');
@@ -748,6 +747,7 @@ class Daftar_paket extends CI_Controller
 			if ($type == 'sts_checked_siup') {
 				$data = [
 					'sts_checked_siup' => $sts_checked_siup,
+					'tgl_berlaku_siup' => date('Y-m-d'),
 				];
 			} else if ($type == 'sts_masa_berlaku_siup') {
 				if ($sts_masa_berlaku_siup == 1) {
@@ -758,7 +758,7 @@ class Daftar_paket extends CI_Controller
 				} else {
 					$data = [
 						'sts_masa_berlaku_siup' => $sts_masa_berlaku_siup,
-						'tgl_berlaku_siup' => NULL
+						'tgl_berlaku_siup' => date('Y-m-d'),
 					];
 				}
 			} else {
@@ -770,6 +770,7 @@ class Daftar_paket extends CI_Controller
 			if ($type == 'sts_checked_nib') {
 				$data = [
 					'sts_checked_nib' => $sts_checked_nib,
+					'tgl_berlaku_nib' => date('Y-m-d'),
 				];
 			} else if ($type == 'sts_masa_berlaku_nib') {
 				if ($sts_masa_berlaku_nib == 1) {
@@ -780,7 +781,7 @@ class Daftar_paket extends CI_Controller
 				} else {
 					$data = [
 						'sts_masa_berlaku_nib' => $sts_masa_berlaku_nib,
-						'tgl_berlaku_nib' => NULL
+						'tgl_berlaku_nib' => date('Y-m-d'),
 					];
 				}
 			} else {
@@ -792,6 +793,7 @@ class Daftar_paket extends CI_Controller
 			if ($type == 'sts_checked_sbu') {
 				$data = [
 					'sts_checked_sbu' => $sts_checked_sbu,
+					'tgl_berlaku_sbu' => date('Y-m-d'),
 				];
 			} else if ($type == 'sts_masa_berlaku_sbu') {
 				if ($sts_masa_berlaku_sbu == 1) {
@@ -802,7 +804,7 @@ class Daftar_paket extends CI_Controller
 				} else {
 					$data = [
 						'sts_masa_berlaku_sbu' => $sts_masa_berlaku_sbu,
-						'tgl_berlaku_sbu' => NULL
+						'tgl_berlaku_sbu' => date('Y-m-d'),
 					];
 				}
 			} else {
@@ -814,6 +816,7 @@ class Daftar_paket extends CI_Controller
 			if ($type == 'sts_checked_siujk') {
 				$data = [
 					'sts_checked_siujk' => $sts_checked_siujk,
+					'tgl_berlaku_siujk' => date('Y-m-d'),
 				];
 			} else if ($type == 'sts_masa_berlaku_siujk') {
 				if ($sts_masa_berlaku_siujk == 1) {
@@ -824,7 +827,7 @@ class Daftar_paket extends CI_Controller
 				} else {
 					$data = [
 						'sts_masa_berlaku_siujk' => $sts_masa_berlaku_siujk,
-						'tgl_berlaku_siujk' => NULL
+						'tgl_berlaku_siujk' => date('Y-m-d'),
 					];
 				}
 			} else {
@@ -836,6 +839,7 @@ class Daftar_paket extends CI_Controller
 			if ($type == 'sts_checked_skdp') {
 				$data = [
 					'sts_checked_skdp' => $sts_checked_skdp,
+					'tgl_berlaku_skdp' => date('Y-m-d'),
 				];
 			} else if ($type == 'sts_masa_berlaku_skdp') {
 				if ($sts_masa_berlaku_skdp == 1) {
@@ -846,7 +850,7 @@ class Daftar_paket extends CI_Controller
 				} else {
 					$data = [
 						'sts_masa_berlaku_skdp' => $sts_masa_berlaku_skdp,
-						'tgl_berlaku_skdp' => NULL
+						'tgl_berlaku_skdp' => date('Y-m-d'),
 					];
 				}
 			} else {
@@ -1026,7 +1030,8 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
 			];
-		} else { }
+		} else {
+		}
 		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])

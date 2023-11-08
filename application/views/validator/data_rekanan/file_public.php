@@ -226,7 +226,7 @@
                         $('#modal_tolak').modal('hide')
                         Swal.fire('Pesan Berhasil Terkirim!', '', 'success')
                         Reload_table_rekanan_baru()
-                        url_tolak_rekanan_baru[0].reset();
+                        form_tolak[0].reset();
                     }
                 }).then((result) => {
                     /* Read more about handling dismissals below */
