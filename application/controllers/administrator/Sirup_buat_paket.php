@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set("Asia/Jakarta");
 
 class Sirup_buat_paket extends CI_Controller
 {
@@ -245,8 +246,7 @@ class Sirup_buat_paket extends CI_Controller
 				'tgl_berlaku_skdp' => date('Y-m-d'),
 			];
 			$this->M_rup->tambah_izin_usaha($data);
-		} else {
-		}
+		} else { }
 
 		if (!$cek_syarat_izin_teknis) {
 			$data = [
@@ -259,8 +259,7 @@ class Sirup_buat_paket extends CI_Controller
 				'tahun_akhir_neraca_keuangan' => '2020',
 			];
 			$this->M_rup->tambah_izin_teknis($data);
-		} else {
-		}
+		} else { }
 
 		foreach ($result_jadwal as $key => $value) {
 			$id = $this->uuid->v4();
