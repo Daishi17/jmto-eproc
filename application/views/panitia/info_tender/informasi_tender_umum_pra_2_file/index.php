@@ -159,35 +159,72 @@
                                 </div>
                             </th>
                         </tr>
-                        <tr>
-                            <th>Persyaratan Tambahan Penyedia</th>
-                            <th>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-header bg-primary text-white">
-                                                Persyaratan Tambahan Penyedia
-                                            </div>
-                                            <div class="card-body">
-                                                <table class="table table-bordered" id="tbl_persyaratan_tambahan_vendor">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama Penyedia</th>
-                                                            <th>Status</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                        <?php if (date('Y-m-d H:i', strtotime($jadwal_evaluasi_dokumen_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                            <!-- belom mulai -->
 
-                                                    </tbody>
-                                                </table>
+                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_evaluasi_dokumen_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_evaluasi_dokumen_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                            <tr>
+                                <th>Persyaratan Tambahan Penyedia</th>
+                                <th>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header bg-primary text-white">
+                                                    Persyaratan Tambahan Penyedia
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-bordered" id="tbl_persyaratan_tambahan_vendor">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama Penyedia</th>
+                                                                <th>Status</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </th>
-                        </tr>
+                                </th>
+                            </tr>
+
+                        <?php    } else { ?>
+                            <tr>
+                                <th>Persyaratan Tambahan Penyedia</th>
+                                <th>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header bg-primary text-white">
+                                                    Persyaratan Tambahan Penyedia
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-bordered" id="tbl_persyaratan_tambahan_vendor">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama Penyedia</th>
+                                                                <th>Status</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        <?php    } ?>
+
                         <tr>
                             <th>Bobot Teknis</th>
                             <th><?= $row_rup['bobot_teknis'] ?>
@@ -197,25 +234,74 @@
                             <th>Bobot Biaya</th>
                             <th><?= $row_rup['bobot_biaya'] ?></th>
                         </tr>
+
+
+
                         <tr>
                             <th>Undangan Pembuktian</th>
-                            <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
-                                    <i class="fa fa-upload" aria-hidden="true"></i> Upload Undangan Pembuktian
-                                </button></th>
+                            <th>
+                                <?php if (date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                    <!-- belom mulai -->
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian" disabled>
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Belum Memasuki Jadwal Ini
+                                    </button>
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Undangan Pembuktian
+                                    </button>
+                                <?php    } else { ?>
+                                    <!-- udah selesai -->
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Undangan Pembuktian
+                                    </button>
+                                <?php    } ?>
+                            </th>
                         </tr>
+
+
                         <tr>
                             <th>Pengumuman Hasil Prakualifikasi</th>
-                            <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hasil_prakualifikasi">
-                                    <i class="fa fa-upload" aria-hidden="true"></i> Upload Hasil Prakualifikasi
-                                </button></th>
+                            <th>
+                                <?php if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_hasil_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hasil_prakualifikasi" disabled>
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Belum Memasuki Tahap Ini
+                                    </button>
+
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_hasil_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pengumuman_hasil_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hasil_prakualifikasi">
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Hasil Prakualifikasi
+                                    </button>
+
+                                <?php    } else { ?>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#hasil_prakualifikasi">
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Hasil Prakualifikasi
+                                    </button>
+
+                                <?php    } ?>
+
+                            </th>
                         </tr>
 
                         <tr>
                             <th>Pembukaan Penawaran</th>
                             <th>
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#buka_dokumen_penawaran">
-                                    <i class="fa fa-folder-open" aria-hidden="true"></i> Buka Dokumen Penawaran
-                                </button>
+                                <?php if (date('Y-m-d H:i', strtotime($jadwal_pembukaan_file1['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-primary" disabled>
+                                        <i class="fa fa-folder-open" aria-hidden="true"></i> Belum Memasuki Tahap Ini
+                                    </button>
+
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pembukaan_file1['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pembukaan_file1['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#buka_dokumen_penawaran">
+                                        <i class="fa fa-folder-open" aria-hidden="true"></i> Buka Dokumen Penawaran
+                                    </button>
+
+                                <?php    } else { ?>
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#buka_dokumen_penawaran">
+                                        <i class="fa fa-folder-open" aria-hidden="true"></i> Buka Dokumen Penawaran
+                                    </button>
+
+                                <?php    } ?>
+
                             </th>
                         </tr>
                         <tr>
@@ -250,15 +336,48 @@
                         </tr>
                         <tr>
                             <th>Pengumuman Pemenang</th>
-                            <th> <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#pengumuman_pemenang">
-                                    <i class="fa fa-bullhorn" aria-hidden="true"></i> Pengumuman Pemenang
-                                </button></th>
+                            <th>
+
+                                <?php if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_pemenang['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-warning" disabled>
+                                        <i class="fa fa-bullhorn" aria-hidden="true"></i> Belum Memasuki Tahap Ini
+                                    </button>
+
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_pemenang['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pengumuman_pemenang['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#pengumuman_pemenang">
+                                        <i class="fa fa-bullhorn" aria-hidden="true"></i> Pengumuman Pemenang
+                                    </button>
+
+                                <?php    } else { ?>
+                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#pengumuman_pemenang">
+                                        <i class="fa fa-bullhorn" aria-hidden="true"></i> Pengumuman Pemenang
+                                    </button>
+
+                                <?php    } ?>
+
+                            </th>
                         </tr>
                         <tr>
                             <th>Surat Penunjukan Pemenang Pengadaan</th>
-                            <th><button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#surat_penunjukan">
-                                    <i class="fa fa-upload" aria-hidden="true"></i> Upload Surat Penunjukan
-                                </button></th>
+                            <th>
+                                <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_surat_penunjukan['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-danger" disabled>
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Belum Memasuki Tahap Ini
+                                    </button>
+
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_surat_penunjukan['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_surat_penunjukan['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#surat_penunjukan">
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Surat Penunjukan
+                                    </button>
+
+                                <?php    } else { ?>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#surat_penunjukan">
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Surat Penunjukan
+                                    </button>
+
+                                <?php    } ?>
+
+                            </th>
                         </tr>
 
                     </table>
@@ -277,7 +396,7 @@
                 <div class="row">
                     <div class="alert alert-primary d-flex align-items-center" role="alert">
                         <div>
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> Silakan Masukan Token Paket Yang Dikirim Ke Whatsaap Anda
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> Silakan Masukan Token Paket Yang Dikirim Ke WhatsApp Anda
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -289,7 +408,7 @@
                                 <input type="text" onkeyup="Cek_token()" class="form-control" name="token_syalala" placeholder="Masukan Token..." aria-describedby="basic-addon1">
                             </div>
                             <br>
-                            <a target="_blank" onclick="kirim_token_ke_wa('<?= $row_rup['id_url_rup'] ?>')" class="btn btn-warning btn_dapatkan_token" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Kirim Token Ke Whatsaap</a>
+                            <a target="_blank" onclick="kirim_token_ke_wa('<?= $row_rup['id_url_rup'] ?>')" class="btn btn-warning btn_dapatkan_token" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Kirim Token Ke WhatsApp</a>
                             <a style="display: none;" target="_blank" onclick="buka_penawaran('<?= $row_rup['id_url_rup'] ?>')" class="btn btn-success btn_buka_penawaran" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
                         </center>
                     </div>

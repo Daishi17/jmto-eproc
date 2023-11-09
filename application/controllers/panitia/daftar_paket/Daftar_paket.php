@@ -137,8 +137,7 @@ class Daftar_paket extends CI_Controller
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/index', $data);
 			$this->load->view('administrator/template_menu/footer_menu');
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/ajax');
-		} else {
-		}
+		} else { }
 	}
 
 	public function get_rup_terfinalisasi()
@@ -266,18 +265,26 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'jenis_kontrak' => $jenis_kontrak
 			];
+			$this->M_panitia->update_rup_panitia($id_rup, $data);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else if ($beban_tahun_anggaran) {
 			$data = [
 				'beban_tahun_anggaran' => $beban_tahun_anggaran
 			];
+			$this->M_panitia->update_rup_panitia($id_rup, $data);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else if ($bobot_nilai) {
 			$data = [
 				'bobot_nilai' => $bobot_nilai
 			];
+			$this->M_panitia->update_rup_panitia($id_rup, $data);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else if ($bobot_biaya) {
 			$data = [
 				'bobot_biaya' => $bobot_biaya
 			];
+			$this->M_panitia->update_rup_panitia($id_rup, $data);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else if ($bobot_teknis) {
 			$data = [
 				'bobot_teknis' => $bobot_teknis
@@ -1045,8 +1052,7 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
 			];
-		} else {
-		}
+		} else { }
 		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])

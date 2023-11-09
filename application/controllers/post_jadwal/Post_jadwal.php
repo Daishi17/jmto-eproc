@@ -33,6 +33,7 @@ class Post_jadwal extends CI_Controller
         $jadwal_mulai = date('Y-m-d H:i', strtotime($waktu_mulai[1]));
         $jadwal_selesai = date('Y-m-d H:i', strtotime($waktu_selesai[1]));
         $id_jadwal = $id_jadwal_rup[1];
+
         $waktu_selesai_akhir30 =  date('Y-m-d H:i', strtotime($waktu_selesai[1]));
         $where1 = [
             'id_jadwal_rup' => $id_jadwal,
@@ -42,8 +43,7 @@ class Post_jadwal extends CI_Controller
             'waktu_selesai' => $jadwal_selesai
         ];
 
-        // var_dump($where1, $data1);
-        // die;
+
         // update_jadwal 1
         $data1_1 = [
             'batas_pendaftaran_tender' => $waktu_selesai_akhir30

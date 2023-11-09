@@ -51,6 +51,10 @@
                                 <th>HPS</th>
                                 <td>Rp. <?= number_format($row_rup['total_hps_rup'], 2, ',', '.')  ?> </td>
                             </tr>
+                            <tr>
+                                <th>TKDN</th>
+                                <td>Rp. <?= number_format($row_rup['persen_pencatatan'], 2, ',', '.')  ?> </td>
+                            </tr>
                         </table>
                     </div>
                 </div>

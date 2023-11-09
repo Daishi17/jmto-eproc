@@ -53,9 +53,8 @@
                                     $name_jadwal_detail = 1;
                                     $i = 1;
                                     foreach ($jadwal as  $value2) { ?>
-                                        <input type="hidden" name="id_jadwal_rup[<?= $i ?>]" value="<?= $value2['id_jadwal_rup'] ?>">
                                         <tr id="erorr_jadwal_row<?= $erorr_row_detail++ ?>">
-                                            <td><?= $no++ ?></td>
+                                            <td><?= $no++ ?><input type="hidden" name="id_jadwal_rup[<?= $i ?>]" value="<?= $value2['id_jadwal_rup'] ?>"></td>
                                             <td><?= $value2['nama_jadwal_rup'] ?></td>
                                             <div class="alert alert-danger" style="display: none;" role="alert">
                                                 Jadwal <?= $value2['nama_jadwal_rup'] ?> Belum Benar Mengisinya
