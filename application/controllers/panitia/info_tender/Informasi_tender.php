@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
 class Informasi_tender extends CI_Controller
 {
-
 	function __construct()
 	{
 		parent::__construct();
@@ -31,7 +30,6 @@ class Informasi_tender extends CI_Controller
 		$data['dok_prakualifikasi'] = $this->M_panitia->get_dokumen_prakualifikasi($data['row_rup']['id_rup']);
 		$data['dok_tambahan'] = $this->M_panitia->result_syarat_tambahan($data['row_rup']['id_rup']);
 		$data['hitung_peserta'] = $this->M_panitia->get_peserta_tender_count($data['row_rup']['id_rup']);
-
 		$data['get_pemenang'] = $this->M_panitia->get_peserta_pemenang($data['row_rup']['id_rup']);
 		$data['get_rank1'] = $this->M_panitia->get_peserta_rank1($data['row_rup']['id_rup']);
 		$this->load->view('template_tender/header');

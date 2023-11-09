@@ -45,7 +45,8 @@
             success: function(response) {
                 $('#modal-xl-detail').modal('show')
                 $('#load_syarat_tambahan').html(html_syarat_tambahan);
-                $('#button_ke_info_tender').html('<a href="<?= base_url('panitia/info_tender/informasi_tender/informasi_pengadaan/') ?>' + response['row_rup'].id_url_rup + '" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i>Halaman Informasi Tender</a>');
+                var root_jadwal = response['row_rup'].root_jadwal + '/informasi_pengadaan/' + response['row_rup'].id_url_rup;
+                $('#button_ke_info_tender').html('<a href="<?= base_url('panitia/info_tender/') ?>' + root_jadwal + '" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i>Halaman Informasi Tender</a>');
                 if (response['row_rup'].jenis_kontrak == 1) {
                     var jenis_kontrak = 'Lump Sum'
                 } else if (response['row_rup'].jenis_kontrak == 2) {
