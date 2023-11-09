@@ -1187,7 +1187,7 @@ class Informasi_tender extends CI_Controller
 
 	public function upload_sanggahan_akhir()
 	{
-		// post
+		// post asd
 		$id_rup = $this->input->post('id_rup');
 		$ket_sanggah_akhir = $this->input->post('ket_sanggah_akhir');
 
