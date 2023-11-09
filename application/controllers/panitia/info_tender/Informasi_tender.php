@@ -682,6 +682,7 @@ class Informasi_tender extends CI_Controller
 	public function get_dokumen_syarat_tambahan($id_vendor)
 	{
 		$id_rup = $this->uri->segment(6);
+		$nama_rup = $this->M_panitia->get_rup($id_rup);
 		$result = $this->M_panitia->gettable_dokumen_syarat_tambahan($id_vendor, $id_rup);
 		$data = [];
 		$no = $_POST['start'];
@@ -689,7 +690,7 @@ class Informasi_tender extends CI_Controller
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $rs->nama_syarat_tambahan;
-			$row[] = $rs->file_syarat_tambahan;
+			$row[] = '<a target="_blank" href="http://localhost/jmto-vms/file_paket/' .  $nama_rup['nama_rup'] .  '/' . $rs->nama_usaha . '/SYARAT_TAMBAHAN' . '/' . $rs->file_syarat_tambahan . '" class="btn btn-sm btn-warning text-white"><i class="fa fa-file"></i></a>';
 			if ($rs->status == NULL) {
 				$row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
 			} else if ($rs->status == 1) {

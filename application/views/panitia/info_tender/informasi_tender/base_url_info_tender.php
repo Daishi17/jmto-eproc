@@ -8,7 +8,9 @@
 <input type="hidden" name="url_simpan_evaluasi_hea_tkdn" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_evaluasi_akhir_tkdn/') ?>">
 <input type="hidden" name="url_simpan_evaluasi_akhir_hea" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_evaluasi_akhir_hea/') ?>">
 
+<!-- syarat tambahan -->
 <input type="hidden" name="url_byid_syarat_tambahan" value="<?= base_url('panitia/info_tender/informasi_tender/get_byid_syarat_tambahan/') ?>">
+
 
 <input type="hidden" name="url_simpan_evaluasi_syarat_tambahan" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_evaluasi_syarat_tambahan/') ?>">
 
