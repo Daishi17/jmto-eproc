@@ -1240,7 +1240,6 @@ class Informasi_tender extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
 	// end sanggahan akhir
-
 	public function negosiasi($id_url_rup)
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
@@ -1248,5 +1247,31 @@ class Informasi_tender extends CI_Controller
 		$this->load->view('panitia/info_tender/informasi_tender/negosiasi', $data);
 		$this->load->view('template_tender/footer');
 		$this->load->view('panitia/info_tender/informasi_tender/ajax');
+	}
+
+	public function get_vendor_negosiasi()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$result_vendor_negosiasi = $this->M_panitia->get_result_vendor_sanggahan($id_rup);
+		$output = [
+			'result_vendor_negosiasi' => $result_vendor_negosiasi,
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+	public function simpan_link_negosiasi()
+	{
+		// post
+		$id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+		$upload = [
+			'tanggal_negosiasi' =>  $this->input->post('tanggal_negosiasi'),
+			'link_negosiasi' =>  $this->input->post('link_negosiasi')
+		];
+
+		$where = [
+			'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket,
+		];
+		$this->M_panitia->update_mengikuti($upload, $where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
 }

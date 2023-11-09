@@ -1,3 +1,6 @@
+<input type="hidden" name="url_get_vendor_negosiasi" value="<?= base_url('panitia/info_tender/informasi_tender/get_vendor_negosiasi') ?>">
+<input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+<input type="hidden" name="url_simpan_link_negosiasi" value="<?= base_url('panitia/info_tender/informasi_tender/simpan_link_negosiasi') ?>">
 <main class="container">
     <div class="row">
         <div class="col">
@@ -34,17 +37,20 @@
                     <div class="card-body">
                         <table class="table table-bordered">
                             <tr>
-                                <th>Nama Paket</th>
-                                <td>PAKET KEMERDEKAAN 78 RI BOGOR</td>
+                                <th style="width: 400px;">Nama Paket</th>
+                                <td><?= $row_rup['nama_rup'] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Kode Tender</th>
+                                <td><?= $row_rup['kode_rup'] ?></td>
                             </tr>
                             <tr>
                                 <th>Nama Jenis Pengadaan</th>
-                                <td>JASA KONSTRUKSI</td>
-
+                                <td>Pengadaan <?= $row_rup['nama_jenis_pengadaan'] ?></td>
                             </tr>
                             <tr>
                                 <th>Nama Metode Pemilihan </th>
-                                <td>Prakualifikasi 2 file</td>
+                                <td><?= $row_rup['nama_metode_pengadaan'] ?> <?= $row_rup['metode_kualifikasi'] ?> (<?= $row_rup['metode_dokumen'] ?>)</td>
                             </tr>
                         </table>
                     </div>
@@ -68,33 +74,8 @@
                                     <th>Upload Bukti</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>PT. KINTEK</td>
-                                    <td>
-                                        <span class="badge bg-primary"><i class="fa fa-date" aria-hidden="true"></i>
-                                            19-10-2023</span>
-                                    </td>
-                                    <td>https://meet.google.com/</td>
-                                    <td>
-                                        <a href="javascript:;" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_negosiasi"><i class="fa fa-file" aria-hidden="true"></i>
-                                            Upload</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>PT. PANGRANGO</td>
-                                    <td>
-                                        <span class="badge bg-primary"><i class="fa fa-date" aria-hidden="true"></i>
-                                            19-10-2023</span>
-                                    </td>
-                                    <td>https://meet.google.com/</td>
-                                    <td>
-                                        <a href="javascript:;" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_negosiasi"><i class="fa fa-file" aria-hidden="true"></i>
-                                            Upload</a>
-                                    </td>
-                                </tr>
+                            <tbody id="tbl_vendor_negosiasi">
+
                             </tbody>
                         </table>
                     </div>
@@ -114,20 +95,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Link Meet (Jika Daring)</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <form id="form_upload_link_negosiasi" action="javascript:;" enctype="multipart/form-data">
+                    <input type="hidden" name="id_vendor_mengikuti_paket" readonly class="form-control">
+                    <div class="form-group">
+                        <label for="">Nama Penyedia</label>
+                        <input type="text" name="nama_penyedia" readonly class="form-control">
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Upload Bukti</label>
-                        <input type="file" class="form-control" id="exampleInputPassword1">
+                    <br>
+                    <div class="form-group">
+                        <label for="">Tanggal Negosiasi</label>
+                        <input type="date" name="tanggal_negosiasi" class="form-control">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="">Link Meet (Jika Daring)</label>
+                        <input type="text" name="link_negosiasi" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary btn_simpan_negosiasi">Simpan</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>
