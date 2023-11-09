@@ -34,7 +34,6 @@ class Informasi_tender extends CI_Controller
 
 		$data['get_pemenang'] = $this->M_panitia->get_peserta_pemenang($data['row_rup']['id_rup']);
 		$data['get_rank1'] = $this->M_panitia->get_peserta_rank1($data['row_rup']['id_rup']);
-
 		$this->load->view('template_tender/header');
 		$this->load->view('panitia/info_tender/informasi_tender/base_url_global');
 		$this->load->view('panitia/info_tender/informasi_tender/base_url_info_tender', $data);
@@ -873,7 +872,6 @@ class Informasi_tender extends CI_Controller
 
 		if ($this->upload->do_upload('file_surat_penunjukan_pemenang')) {
 			$fileData = $this->upload->data();
-
 			$upload = [
 				'file_surat_penunjukan_pemenang' => $fileData['file_name']
 			];
@@ -912,6 +910,37 @@ class Informasi_tender extends CI_Controller
 		$this->load->view('panitia/info_tender/informasi_tender/ajax_penawaran');
 	}
 
+	function acces_penawaran()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$token_syalala = $this->input->post('token_syalala');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		if ($row_rup['token_panitia'] == $token_syalala) {
+			$userdata = [
+				'token_panitia' => $token_syalala,
+			];
+			$this->session->set_userdata($userdata);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('token_salah'));
+		}
+	}
+
+	function kirim_pengumuman_pemenang()
+	{
+		$id_url_rup = $this->input->post('id_url_rup');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$get_rank1 = $this->M_panitia->get_peserta_rank1($row_rup['id_rup']);
+		$message = 'Selamat Anda Telah Memenangkan Pengadaan Paket ' . $row_rup['nama_rup'] . ' Dengan Penawaran Rp.' . number_format($get_rank1['ev_hea_harga'], 2, ',', '.') . '';
+		$this->kirim_wa->kirim_wa_vendor_terdaftar($get_rank1['no_telpon'], $message);
+		$type_email = 'PENGUMUMAN PEMENANG';
+		$this->email_send->sen_row_email($type_email, $get_rank1['id_vendor'], $message);
+		$upload = [
+			'id_vendor_pemenang' => $get_rank1['id_vendor']
+		];
+		$this->M_panitia->update_rup_panitia($row_rup['id_rup'], $upload);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
 	public function get_vendor_mengikuti_paket_penawaran()
 	{
 		$id_rup = $this->input->post('id_rup');
@@ -1075,6 +1104,146 @@ class Informasi_tender extends CI_Controller
 			return true;
 		}
 	}
+
+
+	public function get_sanggahan_pra()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$result_sanggahan_pra = $this->M_panitia->get_result_vendor_sanggahan($id_rup);
+		$output = [
+			'result_sanggahan_pra' => $result_sanggahan_pra,
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+	public function upload_sanggahan_pra()
+	{
+		// post
+		$id_rup = $this->input->post('id_rup');
+		$ket_sanggah_pra = $this->input->post('ket_sanggah_pra');
+
+		// get value vendor dan paket untuk genrate file
+		$nama_rup = $this->M_panitia->get_rup_byid($id_rup);
+		$nama_usaha = $this->session->userdata('nama_usaha');
+		$id_vendor = $this->session->userdata('id_vendor');
+
+		if (!is_dir('file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI')) {
+			mkdir('file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI', 0777, TRUE);
+		}
+		$config['upload_path'] = './file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_sanggah_pra')) {
+			$fileData = $this->upload->data();
+			$upload = [
+				'ket_sanggah_pra' => $ket_sanggah_pra,
+				'file_sanggah_pra' => $fileData['file_name']
+			];
+
+			$where = [
+				'id_rup' => $id_rup,
+				'id_vendor' => $id_vendor,
+			];
+			$this->M_panitia->update_mengikuti($upload, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
+	}
+
+	public function hapus_sanggahan_pra()
+	{
+		// post
+		$id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+
+		// get value vendor dan paket untuk genrate file
+		$nama_usaha = $this->session->userdata('nama_usaha');
+		$id_vendor = $this->session->userdata('id_vendor');
+
+		$upload = [
+			'ket_sanggah_pra' => '',
+			'file_sanggah_pra' => ''
+		];
+
+		$where = [
+			'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket,
+		];
+		$this->M_panitia->update_mengikuti($upload, $where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+	// end sanggahan prakualifikasi
+
+	public function get_sanggahan_akhir()
+	{
+		$id_rup = $this->input->post('id_rup');
+		$id_vendor = $this->input->post('id_vendor');
+		$row_sanggahan_akhir = $this->M_panitia->get_row_vendor_sanggahan($id_rup, $id_vendor);
+		$output = [
+			'row_sanggahan_akhir' => $row_sanggahan_akhir,
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+	public function upload_sanggahan_akhir()
+	{
+		// post
+		$id_rup = $this->input->post('id_rup');
+		$ket_sanggah_akhir = $this->input->post('ket_sanggah_akhir');
+
+		// get value vendor dan paket untuk genrate file
+		$nama_rup = $this->M_panitia->get_rup_byid($id_rup);
+		$nama_usaha = $this->session->userdata('nama_usaha');
+		$id_vendor = $this->session->userdata('id_vendor');
+
+		if (!is_dir('file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR')) {
+			mkdir('file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR', 0777, TRUE);
+		}
+		$config['upload_path'] = './file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_sanggah_akhir')) {
+			$fileData = $this->upload->data();
+			$upload = [
+				'ket_sanggah_akhir' => $ket_sanggah_akhir,
+				'file_sanggah_akhir' => $fileData['file_name']
+			];
+
+			$where = [
+				'id_rup' => $id_rup,
+				'id_vendor' => $id_vendor,
+			];
+			$this->M_panitia->update_mengikuti($upload, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
+	}
+
+	public function hapus_sanggahan_akhir()
+	{
+		// post
+		$id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+
+		// get value vendor dan paket untuk genrate file
+		$nama_usaha = $this->session->userdata('nama_usaha');
+		$id_vendor = $this->session->userdata('id_vendor');
+
+		$upload = [
+			'ket_sanggah_akhir' => '',
+			'file_sanggah_akhir' => ''
+		];
+
+		$where = [
+			'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket,
+		];
+		$this->M_panitia->update_mengikuti($upload, $where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+	}
+	// end sanggahan akhir
 
 	public function negosiasi($id_url_rup)
 	{

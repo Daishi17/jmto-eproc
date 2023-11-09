@@ -245,58 +245,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-header bg-warning text-white">
-                                                Upload Evaluasi Hasil Penawaran
-                                                <a href="javascript:;" style="float: right;" data-bs-toggle="modal" data-bs-target="#upload_berita_acara_penawaran" class="btn btn-danger btn-sm"> <i class="fas fa fa-upload"></i> Upload</a>
-                                            </div>
-                                            <div class="card-body">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama File</th>
-                                                            <th>File</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-header bg-primary text-white">
-                                                Upload Evaluasi Hasil Pengadaan
-                                                <a href="" style="float: right;" data-bs-toggle="modal" data-bs-target="#upload_berita_acara_tender" class="btn btn-danger btn-sm"> <i class="fas fa fa-upload"></i> Upload</a>
-                                            </div>
-                                            <div class="card-body">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama File</th>
-                                                            <th>File</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td scope="row">1</td>
-                                                            <td>Berita Acara Hasil Evaluasi</td>
-                                                            <td><a href="" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i></a></td>
-                                                            <td>
-                                                                <a href="" class="btn btn-sm btn-danger btn-success"> <i class="fas fa fa-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </th>
                         </tr>
@@ -318,48 +266,6 @@
             </div>
         </div>
 </main>
-<div class="modal fade" id="upload_dokumen_penawaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-folder-open" aria-hidden="true"></i> Upload Dokumen Penawaran</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="alert alert-primary d-flex align-items-center" role="alert">
-                        <div>
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> Silakan Masukan Username Panitia Anda Untuk Dapat Mengakses Upload Dokumen Penawaran !!!
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-8">
-                        <center>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"> <i class="fas fa fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"> <i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" readonly value="radxH8GTvQwcdX8sSLoAtfFJu63uCykCUjyn6x7PXeexHrMJbfE45lnRPJDC1aggY2nP7j9BUWF6DvhYbqpIOBtOsphTW0m2omFB04wb9h5stGKEzS9TLOXeNYR71KV3" aria-describedby="basic-addon1">
-                            </div>
-                            <br>
-                            <a target="_blank" href="<?= base_url('panitia/info_tender/informasi_tender/buka_penawaran/' . $row_rup['id_url_rup']) ?>" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
-                        </center>
-                    </div>
-                    <div class="col-md-2">
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="buka_dokumen_penawaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -371,7 +277,7 @@
                 <div class="row">
                     <div class="alert alert-primary d-flex align-items-center" role="alert">
                         <div>
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> Silakan Masukan Username Panitia Anda Untuk Dapat Mengakses Pembukan Dokumen Penawaran !!!
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> Silakan Masukan Token Paket Yang Dikirim Ke Whatsaap Anda
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -379,15 +285,11 @@
                     <div class="col-md-8">
                         <center>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"> <i class="fas fa fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> <i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" readonly value="radxH8GTvQwcdX8sSLoAtfFJu63uCykCUjyn6x7PXeexHrMJbfE45lnRPJDC1aggY2nP7j9BUWF6DvhYbqpIOBtOsphTW0m2omFB04wb9h5stGKEzS9TLOXeNYR71KV3" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" name="token_syalala" placeholder="Masukan Token..." aria-describedby="basic-addon1">
                             </div>
                             <br>
-                            <a target="_blank" href="<?= base_url('panitia/info_tender/informasi_tender/buka_penawaran/' . $row_rup['id_url_rup']) ?>" class="btn btn-warning" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
+                            <a target="_blank" onclick="buka_penawaran('<?= $row_rup['id_url_rup'] ?>')" class="btn btn-warning btn_buka_penawaran" style="width: 300px;"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Akses Dokumen</a>
                         </center>
                     </div>
                     <div class="col-md-2">
@@ -513,7 +415,7 @@
                                 <td><?= $value['nama_usaha'] ?></td>
                                 <td><?= $value['email'] ?></td>
                                 <td>
-                                    <?php if ($value['ev_hea_peringkat'] == 1) { ?>
+                                    <?php if ($value['ev_akhir_hea_peringkat'] == 1) { ?>
                                         <i class="fas fa fa-star text-warning"></i>
                                     <?php   } else { ?>
                                         <i class="fas fa fa-times text-danger"></i>
@@ -522,13 +424,12 @@
                                 </td>
                             </tr>
                         <?php } ?>
-
                     </tbody>
                 </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-paper-plane" aria-hidden="true"></i> Kirim Pengumuman</button>
+                <a class="btn btn-success btn_kirim_pengumuman" onclick="Kirim_pengumuman('<?= $row_rup['id_url_rup'] ?>')"><i class="fa fa-paper-plane" aria-hidden="true"></i> Kirim Pengumuman</a>
             </div>
         </div>
     </div>
@@ -565,11 +466,7 @@
                         </tr>
                     </thead>
                     <tbody id="tbl_undangan_pembuktian">
-                        <!-- <tr>
-                            <td scope="row">1</td>
-                            <td>Undangan Pembuktian</td>
-                            <td><label for="" class="btn btn-sm btn-danger"> Belum Upload Undangan</label></td>
-                        </tr> -->
+
                     </tbody>
                 </table>
             </div>
@@ -611,11 +508,7 @@
                         </tr>
                     </thead>
                     <tbody id="tbl_hasil_prakualifikasi">
-                        <!-- <tr>
-                            <td scope="row">1</td>
-                            <td>Pengumuman Hasil Prakualifikasi</td>
-                            <td><label for="" class="btn btn-sm btn-danger"> Belum Upload</label></td>
-                        </tr> -->
+
                     </tbody>
                 </table>
             </div>

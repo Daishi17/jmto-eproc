@@ -282,6 +282,8 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'bobot_teknis' => $bobot_teknis
 			];
+			$this->M_panitia->update_rup_panitia($id_rup, $data);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else if ($status_paket_panitia) {
 			$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 			$data['panitia'] = $this->M_panitia->get_panitia($data['row_rup']['id_rup']);
@@ -321,13 +323,26 @@ class Daftar_paket extends CI_Controller
 				$post_all_vendor[] = $value['id_vendor'];
 			}
 			$fix_vendor = implode(',', $post_all_vendor);
+			$key = '';
+			$keys = array_merge(range(0, 9), range('a', 'z'));
+			for ($i = 0; $i < 10; $i++) {
+				$key .= $keys[array_rand($keys)];
+			}
+
+			$vendor_key = '';
+			$vendor_keys = array_merge(range(0, 9), range('a', 'z'));
+			for ($i = 0; $i < 10; $i++) {
+				$vendor_key .= $vendor_keys[array_rand($vendor_keys)];
+			}
 			$data = [
 				'status_paket_panitia' => $status_paket_panitia,
-				'data_vendor_terundang' => $fix_vendor
+				'data_vendor_terundang' => $fix_vendor,
+				'token_panitia' => $key,
+				'token_vendor' => $vendor_key
 			];
+			$this->M_panitia->update_rup_panitia($id_rup, $data);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		}
-		$this->M_panitia->update_rup_panitia($id_rup, $data);
-		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
 
 	public function simpan_jadwal_20baris()
@@ -747,7 +762,7 @@ class Daftar_paket extends CI_Controller
 			if ($type == 'sts_checked_siup') {
 				$data = [
 					'sts_checked_siup' => $sts_checked_siup,
-					'tgl_berlaku_siup' => date('Y-m-d'),
+
 				];
 			} else if ($type == 'sts_masa_berlaku_siup') {
 				if ($sts_masa_berlaku_siup == 1) {

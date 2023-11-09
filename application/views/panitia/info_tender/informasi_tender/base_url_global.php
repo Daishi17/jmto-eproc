@@ -50,3 +50,8 @@
 <input type="hidden" name="url_get_syarat_tambahan_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_syarat_tambahan') ?>">
 <input type="hidden" name="url_hapus_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_hapus_syarat_tambahan') ?>">
 <input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_download_syarat_tambahan') ?>">
+<!-- url tok -->
+<input type="hidden" name="url_buka_penawaran" value="<?= base_url('panitia/info_tender/informasi_tender/acces_penawaran') ?>">
+<input type="hidden" name="url_kirim_pengumuman" value="<?= base_url('panitia/info_tender/informasi_tender/kirim_pengumuman_pemenang') ?>">
+
+<input type="hidden" name="url_buka_penawaran_token" value="<?= base_url('panitia/info_tender/informasi_tender/buka_penawaran/') ?>">

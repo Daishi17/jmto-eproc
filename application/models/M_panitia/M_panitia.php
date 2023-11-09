@@ -455,9 +455,9 @@ class M_panitia extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_vendor_keuangan');
-        $this->db->where('tbl_vendor_keuangan.tahun_lapor >=', $cek_syarat_teknis['tahun_awal_laporan_keuangan']);
         $this->db->where('tbl_vendor_keuangan.tahun_lapor <=', $cek_syarat_teknis['tahun_akhir_laporan_keuangan']);
-        $this->db->where('tbl_vendor_keuangan.jenis_audit', $cek_syarat_teknis['sts_audit_laporan_keuangan']);
+        $this->db->where('tbl_vendor_keuangan.tahun_lapor >=', $cek_syarat_teknis['tahun_awal_laporan_keuangan']);
+        // $this->db->where('tbl_vendor_keuangan.jenis_audit', $cek_syarat_teknis['sts_audit_laporan_keuangan']);
         $this->db->group_by('tbl_vendor_keuangan.id_vendor');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -1640,5 +1640,22 @@ class M_panitia extends CI_Model
         $this->db->order_by('tbl_vendor_mengikuti_paket.ev_hea_peringkat', 'ASC');
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+
+    public function get_result_vendor_sanggahan($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_mengikuti_paket');
+        $this->db->join('tbl_rup', 'tbl_vendor_mengikuti_paket.id_rup = tbl_rup.id_rup', 'left');
+        $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
+        $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function update_mengikuti($data, $where)
+    {
+        $this->db->update('tbl_vendor_mengikuti_paket', $data, $where);
+        return $this->db->affected_rows();
     }
 }
