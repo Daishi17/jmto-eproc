@@ -308,16 +308,14 @@
             $('[name="bobot_biaya"]').attr("readonly", false);
             $('[name="bobot_teknis"]').removeClass("bg-light");
             $('[name="bobot_biaya"]').removeClass("bg-light");
+            $('[name="bobot_biaya"]').val(0);
+            $('[name="bobot_teknis"]').val(0);
         } else if (bobot_nilai == 2) {
-            $('[name="bobot_teknis"]').attr("readonly", false);
+            $('[name="bobot_teknis"]').attr("readonly", true);
             $('[name="bobot_biaya"]').addClass("bg-light");
             $('[name="bobot_biaya"]').attr("readonly", true);
+            $('[name="bobot_biaya"]').val(100);
             $('[name="bobot_teknis"]').removeClass("bg-light");
-        } else if (bobot_nilai == 3) {
-            $('[name="bobot_teknis"]').attr("readonly", true);
-            $('[name="bobot_teknis"]').addClass("bg-light");
-            $('[name="bobot_biaya"]').attr("readonly", false);
-            $('[name="bobot_biaya"]').removeClass("bg-light");
         }
         $.ajax({
             type: "POST",

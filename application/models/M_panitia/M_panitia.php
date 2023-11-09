@@ -347,8 +347,7 @@ class M_panitia extends CI_Model
             $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Kecil', 'Menengah']);
         } else if ($row_paket['syarat_tender_kualifikasi'] == 'Kecil') {
             $this->db->where('tbl_vendor.kualifikasi_usaha', 'Kecil');
-        } else {
-        }
+        } else { }
         $this->db->group_by('tbl_vendor.id_vendor');
         $query = $this->db->get();
         return $query->result_array();

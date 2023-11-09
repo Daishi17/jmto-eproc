@@ -332,23 +332,19 @@
                                                     <?php if (!$row_rup['bobot_nilai']) { ?>
                                                         <option value="">Pilih...</option>
                                                         <option value="1">Kombinasi</option>
-                                                        <option value="2">Bobot Teknis</option>
-                                                        <option value="3">Bobot Biaya</option>
+                                                        <option value="2">Biaya Terendah</option>
                                                     <?php } else if ($row_rup['bobot_nilai'] == 1) { ?>
                                                         <option value="">Pilih...</option>
                                                         <option value="1" selected>Kombinasi</option>
-                                                        <option value="2">Bobot Teknis</option>
-                                                        <option value="3">Bobot Biaya</option>
+                                                        <option value="2">Biaya Terendah</option>
                                                     <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
                                                         <option value="">Pilih...</option>
                                                         <option value="1">Kombinasi</option>
-                                                        <option value="2" selected>Bobot Teknis</option>
-                                                        <option value="3">Bobot Biaya</option>
+                                                        <option value="2">Biaya Terendah</option>
                                                     <?php } else if ($row_rup['bobot_nilai'] == 3) { ?>
                                                         <option value="">Pilih...</option>
                                                         <option value="1">Kombinasi</option>
-                                                        <option value="2">Bobot Teknis</option>
-                                                        <option value="3" selected>Bobot Biaya</option>
+                                                        <option value="2">Biaya Terendah</option>
                                                     <?php }  ?>
 
                                                 </select>
@@ -1168,7 +1164,8 @@
                                                                                     <option value="Audit">Audit</option>
                                                                                     <option value="Tidak Audit">Tidak Audit</option>
                                                                                 <?php } else { ?>
-                                                                                    <option selected value="Audit">Audit</option>
+                                                                                    <option value="">--Pilih--</option>
+                                                                                    <option value="Audit">Audit</option>
                                                                                     <option value="Tidak Audit">Tidak Audit</option>
                                                                                 <?php } ?>
                                                                             </select>
