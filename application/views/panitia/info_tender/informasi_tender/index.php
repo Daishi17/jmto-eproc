@@ -1,4 +1,4 @@
-<main class="container-fluid">
+<main class="container">
     <!-- id rup global -->
     <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
 
@@ -163,7 +163,7 @@
                             <th>Persyaratan Tambahan Penyedia</th>
                             <th>
                                 <div class="row">
-                                    <div class="col-md-10">
+                                    <div class="col-md-12">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
                                                 Persyaratan Tambahan Penyedia

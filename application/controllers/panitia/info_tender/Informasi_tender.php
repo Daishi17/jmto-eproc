@@ -1119,31 +1119,29 @@ class Informasi_tender extends CI_Controller
 	{
 		// post
 		$id_rup = $this->input->post('id_rup');
-		$ket_sanggah_pra = $this->input->post('ket_sanggah_pra');
+		$id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+		$ket_sanggah_pra_panitia = $this->input->post('ket_sanggah_pra_panitia');
 
 		// get value vendor dan paket untuk genrate file
-		$nama_rup = $this->M_panitia->get_rup_byid($id_rup);
-		$nama_usaha = $this->session->userdata('nama_usaha');
-		$id_vendor = $this->session->userdata('id_vendor');
+		$nama_rup = $this->M_panitia->get_rup($id_rup);
 
-		if (!is_dir('file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI')) {
-			mkdir('file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI', 0777, TRUE);
+		if (!is_dir('file_paket/' . $nama_rup['nama_rup']  . '/' . 'SANGGAHAN_PRAKUALIFIKASI')) {
+			mkdir('file_paket/' . $nama_rup['nama_rup']  . '/' . 'SANGGAHAN_PRAKUALIFIKASI', 0777, TRUE);
 		}
-		$config['upload_path'] = './file_paket/' . $nama_rup['nama_rup'] . '/' .  $nama_usaha . '/' . 'SANGGAHAN_PRAKUALIFIKASI';
+		$config['upload_path'] = './file_paket/' . $nama_rup['nama_rup']  . '/' . 'SANGGAHAN_PRAKUALIFIKASI';
 		$config['allowed_types'] = 'pdf|xlsx|xls';
 		$config['max_size'] = 0;
 		$this->load->library('upload', $config);
 
-		if ($this->upload->do_upload('file_sanggah_pra')) {
+		if ($this->upload->do_upload('file_sanggah_pra_panitia')) {
 			$fileData = $this->upload->data();
 			$upload = [
-				'ket_sanggah_pra' => $ket_sanggah_pra,
-				'file_sanggah_pra' => $fileData['file_name']
+				'ket_sanggah_pra_panitia' => $ket_sanggah_pra_panitia,
+				'file_sanggah_pra_panitia' => $fileData['file_name']
 			];
 
 			$where = [
-				'id_rup' => $id_rup,
-				'id_vendor' => $id_vendor,
+				'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket,
 			];
 			$this->M_panitia->update_mengikuti($upload, $where);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
@@ -1177,43 +1175,41 @@ class Informasi_tender extends CI_Controller
 	public function get_sanggahan_akhir()
 	{
 		$id_rup = $this->input->post('id_rup');
-		$id_vendor = $this->input->post('id_vendor');
-		$row_sanggahan_akhir = $this->M_panitia->get_row_vendor_sanggahan($id_rup, $id_vendor);
+		$result_sanggahan_akhir = $this->M_panitia->get_result_vendor_sanggahan($id_rup);
 		$output = [
-			'row_sanggahan_akhir' => $row_sanggahan_akhir,
+			'result_sanggahan_akhir' => $result_sanggahan_akhir,
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));
 	}
 
+
 	public function upload_sanggahan_akhir()
 	{
-		// post asd
+		// post 
 		$id_rup = $this->input->post('id_rup');
-		$ket_sanggah_akhir = $this->input->post('ket_sanggah_akhir');
+		$id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+		$ket_sanggah_akhir_panitia = $this->input->post('ket_sanggah_akhir_panitia');
 
 		// get value vendor dan paket untuk genrate file
-		$nama_rup = $this->M_panitia->get_rup_byid($id_rup);
-		$nama_usaha = $this->session->userdata('nama_usaha');
-		$id_vendor = $this->session->userdata('id_vendor');
+		$nama_rup = $this->M_panitia->get_rup($id_rup);
 
-		if (!is_dir('file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR')) {
-			mkdir('file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR', 0777, TRUE);
+		if (!is_dir('file_paket/' . $nama_rup['nama_rup']  . '/' . 'SANGGAHAN_AKHIR')) {
+			mkdir('file_paket/' . $nama_rup['nama_rup']  . '/' . 'SANGGAHAN_AKHIR', 0777, TRUE);
 		}
-		$config['upload_path'] = './file_paket/' . $nama_rup['nama_rup'] . '/' . $nama_usaha . '/' . 'SANGGAHAN_AKHIR';
+		$config['upload_path'] = './file_paket/' . $nama_rup['nama_rup']  . '/' . 'SANGGAHAN_AKHIR';
 		$config['allowed_types'] = 'pdf|xlsx|xls';
 		$config['max_size'] = 0;
 		$this->load->library('upload', $config);
 
-		if ($this->upload->do_upload('file_sanggah_akhir')) {
+		if ($this->upload->do_upload('file_sanggah_akhir_panitia')) {
 			$fileData = $this->upload->data();
 			$upload = [
-				'ket_sanggah_akhir' => $ket_sanggah_akhir,
-				'file_sanggah_akhir' => $fileData['file_name']
+				'ket_sanggah_akhir_panitia' => $ket_sanggah_akhir_panitia,
+				'file_sanggah_akhir_panitia' => $fileData['file_name']
 			];
 
 			$where = [
-				'id_rup' => $id_rup,
-				'id_vendor' => $id_vendor,
+				'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket,
 			];
 			$this->M_panitia->update_mengikuti($upload, $where);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));

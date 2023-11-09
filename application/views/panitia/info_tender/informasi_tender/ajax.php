@@ -1142,8 +1142,8 @@
     var form_sanggahan_prakualifikasi = $('#form_sanggahan_prakualifikasi')
     form_sanggahan_prakualifikasi.on('submit', function(e) {
         var url_upload_sanggahan_pra = $('[name="url_upload_sanggahan_pra"]').val();
-        var file_sanggah_pra = $('[name="file_sanggah_pra"]').val();
-        if (file_sanggah_pra == '') {
+        var file_sanggah_pra_panitia = $('[name="file_sanggah_pra_panitia"]').val();
+        if (file_sanggah_pra_panitia == '') {
             e.preventDefault();
             Swal.fire({
                 icon: 'error',
@@ -1179,7 +1179,7 @@
                         willClose: () => {
                             clearInterval(timerInterval)
                             Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                            $('#modal_sanggahan_prakualifikasi').modal('hide')
+                            $('#modal_balas_sanggahan_pra').modal('hide')
                             form_sanggahan_prakualifikasi[0].reset()
                             load_dok_sanggahan_pra()
                             $('.btn-sanggah').attr("disabled", false);
@@ -1200,6 +1200,7 @@
         var id_rup = $('[name="id_rup"]').val()
         var url_get_sanggahan_pra = $('[name="url_get_sanggahan_pra"]').val()
         var url_open_sanggahan_pra = $('[name="url_open_sanggahan_pra"]').val()
+        var url_open_sanggahan_pra_panitia = $('[name="url_open_sanggahan_pra_panitia"]').val()
         $.ajax({
             type: "POST",
             url: url_get_sanggahan_pra,
@@ -1219,7 +1220,7 @@
                     }
 
                     if (response['result_sanggahan_pra'][i].file_sanggah_pra) {
-                        var file_sanggah_pra = '<a target="_blank" href="' + url_open_sanggahan_pra + response['result_sanggahan_pra'][i].file_sanggah_pra + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                        var file_sanggah_pra = '<a target="_blank" href="' + url_open_sanggahan_pra + response['result_sanggahan_pra'][i].nama_usaha + '/SANGGAHAN_PRAKUALIFIKASI/' + response['result_sanggahan_pra'][i].file_sanggah_pra + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
                     } else {
                         var file_sanggah_pra = '<span class="badge bg-secondary">Tidak Ada File</span>'
                     }
@@ -1230,18 +1231,27 @@
                         var ket_sanggah_pra_panitia = '-'
                     }
 
-                    if (response['result_sanggahan_pra'][i].file_sanggah_pra_panitia) {
-                        var file_sanggah_pra_panitia = '<a target="_blank" href="' + url_open_sanggahan_pra + response['result_sanggahan_pra'][i].file_sanggah_pra_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                    if (response['result_sanggahan_pra'][i].file_sanggah_pra) {
+                        if (response['result_sanggahan_pra'][i].file_sanggah_pra_panitia) {
+                            var file_sanggah_pra_panitia = '<a target="_blank" href="' + url_open_sanggahan_pra_panitia + response['result_sanggahan_pra'][i].file_sanggah_pra_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                            var balas = '<a href="javascript:;"  onclick="balas_sanggahan_pra(\'' + response['result_sanggahan_pra'][i].id_vendor_mengikuti_paket + '\'' + ',' + '\'' + response['result_sanggahan_pra'][i].nama_usaha + '\')" class="btn btn-sm btn-success"><i class="fas fa fa-edit"></i> Balas </a>'
+                        } else {
+                            var file_sanggah_pra_panitia = '-'
+                            var balas = '<a href="javascript:;"  onclick="balas_sanggahan_pra(\'' + response['result_sanggahan_pra'][i].id_vendor_mengikuti_paket + '\'' + ',' + '\'' + response['result_sanggahan_pra'][i].nama_usaha + '\')" class="btn btn-sm btn-success"><i class="fas fa fa-edit"></i> Balas </a>'
+                        }
+
                     } else {
                         var file_sanggah_pra_panitia = '<span class="badge bg-secondary">Tidak Ada File</span>'
+                        var balas = '-'
                     }
                     html += '<tr>' +
+                        '<td><small>' + no++ + '</small></td>' +
                         '<td><small>' + response['result_sanggahan_pra'][i].nama_usaha + '</small></td>' +
                         '<td><small>' + ket_sanggah_pra + '</small></td>' +
                         '<td><small>' + file_sanggah_pra + '</small></td>' +
-                        '<td><small>' + ket_sanggah_pra_panitia + '</small></td>' +
                         '<td><small>' + file_sanggah_pra_panitia + '</small></td>' +
-                        '<td><a href="javascript:;"  onclick="balas_sanggahn_pra(\'' + response['result_sanggahan_pra'][i].id_vendor_mengikuti_paket + '\')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus </a></td>' +
+                        '<td><small>' + ket_sanggah_pra_panitia + '</small></td>' +
+                        '<td>' + balas + '</td>' +
                         '</tr>';
                     '</tr>';
 
@@ -1251,9 +1261,10 @@
         })
     }
 
-    function balas_sanggahn_pra(id_vendor_mengikuti_paket) {
+    function balas_sanggahan_pra(id_vendor_mengikuti_paket, nama_usaha) {
         var modal_balas_sanggahan_pra = $('#modal_balas_sanggahan_pra');
         $('[name="id_vendor_mengikuti_paket"]').val(id_vendor_mengikuti_paket)
+        $('#nama_penyedia').text(nama_usaha)
         modal_balas_sanggahan_pra.modal('show');
 
     }
@@ -1335,7 +1346,7 @@
                         willClose: () => {
                             clearInterval(timerInterval)
                             Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                            $('#modal_sanggahan_akhir').modal('hide')
+                            $('#modal_balas_sanggahan_akhir').modal('hide')
                             form_sanggahan_akhir[0].reset()
                             load_dok_sanggahan_akhir()
                             $('.btn-sanggah-akhir').attr("disabled", false);
@@ -1355,55 +1366,75 @@
 
     function load_dok_sanggahan_akhir() {
         var id_rup = $('[name="id_rup"]').val()
-        var id_vendor = $('[name="id_vendor"]').val()
         var url_get_sanggahan_akhir = $('[name="url_get_sanggahan_akhir"]').val()
         var url_open_sanggahan_akhir = $('[name="url_open_sanggahan_akhir"]').val()
+        var url_open_sanggahan_akhir_panitia = $('[name="url_open_sanggahan_akhir_panitia"]').val()
         $.ajax({
             type: "POST",
             url: url_get_sanggahan_akhir,
             data: {
                 id_rup: id_rup,
-                id_vendor: id_vendor
             },
             dataType: "JSON",
             success: function(response) {
                 var html = '';
-                if (response['row_sanggahan_akhir'].ket_sanggah_akhir) {
-                    var ket_sanggah_akhir = response['row_sanggahan_akhir'].ket_sanggah_akhir
-                } else {
-                    var ket_sanggah_akhir = '-'
-                }
+                var i;
+                var no = 1;
+                for (i = 0; i < response['result_sanggahan_akhir'].length; i++) {
+                    if (response['result_sanggahan_akhir'][i].ket_sanggah_akhir) {
+                        var ket_sanggah_akhir = response['result_sanggahan_akhir'][i].ket_sanggah_akhir
+                    } else {
+                        var ket_sanggah_akhir = '-'
+                    }
 
-                if (response['row_sanggahan_akhir'].file_sanggah_akhir) {
-                    var file_sanggah_akhir = '<a target="_blank" href="' + url_open_sanggahan_akhir + response['row_sanggahan_akhir'].file_sanggah_akhir + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
-                } else {
-                    var file_sanggah_akhir = '<span class="badge bg-secondary">Tidak Ada File</span>'
-                }
+                    if (response['result_sanggahan_akhir'][i].file_sanggah_akhir) {
+                        var file_sanggah_akhir = '<a target="_blank" href="' + url_open_sanggahan_akhir + response['result_sanggahan_akhir'][i].nama_usaha + '/SANGGAHAN_AKHIR/' + response['result_sanggahan_akhir'][i].file_sanggah_akhir + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                    } else {
+                        var file_sanggah_akhir = '<span class="badge bg-secondary">Tidak Ada File</span>'
+                    }
 
-                if (response['row_sanggahan_akhir'].ket_sanggah_akhir_panitia) {
-                    var ket_sanggah_akhir_panitia = response['row_sanggahan_akhir'].ket_sanggah_akhir_panitia
-                } else {
-                    var ket_sanggah_akhir_panitia = '-'
-                }
+                    if (response['result_sanggahan_akhir'][i].ket_sanggah_akhir_panitia) {
+                        var ket_sanggah_akhir_panitia = response['result_sanggahan_akhir'][i].ket_sanggah_akhir_panitia
+                    } else {
+                        var ket_sanggah_akhir_panitia = '-'
+                    }
 
-                if (response['row_sanggahan_akhir'].file_sanggah_akhir_panitia) {
-                    var file_sanggah_akhir_panitia = '<a target="_blank" href="' + url_open_sanggahan_akhir + response['row_sanggahan_akhir'].file_sanggah_akhir_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
-                } else {
-                    var file_sanggah_akhir_panitia = '<span class="badge bg-secondary">Tidak Ada File</span>'
-                }
+                    if (response['result_sanggahan_akhir'][i].file_sanggah_akhir) {
+                        if (response['result_sanggahan_akhir'][i].file_sanggah_akhir_panitia) {
+                            var file_sanggah_akhir_panitia = '<a target="_blank" href="' + url_open_sanggahan_akhir_panitia + response['result_sanggahan_akhir'][i].file_sanggah_akhir_panitia + '"><img src="<?= base_url('assets/img/pdf.png') ?>" alt="File Sanggah" width="30px"></a>'
+                            var balas = '<a href="javascript:;"  onclick="balas_sanggahan_akhir(\'' + response['result_sanggahan_akhir'][i].id_vendor_mengikuti_paket + '\'' + ',' + '\'' + response['result_sanggahan_akhir'][i].nama_usaha + '\')" class="btn btn-sm btn-success"><i class="fas fa fa-edit"></i> Balas </a>'
+                        } else {
+                            var file_sanggah_akhir_panitia = '-'
+                            var balas = '<a href="javascript:;"  onclick="balas_sanggahan_akhir(\'' + response['result_sanggahan_akhir'][i].id_vendor_mengikuti_paket + '\'' + ',' + '\'' + response['result_sanggahan_akhir'][i].nama_usaha + '\')" class="btn btn-sm btn-success"><i class="fas fa fa-edit"></i> Balas </a>'
+                        }
 
-                html += '<tr>' +
-                    '<td><small>' + response['row_sanggahan_akhir'].nama_usaha + '</small></td>' +
-                    '<td><small>' + ket_sanggah_akhir + '</small></td>' +
-                    '<td><small>' + file_sanggah_akhir + '</small></td>' +
-                    '<td><small>' + ket_sanggah_akhir_panitia + '</small></td>' +
-                    '<td><small>' + file_sanggah_akhir_panitia + '</small></td>' +
-                    '<td><a href="javascript:;"  onclick="delete_sanggah_akhir(\'' + response['row_sanggahan_akhir'].id_vendor_mengikuti_paket + '\')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus </a></td>' +
+                    } else {
+                        var file_sanggah_pra_panitia = '<span class="badge bg-secondary">Tidak Ada File</span>'
+                        var balas = '-'
+                    }
+                    html += '<tr>' +
+                        '<td><small>' + no++ + '</small></td>' +
+                        '<td><small>' + response['result_sanggahan_akhir'][i].nama_usaha + '</small></td>' +
+                        '<td><small>' + ket_sanggah_akhir + '</small></td>' +
+                        '<td><small>' + file_sanggah_akhir + '</small></td>' +
+                        '<td><small>' + file_sanggah_akhir_panitia + '</small></td>' +
+                        '<td><small>' + ket_sanggah_akhir_panitia + '</small></td>' +
+                        '<td>' + balas + '</td>' +
+                        '</tr>';
                     '</tr>';
-                '</tr>';
+
+                }
                 $('#tbl_sanggah_akhir').html(html);
             }
         })
+    }
+
+    function balas_sanggahan_akhir(id_vendor_mengikuti_paket, nama_usaha) {
+        var modal_balas_sanggahan_akhir = $('#modal_balas_sanggahan_akhir');
+        $('[name="id_vendor_mengikuti_paket"]').val(id_vendor_mengikuti_paket)
+        $('#nama_penyedia').text(nama_usaha)
+        modal_balas_sanggahan_akhir.modal('show');
+
     }
 
     function delete_sanggah_akhir(id_vendor_mengikuti_paket) {
