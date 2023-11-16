@@ -39,6 +39,7 @@
                                         <th>Nama Jadwal</th>
                                         <th>Tanggal & Jam Mulai</th>
                                         <th>Tanggal & Jam Selesai</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +65,21 @@
                                             </div>
                                             <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" id="mulai<?= $mulai_detail++ ?>" value="<?= $value2['waktu_mulai'] ?>" type="text"></td>
                                             <td><input class="form-control form-control-sm" name="waktu_selesai[<?= $i ?>]" id="selesai<?= $selesai_detail++ ?>" value="<?= $value2['waktu_selesai']  ?>" type="text"></td>
+                                            <td>
+                                                <?php if ($value2['waktu_mulai'] == '' && $value2['waktu_selesai'] == '') { ?>
+                                                    <?php if ($i == 1) { ?>
+                                                        <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
+                                                    <?php  } else { ?>
+                                                    <?php } ?>
+                                                <?php } else { ?>
+                                                    <?php if ($i == 1) { ?>
+                                                        <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
+                                                    <?php  } else { ?>
+                                                        <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
+                                                        <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="min_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">-</a>
+                                                    <?php } ?>
+                                                <?php   } ?>
+                                            </td>
                                         </tr>
                                         <?php $i++ ?>
                                     <?php  } ?>

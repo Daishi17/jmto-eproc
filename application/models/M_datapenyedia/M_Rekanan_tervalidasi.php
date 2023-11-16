@@ -1691,7 +1691,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_siup');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1702,7 +1702,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_kbli_siup');
         $this->db->from('tbl_vendor_kbli_siup');
-        $this->db->where('sts_kbli_siup', 2);
+        $this->db->where_in('sts_kbli_siup', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1713,7 +1713,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_nib');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1724,7 +1724,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_kbli_nib');
         $this->db->from('tbl_vendor_kbli_nib');
-        $this->db->where('sts_kbli_nib', 2);
+        $this->db->where_in('sts_kbli_nib', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1735,7 +1735,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_sbu');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1746,7 +1746,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_kbli_sbu');
         $this->db->from('tbl_vendor_kbli_sbu');
-        $this->db->where('sts_kbli_sbu', 2);
+        $this->db->where_in('sts_kbli_sbu', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1758,7 +1758,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_siujk');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1769,7 +1769,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_kbli_siujk');
         $this->db->from('tbl_vendor_kbli_siujk');
-        $this->db->where('sts_kbli_siujk', 2);
+        $this->db->where_in('sts_kbli_siujk', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1780,7 +1780,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_akta_pendirian');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1791,7 +1791,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_akta_perubahan');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1802,7 +1802,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_pemilik');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1813,7 +1813,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_pengurus');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1824,7 +1824,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_pengalaman');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1836,7 +1836,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_sppkp');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1847,7 +1847,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_npwp');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1858,7 +1858,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_spt');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1869,7 +1869,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_neraca_keuangan');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -1880,7 +1880,7 @@ class M_Rekanan_tervalidasi extends CI_Model
     {
         $this->db->select('sts_validasi');
         $this->db->from('tbl_vendor_keuangan');
-        $this->db->where('sts_validasi', 2);
+        $this->db->where_in('sts_validasi', [0, 2, 3]);
         $this->db->where('id_vendor', $id_vendor);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -2055,30 +2055,4 @@ class M_Rekanan_tervalidasi extends CI_Model
     // end izin_lain
 
     // end skdp
-
-    public function cek_dokumen_all($id_vendor)
-    {
-        // $this->db->select('tbl_vendor.id_vendor,tbl_vendor_siup.id_vendor, tbl_vendor_nib.id_vendor, tbl_vendor_sbu.id_vendor, tbl_vendor_sbu.id_vendor, tbl_vendor_siujk.id_vendor, tbl_vendor_skdp.id_vendor, tbl_vendor_izin_lain.id_vendor,tbl_vendor_akta_pendirian.id_vendor, tbl_vendor_akta_perubahan.id_vendor, tbl_vendor_pemilik.id_vendor, tbl_vendor_pengurus.id_vendor, tbl_vendor_pengalaman.id_vendor, tbl_vendor_sppkp.id_vendor,tbl_vendor_npwp.id_vendor,tbl_vendor_spt.id_vendor, tbl_vendor_neraca_keuangan.id_vendor, tbl_vendor_keuangan.id_vendor');
-        $this->db->select('*');
-        $this->db->from('tbl_vendor');
-        $this->db->join('tbl_vendor_siup', 'tbl_vendor.id_vendor = tbl_vendor_siup.id_vendor', 'left');
-        $this->db->join('tbl_vendor_nib', 'tbl_vendor.id_vendor = tbl_vendor_nib.id_vendor', 'left');
-        $this->db->join('tbl_vendor_sbu', 'tbl_vendor.id_vendor = tbl_vendor_sbu.id_vendor', 'left');
-        $this->db->join('tbl_vendor_siujk', 'tbl_vendor.id_vendor = tbl_vendor_siujk.id_vendor', 'left');
-        $this->db->join('tbl_vendor_skdp', 'tbl_vendor.id_vendor = tbl_vendor_skdp.id_vendor', 'left');
-        $this->db->join('tbl_vendor_izin_lain', 'tbl_vendor.id_vendor = tbl_vendor_izin_lain.id_vendor', 'left');
-        $this->db->join('tbl_vendor_akta_pendirian', 'tbl_vendor.id_vendor = tbl_vendor_akta_pendirian.id_vendor', 'left');
-        $this->db->join('tbl_vendor_akta_perubahan', 'tbl_vendor.id_vendor = tbl_vendor_akta_perubahan.id_vendor', 'left');
-        $this->db->join('tbl_vendor_pemilik', 'tbl_vendor.id_vendor = tbl_vendor_pemilik.id_vendor', 'left');
-        $this->db->join('tbl_vendor_pengurus', 'tbl_vendor.id_vendor = tbl_vendor_pengurus.id_vendor', 'left');
-        $this->db->join('tbl_vendor_pengalaman', 'tbl_vendor.id_vendor = tbl_vendor_pengalaman.id_vendor', 'left');
-        $this->db->join('tbl_vendor_sppkp', 'tbl_vendor.id_vendor = tbl_vendor_sppkp.id_vendor', 'left');
-        $this->db->join('tbl_vendor_npwp', 'tbl_vendor.id_vendor = tbl_vendor_npwp.id_vendor', 'left');
-        $this->db->join('tbl_vendor_spt', 'tbl_vendor.id_vendor = tbl_vendor_spt.id_vendor', 'left');
-        $this->db->join('tbl_vendor_neraca_keuangan', 'tbl_vendor.id_vendor = tbl_vendor_neraca_keuangan.id_vendor', 'left');
-        $this->db->join('tbl_vendor_keuangan', 'tbl_vendor.id_vendor = tbl_vendor_keuangan.id_vendor', 'left');
-        $this->db->where('tbl_vendor.id_vendor', $id_vendor);
-        $query = $this->db->get();
-        return $query->row_array();
-    }
 }

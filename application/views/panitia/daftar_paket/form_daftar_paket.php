@@ -181,10 +181,10 @@
                                                             <tr>
                                                                 <th><small>Total Pagu Paket</small></th>
                                                                 <th><small>Total HPS </small></th>
-                                                                <th><small>Upload Dokumen HPS</small></th>
+                                                                <th><small>Upload Dokumen HPS dan Dokumen Pengadaan</small></th>
                                                                 <th>
                                                                     <div class="text-center">
-                                                                        <small>Dokumen HPS</small>
+                                                                        <small>Dokumen HPS dan Dokumen Pengadaan</small>
                                                                     </div>
                                                                 </th>
                                                             </tr>
@@ -215,7 +215,7 @@
 
                                                                             <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
 
-                                                                            <button class="btn btn-outline-secondary file_hps_btn" type="submit">Upload</button>
+                                                                            <button class="btn btn-primary file_hps_btn" type="submit">Upload</button>
                                                                         </div>
                                                                     </form>
                                                                 </td>
@@ -353,29 +353,29 @@
                                         <td colspan="2">
                                             <div class="input-group mb-2">
                                                 <?php if (!$row_rup['bobot_nilai']) { ?>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Teknis</span>
                                                     <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" readonly value="<?= $row_rup['bobot_teknis'] ?>">
-                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i> &ensp; Bobot Biaya</span>
                                                     <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
                                                     <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>">
 
                                                     <span class=" input-group-text"><i class="fa-solid fa-percent"></i></span>
                                                 <?php } else if ($row_rup['bobot_nilai'] == 1) { ?>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Teknis</span>
 
                                                     <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
 
                                                     <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Biaya</span>
 
                                                     <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_biaya'] ?>">
 
                                                     <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
                                                 <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp;Bobot Teknis</span>
                                                     <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
                                                     <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp;Bobot Biaya</span>
 
                                                     <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>">
 

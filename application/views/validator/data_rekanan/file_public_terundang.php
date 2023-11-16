@@ -2,31 +2,68 @@
     var tbl_rekanan_terundang = $('#tbl_rekanan_terundang')
     var url_get_rekanan_terundang = $('[name="url_get_rekanan_terundang"').val()
     $(document).ready(function() {
-        tbl_rekanan_terundang.DataTable({
-            "responsive": false,
-            "ordering": true,
-            "processing": true,
-            "serverSide": true,
-            "dom": 'Bfrtip',
-            "buttons": ["excel", "pdf", "print", "colvis"],
-            "order": [],
-            "ajax": {
-                "url": url_get_rekanan_terundang,
-                "type": "POST",
-            },
-            "columnDefs": [{
-                "target": [-1],
-                "orderable": false
-            }],
-            "oLanguage": {
-                "sSearch": "Pencarian : ",
-                "sEmptyTable": "Data Tidak Tersedia",
-                "sLoadingRecords": "Silahkan Tunggu - loading...",
-                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
-                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
-                "sProcessing": "Memuat Data...."
+        fill_datatable();
+
+        function fill_datatable(sts_upload_dokumen = '', sts_dokumen_cek = '') {
+            tbl_rekanan_terundang.DataTable({
+                "responsive": false,
+                "ordering": true,
+                "processing": true,
+                "serverSide": true,
+                lengthMenu: [
+                    [10, 25, 50, 100, 200, -1],
+                    ['10 Rows', '25 Rows', '50 Rows', '100 Rows', '200 Rows', 'Back']
+                ],
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'pdf',
+                    text: ' PDF'
+                }, {
+                    extend: 'print',
+                    text: ' Print'
+                }, {
+                    extend: 'excel',
+                    exportOption: {
+                        columns: [0, 1, 2, 3]
+                    },
+                    text: ' EXCEL'
+                }, 'pageLength'],
+                "order": [],
+                "ajax": {
+                    "url": url_get_rekanan_terundang,
+                    "type": "POST",
+                    data: {
+                        sts_upload_dokumen: sts_upload_dokumen,
+                        sts_dokumen_cek: sts_dokumen_cek
+                    },
+                },
+                "columnDefs": [{
+                    "target": [-1],
+                    "orderable": false
+                }],
+                "oLanguage": {
+                    "sSearch": "Pencarian : ",
+                    "sEmptyTable": "Data Tidak Tersedia",
+                    "sLoadingRecords": "Silahkan Tunggu - loading...",
+                    "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                    "sProcessing": "Memuat Data...."
+                }
+            }).buttons().container().appendTo('#tbl_rekanan_terundang .col-md-6:eq(0)');
+        }
+        // filtering select data per divisi dan per jenis pengadaan
+        $('#filter').click(function() {
+            var sts_upload_dokumen = $('#sts_upload_dokumen').val();
+            var sts_dokumen_cek = $('#sts_dokumen_cek').val();
+            if (sts_upload_dokumen != '' && sts_dokumen_cek != '') {
+                tbl_rekanan_terundang.DataTable().destroy();
+                fill_datatable(sts_upload_dokumen, sts_dokumen_cek);
+            } else {
+                Swal.fire('Kesalahan Filter!', '', 'warning')
+                tbl_rekanan_terundang.DataTable().destroy();
+                fill_datatable();
             }
-        }).buttons().container().appendTo('#tbl_rekanan_terundang .col-md-6:eq(0)');
+        })
     });
 
     function Reload_table_rekanan_baru() {
@@ -43,12 +80,12 @@
         if (type == 'pesan') {
             saveData = 'pesan';
         }
-        var url_get_rekanan_tervalidasi_by_id = $('[name="url_get_rekanan_tervalidasi_by_id"]').val();
+        var url_get_rekanan_terundang_by_id = $('[name="url_get_rekanan_terundang_by_id"]').val();
         var modal_pesan = $('#modal_pesan')
         var modal_undang = $('#modal_undang')
         $.ajax({
             type: "GET",
-            url: url_get_rekanan_tervalidasi_by_id + id_vendor,
+            url: url_get_rekanan_terundang_by_id + id_vendor,
             dataType: "JSON",
             success: function(response) {
                 if (type == 'pesan') {
@@ -58,13 +95,12 @@
                     modal_undang.modal('show')
                     $('[name="id_url_vendor"]').val(id_vendor)
                     $('#nama_usaha').text(response['row_vendor'].nama_usaha)
-                } else if (type == 'tidak_valid') {
-                    Question_tidak_valid(id_vendor, response['row_vendor'].nama_usaha)
+                } else {
+
                 }
             }
         })
     }
-
 
     var form_pesan = $('#form_pesan');
     form_pesan.on('submit', function(e) {
@@ -160,23 +196,22 @@
         })
     })
 
-
-    function Question_tidak_valid(id_vendor, nm_vendor) {
-        var url_tidak_valid = $('[name="url_tidak_valid"]').val()
+    function Question_kbli_nib(id_vendor, nm_vendor) {
+        var url_terima_rekanan_baru = $('[name="url_terima_rekanan_baru"]').val()
         Swal.fire({
             title: 'Apakah Anda Yakin Terima Penyedia? ' + nm_vendor,
-            text: "Penyedia Akan Dikeluarkan dari daftar Penyedia Terundang!",
+            text: "Penyedia Yang Sudah Di Terima Tidak Bisa Di Tolak Kembali!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya!',
+            confirmButtonText: 'Ya, Terima!',
             cancelButtonText: 'Batal!',
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: url_tidak_valid,
+                    url: url_terima_rekanan_baru,
                     data: {
                         id_vendor: id_vendor,
                     },
@@ -185,7 +220,7 @@
                         if (response['message'] == 'success') {
                             Swal.fire(
                                 'Berhasil!',
-                                'Penyedia ' + nm_vendor + ' Berhasil Di Keluarkan Dari Penyedia Terundang!',
+                                'Penyedia ' + nm_vendor + ' Berhasil Di Terima!',
                                 'success'
                             )
                             Reload_table_rekanan_baru();

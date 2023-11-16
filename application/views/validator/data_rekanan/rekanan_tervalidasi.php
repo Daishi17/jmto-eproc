@@ -14,7 +14,7 @@
                     <div class="col-sm-6">
                         <div class="card border-dark shadow-lg">
                             <div class="card-body">
-                              <from>
+                                <from>
                                     <div class="row g-1">
                                         <div class="col-sm-6">
                                             <div class="input-group mb-2">
@@ -45,7 +45,8 @@
                                             </button>
                                         </div>
                                     </div>
-                                </from>                            </div>
+                                </from>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -179,6 +180,10 @@
                             </select>
                             <label class="col-form-label" style="text-align: right;">Tanggal<span style="color:red;">*</span></label>
                             <input class="tanggal_mulai form-control form-control-sm" type="date" name="tanggal" required="">
+                            <label class="col-form-label" style="text-align: right;">Jam<span style="color:red;">*</span></label>
+                            <input class="form-control form-control-sm" type="time" name="jam" required="">
+                            <label class="col-form-label" style="text-align: right;">Keterangan</label>
+                            <textarea name="keterangan" class="form-control"></textarea>
                             <br>
                         </div>
                     </div>

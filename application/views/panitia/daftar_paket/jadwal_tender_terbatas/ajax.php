@@ -1460,7 +1460,7 @@
     form_jadwal_tender_terbatas.on('submit', function(e) {
         e.preventDefault();
         $.ajax({
-            url: '<?= base_url('post_jadwal/post_jadwal/update_jadwal_18_tender_terbatas/') ?>' + id_url_rup,
+            url: '<?= base_url('post_jadwal/post_jadwal/update_jadwal_22_tender_terbatas/') ?>' + id_url_rup,
             method: "POST",
             data: new FormData(this),
             contentType: false,
@@ -1507,4 +1507,36 @@
             $fixedHeader.hide();
         }
     });
+
+    function plus_jadwal_22_baris(id_jadwal_rup) {
+        var id_rup_global = $('[name="id_rup_global"]').val()
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url('post_jadwal/post_jadwal/genrate_jadwal_22_baris_plus/') ?>' + id_rup_global,
+            data: {
+                id_jadwal_rup: id_jadwal_rup
+            },
+            dataType: "JSON",
+            success: function(response) {
+                Swal.fire('Jadwal Berhasil Di Update!', '', 'success')
+                window.location.href = '';
+            }
+        });
+    }
+
+    function min_jadwal_22_baris(id_jadwal_rup) {
+        var id_rup_global = $('[name="id_rup_global"]').val()
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url('post_jadwal/post_jadwal/genrate_jadwal_22_baris_min/') ?>' + id_rup_global,
+            data: {
+                id_jadwal_rup: id_jadwal_rup
+            },
+            dataType: "JSON",
+            success: function(response) {
+                Swal.fire('Jadwal Berhasil Di Update!', '', 'success')
+                window.location.href = '';
+            }
+        });
+    }
 </script>

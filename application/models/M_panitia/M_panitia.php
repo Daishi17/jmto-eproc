@@ -101,7 +101,7 @@ class M_panitia extends CI_Model
         return $query->result_array();
     }
 
-    public function update_jadwal_rup_tender_terbatas_18_jadwal($data, $where)
+    public function update_jadwal_rup_tender_terbatas_22_jadwal($data, $where)
     {
         $this->db->where($where);
         $this->db->update('tbl_jadwal_rup', $data);
@@ -347,8 +347,7 @@ class M_panitia extends CI_Model
             $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Kecil', 'Menengah']);
         } else if ($row_paket['syarat_tender_kualifikasi'] == 'Kecil') {
             $this->db->where('tbl_vendor.kualifikasi_usaha', 'Kecil');
-        } else {
-        }
+        } else { }
         $this->db->group_by('tbl_vendor.id_vendor');
         $query = $this->db->get();
         return $query->result_array();
@@ -1726,5 +1725,50 @@ class M_panitia extends CI_Model
     {
         $this->db->update('tbl_vendor_mengikuti_paket', $data, $where);
         return $this->db->affected_rows();
+    }
+
+    // jadwal ngeplus
+    public function get_jadwal_plus_id_result($id_jadwal_rup, $id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_jadwal_rup >=', $id_jadwal_rup);
+        $this->db->where('id_rup', $id_rup);
+        $this->db->order_by('id_jadwal_rup', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_jadwal_plus_id_row($id_jadwal_rup, $id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_jadwal_rup >=', $id_jadwal_rup);
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_jadwal_min_id_result($id_jadwal_rup, $id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_jadwal_rup >=', $id_jadwal_rup);
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('waktu_mulai !=', NULL);
+        $this->db->where('waktu_selesai !=', NULL);
+        $this->db->order_by('id_jadwal_rup', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_jadwal_min_id_row($id_jadwal_rup, $id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_jadwal_rup >=', $id_jadwal_rup);
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->row_array();
     }
 }

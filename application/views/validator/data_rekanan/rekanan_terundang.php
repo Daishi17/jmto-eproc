@@ -6,7 +6,7 @@
                     <div class="flex-grow-1 bd-highlight">
                         <span class="text-white">
                             <i class="fa-solid fa-table px-1"></i>
-                            <small> <strong>Data Tabel - Data Rekanan Terundang (DRT)</strong></small>
+                            <small><strong>Data Tabel - Data Rekanan Terundang (DRT)</strong></small>
                         </span>
                     </div>
                 </div>
@@ -19,28 +19,27 @@
                                         <div class="col-sm-6">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Filter Dokumen Upload</option>
-                                                    <option value="all">All</option>
-                                                    <option value="sudah">Sudah Upload</option>
-                                                    <option value="belum">Belum Upload</option>
+                                                <select class="form-select" id="sts_upload_dokumen" name="sts_upload_dokumen" aria-label="Default select example">
+                                                    <option value="">Filter Dokumen Upload</option>
+                                                    <option value="">All</option>
+                                                    <option value="1">Sudah Upload</option>
+                                                    <option value="2">Belum Upload</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-bars"></i></span>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Filter Dokumen Cek</option>
-                                                    <option value="all">All</option>
-                                                    <option value="belum">Belum terundang</option>
-                                                    <option value="valid">Dokumen terundang</option>
-                                                    <option value="tidak">Dokumen Tidak Valid</option>
+                                                <select class="form-select" id="sts_dokumen_cek" name="sts_dokumen_cek" aria-label="Default select example">
+                                                    <option value="">Filter Dokumen Cek</option>
+                                                    <option value="">All</option>
+                                                    <option value="1">Sudah DiPeriksa</option>
+                                                    <option value="2">Belum Diperiksa</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
-                                            <button type="button" class="btn btn-primary btn-sm shadow-lg">
+                                            <button type="button" name="filter" id="filter" class="btn btn-primary btn-sm shadow-lg">
                                                 <i class="fa-solid fa-list px-1"></i>
                                                 <small>Filtering</small>
                                             </button>
@@ -51,9 +50,9 @@
                         </div>
                     </div>
                     <hr>
-                    <input type="hidden" name="url_get_rekanan_terundang" value="<?= base_url('validator/rekanan_terundang/get_rekanan_terundang') ?>">
-                    <input type="hidden" name="url_get_rekanan_tervalidasi_by_id" value="<?= base_url('validator/rekanan_tervalidasi/get_id_rekanan_tervalidasi/') ?>">
-                    <input type="hidden" name="url_tidak_valid" value="<?= base_url('validator/rekanan_terundang/tidak_valid') ?>">
+                    <input type="hidden" name="url_get_rekanan_terundang" value="<?= base_url('validator/rekanan_terundang/get_rekanan_tervalidasi') ?>">
+                    <input type="hidden" name="url_get_rekanan_terundang_by_id" value="<?= base_url('validator/rekanan_terundang/get_id_rekanan_tervalidasi/') ?>">
+                    <input type="hidden" name="url_terima_rekanan_terundang" value="<?= base_url('validator/rekanan_terundang/terima') ?>">
                     <table id="tbl_rekanan_terundang" class="table table-bordered table-sm table-striped">
                         <thead class="bg-secondary shadow-lg">
                             <tr>
@@ -61,8 +60,8 @@
                                 <th style="width:20%;"><small class="text-white">Nama Rekanan</small></th>
                                 <th style="width:18%;"><small class="text-white">Jenis Usaha</small></th>
                                 <th style="width:10%;"><small class="text-white">Kualifikasi</small></th>
-                                <th style="width:15%;"><small class="text-white">Status Rekanan</small></th>
-                                <th style="width:15%;"><small class="text-white">Status Dokumen </small></th>
+                                <th style="width:15%;"><small class="text-white">Status Dokumen Upload</small></th>
+                                <th style="width:15%;"><small class="text-white">Status Dokumen Cek</small></th>
                                 <th style="width:22%;"><small class="text-white">
                                         <div class="text-center">More Options</div>
                                     </small></th>
@@ -181,6 +180,10 @@
                             </select>
                             <label class="col-form-label" style="text-align: right;">Tanggal<span style="color:red;">*</span></label>
                             <input class="tanggal_mulai form-control form-control-sm" type="date" name="tanggal" required="">
+                            <label class="col-form-label" style="text-align: right;">Jam<span style="color:red;">*</span></label>
+                            <input class="form-control form-control-sm" type="time" name="jam" required="">
+                            <label class="col-form-label" style="text-align: right;">Keterangan</label>
+                            <textarea name="keterangan" class="form-control"></textarea>
                             <br>
                         </div>
                     </div>
