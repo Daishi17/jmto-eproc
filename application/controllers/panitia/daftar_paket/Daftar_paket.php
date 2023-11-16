@@ -92,29 +92,39 @@ class Daftar_paket extends CI_Controller
 		// cek vendor terundang
 		// lolos izin_usaha paket
 		$syarat_izin_usaha = $this->M_panitia->cek_syarat_izin_usaha($data['row_rup']['id_rup']);
-
 		$cek_syarat_kbli = $this->M_panitia->cek_syarat_kbli($data['row_rup']['id_rup']);
 		$cek_syarat_kbli_sbu = $this->M_panitia->cek_syarat_sbu($data['row_rup']['id_rup']);
 		$cek_syarat_teknis = $this->M_panitia->cek_syarat_teknis($data['row_rup']['id_rup']);
 		// siup
 		$data_vendor_lolos_siup_kbli = $this->M_panitia->data_vendor_lolos_siup_kbli($cek_syarat_kbli);
+
 		// nib
 		$data_vendor_lolos_nib_kbli = $this->M_panitia->data_vendor_lolos_nib_kbli($cek_syarat_kbli);
+
 		// siujk
 		$data_vendor_lolos_siujk_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
+
 		// skdp
 		$data_vendor_lolos_skdp_kbli = $this->M_panitia->data_vendor_lolos_skdp_kbli($cek_syarat_kbli);
+
 		// sbu
 		$data_vendor_lolos_sbu_kbli = $this->M_panitia->data_vendor_lolos_sbu_kbli($cek_syarat_kbli_sbu);
 
 		// spt
 		$data_vendor_lolos_spt = $this->M_panitia->data_vendor_lolos_spt($cek_syarat_teknis);
+
 		// laporan keuangan
 		$data_vendor_lolos_laporan_keuangan = $this->M_panitia->data_vendor_lolos_laporan_keuangan($cek_syarat_teknis);
+
 		// neraca keuangan
 		$data_vendor_lolos_neraca_keuangan = $this->M_panitia->data_vendor_lolos_neraca_keuangan($cek_syarat_teknis);
+
+
 		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli, $data_vendor_lolos_siujk_kbli, $data_vendor_lolos_skdp_kbli, $data_vendor_lolos_sbu_kbli);
+
 		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $cek_syarat_teknis, $data_vendor_lolos_spt, $data_vendor_lolos_laporan_keuangan, $data_vendor_lolos_neraca_keuangan, $data_vendor_terundang_by_kbli, $data['row_rup']);
+
+
 
 		$this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
@@ -908,7 +918,7 @@ class Daftar_paket extends CI_Controller
 		} else {
 			$data = [
 				'id_rup' => $row_rup['id_rup'],
-				'id_kbli' => $row_kbli['id_kbli']
+				'id_kbli' => $nama_kbli
 			];
 			$this->M_panitia->tambah_syarat_tender_kbli($data);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));

@@ -26,8 +26,6 @@
     <link href="<?php echo base_url(); ?>/assets/css/bs5-style.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>/assets/css/bs4-card.css" rel="stylesheet">
 
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins-lte/select2/css/select2.css">
 </head>
 
 <body class="bg-white">

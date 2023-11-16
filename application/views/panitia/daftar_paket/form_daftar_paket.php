@@ -988,12 +988,16 @@
                                                                             <div class="input-group">
                                                                                 <span class="input-group-text"><small>Jenis KBLI</small></span>
                                                                                 <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
-                                                                                <input class="form-control form-control-sm" name="nama_kbli" list="datalistOptions" placeholder="Pilih...">
-                                                                                <datalist id="datalistOptions">
+                                                                                <select name="nama_kbli" class="form-control ">
                                                                                     <?php foreach ($result_kbli as $key => $value) { ?>
-                                                                                        <option value="<?= $value['nama_kbli'] ?>"><?= $value['kode_kbli'] ?></option>
+                                                                                        <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> | <?= $value['nama_kbli'] ?></option>
                                                                                     <?php } ?>
-                                                                                </datalist>
+                                                                                </select>
+                                                                                <!-- <input class="form-control form-control-sm" name="nama_kbli" list="datalistOptions" placeholder="Pilih...">
+                                                                                    
+                                                                                <datalist id="datalistOptions">
+                                                                                
+                                                                                </datalist> -->
                                                                             </div>
                                                                         </td>
                                                                         <td class="col-sm-2 text-center">
@@ -1038,12 +1042,15 @@
                                                                             <div class="input-group">
                                                                                 <span class="input-group-text"><small>Jenis SBU</small></span>
                                                                                 <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
-                                                                                <input class="form-control form-control-sm" name="nama_sbu" list="datalistOptionsSbu" placeholder="Pilih...">
-                                                                                <datalist id="datalistOptionsSbu">
+                                                                                <select name="nama_sbu" class="form-control">
                                                                                     <?php foreach ($result_sbu as $key => $value) { ?>
-                                                                                        <option value="<?= $value['nama_sbu'] ?>"><?= $value['kode_sbu'] ?></option>
+                                                                                        <option value="<?= $value['id_sbu'] ?>"><?= $value['kode_sbu'] ?> | <?= $value['nama_sbu'] ?></option>
                                                                                     <?php } ?>
-                                                                                </datalist>
+                                                                                </select>
+                                                                                <!-- <input class="form-control form-control-sm" name="nama_sbu" list="datalistOptionsSbu" placeholder="Pilih..."> -->
+                                                                                <!-- <datalist id="datalistOptionsSbu">
+                                                                                   
+                                                                                </datalist> -->
                                                                             </div>
                                                                         </td>
                                                                         <td class="col-sm-2 text-center">
@@ -1389,7 +1396,7 @@
                                         <div class="flex-grow-1 bd-highlight">
                                             <span class="text-white">
                                                 <i class="fa-regular fa-rectangle-list px-1"></i>
-                                                <small><strong>List Data - Rekanan Terrekomendasi Sesuai Persyaratan Pengadaan</strong></small>
+                                                <small><strong>List Data - Rekanan Ter-Rekomendasi Sesuai Persyaratan Pengadaan</strong></small>
                                             </span>
                                         </div>
                                     </div>
