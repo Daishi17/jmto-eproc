@@ -1069,24 +1069,23 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->nama_usaha;
-            if ($rs->nilai_penawaran_vendor) {
-                $row[] = "Rp " . number_format($rs->nilai_penawaran_vendor, 2, ',', '.');
-            } else {
-                $row[] = "-";
-            }
+            // if ($rs->nilai_penawaran_vendor) {
+            //     $row[] = "Rp " . number_format($rs->nilai_penawaran_vendor, 2, ',', '.');
+            // } else {
+            //     $row[] = "-";
+            // }
 
-            if ($rs->tkdn_dokumen_penawaran_vendor) {
-                $row[] = $rs->tkdn_dokumen_penawaran_vendor;
-            } else {
-                $row[] = "-";
-            }
+            // if ($rs->tkdn_dokumen_penawaran_vendor) {
+            //     $row[] = $rs->tkdn_dokumen_penawaran_vendor;
+            // } else {
+            //     $row[] = "-";
+            // }
 
-            if ($rs->persentase_tkdn_dokumen_penawaran_vendor) {
-                $row[] = $rs->persentase_tkdn_dokumen_penawaran_vendor . '%';
-            } else {
-                $row[] = "-";
-            }
-
+            // if ($rs->persentase_tkdn_dokumen_penawaran_vendor) {
+            //     $row[] = $rs->persentase_tkdn_dokumen_penawaran_vendor . '%';
+            // } else {
+            //     $row[] = "-";
+            // }
             $row[] = '<div class="text-center">
 			<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_mengikuti(' . "'" . $rs->id_vendor_mengikuti_paket . "','lihat_dokumen_penawaran_2'" . ')">
 				<i class="fa-solid fa-eye"></i>
@@ -1145,26 +1144,26 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->nama_usaha;
-            if ($rs->nilai_penawaran_vendor) {
-                $row[] = "Rp " . number_format($rs->nilai_penawaran_vendor, 2, ',', '.');
-            } else {
-                $row[] = "-";
-            }
+            // if ($rs->nilai_penawaran_vendor) {
+            //     $row[] = "Rp " . number_format($rs->nilai_penawaran_vendor, 2, ',', '.');
+            // } else {
+            //     $row[] = "-";
+            // }
 
-            if ($rs->tkdn_dokumen_penawaran_vendor) {
-                $row[] = $rs->tkdn_dokumen_penawaran_vendor;
-            } else {
-                $row[] = "-";
-            }
+            // if ($rs->tkdn_dokumen_penawaran_vendor) {
+            //     $row[] = $rs->tkdn_dokumen_penawaran_vendor;
+            // } else {
+            //     $row[] = "-";
+            // }
 
-            if ($rs->persentase_tkdn_dokumen_penawaran_vendor) {
-                $row[] = $rs->persentase_tkdn_dokumen_penawaran_vendor . '%';
-            } else {
-                $row[] = "-";
-            }
+            // if ($rs->persentase_tkdn_dokumen_penawaran_vendor) {
+            //     $row[] = $rs->persentase_tkdn_dokumen_penawaran_vendor . '%';
+            // } else {
+            //     $row[] = "-";
+            // }
 
             $row[] = '<div class="text-center">
-			<a href="https://jmto-vms.kintekindo.net/file_paket/' . $rs->nama_rup . '/' . '" class="btn btn-info btn-sm shadow-lg text-white">
+			<a href="https://jmto-vms.kintekindo.net/file_paket/' . $rs->nama_rup . '/' . $rs->dok_penawaran_harga . '" class="btn btn-info btn-sm shadow-lg text-white">
 				<i class="fa-solid fa-file"></i>
 				<small>Lihat</small>
 			</a>

@@ -94,9 +94,9 @@
                                             <thead>
                                                 <th>No</th>
                                                 <th>Nama Peserta</th>
-                                                <th>Nilai Penawaran</th>
-                                                <th>TKDN/PDN/IMPORT</th>
-                                                <th>Persentase TKDN/PDN/IMPORT </th>
+                                                <!-- <th>Nilai Penawaran</th>
+                                                        <th>TKDN/PDN/IMPORT</th>
+                                                        <th>Persentase TKDN/PDN/IMPORT </th> -->
                                                 <th>Lihat Dok Penawaran</th>
                                             </thead>
                                             <tbody>
@@ -207,9 +207,9 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Usaha</th>
-                                <th>Nilai Penawaran</th>
-                                <th>TKDN/PDN/IMPORT</th>
-                                <th>Persentase TKDN/PDN/IMPORT</th>
+                                <!-- <th>Nilai Penawaran</th>
+                                    <th>TKDN/PDN/IMPORT</th>
+                                    <th>Persentase TKDN/PDN/IMPORT</th> -->
                                 <th>File</th>
                             </tr>
                         </thead>
