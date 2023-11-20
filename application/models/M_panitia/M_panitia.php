@@ -407,21 +407,21 @@ class M_panitia extends CI_Model
     // end cek barus kbli siujk
 
 
-    function data_vendor_lolos_skdp_kbli($cek_syarat_kbli)
-    {
-        $data_kbli_tampung = [];
-        foreach ($cek_syarat_kbli as $data_syarat_skdp) {
-            $data_kbli_tampung[] = $data_syarat_skdp['id_kbli'];
-        }
-        $implode = implode(',', $data_kbli_tampung);
-        $this->db->select('tbl_vendor.id_vendor,tbl_vendor_kbli_skdp.id_kbli');
-        $this->db->from('tbl_vendor');
-        $this->db->join('tbl_vendor_kbli_skdp', 'tbl_vendor_kbli_skdp.id_vendor = tbl_vendor.id_vendor', 'left');
-        $this->db->where_in('tbl_vendor_kbli_skdp.id_kbli', [$implode]);
-        $this->db->group_by('tbl_vendor.id_vendor');
-        $query = $this->db->get();
-        return $query->result_array();
-    }
+    // function data_vendor_lolos_skdp_kbli($cek_syarat_kbli)
+    // {
+    //     $data_kbli_tampung = [];
+    //     foreach ($cek_syarat_kbli as $data_syarat_skdp) {
+    //         $data_kbli_tampung[] = $data_syarat_skdp['id_kbli'];
+    //     }
+    //     $implode = implode(',', $data_kbli_tampung);
+    //     $this->db->select('tbl_vendor.id_vendor,tbl_vendor_kbli_skdp.id_kbli');
+    //     $this->db->from('tbl_vendor');
+    //     $this->db->join('tbl_vendor_kbli_skdp', 'tbl_vendor_kbli_skdp.id_vendor = tbl_vendor.id_vendor', 'left');
+    //     $this->db->where_in('tbl_vendor_kbli_skdp.id_kbli', [$implode]);
+    //     $this->db->group_by('tbl_vendor.id_vendor');
+    //     $query = $this->db->get();
+    //     return $query->result_array();
+    // }
     // end cek barus kbli skdp
 
     // ini baris cek_kli sbu
@@ -485,7 +485,7 @@ class M_panitia extends CI_Model
 
 
     // ini untuk mengabungkan data vendor terundang
-    function gabung_keseluruhan_vendor_terundang($array_kbli_siup, $array_kbli_nib, $array_kbli_siujk, $array_kbli_skdp, $array_kbli_sbu)
+    function gabung_keseluruhan_vendor_terundang($array_kbli_siup, $array_kbli_nib, $array_kbli_siujk, $array_kbli_sbu)
     {
         // lolos kbli
         $mergedResult = [];
@@ -496,11 +496,6 @@ class M_panitia extends CI_Model
         }
         // kbli siujk
         foreach ($array_kbli_siujk as $row) {
-            $mergedResult[$row['id_vendor']] = $row;
-        }
-
-        // kbli skdp
-        foreach ($array_kbli_skdp as $row) {
             $mergedResult[$row['id_vendor']] = $row;
         }
 
@@ -1773,5 +1768,24 @@ class M_panitia extends CI_Model
         $this->db->where('id_rup', $id_rup);
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+    public function insert_izin_prinsip($data)
+    {
+        $this->db->insert('tbl_izin_prinsip', $data);
+    }
+
+    public function get_dokumen_izin_prinsip($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_izin_prinsip');
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function delete_izin_prinsip($where)
+    {
+        $this->db->delete('tbl_izin_prinsip', $where);
     }
 }

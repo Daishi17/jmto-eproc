@@ -108,11 +108,11 @@
         }
     }
 
-    var form_hps = $('#form_hps')
-    form_hps.on('submit', function(e) {
-        var url_update_dok_hps = $('[name="url_update_dok_hps"]').val();
-        var file_hps = $('[name="file_hps"]').val();
-        if (file_hps == '') {
+    var form_dokumen_izin_prinsip = $('#form_dokumen_izin_prinsip')
+    form_dokumen_izin_prinsip.on('submit', function(e) {
+        var url_dok_izin_prinsip = $('[name="url_dok_izin_prinsip"]').val();
+        var file_dokumen = $('[name="file_dokumen"]').val();
+        if (file_dokumen == '') {
             e.preventDefault();
             Swal.fire({
                 icon: 'error',
@@ -122,14 +122,14 @@
         } else {
             e.preventDefault();
             $.ajax({
-                url: url_update_dok_hps,
+                url: url_dok_izin_prinsip,
                 method: "POST",
                 data: new FormData(this),
                 contentType: false,
                 cache: false,
                 processData: false,
                 beforeSend: function() {
-                    $('.file_hps_btn').attr("disabled", true);
+                    $('.btn_dok_izin_prinsip').attr("disabled", true);
                 },
                 success: function(response) {
                     let timerInterval
@@ -148,8 +148,9 @@
                         willClose: () => {
                             clearInterval(timerInterval)
                             Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            form_dokumen_izin_prinsip[0].reset();
                             load_dok_hps()
-                            $('.file_hps_btn').attr("disabled", false);
+                            $('.btn_dok_izin_prinsip').attr("disabled", false);
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */
@@ -162,6 +163,66 @@
         }
     })
     load_dok_hps()
+    load_dok_izin_prinsip()
+
+    function load_dok_izin_prinsip() {
+
+        var url_get_dok_izin_prinsip = $('[name="url_get_dok_izin_prinsip"]').val()
+        var id_rup_global = $('[name="id_rup_global"]').val()
+        var open_dokumen_izin_prinsip = $('[name="open_dokumen_izin_prinsip"]').val()
+        $.ajax({
+            type: "GET",
+            url: url_get_dok_izin_prinsip + id_rup_global,
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                var i;
+                for (i = 0; i < response['dok_izin_prinsip'].length; i++) {
+                    html += '<tr>' +
+                        '<td>' + response['dok_izin_prinsip'][i].nama_file + '</td>' +
+                        '<td>' + '  <a target="_blank" href="' + open_dokumen_izin_prinsip + response['dok_izin_prinsip'][i].file_dokumen + '" class="btn btn-sm btn-danger">' +
+                        '<i class="fa-solid fa-folder-open"></i>' +
+                        ' File Dokumen' +
+                        '</a>' + '</td>' +
+                        '<td style="text-align:center;">' +
+                        '<a href="javascript:;" onclick="hapus_dok_izin_prinsip(' + response['dok_izin_prinsip'][i].id_izin_prinsip + ')" class="btn btn-danger btn-sm" > <i class="fa-solid fa-trash"></i></a>' +
+                        '</td>' +
+                        '</tr>';
+                }
+                $('#tbl_dok_izin_prinsip').html(html)
+            }
+        })
+    }
+
+    function hapus_dok_izin_prinsip(id_izin_prinsip) {
+        var url_hapus_izin_prinsip = $('[name="url_hapus_izin_prinsip"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Menghapus',
+            text: 'Dokumen Ini ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_hapus_izin_prinsip,
+                    data: {
+                        id_izin_prinsip: id_izin_prinsip,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Data Berhasil Di Hapus!', '', 'success')
+                        load_dok_izin_prinsip()
+                    }
+                })
+
+            }
+        })
+    }
 
     function load_dok_hps() {
 
@@ -177,13 +238,6 @@
             success: function(response) {
                 $('.total_hps').val("Rp " + response['row_rup'].total_hps_rup.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ',00');
                 var html = ''
-                if (response['row_rup'].file_hps) {
-                    html += '<a target="_blank" href="' + url_cek_dokumen_hps + nama_rup + '/HPS' + '/' + response['row_rup'].file_hps + '" class="btn btn-default btn-info">' + '<i class="fa-solid fa-file px-1"></i>' + response['row_rup'].file_hps + '</a>';
-                    $('.load_dok_Hps').html(html);
-                } else {
-                    html += '<a class="btn btn-danger btn-sm">' + '<i class="fa-solid fa-file px-1"></i>' + 'Belum Upload' + '</a>';
-                    $('.load_dok_Hps').html(html);
-                }
             }
         })
     }
@@ -1858,54 +1912,45 @@
     form_simpan_syarat_tambahan.on('submit', function(e) {
         var url_simpan_syarat_tambahan = $('[name="url_simpan_syarat_tambahan"]').val();
         var file_syarat_tambahan = $('[name="file_syarat_tambahan"]').val();
-        if (file_syarat_tambahan == '') {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Dokumen Wajib Di Isi!',
-            })
-        } else {
-            e.preventDefault();
-            $.ajax({
-                url: url_simpan_syarat_tambahan,
-                method: "POST",
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                beforeSend: function() {
-                    $('.file_syarat_tambahan_btn').attr("disabled", true);
-                },
-                success: function(response) {
-                    let timerInterval
-                    Swal.fire({
-                        title: 'Sedang Proses Menyimpan Data!',
-                        html: 'Membuat Data <b></b>',
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading()
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                                // b.textContent = Swal.getTimerRight()
-                            }, 100)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                            $('.file_syarat_tambahan_btn').attr("disabled", false);
-                            get_syarat_tambahan()
-                        }
-                    }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
+        e.preventDefault();
+        $.ajax({
+            url: url_simpan_syarat_tambahan,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $('.file_syarat_tambahan_btn').attr("disabled", true);
+            },
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Membuat Data <b></b>',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                        $('.file_syarat_tambahan_btn').attr("disabled", false);
+                        get_syarat_tambahan()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
 
-                        }
-                    })
-                }
-            })
-        }
+                    }
+                })
+            }
+        })
     })
 
     get_syarat_tambahan()

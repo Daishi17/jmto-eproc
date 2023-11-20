@@ -43,6 +43,7 @@
         <script type="text/javascript" src="<?= base_url('assets/datetimepicekernew/plugins/'); ?>jquery.datetimepicker.full.min.js"></script>
         <!-- Select2 -->
         <script src="<?php echo base_url(); ?>assets/plugins-lte/select2/js/select2.full.min.js"></script>
+
         <script>
             $('.select2').select2()
             $(function() {
@@ -51,7 +52,6 @@
                 $('.select2bs4').select2({
                     theme: 'bootstrap4'
                 });
-                // $( ".modal-xl-paket" ).modal();
             })
         </script>
 

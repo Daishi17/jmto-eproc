@@ -166,71 +166,104 @@
                                     </tr>
                                     <tr>
                                         <th colspan="4">
+                                            <input type="hidden" name="open_dokumen_izin_prinsip" value="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/DOKUMEN_IZIN_PRINSIP_DAN_HPS' . '/') ?>">
                                             <div class="card border-dark shadow-lg">
                                                 <div class="card-header border-dark bg-gradient-color2 d-flex justify-content-between align-items-center">
                                                     <div class="flex-grow-1 bd-highlight text-center">
                                                         <span class="text-dark">
                                                             <i class="fa-solid fa-money-bill-wave px-1"></i>
-                                                            <small>Form Isian HPS</small>
+                                                            <small>DOKUMEN IZIN PRINSIP DAN HPS</small>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
-                                                    <table class="table table-bordered border-dark table-sm shadow-lg">
-                                                        <thead class="bg-secondary text-white">
-                                                            <tr>
-                                                                <th><small>Total Pagu Paket</small></th>
-                                                                <th><small>Total HPS </small></th>
-                                                                <th><small>Upload Dokumen HPS dan Dokumen Pengadaan</small></th>
-                                                                <th>
-                                                                    <div class="text-center">
-                                                                        <small>Dokumen HPS dan Dokumen Pengadaan</small>
-                                                                    </div>
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td style="vertical-align: middle;">
-                                                                    <i class="fa-solid fa-rupiah-sign px-1"></i>
-                                                                    <input type="hidden" name="total_pagu_rup" value="<?= $row_rup['total_pagu_rup'] ?>" class="form-control" placeholder="Total HPS">
-                                                                    <small><?= number_format($row_rup['total_pagu_rup'], 2, ',', '.') ?></small>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="col-sm-12">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-text">Rp.</span>
-                                                                            <input type="number" name="total_hps_rup" onkeyup="total_hps_validasi('<?= $row_rup['id_url_rup'] ?>')" class="form-control " placeholder="Total HPS" value="<?= $row_rup['total_hps_rup'] ?>">
-                                                                            <input type="text" id="rupiah_total_hps" class="form-control total_hps bg-light" readonly value="<?= "Rp " . number_format($row_rup['total_hps_rup'], 2, ',', '.') ?>">
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
 
-                                                                <td>
-                                                                    <form id="form_hps" action="javascript:;" enctype="multipart/form-data">
-                                                                        <div class="input-group">
-                                                                            <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
-                                                                            <input type="hidden" name="nama_rup" value="<?= $row_rup['nama_rup'] ?>">
-                                                                            <input type="hidden" name="date_y" value="<?= date('Y') ?>">
+                                                            <table class="table table-bordered border-dark table-sm shadow-lg">
+                                                                <thead class="bg-secondary text-white">
+                                                                    <tr>
+                                                                        <th>
+                                                                            <div class="text-center">
+                                                                                <small>DOKUMEN IZIN PRINSIP DAN HPS</small>
+                                                                            </div>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <form action="javascript:;" id="form_dokumen_izin_prinsip">
+                                                                                <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
+                                                                                <input type="hidden" name="nama_rup" value="<?= $row_rup['nama_rup'] ?>">
+                                                                                <div class="input-group mb-2">
+                                                                                    <span class="input-group-text"><i class="fa-solid fa-keyboard"></i></span>
+                                                                                    <input type="text" class="form-control" placeholder="Nama Dokumen" name="nama_file">
+                                                                                </div>
+                                                                                <div class="input-group mb-2">
+                                                                                    <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dokumen">
+                                                                                </div>
+                                                                                <button type="submit" class="btn btn-sm btn-success btn_dok_izin_prinsip">
+                                                                                    <i class="fa-solid fa-square-plus"></i>
+                                                                                    Tambah Dokumen
+                                                                                </button>
+                                                                            </form>
+                                                                        </td>
 
-                                                                            <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_hps">
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <table class="table table-bordered border-dark table-sm shadow-lg">
+                                                                <thead class="bg-secondary text-white">
+                                                                    <tr>
+                                                                        <th><small>Total Pagu Paket</small></th>
+                                                                        <th><small>Total HPS </small></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle;">
+                                                                            <i class="fa-solid fa-rupiah-sign px-1"></i>
+                                                                            <input type="hidden" name="total_pagu_rup" value="<?= $row_rup['total_pagu_rup'] ?>" class="form-control" placeholder="Total HPS">
+                                                                            <small><?= number_format($row_rup['total_pagu_rup'], 2, ',', '.') ?></small>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="col-sm-12">
+                                                                                <div class="input-group">
+                                                                                    <span class="input-group-text">Rp.</span>
+                                                                                    <input type="number" name="total_hps_rup" onkeyup="total_hps_validasi('<?= $row_rup['id_url_rup'] ?>')" class="form-control " placeholder="Total HPS" value="<?= $row_rup['total_hps_rup'] ?>">
+                                                                                    <input type="text" id="rupiah_total_hps" class="form-control total_hps bg-light" readonly value="<?= "Rp " . number_format($row_rup['total_hps_rup'], 2, ',', '.') ?>">
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table class="table table-bordered border-dark table-sm shadow-lg">
+                                                                <thead class="bg-info text-dark">
+                                                                    <tr>
+                                                                        <th>
+                                                                            <small>Nama Dokumen</small>
+                                                                        </th>
+                                                                        <th>
+                                                                            <small>File Dokumen</small>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="text-center">
+                                                                                <small>Aksi</small>
+                                                                            </div>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="tbl_dok_izin_prinsip">
 
-                                                                            <button class="btn btn-primary file_hps_btn" type="submit">Upload</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </td>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
 
-                                                                <td>
-                                                                    <center>
-                                                                        <div class="text-center load_dok_Hps">
-
-                                                                        </div>
-                                                                    </center>
-                                                                </td>
-
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
                                                 </div>
                                             </div>
                                         </th>
@@ -405,28 +438,37 @@
                                                 <i class="fa-regular fa-folder-open px-1"></i>
                                                 Setting Dokumen Persyaratan
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modal-xl-rekomendasi">
-                                                <i class="fa-solid fa-building-user px-1"></i>
-                                                Lihat Rekanan Terekomendasi
-                                            </button>
+
+                                            <?php if ($row_rup['id_jadwal_tender'] == 2) { ?>
+                                                <button type="button" class="btn btn-sm btn-warning text-white" data-bs-toggle="modal" data-bs-target="#modal-xl-rekomendasi">
+                                                    <i class="fa-solid fa-building-user px-1"></i>
+                                                    Undang Rekanan Terekomendasi
+                                                </button>
+                                            <?php } else { ?>
+                                                <button type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal-xl-rekomendasi">
+                                                    <i class="fa-solid fa-building-user px-1"></i>
+                                                    Lihat Rekanan Terekomendasi
+                                                </button>
+                                            <?php }  ?>
+
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <?php if ($row_rup['id_metode_pengadaan'] == 3 || $row_rup['id_metode_pengadaan'] == 4 || $row_rup['id_metode_pengadaan'] == 5 || $row_rup['id_metode_pengadaan'] == 6) { ?>
-                                            <th class="bg-light">
-                                                <small>Daftar Rekanan Tervalidasi (DRT)</small>
-                                            </th>
-                                            <td class="bg-default" colspan="3">
-                                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
-                                                    <i class="fa-solid fa-building-user px-1"></i>
-                                                    Pilih Rekanan Tervalidasi
-                                                </button>
-                                                <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
-                                            </td>
+                                                                                                                                                                                                                        <th class="bg-light">
+                                                                                                                                                                                                                            <small>Daftar Rekanan Tervalidasi (DRT)</small>
+                                                                                                                                                                                                                        </th>
+                                                                                                                                                                                                                        <td class="bg-default" colspan="3">
+                                                                                                                                                                                                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
+                                                                                                                                                                                                                                <i class="fa-solid fa-building-user px-1"></i>
+                                                                                                                                                                                                                                Pilih Rekanan Tervalidasi
+                                                                                                                                                                                                                            </button>
+                                                                                                                                                                                                                            <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
+                                                                                                                                                                                                                        </td>
                                         <?php  } else { ?>
 
                                         <?php  }   ?>
-                                    </tr>
+                                    </tr> -->
                                     <tr>
                                         <th colspan="4">
                                             <div class="card border-dark shadow-lg">
@@ -509,7 +551,7 @@
                                                                                 </th>
                                                                                 <th>
                                                                                     <div class="text-center">
-                                                                                        <small>#</small>
+                                                                                        <small>Aksi</small>
                                                                                     </div>
                                                                                 </th>
                                                                             </tr>
@@ -531,7 +573,7 @@
                                                                                 </th>
                                                                                 <th>
                                                                                     <div class="text-center">
-                                                                                        <small>#</small>
+                                                                                        <small>Aksi</small>
                                                                                     </div>
                                                                                 </th>
                                                                             </tr>
@@ -988,7 +1030,7 @@
                                                                             <div class="input-group">
                                                                                 <span class="input-group-text"><small>Jenis KBLI</small></span>
                                                                                 <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
-                                                                                <select name="nama_kbli" class="form-control ">
+                                                                                <select name="nama_kbli" class="form-control select2bs4">
                                                                                     <?php foreach ($result_kbli as $key => $value) { ?>
                                                                                         <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> | <?= $value['nama_kbli'] ?></option>
                                                                                     <?php } ?>
@@ -1016,7 +1058,7 @@
                                                                                             <th><small>Keterangan Jenis KBLI</small></th>
                                                                                             <th>
                                                                                                 <div class="text-center">
-                                                                                                    <small>#</small>
+                                                                                                    <small>Aksi</small>
                                                                                                 </div>
                                                                                             </th>
                                                                                         </tr>
@@ -1069,7 +1111,7 @@
                                                                                             <th><small>Keterangan Jenis SBU</small></th>
                                                                                             <th>
                                                                                                 <div class="text-center">
-                                                                                                    <small>#</small>
+                                                                                                    <small>Aksi</small>
                                                                                                 </div>
                                                                                             </th>
                                                                                         </tr>
@@ -1339,7 +1381,7 @@
                                                                                         </th>
                                                                                         <th class="col-sm-1">
                                                                                             <div class="text-center">
-                                                                                                <small>#</small>
+                                                                                                <small>Aksi</small>
                                                                                             </div>
                                                                                         </th>
                                                                                     </tr>

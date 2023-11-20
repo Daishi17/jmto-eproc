@@ -11,9 +11,7 @@
 <!-- url update -->
 
 <input type="hidden" name="url_update_rup_hps" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_hps/') ?>">
-<input type="hidden" name="url_dok_izin_prinsip" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_dok_izin_prinsip') ?>">
-<input type="hidden" name="url_get_dok_izin_prinsip" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_dok_izin_prinsip/') ?>">
-<input type="hidden" name="url_hapus_izin_prinsip" value="<?= base_url('panitia/daftar_paket/daftar_paket/hapus_izin_prinsip/') ?>">
+<input type="hidden" name="url_update_dok_hps" value="<?= base_url('panitia/daftar_paket/daftar_paket/update_dok_hps') ?>">
 <input type="hidden" name="url_update_rup" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_update_rup') ?>">
 <input type="hidden" name="url_cek_dokumen_hps" value="<?= base_url('file_paket/') ?>">
 
@@ -51,4 +49,10 @@
 <input type="hidden" name="url_simpan_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/simpan_syarat_tambahan') ?>">
 <input type="hidden" name="url_get_syarat_tambahan_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_syarat_tambahan') ?>">
 <input type="hidden" name="url_hapus_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_hapus_syarat_tambahan') ?>">
-<input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_download_syarat_tambahan/') ?>">
+<input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_download_syarat_tambahan') ?>">
+<!-- url tok -->
+<input type="hidden" name="url_buka_penawaran" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/acces_penawaran') ?>">
+<input type="hidden" name="url_buka_penawaran_token" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/buka_penawaran' . '/') ?>">
+
+<input type="hidden" name="url_dapatkan_token_penawaran" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/kirim_token_penawaran') ?>">
+<input type="hidden" name="url_kirim_pengumuman" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/kirim_pengumuman_pemenang') ?>">

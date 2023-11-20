@@ -105,7 +105,7 @@ class Daftar_paket extends CI_Controller
 		$data_vendor_lolos_siujk_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
 
 		// skdp
-		$data_vendor_lolos_skdp_kbli = $this->M_panitia->data_vendor_lolos_skdp_kbli($cek_syarat_kbli);
+		// $data_vendor_lolos_skdp_kbli = $this->M_panitia->data_vendor_lolos_skdp_kbli($cek_syarat_kbli);
 
 		// sbu
 		$data_vendor_lolos_sbu_kbli = $this->M_panitia->data_vendor_lolos_sbu_kbli($cek_syarat_kbli_sbu);
@@ -120,7 +120,7 @@ class Daftar_paket extends CI_Controller
 		$data_vendor_lolos_neraca_keuangan = $this->M_panitia->data_vendor_lolos_neraca_keuangan($cek_syarat_teknis);
 
 
-		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli, $data_vendor_lolos_siujk_kbli, $data_vendor_lolos_skdp_kbli, $data_vendor_lolos_sbu_kbli);
+		$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli, $data_vendor_lolos_siujk_kbli, $data_vendor_lolos_sbu_kbli);
 
 		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $cek_syarat_teknis, $data_vendor_lolos_spt, $data_vendor_lolos_laporan_keuangan, $data_vendor_lolos_neraca_keuangan, $data_vendor_terundang_by_kbli, $data['row_rup']);
 
@@ -143,7 +143,7 @@ class Daftar_paket extends CI_Controller
 		$this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
-		if ($data['row_rup']['id_jadwal_tender'] == 5) {
+		if ($data['row_rup']['id_jadwal_tender'] == 5 || $data['row_rup']['id_jadwal_tender'] == 2) {
 			// tender terbatas dengan 18 jadwal
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/index', $data);
 			$this->load->view('administrator/template_menu/footer_menu');
@@ -231,35 +231,55 @@ class Daftar_paket extends CI_Controller
 
 
 
-	public function update_dok_hps()
+	public function update_dok_izin_prinsip()
 	{
 		$id_rup = $this->input->post('id_rup');
 		$nama_rup = $this->input->post('nama_rup');
 
 
 		$date = date('Y');
-		if (!is_dir('file_paket/' . $nama_rup . '/HPS')) {
-			mkdir('file_paket/' . $nama_rup . '/HPS', 0777, TRUE);
+		if (!is_dir('file_paket/' . $nama_rup . '/DOKUMEN_IZIN_PRINSIP_DAN_HPS')) {
+			mkdir('file_paket/' . $nama_rup . '/DOKUMEN_IZIN_PRINSIP_DAN_HPS', 0777, TRUE);
 		}
 
-		$config['upload_path'] = './file_paket/' . $nama_rup  . '/HPS';
+		$config['upload_path'] = './file_paket/' . $nama_rup  . '/DOKUMEN_IZIN_PRINSIP_DAN_HPS';
 		$config['allowed_types'] = 'pdf|xlsx|xls';
 		$config['max_size'] = 0;
 
 		$this->load->library('upload', $config);
 
-		if ($this->upload->do_upload('file_hps')) {
+		if ($this->upload->do_upload('file_dokumen')) {
 			$fileData = $this->upload->data();
 
 			$upload = [
-				'file_hps' => $fileData['file_name']
+				'file_dokumen' => $fileData['file_name'],
+				'nama_file' =>  $this->input->post('nama_file'),
+				'id_rup' =>  $this->input->post('id_rup'),
 			];
 
-			$this->M_panitia->update_rup_panitia($id_rup, $upload);
+			$this->M_panitia->insert_izin_prinsip($upload);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else {
 			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
 		}
+	}
+
+	public function get_dok_izin_prinsip($id_rup_global)
+	{
+		$response = [
+			'dok_izin_prinsip'  => $this->M_panitia->get_dokumen_izin_prinsip($id_rup_global),
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	function hapus_izin_prinsip()
+	{
+		$id_izin_prinsip = $this->input->post('id_izin_prinsip');
+		$where = [
+			'id_izin_prinsip' => $id_izin_prinsip
+		];
+		$this->M_panitia->delete_izin_prinsip($where);
+		$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 	}
 
 	public function url_update_rup()
@@ -1125,7 +1145,12 @@ class Daftar_paket extends CI_Controller
 			$this->M_panitia->tambah_syarat_rup($upload);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else {
-			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+			$upload = [
+				'id_rup' => $row_rup['id_rup'],
+				'nama_syarat_tambahan' => $nama_syarat_tambahan,
+				'file_syarat_tambahan' => ''
+			];
+			$this->M_panitia->tambah_syarat_rup($upload);
 		}
 	}
 
