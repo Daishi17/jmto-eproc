@@ -23,7 +23,7 @@ class Kirim_wa
             CURLOPT_POSTFIELDS => array(
                 'target' => $target,
                 'message' => 'Selamat! Akun Anda Telah Aktif Pada Aplikasi E-PROCUREMENT PT. Jasamarga Tollroad Operator Silahkan Login Sebagai Penyedia https://drtproc.jmto.co.id/',
-                'delay'=>'120-300',
+                'delay' => '120-300',
             ),
             CURLOPT_HTTPHEADER => array(
                 "Authorization: $token"
@@ -54,7 +54,7 @@ class Kirim_wa
             CURLOPT_POSTFIELDS => array(
                 'target' => $target,
                 'message' => "$pesan",
-                'delay'=>'120-300',
+                'delay' => '120-300',
             ),
             CURLOPT_HTTPHEADER => array(
                 "Authorization: $token"

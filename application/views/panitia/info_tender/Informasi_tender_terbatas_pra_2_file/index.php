@@ -156,7 +156,6 @@
                                                                 <?php } else { ?>
                                                                     <td><span class="badge bg-danger">Tidak Ada File</span> </td>
                                                                 <?php  } ?>
-
                                                             </tr>
                                                         <?php } ?>
                                                     </tbody>

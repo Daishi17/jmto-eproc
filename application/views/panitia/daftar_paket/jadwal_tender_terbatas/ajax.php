@@ -1474,7 +1474,9 @@
                     Swal.fire('Jadwal Berhasil Di Update!', '', 'success')
                     form_jadwal_tender_terbatas[0].reset();
                     $('.btnSave').attr('disabled', false);
-                    location.reload();
+                    setTimeout(() => {
+                        window.location.href = ''
+                    }, "1500");
                 }
             }
         });
@@ -1539,4 +1541,135 @@
             }
         });
     }
+
+
+    function edit_jadwal(id_jadwal_rup) {
+
+        var id_rup_global = $('[name="id_rup_global"]').val()
+        $('#modal_ubah_jadwal').modal('show')
+        $('[name="id_jadwal_rup"]').val(id_jadwal_rup)
+        $('[name="id_rup"]').val(id_rup_global)
+    }
+
+    function acc_jadwal(id_jadwal_rup) {
+        var id_rup_global = $('[name="id_rup_global"]').val()
+        $('#modal_acc_jadwal').modal('show')
+        $('[name="id_jadwal_rup"]').val(id_jadwal_rup)
+        $('[name="id_rup"]').val(id_rup_global)
+
+        $.ajax({
+            type: "GET",
+            url: '<?= base_url('post_jadwal/post_jadwal/get_row_jadwal/') ?>' + id_jadwal_rup,
+            dataType: "JSON",
+            success: function(response) {
+                $('[name="alasan_ubah"]').val(response.alasan)
+            }
+        });
+    }
+
+    var form_ubah_jadwal = $('#form_ubah_jadwal')
+    form_ubah_jadwal.on('submit', function(e) {
+        var url_ubah_jadwal = $('[name="url_ubah_jadwal"]').val()
+        $.ajax({
+            url: url_ubah_jadwal,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $('.btn_save_jadwal').attr("disabled", true);
+            },
+            success: function(response) {
+                if (response['error']) {
+                    $("#alasan").html(response['error']['alasan']);
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            form_ubah_jadwal[0].reset();
+                            $('.btn_save_jadwal').attr("disabled", false)
+                            $('#modal_ubah_jadwal').modal('hide');
+
+                            setTimeout(() => {
+                                window.location.href = ''
+                            }, "1500");
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+
+            }
+        })
+
+
+    })
+
+    var form_acc_jadwal = $('#form_acc_jadwal')
+    form_acc_jadwal.on('submit', function(e) {
+        var url_acc_jadwal = $('[name="url_acc_jadwal"]').val()
+        $.ajax({
+            url: url_acc_jadwal,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response['error']) {
+                    $("#alasan").html(response['error']['alasan']);
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            form_acc_jadwal[0].reset();
+                            $('#modal_acc_jadwal').modal('hide');
+
+                            setTimeout(() => {
+                                window.location.href = ''
+                            }, "1500");
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+
+            }
+        })
+
+
+    })
 </script>

@@ -224,4 +224,34 @@ class M_jadwal extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function insert_alasan($data)
+    {
+        $this->db->insert('tbl_alasan_jadwal_rup', $data);
+    }
+
+    public function update_status($data, $where)
+    {
+        $this->db->where($where);
+        $this->db->update('tbl_jadwal_rup', $data);
+    }
+
+    public function cek_role_panitia($id_rup_cek, $id_mjm_user)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_panitia');
+        $this->db->where('id_rup', $id_rup_cek);
+        $this->db->where('id_manajemen_user', $id_mjm_user);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function get_row_jadwal($id_rup_jadwal)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_jadwal_rup', $id_rup_jadwal);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

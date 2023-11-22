@@ -32,6 +32,7 @@
                                 </center>
                             </div>
                             <input type="hidden" name="id_url_rup" id="id_url_rup" value="<?= $row_rup['id_url_rup'] ?>">
+
                             <table id="table_jadwal" class="table table-hover">
                                 <thead>
                                     <tr class="btn-grad100">
@@ -63,28 +64,76 @@
                                             <div class="alert alert-success" style="display: none;" role="alert">
                                                 Jadwal <?= $value2['nama_jadwal_rup'] ?> Sudah Benar
                                             </div>
-                                            <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" id="mulai<?= $mulai_detail++ ?>" value="<?= $value2['waktu_mulai'] ?>" type="text"></td>
-                                            <td><input class="form-control form-control-sm" name="waktu_selesai[<?= $i ?>]" id="selesai<?= $selesai_detail++ ?>" value="<?= $value2['waktu_selesai']  ?>" type="text"></td>
-                                            <td>
-                                                <?php if ($value2['waktu_mulai'] == '' && $value2['waktu_selesai'] == '') { ?>
-                                                    <?php if ($i == 1) { ?>
-                                                        <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
-                                                    <?php  } else { ?>
-                                                    <?php } ?>
+
+                                            <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+
+                                                <?php if ($value2['sts_perubahan_jadwal'] == 1) { ?>
+                                                    <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" id="mulai<?= $mulai_detail++ ?>" value="<?= $value2['waktu_mulai'] ?>" type="text"></td>
+                                                    <td><input class="form-control form-control-sm" name="waktu_selesai[<?= $i ?>]" id="selesai<?= $selesai_detail++ ?>" value="<?= $value2['waktu_selesai']  ?>" type="text"></td>
                                                 <?php } else { ?>
-                                                    <?php if ($i == 1) { ?>
-                                                        <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
+                                                    <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" id="mulai<?= $mulai_detail++ ?>" value="<?= $value2['waktu_mulai'] ?>" type="text" style="background-color: #e9e9e9;" readonly></td>
+                                                    <td><input class="form-control form-control-sm" name="waktu_selesai[<?= $i ?>]" id="selesai<?= $selesai_detail++ ?>" value="<?= $value2['waktu_selesai']  ?>" type="text" style="background-color: #e9e9e9;" readonly></td>
+                                                <?php  } ?>
+
+                                                <td>
+                                                    <?php if ($value2['waktu_mulai'] == '' && $value2['waktu_selesai'] == '') { ?>
+                                                        <?php if ($i == 1) { ?>
+                                                            <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
+                                                        <?php  } else { ?>
+                                                        <?php } ?>
+                                                    <?php } else { ?>
+                                                        <?php if ($i == 1) { ?>
+                                                            <button title="Sedang Berlangsung" disabled class="btn btn-sm btn-primary">+</button>
+                                                        <?php  } else { ?>
+                                                            <button title="Sedang Berlangsung" disabled class="btn btn-sm btn-primary">+</button>
+                                                            <button title="Sedang Berlangsung" disabled class="btn btn-sm btn-primary">-</button>
+                                                        <?php } ?>
+                                                    <?php   } ?>
+
+                                                    <?php if ($role_panitia['role_panitia'] == 1) { ?>
+                                                        <a href="javascript:;" title="Edit Jadwal" onclick="edit_jadwal(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                                        <?php if ($value2['sts_perubahan_jadwal'] == 2) { ?>
+                                                            <a href="javascript:;" title="Acc Permintaan Ubah Jadwal" onclick="acc_jadwal(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-success"><i class="fa fa-check"></i></a>
+                                                        <?php }  ?>
                                                     <?php  } else { ?>
-                                                        <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
-                                                        <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="min_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">-</a>
-                                                    <?php } ?>
-                                                <?php   } ?>
-                                            </td>
+                                                        <?php if ($value2['sts_perubahan_jadwal'] == 2) { ?>
+                                                            <a href="javascript:;" title="Menunggu Perubahan" onclick="edit_jadwal(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                                        <?php } else { ?>
+                                                            <a href="javascript:;" title="Edit Jadwal" onclick="edit_jadwal(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                                        <?php } ?>
+                                                    <?php   }  ?>
+
+
+                                                </td>
+
+                                            <?php } else { ?>
+                                                <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" id="mulai<?= $mulai_detail++ ?>" value="<?= $value2['waktu_mulai'] ?>" type="text"></td>
+                                                <td><input class="form-control form-control-sm" name="waktu_selesai[<?= $i ?>]" id="selesai<?= $selesai_detail++ ?>" value="<?= $value2['waktu_selesai']  ?>" type="text"></td>
+                                                <td>
+                                                    <?php if ($value2['waktu_mulai'] == '' && $value2['waktu_selesai'] == '') { ?>
+                                                        <?php if ($i == 1) { ?>
+                                                            <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
+                                                        <?php  } else { ?>
+                                                        <?php } ?>
+                                                    <?php } else { ?>
+                                                        <?php if ($i == 1) { ?>
+                                                            <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
+                                                        <?php  } else { ?>
+                                                            <a href="javascript:;" title="Tambah Waktu +1 Hari" onclick="plus_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">+</a>
+                                                            <a href="javascript:;" title="Kurang Waktu -1 Hari" onclick="min_jadwal_22_baris(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-sm btn-primary">-</a>
+                                                        <?php } ?>
+                                                    <?php   } ?>
+                                                </td>
+                                            <?php } ?>
+
+
+
                                         </tr>
                                         <?php $i++ ?>
                                     <?php  } ?>
                                 </tbody>
                             </table>
+
                         </form>
                     </div>
                 </div>
@@ -92,4 +141,101 @@
         </div>
     </div>
     </div>
+    </div>
+
+    <div class="modal fade" id="modal_ubah_jadwal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="navbar-brand">
+                        <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                        <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+                    </a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <input type="hidden" name="url_ubah_jadwal" value="<?= base_url('post_jadwal/post_jadwal/ubah_jadwal') ?>">
+
+                <form id="form_ubah_jadwal" action="javascript:;">
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1 bd-highlight">
+                                    <span class="text-dark">
+                                        <small class="text-white">
+                                            <strong><i class="fa-solid fa-edit px-1"></i>
+                                                Form Ubah Jadwal
+                                            </strong>
+                                        </small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" name="id_jadwal_rup">
+                                <input type="hidden" name="id_rup_cek" value="<?= $row_rup['id_rup'] ?>">
+                                <div class=" mb-3" style="margin-top: -10px;">
+                                    <label for="" class="form-label">Alasan Mengubah Jadwal</label>
+                                    <br>
+                                    <textarea name="alasan" cols="10" rows="3" class="form-control"></textarea>
+                                    <label for="" id="alasan" class="text-danger"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success" id="btn_save_jadwal">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal_acc_jadwal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="navbar-brand">
+                        <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                        <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+                    </a>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <input type="hidden" name="url_acc_jadwal" value="<?= base_url('post_jadwal/post_jadwal/acc_jadwal') ?>">
+
+                <form id="form_acc_jadwal" action="javascript:;">
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1 bd-highlight">
+                                    <span class="text-dark">
+                                        <small class="text-white">
+                                            <strong><i class="fa-solid fa-edit px-1"></i>
+                                                Form Ubah Jadwal
+                                            </strong>
+                                        </small>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" name="id_jadwal_rup">
+                                <input type="hidden" name="id_rup_cek" value="<?= $row_rup['id_rup'] ?>">
+                                <div class=" mb-3" style="margin-top: -10px;">
+                                    <label for="" class="form-label">Alasan Mengubah Jadwal</label>
+                                    <br>
+                                    <textarea name="alasan_ubah" cols="10" rows="3" class="form-control" disabled></textarea>
+                                    <label for="" id="alasan" class="text-danger"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success" id="btn_save_jadwal">Terima</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
-class Informasi_tender_umum_pra_2_file extends CI_Controller
+class Informasi_tender_terbatas_pra_2_file extends CI_Controller
 {
     var $link_vendor = 'http://localhost/jmto-vms/file_paket/';
     function __construct()

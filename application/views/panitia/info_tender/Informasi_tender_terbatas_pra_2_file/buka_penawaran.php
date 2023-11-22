@@ -1,7 +1,7 @@
 <?php if ($this->session->userdata('token_panitia') == $row_rup['token_panitia']) { ?>
-    <main class="container-fluid">
+    <main class="container">
         <input type="hidden" name="id_rup" value="<?= $row_rup['id_rup'] ?>">
-        <input type="hidden" name="url_byid_mengikuti" value="<?= base_url('panitia/info_tender/informasi_tender/get_byid_mengikuti/') ?>">
+        <input type="hidden" name="url_byid_mengikuti" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/' . 'get_byid_mengikuti/') ?>">
         <div class="row">
             <div class="col">
                 <div class="card border-dark">
@@ -41,9 +41,21 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-file1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dokumen Pengadaan File I</button>
                             </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Pengadaan File II</button>
-                            </li>
+                            <?php if (date('Y-m-d H:i', strtotime($jadwal_pembukaan_file2['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                <!-- belom mulai -->
+
+                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pembukaan_file2['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pembukaan_file2['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Pengadaan File II</button>
+                                </li>
+
+                            <?php    } else { ?>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Pengadaan File II</button>
+                                </li>
+
+                            <?php    } ?>
+
                         </ul>
 
                     </div>
@@ -88,14 +100,12 @@
                                     <div class="card-body">
                                         <table id="table_vendor_mengikuti_paket_penawaran_II" class="table table-stripped table-bordered">
                                             <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama Peserta</th>
-                                                    <th>Nilai Penawaran</th>
-                                                    <th>TKDN/PDN/IMPORT</th>
-                                                    <th>Persentase TKDN/PDN/IMPORT </th>
-                                                    <th>Lihat Dok Penawaran</th>
-                                                </tr>
+                                                <th>No</th>
+                                                <th>Nama Peserta</th>
+                                                <!-- <th>Nilai Penawaran</th>
+                                                                <th>TKDN/PDN/IMPORT</th>
+                                                                <th>Persentase TKDN/PDN/IMPORT </th> -->
+                                                <th>Lihat Dok Penawaran</th>
                                             </thead>
                                             <tbody>
 
@@ -129,8 +139,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama File</th>
-                                <th>TKDN/PDN/IMPORT</th>
-                                <th>Persentase TKDN/PDN/IMPORT</th>
                                 <th>File</th>
                             </tr>
                         </thead>
@@ -140,6 +148,81 @@
                                 <td>Dokumen File 1</td>
                                 <td><a href="#" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i> Download</a></td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="buka_penawaran1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-file" aria-hidden="true"></i> Dokumen File I</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <div>
+                            <i class="fa fa-info-circle" aria-hidden="true"> </i> Pembukaan Dokumen File I Penyedia <label for="" class="nama_usaha_vendor"></label> <br>
+                        </div>
+                    </div>
+                    <br>
+                    <table id="table_dokumen_penawaran_file_I_vendor" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama File</th>
+                                <th>File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">1</td>
+                                <td>Dokumen File 1</td>
+                                <td><a href="#" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i> Download</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="buka_penawaran2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-file" aria-hidden="true"></i> Dokumen File II</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <div>
+                            <i class="fa fa-info-circle" aria-hidden="true"> </i> Pembukaan Dokumen File II Penyedia <label for="" class="nama_usaha_vendor"></label> <br>
+                        </div>
+                    </div>
+                    <br>
+                    <table id="table_dokumen_penawaran_file_II_vendor" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Usaha</th>
+                                <!-- <th>Nilai Penawaran</th>
+                                            <th>TKDN/PDN/IMPORT</th>
+                                            <th>Persentase TKDN/PDN/IMPORT</th> -->
+                                <th>File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
                         </tbody>
                     </table>
                 </div>
@@ -162,7 +245,7 @@
 
             </div>
             <div class="col-md-3">
-                <a class="btn btn-primary" href="<?= base_url('panitia/info_tender/informasi_tender/informasi_pengadaan/') . $row_rup['id_url_rup'] ?>"> Kembali Ke Informasi Pengadaan</a>
+                <a class="btn btn-primary" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/' . 'informasi_pengadaan/') . $row_rup['id_url_rup'] ?>"> Kembali Ke Informasi Pengadaan</a>
             </div>
             <div class="col-md-4">
 

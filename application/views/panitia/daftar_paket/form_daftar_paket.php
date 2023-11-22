@@ -440,7 +440,7 @@
                                             </button>
 
                                             <?php if ($row_rup['id_jadwal_tender'] == 2) { ?>
-                                                <button type="button" class="btn btn-sm btn-warning text-white" data-bs-toggle="modal" data-bs-target="#modal-xl-rekomendasi">
+                                                <button type="button" class="btn btn-sm btn-warning text-white" onclick="get_terekomendasi()">
                                                     <i class="fa-solid fa-building-user px-1"></i>
                                                     Undang Rekanan Terekomendasi
                                                 </button>
@@ -455,16 +455,16 @@
                                     </tr>
                                     <!-- <tr>
                                         <?php if ($row_rup['id_metode_pengadaan'] == 3 || $row_rup['id_metode_pengadaan'] == 4 || $row_rup['id_metode_pengadaan'] == 5 || $row_rup['id_metode_pengadaan'] == 6) { ?>
-                                                                                                                                                                                                                        <th class="bg-light">
-                                                                                                                                                                                                                            <small>Daftar Rekanan Tervalidasi (DRT)</small>
-                                                                                                                                                                                                                        </th>
-                                                                                                                                                                                                                        <td class="bg-default" colspan="3">
-                                                                                                                                                                                                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
-                                                                                                                                                                                                                                <i class="fa-solid fa-building-user px-1"></i>
-                                                                                                                                                                                                                                Pilih Rekanan Tervalidasi
-                                                                                                                                                                                                                            </button>
-                                                                                                                                                                                                                            <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
-                                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                                                                                                                            <th class="bg-light">
+                                                                                                                                                                                                                                                                                                                <small>Daftar Rekanan Tervalidasi (DRT)</small>
+                                                                                                                                                                                                                                                                                                            </th>
+                                                                                                                                                                                                                                                                                                            <td class="bg-default" colspan="3">
+                                                                                                                                                                                                                                                                                                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
+                                                                                                                                                                                                                                                                                                                    <i class="fa-solid fa-building-user px-1"></i>
+                                                                                                                                                                                                                                                                                                                    Pilih Rekanan Tervalidasi
+                                                                                                                                                                                                                                                                                                                </button>
+                                                                                                                                                                                                                                                                                                                <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
+                                                                                                                                                                                                                                                                                                            </td>
                                         <?php  } else { ?>
 
                                         <?php  }   ?>
@@ -1355,7 +1355,7 @@
                                                                             <td>
                                                                                 <div class="input-group">
                                                                                     <span class="input-group-text"><i class="fa-solid fa-cloud-arrow-up"></i></span>
-                                                                                    <input type="file" name="file_syarat_tambahan" class="form-control form-control-sm" accept=".xlsx, .xls">
+                                                                                    <input type="file" name="file_syarat_tambahan" class="form-control form-control-sm" accept=".xlsx, .xls, .pdf">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -1501,6 +1501,92 @@
                                                 <?php   } ?>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-start">
+                        <div class="container-fluid">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                <i class="fa-solid fa-angles-left"></i>
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="modal-xl-rekomendasi2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a class="navbar-brand">
+                            <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="27" height="27" class="d-inline-block align-text-top">
+                            <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+                        </a>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card border-dark shadow-lg">
+                                    <div class="card-header border-dark bd-blue-700 d-flex justify-content-between align-items-center">
+                                        <div class="flex-grow-1 bd-highlight">
+                                            <span class="text-white">
+                                                <i class="fa-regular fa-rectangle-list px-1"></i>
+                                                <small><strong>List Data - Rekanan Ter-Rekomendasi Sesuai Persyaratan Pengadaan</strong></small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Rekanan Terekomendasi</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Rekanan Terpilih</button>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                <table class="table table-sm table-bordered border-dark table-sm shadow-lg" id="table_terekomendasi">
+                                                    <thead class="bg-secondary text-white text-center">
+                                                        <tr>
+                                                            <th class="col-sm-1"><small>No</small></th>
+                                                            <th class="col-sm-4"><small>Nama Perusahaan</small></th>
+                                                            <th class="col-sm-2"><small>Email</small></th>
+                                                            <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
+                                                            <th class="col-sm-2"><small>Rating</small></th>
+                                                            <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
+                                                            <th class="col-sm-2"><small>Aksi</small></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="load_rekomendasi">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <table class="table table-sm table-bordered border-dark table-sm shadow-lg" id="table_terpilih">
+                                                    <thead class="bg-secondary text-white text-center">
+                                                        <tr>
+                                                            <th class="col-sm-1"><small>No</small></th>
+                                                            <th class="col-sm-4"><small>Nama Perusahaan</small></th>
+                                                            <th class="col-sm-2"><small>Email</small></th>
+                                                            <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
+                                                            <th class="col-sm-2"><small>Rating</small></th>
+                                                            <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
+                                                            <th class="col-sm-2"><small>Aksi</small></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="load_terpilih">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

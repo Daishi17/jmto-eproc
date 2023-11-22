@@ -78,7 +78,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="<?= base_url() ?>panitia/beranda/beranda">
                                 <i class="fa-solid fa-circle-info px-1"></i>
                                 <small>Info Tender</small>
                             </a>

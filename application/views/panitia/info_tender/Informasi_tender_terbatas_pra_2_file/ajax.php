@@ -37,7 +37,6 @@
                         var alasan = ''
                     }
 
-
                     html += '<tr>' +
                         '<td><small>' + no++ + '</small></td>' +
                         '<td><small>' + response['jadwal'][i].nama_jadwal_rup + ' ' + check + '</small></td>' +

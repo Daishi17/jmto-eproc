@@ -52,3 +52,10 @@
 <input type="hidden" name="url_get_syarat_tambahan_tender" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_syarat_tambahan') ?>">
 <input type="hidden" name="url_hapus_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_hapus_syarat_tambahan') ?>">
 <input type="hidden" name="url_download_syarat_tambahan" value="<?= base_url('panitia/daftar_paket/daftar_paket/url_download_syarat_tambahan/') ?>">
+
+<!-- rekanan terekomendasi -->
+<input type="hidden" name="url_get_rekanan_terekomendasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_rekanan_terkomendasi') ?>">
+
+<input type="hidden" name="url_invite_rekanan" value="<?= base_url('panitia/daftar_paket/daftar_paket/invite_rekanan/') ?>">
+<input type="hidden" name="url_batal_pilih_rekanan" value="<?= base_url('panitia/daftar_paket/daftar_paket/batal_pilih_rekanan/') ?>">
+<input type="hidden" name="url_get_rekanan_terpilih" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_rekanan_terpilih') ?>">

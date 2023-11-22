@@ -305,7 +305,6 @@
                 <a class="navbar-brand">
                     <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
                     <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
-
                 </a>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

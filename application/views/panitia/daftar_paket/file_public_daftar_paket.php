@@ -2058,4 +2058,139 @@
         var id_url_rup = $('[name="id_url_rup"]').val()
         location.replace('<?= base_url('panitia/daftar_paket/daftar_paket/form_daftar_paket/') ?>' + id_url_rup);
     }
+    vendor_terpilih()
+
+    function vendor_terpilih() {
+        var id_rup_global = $('[name="id_rup_global"]').val();
+        var url_get_rekanan_terpilih = $('[name="url_get_rekanan_terpilih"]').val()
+        $.ajax({
+            type: "POST",
+            url: url_get_rekanan_terpilih,
+            data: {
+                id_rup_global: id_rup_global,
+            },
+            dataType: "JSON",
+            success: function(response) {
+                var html = '';
+                var i;
+                var o = 0;
+                for (i = 0; i < response.length; i++) {
+                    html += '<tr>' +
+                        '<td>' + ++o + '</td>' +
+                        '<td>' + response[i].nama_usaha + '</td>' +
+                        '<td>' + response[i].email + '</td>' +
+                        '<td>' + response[i].kualifikasi_usaha + '</td>' +
+                        '<td>' + '80' + '</td>' +
+                        '<td>' + ' <center><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small> <small> <span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small></center>' + '</td>' +
+                        '<td><a href="javascript:;" onclick="batal_pilih(\'' + response[i].id_vendor + '\'' + ',' + '\'' + id_rup_global + '\'' + ',' + '\'' + response[i].nama_usaha + '\')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Batal Pilih</a></td>' +
+                        '</tr>'
+                }
+                $('#load_terpilih').html(html);
+            }
+        })
+    }
+
+
+    function get_terekomendasi() {
+        var modal = $('#modal-xl-rekomendasi2')
+        var id_rup_global = $('[name="id_rup_global"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var url_get_rekanan_terekomendasi = $('[name="url_get_rekanan_terekomendasi"]').val()
+
+        $.ajax({
+            type: "POST",
+            url: url_get_rekanan_terekomendasi,
+            data: {
+                id_rup_global: id_rup_global,
+                id_url_rup: id_url_rup
+            },
+            dataType: "JSON",
+            success: function(response) {
+                modal.modal('show')
+                var html = '';
+                var i;
+                var o = 0;
+                for (i = 0; i < response.length; i++) {
+                    html += '<tr>' +
+                        '<td>' + ++o + '</td>' +
+                        '<td>' + response[i].nama_usaha + '</td>' +
+                        '<td>' + response[i].email + '</td>' +
+                        '<td>' + response[i].kualifikasi_usaha + '</td>' +
+                        '<td>' + '80' + '</td>' +
+                        '<td>' + ' <center><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small> <small> <span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small></center>' + '</td>' +
+                        '<td><a href="javascript:;" onclick="pilih_vendor(\'' + response[i].id_vendor + '\'' + ',' + '\'' + id_rup_global + '\'' + ',' + '\'' + response[i].nama_usaha + '\')" class="btn btn-sm btn-warning"><i class="fas fa fa-edit"></i> Pilih</a></td>' +
+                        '</tr>'
+                }
+                $('#load_rekomendasi').html(html);
+            }
+        })
+    }
+
+    function pilih_vendor(id_vendor, id_rup_global, nama_usaha) {
+        var url_invite_rekanan = $('[name="url_invite_rekanan"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Memilih Penyedia',
+            text: nama_usaha,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Yakin!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_invite_rekanan,
+                    data: {
+                        id_vendor: id_vendor,
+                        id_rup_global: id_rup_global
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response == 'gagal') {
+                            Swal.fire('Oops, Penyedia Sudah Ada Di Dalam Pengadaan Ini, Silahkan Pilih Penyedia Yang Lain!', '', 'warning')
+                        } else {
+                            Swal.fire('Penyedia Berhasil Di Pilih!', '', 'success')
+                            vendor_terpilih()
+                        }
+
+
+                    }
+                })
+
+            }
+        })
+    }
+
+    function batal_pilih(id_vendor, id_rup_global, nama_usaha) {
+        var url_batal_pilih_rekanan = $('[name="url_batal_pilih_rekanan"]').val()
+        Swal.fire({
+            title: 'Apakah Anda Yakin Ingin Hapus Penyedia Dari Pengadaan Ini!?',
+            text: nama_usaha,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Yakin!',
+            cancelButtonText: 'Batal!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: url_batal_pilih_rekanan,
+                    data: {
+                        id_vendor: id_vendor,
+                        id_rup_global: id_rup_global
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        vendor_terpilih()
+                        Swal.fire('Penyedia Berhasil Di Di Hapus Dari Pengadaan Ini!', '', 'success')
+                    }
+                })
+
+            }
+        })
+    }
 </script>

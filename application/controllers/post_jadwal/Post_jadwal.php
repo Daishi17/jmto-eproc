@@ -20,6 +20,7 @@ class Post_jadwal extends CI_Controller
         $this->load->model('Wilayah/Wilayah_model');
         $this->load->model('M_jenis_jadwal/M_jenis_jadwal');
         $this->load->model('M_panitia/M_panitia');
+        $this->load->model('M_panitia/M_jadwal');
     }
 
     public function update_jadwal_22_tender_terbatas($id_url_rup)
@@ -41,7 +42,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data1 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
 
 
@@ -62,7 +64,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data2 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 2
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data2, $where2);
@@ -76,7 +79,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data3 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 3
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data3, $where3);
@@ -90,7 +94,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data4 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 4
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data4, $where4);
@@ -104,7 +109,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data5 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 5
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data5, $where5);
@@ -118,7 +124,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data6 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 6
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data6, $where6);
@@ -132,7 +139,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data7 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 7
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data7, $where7);
@@ -146,7 +154,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data8 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 8
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data8, $where8);
@@ -160,7 +169,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data9 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 9
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data9, $where9);
@@ -174,7 +184,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data10 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 10
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data10, $where10);
@@ -188,7 +199,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data11 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 11
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data11, $where11);
@@ -202,7 +214,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data12 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 12
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data12, $where12);
@@ -216,7 +229,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data13 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 13
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data13, $where13);
@@ -231,7 +245,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data14 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 14
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data14, $where14);
@@ -245,7 +260,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data15 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 15
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data15, $where15);
@@ -260,7 +276,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data16 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 16
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data16, $where16);
@@ -274,7 +291,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data17 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 17
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data17, $where17);
@@ -288,7 +306,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data18 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 18
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data18, $where18);
@@ -303,7 +322,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data19 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 19
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data19, $where19);
@@ -317,7 +337,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data20 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 20
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data20, $where20);
@@ -332,7 +353,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data21 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 21
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data21, $where21);
@@ -348,7 +370,8 @@ class Post_jadwal extends CI_Controller
         ];
         $data22 = [
             'waktu_mulai' => $jadwal_mulai,
-            'waktu_selesai' => $jadwal_selesai
+            'waktu_selesai' => $jadwal_selesai,
+            'sts_perubahan_jadwal' => 0
         ];
         // update_jadwal 21
         $this->M_panitia->update_jadwal_rup_tender_terbatas_22_jadwal($data22, $where22);
@@ -454,5 +477,71 @@ class Post_jadwal extends CI_Controller
             }
             $this->output->set_content_type('application/json')->set_output(json_encode('success'));
         }
+    }
+
+    public function ubah_jadwal()
+    {
+        $id_jadwal_rup = $this->input->post('id_jadwal_rup');
+        $alasan =  $this->input->post('alasan');
+        $id_rup_cek = $this->input->post('id_rup_cek');
+        $id_mjm_user = $this->session->userdata('id_manajemen_user');
+
+        $cek_role_panitia = $this->M_jadwal->cek_role_panitia($id_rup_cek, $id_mjm_user);
+
+        $this->form_validation->set_rules('alasan', 'Alasan', 'required|trim', ['required' => 'Alasan Harus Di isi!']);
+
+        if ($this->form_validation->run() == false) {
+            $response = [
+                'error' => [
+                    'alasan' => form_error('alasan')
+                ]
+            ];
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
+        } else {
+            $data = [
+                'id_jadwal_rup' => $id_jadwal_rup,
+                'alasan' => $alasan,
+                'user_create' => $this->session->userdata('nama_pegawai')
+            ];
+            $this->M_jadwal->insert_alasan($data);
+
+            $where = [
+                'id_jadwal_rup' => $id_jadwal_rup
+            ];
+            if ($cek_role_panitia['role_panitia'] == 1) {
+                $data2 = [
+                    'sts_perubahan_jadwal' => 1,
+                    'alasan' => $alasan,
+                ];
+                $this->M_jadwal->update_status($data2, $where);
+                $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+            } else {
+                $data2 = [
+                    'sts_perubahan_jadwal' => 2,
+                    'alasan' => $alasan,
+                ];
+                $this->M_jadwal->update_status($data2, $where);
+                $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+            }
+        }
+    }
+
+    public function acc_jadwal()
+    {
+        $id_jadwal_rup = $this->input->post('id_jadwal_rup');
+        $data = [
+            'sts_perubahan_jadwal' => 1,
+        ];
+        $where = [
+            'id_jadwal_rup' => $id_jadwal_rup
+        ];
+        $this->M_jadwal->update_status($data, $where);
+        $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+    }
+
+    public function get_row_jadwal($id_rup_jadwal)
+    {
+        $data =  $this->M_jadwal->get_row_jadwal($id_rup_jadwal);
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
 }
