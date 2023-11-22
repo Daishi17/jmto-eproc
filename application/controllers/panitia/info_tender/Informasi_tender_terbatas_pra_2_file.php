@@ -631,8 +631,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
         $total_hps_rup = $this->input->post('total_hps_rup');
 
         if ($ev_hea_tkdn >= 25) {
-            $prefensi = 0.25;
-            $total_harga = (1 - ($ev_hea_tkdn * $prefensi)) * $ev_hea_penawaran;
+            // $prefensi = 25 / 100;
+            $total_harga = (1 - ($ev_hea_tkdn / 100 * 0.25)) * $ev_hea_penawaran;
         } else {
             $prefensi = 0;
             $total_harga = (1 - ($ev_hea_tkdn * $prefensi)) * $ev_hea_penawaran;

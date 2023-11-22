@@ -460,7 +460,7 @@
                 </div>
                 <!-- test -->
                 <div class="card card_chat" style="background-image: linear-gradient(180deg, #b2eaff 0, #5389f2 50%, #003265 100%);">
-                    <div class="card-header card-chat" style="background-image: radial-gradient(circle at 50% -20.71%, #cfa8ff 0, #9d8bff 25%, #6c6cd8 50%, #3f4ea4 75%, #153375 100%);">
+                    <div class="card-header card-chat" style="background-image: linear-gradient(90deg, hsla(206, 98%, 48%, 1) 3%, hsla(60, 100%, 50%, 1) 70%);">
                         <div class="d-flex bd-highlight">
                             <div class="img_cont">
                                 <img src="<?= base_url('assets/chat_logo.png') ?>" class="rounded-circle user_img">

@@ -51,8 +51,12 @@
                             <th> <?= $row_rup['nama_rup'] ?></th>
                         </tr>
                         <tr>
-                            <th>TKDN/PDN/IMPORT</th>
+                            <th>TKDN</th>
                             <th> <?= $row_rup['status_pencatatan'] ?> (<?= $row_rup['persen_pencatatan'] ?>%)</th>
+                        </tr>
+                        <tr>
+                            <th>Nilai HPS</th>
+                            <th>Rp. <?= number_format($row_rup['total_hps_rup'], 2, ",", "."); ?> </th>
                         </tr>
                         <tr>
                             <th>Jadwal Pengadaan</th>

@@ -1806,7 +1806,7 @@ class M_panitia extends CI_Model
         $this->db->from('tbl_vendor_mengikuti_paket');
         $this->db->join('tbl_vendor', 'tbl_vendor_mengikuti_paket.id_vendor = tbl_vendor.id_vendor', 'left');
         $this->db->where('tbl_vendor_mengikuti_paket.id_rup', $id_rup);
-        $this->db->order_by('tbl_vendor_mengikuti_paket.ev_hea_peringkat', 'ASC');
+        $this->db->where('tbl_vendor_mengikuti_paket.ev_akhir_hea_peringkat', 1);
         $query = $this->db->get();
         return $query->row_array();
     }
