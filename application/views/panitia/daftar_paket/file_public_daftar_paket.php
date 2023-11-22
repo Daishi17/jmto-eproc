@@ -149,7 +149,7 @@
                             clearInterval(timerInterval)
                             Swal.fire('Data Berhasil Di Simpan!', '', 'success')
                             form_dokumen_izin_prinsip[0].reset();
-                            load_dok_hps()
+                            load_dok_izin_prinsip()
                             $('.btn_dok_izin_prinsip').attr("disabled", false);
                         }
                     }).then((result) => {

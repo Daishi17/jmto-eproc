@@ -537,7 +537,7 @@ class M_panitia extends CI_Model
         } else if ($rup['syarat_tender_kualifikasi'] == 'Kecil') {
             $this->db->where('tbl_vendor.kualifikasi_usaha', 'Kecil');
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
         // lolos_spt
@@ -549,10 +549,10 @@ class M_panitia extends CI_Model
                 }
                 $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang_spt);
             } else {
-                $this->db->where('tbl_vendor.id_vendor', null);
+                // $this->db->where('tbl_vendor.id_vendor', null);
             }
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
         // lolos_keuangan
@@ -564,10 +564,10 @@ class M_panitia extends CI_Model
                 }
                 $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang_laporan_keuangan);
             } else {
-                $this->db->where('tbl_vendor.id_vendor', null);
+                // $this->db->where('tbl_vendor.id_vendor', null);
             }
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
         // lolos_neraca_keuangan
@@ -579,10 +579,10 @@ class M_panitia extends CI_Model
                 }
                 $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang_neraca_keuangan);
             } else {
-                $this->db->where('tbl_vendor.id_vendor', null);
+                // $this->db->where('tbl_vendor.id_vendor', null);
             }
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
         // cek_vendor terundang by_kbli
@@ -593,7 +593,7 @@ class M_panitia extends CI_Model
             }
             $this->db->where_in('tbl_vendor.id_vendor', $id_vendor_terundang);
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
 
@@ -608,7 +608,7 @@ class M_panitia extends CI_Model
                 $this->db->where('tbl_vendor_siup.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_siup']);
             }
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
         // cek nib syart izin
@@ -621,7 +621,7 @@ class M_panitia extends CI_Model
                 $this->db->where('tbl_vendor_nib.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_nib']);
             }
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
         // cek sbu syart izin
@@ -634,7 +634,7 @@ class M_panitia extends CI_Model
                 $this->db->where('tbl_vendor_sbu.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_sbu']);
             }
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
         // // cek siujk syart izin
@@ -660,7 +660,7 @@ class M_panitia extends CI_Model
                 $this->db->where('tbl_vendor_skdp.sts_seumur_hidup', $syarat_izin_usaha['sts_masa_berlaku_sbu']);
             }
         } else {
-            $this->db->where('tbl_vendor.id_vendor', null);
+            // $this->db->where('tbl_vendor.id_vendor', null);
         }
 
         $query = $this->db->get();

@@ -100,7 +100,8 @@ class Daftar_paket extends CI_Controller
 
 		// nib
 		$data_vendor_lolos_nib_kbli = $this->M_panitia->data_vendor_lolos_nib_kbli($cek_syarat_kbli);
-
+		// var_dump($data_vendor_lolos_nib_kbli);
+		// die;
 		// siujk
 		$data_vendor_lolos_siujk_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
 
