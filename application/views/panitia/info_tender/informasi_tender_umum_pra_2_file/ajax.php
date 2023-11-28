@@ -240,6 +240,11 @@
         }).buttons().container().appendTo('#tbl_rup .col-md-6:eq(0)');
     });
 
+
+    function reload_evaluasi_harga_terendah() {
+        $('#tbl_peringkat_akhir_terendah').DataTable().ajax.reload();
+    }
+
     $(document).ready(function() {
         $('#tbl_file_1').DataTable({
 
@@ -258,6 +263,7 @@
         var modal_evaluasi_penawaran = $('#modal_evaluasi_penawaran')
         var modal_evaluasi_hea_tkdn = $('#modal_evaluasi_hea_tkdn')
         var modal_evaluasi_akhir_hea = $('#modal_evaluasi_akhir_hea')
+        var modal_evaluasi_harga_terendah = $('#modal_evaluasi_harga_terendah')
         var id_rup = $('[name="id_rup"]').val()
         $.ajax({
             type: "GET",
@@ -278,6 +284,11 @@
                     $('[name="id_vendor_mengikuti_paket"]').val(id_vendor_mengikuti_paket)
                 } else if (type == 'akhir_hea') {
                     modal_evaluasi_akhir_hea.modal('show')
+                    $('.nama_usaha').text(response['row_vendor_mengikuti'].nama_usaha)
+                    $('[name="ev_hea_harga"]').val(response['row_vendor_mengikuti'].ev_hea_harga)
+                    $('[name="id_vendor_mengikuti_paket"]').val(id_vendor_mengikuti_paket)
+                } else if (type == 'harga_terendah') {
+                    modal_evaluasi_harga_terendah.modal('show')
                     $('.nama_usaha').text(response['row_vendor_mengikuti'].nama_usaha)
                     $('[name="ev_hea_harga"]').val(response['row_vendor_mengikuti'].ev_hea_harga)
                     $('[name="id_vendor_mengikuti_paket"]').val(id_vendor_mengikuti_paket)
@@ -334,6 +345,14 @@
         var rupiahFormat = nilai_penawaran.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         $('[name="penawaran_rp"]').val('Rp. ' + rupiahFormat)
     }
+
+
+    function format_rupiah3() {
+        var nilai_penawaran = $('[name="ev_terendah_harga"]').val()
+        var rupiahFormat = nilai_penawaran.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        $('[name="penawaran_rp_terendah"]').val('Rp. ' + rupiahFormat)
+    }
+
 
     $(document).on('keyup', '.number_only', function(e) {
 
@@ -554,6 +573,52 @@
                         }
                     })
                 }
+
+            }
+        })
+    })
+
+    var form_evaluasi_harga_terendah = $('#form_evaluasi_harga_terendah')
+    form_evaluasi_harga_terendah.on('submit', function(e) {
+        var url_simpan_evaluasi_harga_terendah = $('[name="url_simpan_evaluasi_harga_terendah"]').val();
+        e.preventDefault();
+        $.ajax({
+            url: url_simpan_evaluasi_harga_terendah,
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $('#btn_ev_hea_akhir').attr("disabled", true);
+            },
+            success: function(response) {
+                let timerInterval
+                Swal.fire({
+                    title: 'Sedang Proses Menyimpan Data!',
+                    html: 'Proses Data <b></b>',
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            // b.textContent = Swal.getTimerRight()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                        Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                        $('#modal_evaluasi_harga_terendah').modal('hide')
+                        form_evaluasi_harga_terendah[0].reset();
+                        reload_evaluasi_harga_terendah()
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+
+                    }
+                })
 
             }
         })

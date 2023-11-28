@@ -58,6 +58,10 @@
                                 <th>TKDN</th>
                                 <td><?= number_format($row_rup['persen_pencatatan'], 2, ',', '.')  ?> % </td>
                             </tr>
+                            <tr>
+                                <th>Bobot Penilaian</th>
+                                <td>Bobot Teknis (<?= $row_rup['bobot_teknis'] ?>) & Bobot Biaya (<?= $row_rup['bobot_biaya'] ?>)</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -77,19 +81,19 @@
                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#evakhirpenawaran" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Evaluasi Akhir Penawaran</button>
                         </li>
                         <?php if ($row_rup['bobot_nilai'] == 1) { ?>
-
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#evheatkdn" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Evaluasi HEA TKDN</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#peringkatakhirhea" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Peringkat Akhir HEA</button>
+                            </li>
                         <?php } else { ?>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#peringkatakhirterendah" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Peringkat Akhir Harga Terendah</button>
                             </li>
+
                         <?php }   ?>
 
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#evheatkdn" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Evaluasi HEA TKDN</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#peringkatakhirhea" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Peringkat Akhir HEA</button>
-                        </li>
 
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
@@ -265,7 +269,7 @@
                             <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
                                 <div class="flex-grow-1 bd-highlight">
                                     <span class="text-dark">
-                                        <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Peringkat Akhir HEA</strong></small>
+                                        <small class="text-white"><strong><i class="fa-solid fa-table px-1"></i> Data Tabel - Peringkat Akhir Harga Terendah</strong></small>
                                     </span>
                                 </div>
                             </div>
@@ -282,7 +286,7 @@
                                                 <th>Nilai Biaya</th>
                                                 <th rowspan="2">Peringkat Akhir</th>
                                                 <th rowspan="2">Keterangan</th>
-                                                <!-- <th rowspan="2">Aksi</th> -->
+                                                <th rowspan="2">Aksi</th>
                                             </tr>
                                             <tr>
                                                 <th>100%</th>
@@ -499,6 +503,57 @@
                             <div class="mb-3" style="margin-top: 10px;">
                                 <label for="" class="form-label">Nilai Teknis</label>
                                 <input type="text" class="form-control number_only" name="ev_akhir_hea_teknis" placeholder="Nilai Teknis">
+                                <label for="" id="error_ev_teknis" class="text-danger"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success" id="btn_ev_hea_akhir">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- harga terendah -->
+<div class="modal fade" id="modal_evaluasi_harga_terendah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="navbar-brand">
+                    <img src="<?php echo base_url(); ?>/assets/brand/jm1.png" alt="" width="25" height="25" class="d-inline-block align-text-top">
+                    <b><span class="text-primary">Jasamarga Tollroad Operator</span></b>
+
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form_evaluasi_harga_terendah" action="javascript:;">
+                <input type="hidden" value="<?= $row_rup['total_hps_rup'] ?>" name="total_hps_rup">
+                <input type="hidden" value="<?= $row_rup['id_rup'] ?>" name="id_rup_post">
+                <input type="hidden" value="<?= $row_rup['bobot_teknis'] ?>" name="bobot_teknis">
+                <input type="hidden" value="<?= $row_rup['bobot_biaya'] ?>" name="bobot_biaya">
+                <input type="hidden" name="ev_hea_harga">
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
+                            <div class="flex-grow-1 bd-highlight">
+                                <span class="text-dark">
+                                    <small class="text-white">
+                                        <strong><i class="fa-solid fa-edit px-1"></i>
+                                            Evaluasi Peringkat Akhir Harga Terendah <label for="" class="nama_usaha"></label>
+                                        </strong>
+                                    </small>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" name="id_vendor_mengikuti_paket">
+                            <div class="mb-3" style="margin-top: 10px;">
+                                <label for="" class="form-label">Harga Penawaran (Setelah Koreksi Aritmatika)</label>
+                                <input type="text" class="form-control number_only" name="ev_terendah_harga" placeholder="Harga Penawaran (Setelah Koreksi Aritmatika)" onkeyup="format_rupiah3()">
+                                <input type="text" class="form-control" placeholder="Rp." name="penawaran_rp_terendah" disabled>
                                 <label for="" id="error_ev_teknis" class="text-danger"></label>
                             </div>
                         </div>

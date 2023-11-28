@@ -1808,6 +1808,7 @@
                 $('#jenis_kontrak').text(jenis_kontrak)
                 $('#bobot_teknis').text(response['row_rup'].bobot_teknis)
                 $('#bobot_biaya').text(response['row_rup'].bobot_biaya)
+                $('#sumber_dana').text(response['row_rup'].nama_departemen)
                 $('#total_pagu_rup').text('Rp. ' + formatRupiah(response['row_rup'].total_pagu_rup))
                 $('#total_hps_rup').text('Rp. ' + formatRupiah(response['row_rup'].total_hps_rup))
                 $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i>Detail Jadwal Pengadaan</a>')
@@ -1829,12 +1830,12 @@
                 }
                 $('#load_panitia').html(html);
 
-                var html2 = ''
-                var j;
-                for (j = 0; j < response['ruas'].length; j++) {
-                    html2 += '<small>' + response['ruas'][i].nama_ruas + '</small> , </td>';
-                }
-                $('#load_ruas').html('<i class="fa-solid fa-road px-2"></i>' + html2);
+                // var html2 = ''
+                // var j;
+                // for (j = 0; j < response['ruas'].length; j++) {
+                //     html2 += '<small>' + response['ruas'][i].nama_ruas + '</small> , </td>';
+                // }
+                // $('#load_ruas').html('<i class="fa-solid fa-road px-2"></i>' + html2);
 
                 var html_dok_hps = '';
                 if (response['row_rup'].file_hps) {
@@ -1970,9 +1971,14 @@
                 var html = '';
                 var i;
                 for (i = 0; i < response['result_syarat_tender_tambahan'].length; i++) {
+                    if (response['result_syarat_tender_tambahan'][i].file_syarat_tambahan) {
+                        var dok = '<a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['result_syarat_tender_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> Download File</a>'
+                    } else {
+                        var dok = '<span class="badge bg-danger">Tidak Ada Lampiran</span>'
+                    }
                     html += '<tr>' +
                         '<td>' + response['result_syarat_tender_tambahan'][i].nama_syarat_tambahan + '</td>' +
-                        '<td><a href="javascript:;" onclick="download_file_syarat_tambahan(' + response['result_syarat_tender_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-warning"><i class="fas fa fa-file"></i> Download File</a></td>' +
+                        '<td>' + dok + '</td>' +
                         '<td><a href="javascript:;" onclick="hapus_tambahan_syarat(' + response['result_syarat_tender_tambahan'][i].id_syarat_tambahan + ')" class="btn btn-sm btn-danger"><i class="fas fa fa-trash"></i> Hapus</a></td>' +
                         '</tr>'
                 }

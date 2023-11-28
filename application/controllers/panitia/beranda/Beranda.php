@@ -20,6 +20,7 @@ class Beranda extends CI_Controller
 		$this->load->model('M_jenis_jadwal/M_jenis_jadwal');
 		$this->load->model('M_panitia/M_panitia');
 		$this->load->model('M_panitia/M_count');
+		$this->load->model('M_panitia/M_jadwal');
 	}
 	public function index()
 	{
@@ -36,7 +37,9 @@ class Beranda extends CI_Controller
 		$result = $this->M_panitia->gettable_daftar_paket_tender_umum();
 		$data = [];
 		$no = $_POST['start'];
+		$now = date('Y-m-d H:i');
 		foreach ($result as $rs) {
+			$jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
 			$row = array();
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';
 			$row[] = '<small>' . $rs->nama_rup . '</small>';
@@ -46,7 +49,13 @@ class Beranda extends CI_Controller
 			if ($rs->status_paket_panitia == 1) {
 				$row[] = '<small><span class="badge bg-warning text-dark">Draft Paket</span></small>';
 			} else {
-				$row[] = '<small><span class="badge bg-success text-white">Tender Sedang Berlangsung</span></small>';
+				if ($jadwal_terakhir['waktu_mulai'] < $now) {
+					$row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
+					</span>';
+				} else {
+					$row[] = '<span class="badge bg-danger text-white">Sedang Berlangsung
+					</span>';
+				}
 			}
 			$row[] = '<div class="text-center">
 						<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onclick="byid_paket(' . "'" . $rs->id_url_rup . "'" . ')">
@@ -70,7 +79,9 @@ class Beranda extends CI_Controller
 		$result = $this->M_panitia->gettable_daftar_paket_tender_terbatas();
 		$data = [];
 		$no = $_POST['start'];
+		$now = date('Y-m-d H:i');
 		foreach ($result as $rs) {
+			$jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
 			$row = array();
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';
 			$row[] = '<small>' . $rs->nama_rup . '</small>';
@@ -80,7 +91,13 @@ class Beranda extends CI_Controller
 			if ($rs->status_paket_panitia == 1) {
 				$row[] = '<small><span class="badge bg-warning text-dark">Draft Paket</span></small>';
 			} else {
-				$row[] = '<small><span class="badge bg-success text-white">Tender Sedang Berlangsung</span></small>';
+				if ($jadwal_terakhir['waktu_mulai'] < $now) {
+					$row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
+					</span>';
+				} else {
+					$row[] = '<span class="badge bg-danger text-white">Sedang Berlangsung
+					</span>';
+				}
 			}
 			$row[] = '<div class="text-center">
 						<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onclick="byid_paket(' . "'" . $rs->id_url_rup . "'" . ')">

@@ -20,6 +20,7 @@ class Daftar_paket extends CI_Controller
 		$this->load->model('Wilayah/Wilayah_model');
 		$this->load->model('M_jenis_jadwal/M_jenis_jadwal');
 		$this->load->model('M_panitia/M_panitia');
+		$this->load->model('M_panitia/M_jadwal');
 	}
 	public function index()
 	{
@@ -38,7 +39,9 @@ class Daftar_paket extends CI_Controller
 		$result = $this->M_panitia->gettable_daftar_paket();
 		$data = [];
 		$no = $_POST['start'];
+		$now = date('Y-m-d H:i');
 		foreach ($result as $rs) {
+			$jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
 			$row = array();
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';
 			$row[] = '<small>' . $rs->nama_rup . '</small>';
@@ -49,7 +52,13 @@ class Daftar_paket extends CI_Controller
 			if ($rs->status_paket_panitia == 1) {
 				$row[] = '<small><span class="badge bg-warning text-dark">Draft Paket</span></small>';
 			} else {
-				$row[] = '<small><span class="badge bg-success text-white">Tender Sedang Berlangsung</span></small>';
+				if ($jadwal_terakhir['waktu_mulai'] < $now) {
+					$row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
+					</span>';
+				} else {
+					$row[] = '<span class="badge bg-danger text-white">Sedang Berlangsung
+					</span>';
+				}
 			}
 			$row[] = '<div class="text-center">
 						<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onclick="byid_paket(' . "'" . $rs->id_url_rup . "'" . ')">
@@ -1182,7 +1191,7 @@ class Daftar_paket extends CI_Controller
 		$nama_dok_pengadaan = $this->input->post('nama_dok_pengadaan');
 		$nama_rup = $this->input->post('nama_rup');
 		$nama_pegawai = $this->session->userdata('nama_pegawai');
-
+		$rup = $this->M_panitia->get_rup($id_rup);
 		$date = date('Y');
 		if (!is_dir('file_paket/' . $nama_rup  . '/DOKUMEN_PENGADAAN')) {
 			mkdir('file_paket/' . $nama_rup  . '/DOKUMEN_PENGADAAN', 0777, TRUE);
@@ -1203,8 +1212,15 @@ class Daftar_paket extends CI_Controller
 				'file_dok_pengadaan' => $fileData['file_name'],
 				'user_created' => $nama_pegawai
 			];
-
 			$this->M_panitia->insert_dok_pengadaan($upload);
+
+			if ($rup['status_paket_diumumkan'] == 1) {
+				$sts_adendum = [
+					'sts_adendum' => 1
+				];
+				var_dump($sts_adendum);
+				$this->M_panitia->update_rup_panitia($id_rup, $sts_adendum);
+			}
 		}
 	}
 	public function simpan_syarat_tambahan()

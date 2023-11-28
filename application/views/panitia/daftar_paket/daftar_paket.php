@@ -125,17 +125,13 @@
                                                 <small id="nama_rup"></small>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <th class="bg-light">
                                                 <small>Detail Lokasi / Ruas</small>
                                             </th>
                                             <td colspan="3" id="load_ruas">
-
-
-                                                <!-- <small>Ruas Toll Jakarta Cikampek KM 17</small>&nbsp;&amp;
-                                                <small>Ruas Toll Jakarta Cikampek KM 37</small> -->
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                         <tr>
                                             <th class="bg-light">
                                                 <small>Waktu Pelaksanaan</small>
@@ -271,7 +267,7 @@
                                                                 <tr>
                                                                     <td>
                                                                         <i class="fa-solid fa-building-columns px-1"></i>
-                                                                        <small>BUMN</small>
+                                                                        <small id="sumber_dana"></small>
                                                                     </td>
                                                                     <td>
                                                                         <i class="fa-solid fa-money-bills px-1"></i>
