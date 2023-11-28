@@ -377,61 +377,8 @@
                                         <tr>
                                             <td colspan="4">
                                                 <table class="table table-bordered table-sm shadow-lg">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="bg-danger text-white text-center" colspan="3">
-                                                                <small>Pemilihan Jenis Jadwal Pengadaan</small>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-center bg-secondary text-white" scope="col">
-                                                                <small>Metode Kualifikasi Pengadaan</small>
-                                                            </th>
-                                                            <th class="text-center bg-secondary text-white" scope="col">
-                                                                <small>Metode Pemilihan Dokumen</small>
-                                                            </th>
-                                                            <th class="text-center bg-secondary text-white" scope="col">
-                                                                <small>Jenis Jadwal Pengadaan</small>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="input-group mb-2">
-                                                                    <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
-                                                                    <select class="form-control" id="metode_kualifikasi" name="metode_kualifikasi">
-                                                                        <option>Pilih Metode Kualifikasi</option>
-                                                                        <option value="Prakualifikasi">Prakualifikasi</option>
-                                                                        <option value="Pascakualifikasi">Pascakualifikasi</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="input-group mb-2">
-                                                                    <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
-                                                                    <select class="form-control" id="metode_dokumen" name="metode_dokumen">
-                                                                        <option value="">Pilih Metode Dokumen</option>
-                                                                        <option value="SATU FILE">SATU FILE</option>
-                                                                        <option value="DUA FILE">DUA FILE</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="input-group mb-2">
-                                                                    <span class="input-group-text"><i class="fa-regular fa-calendar-check"></i></span>
-                                                                    <select name="id_jadwal_tender" class="form-control" id="jenis_jadwal">
-                                                                        <option value="">Pilih Jenis Jadwal</option>
-                                                                        <?php foreach ($get_jadwal as $key => $value) { ?>
-                                                                            <option value="<?= $value['id_jadwal_tender'] ?>"><?= $value['nama_jadwal_pengadaan'] ?></option>
-                                                                        <?php  } ?>
-                                                                    </select>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
+
+
                                                     <thead>
                                                         <tr>
                                                             <th class="bg-danger text-white text-center" colspan="3">
@@ -504,6 +451,63 @@
                                                             </th>
                                                         </tr>
                                                     </thead>
+
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="bg-danger text-white text-center" colspan="3">
+                                                                <small>Pemilihan Jenis Jadwal Pengadaan</small>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center bg-secondary text-white" scope="col">
+                                                                <small>Metode Kualifikasi Pengadaan</small>
+                                                            </th>
+                                                            <th class="text-center bg-secondary text-white" scope="col">
+                                                                <small>Metode Pemilihan Dokumen</small>
+                                                            </th>
+                                                            <th class="text-center bg-secondary text-white" scope="col">
+                                                                <small>Jenis Jadwal Pengadaan</small>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="input-group mb-2">
+                                                                    <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
+                                                                    <select class="form-control" id="metode_kualifikasi" name="metode_kualifikasi">
+                                                                        <option>Pilih Metode Kualifikasi</option>
+                                                                        <option value="Prakualifikasi">Prakualifikasi</option>
+                                                                        <option value="Pascakualifikasi">Pascakualifikasi</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group mb-2">
+                                                                    <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
+                                                                    <select class="form-control" id="metode_dokumen" name="metode_dokumen">
+                                                                        <option value="">Pilih Metode Dokumen</option>
+                                                                        <option value="SATU FILE">SATU FILE</option>
+                                                                        <option value="DUA FILE">DUA FILE</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group mb-2">
+                                                                    <span class="input-group-text"><i class="fa-regular fa-calendar-check"></i></span>
+                                                                    <select name="id_jadwal_tender" class="form-control" id="jenis_jadwal">
+                                                                        <option value="">Pilih Jenis Jadwal</option>
+                                                                        <?php foreach ($get_jadwal as $key => $value) { ?>
+                                                                            <option value="<?= $value['id_jadwal_tender'] ?>"><?= $value['nama_jadwal_pengadaan'] ?></option>
+                                                                        <?php  } ?>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
                                                 </table>
                                             </td>
                                         </tr>
