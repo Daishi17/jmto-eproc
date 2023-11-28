@@ -360,13 +360,13 @@
                         </tr>
                         <tr>
 
-                            <th>Berita Acara Pengadaan</th>
+                            <th>Berita Acara dan Pengumuman Pengadaan</th>
                             <th>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="card">
                                             <div class="card-header bg-primary text-white">
-                                                Upload Berita Acara Pengadaan
+                                                Upload Berita Acara dan Pengumuman Pengadaan
                                                 <a href="" style="float: right;" data-bs-toggle="modal" data-bs-target="#upload_berita_acara_tender" class="btn btn-danger btn-sm"> <i class="fas fa fa-upload"></i> Upload</a>
                                             </div>
                                             <div class="card-body">
@@ -483,7 +483,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara Pengadaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara dan Pengumuman Pengadaan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="form_upload_berita_acara_tender" action="javascript:;" enctype="multipart/form-data">
@@ -524,7 +524,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara Pengadaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-upload" aria-hidden="true"></i> Berita Acara dan Pengumuman Pengadaan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="form_upload_berita_acara_tender" action="javascript:;" enctype="multipart/form-data">
