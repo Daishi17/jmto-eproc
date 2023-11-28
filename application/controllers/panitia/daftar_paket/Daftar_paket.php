@@ -92,6 +92,7 @@ class Daftar_paket extends CI_Controller
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$data['jadwal'] = $this->M_panitia->get_jadwal($id_url_rup);
 		$data['panitia'] = $this->M_panitia->get_panitia($data['row_rup']['id_rup']);
+		$data['ruas'] = $this->M_panitia->get_ruas($data['row_rup']['id_rup']);
 
 		$data['syarat_izin_usaha_tender'] = $this->M_panitia->get_syarat_izin_usaha_tender($data['row_rup']['id_rup']);
 		$data['syarat_izin_teknis_tender'] = $this->M_panitia->get_syarat_izin_teknis_tender($data['row_rup']['id_rup']);

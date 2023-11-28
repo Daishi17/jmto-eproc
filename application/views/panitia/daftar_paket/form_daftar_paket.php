@@ -76,7 +76,11 @@
                                         </th>
                                         <td colspan="3">
                                             <i class="fa-solid fa-road px-2"></i>
-                                            <small><?= $row_rup['nama_ruas'] ?></small>
+                                            <small>
+                                                <?php foreach ($ruas as $key => $value) { ?>
+                                                    | <?= $value['nama_ruas'] ?>
+                                                <?php  } ?>
+                                            </small>
                                         </td>
                                     </tr>
                                     <tr>
@@ -286,47 +290,52 @@
                                         <td>
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-square-pen px-1"></i></span>
-                                                <select class="form-select" name="jenis_kontrak" aria-label="Default select example" onchange="jenis_kontrak()">
-                                                    <?php if (!$row_rup['jenis_kontrak']) { ?>
-                                                        <option value="">Pilih Jenis Kontrak..</option>
-                                                        <option value="1">Lump Sum</option>
-                                                        <option value="2">Harga Satuan</option>
-                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
-                                                        <option value="4">Terima Jadi (Turnkey)</option>
-                                                        <option value="5">Persentase (%)</option>
-                                                    <?php } else if ($row_rup['jenis_kontrak'] == 1) { ?>
-                                                        <option value="1" selected>Lump Sum</option>
-                                                        <option value="2">Harga Satuan</option>
-                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
-                                                        <option value="4">Terima Jadi (Turnkey)</option>
-                                                        <option value="5">Persentase (%)</option>
-                                                    <?php } else if ($row_rup['jenis_kontrak'] == 2) { ?>
-                                                        <option value="1">Lump Sum</option>
-                                                        <option value="2" selected>Harga Satuan</option>
-                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
-                                                        <option value="4">Terima Jadi (Turnkey)</option>
-                                                        <option value="5">Persentase (%)</option>
-                                                    <?php } else if ($row_rup['jenis_kontrak'] == 3) { ?>
-                                                        <option value="1">Lump Sum</option>
-                                                        <option value="2">Harga Satuan</option>
-                                                        <option value="3" selected>Gabungan Lump Sum dan Harga Satuan</option>
-                                                        <option value="4">Terima Jadi (Turnkey)</option>
-                                                        <option value="5">Persentase (%)</option>
-                                                    <?php } else if ($row_rup['jenis_kontrak'] == 4) { ?>
-                                                        <option value="1">Lump Sum</option>
-                                                        <option value="2">Harga Satuan</option>
-                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
-                                                        <option value="4" selected>Terima Jadi (Turnkey)</option>
-                                                        <option value="5">Persentase (%)</option>
-                                                    <?php } else if ($row_rup['jenis_kontrak'] == 5) { ?>
-                                                        <option value="1">Lump Sum</option>
-                                                        <option value="2">Harga Satuan</option>
-                                                        <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
-                                                        <option value="4">Terima Jadi (Turnkey)</option>
-                                                        <option value="5" selected>Persentase (%)</option>
-                                                    <?php } ?>
+                                                <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+                                                    <select class="form-select" name="jenis_kontrak" aria-label="Default select example" onchange="jenis_kontrak()" disabled>
+                                                    <?php } else { ?>
+                                                        <select class="form-select" name="jenis_kontrak" aria-label="Default select example" onchange="jenis_kontrak()">
+                                                        <?php   } ?>
 
-                                                </select>
+                                                        <?php if (!$row_rup['jenis_kontrak']) { ?>
+                                                            <option value="">Pilih Jenis Kontrak..</option>
+                                                            <option value="1">Lump Sum</option>
+                                                            <option value="2">Harga Satuan</option>
+                                                            <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                            <option value="4">Terima Jadi (Turnkey)</option>
+                                                            <option value="5">Persentase (%)</option>
+                                                        <?php } else if ($row_rup['jenis_kontrak'] == 1) { ?>
+                                                            <option value="1" selected>Lump Sum</option>
+                                                            <option value="2">Harga Satuan</option>
+                                                            <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                            <option value="4">Terima Jadi (Turnkey)</option>
+                                                            <option value="5">Persentase (%)</option>
+                                                        <?php } else if ($row_rup['jenis_kontrak'] == 2) { ?>
+                                                            <option value="1">Lump Sum</option>
+                                                            <option value="2" selected>Harga Satuan</option>
+                                                            <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                            <option value="4">Terima Jadi (Turnkey)</option>
+                                                            <option value="5">Persentase (%)</option>
+                                                        <?php } else if ($row_rup['jenis_kontrak'] == 3) { ?>
+                                                            <option value="1">Lump Sum</option>
+                                                            <option value="2">Harga Satuan</option>
+                                                            <option value="3" selected>Gabungan Lump Sum dan Harga Satuan</option>
+                                                            <option value="4">Terima Jadi (Turnkey)</option>
+                                                            <option value="5">Persentase (%)</option>
+                                                        <?php } else if ($row_rup['jenis_kontrak'] == 4) { ?>
+                                                            <option value="1">Lump Sum</option>
+                                                            <option value="2">Harga Satuan</option>
+                                                            <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                            <option value="4" selected>Terima Jadi (Turnkey)</option>
+                                                            <option value="5">Persentase (%)</option>
+                                                        <?php } else if ($row_rup['jenis_kontrak'] == 5) { ?>
+                                                            <option value="1">Lump Sum</option>
+                                                            <option value="2">Harga Satuan</option>
+                                                            <option value="3">Gabungan Lump Sum dan Harga Satuan</option>
+                                                            <option value="4">Terima Jadi (Turnkey)</option>
+                                                            <option value="5" selected>Persentase (%)</option>
+                                                        <?php } ?>
+
+                                                    </select>
                                             </div>
                                         </td>
                                         <th class="bg-light">
@@ -335,22 +344,28 @@
                                         <td>
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-calendar-plus"></i></span>
-                                                <select class="form-select" name="beban_tahun_anggaran" aria-label="Default select example" onchange="beban_anggaran()">
-                                                    <?php if (!$row_rup['beban_tahun_anggaran']) { ?>
-                                                        <option value="">Pilih...</option>
-                                                        <option value="1">Tahun Tunggal</option>
-                                                        <option value="2">Tahun Jamak</option>
-                                                    <?php } else if ($row_rup['beban_tahun_anggaran'] == 1) { ?>
-                                                        <option value="">Pilih...</option>
-                                                        <option value="1" selected>Tahun Tunggal</option>
-                                                        <option value="2">Tahun Jamak</option>
-                                                    <?php } else if ($row_rup['beban_tahun_anggaran'] == 2) { ?>
-                                                        <option value="">Pilih...</option>
-                                                        <option value="1">Tahun Tunggal</option>
-                                                        <option value="2" selected>Tahun Jamak</option>
-                                                    <?php } ?>
 
-                                                </select>
+                                                <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+                                                    <select class="form-select" name="beban_tahun_anggaran" aria-label="Default select example" onchange="beban_anggaran()" disabled>
+                                                    <?php } else { ?>
+                                                        <select class="form-select" name="beban_tahun_anggaran" aria-label="Default select example" onchange="beban_anggaran()">
+                                                        <?php } ?>
+
+                                                        <?php if (!$row_rup['beban_tahun_anggaran']) { ?>
+                                                            <option value="">Pilih...</option>
+                                                            <option value="1">Tahun Tunggal</option>
+                                                            <option value="2">Tahun Jamak</option>
+                                                        <?php } else if ($row_rup['beban_tahun_anggaran'] == 1) { ?>
+                                                            <option value="">Pilih...</option>
+                                                            <option value="1" selected>Tahun Tunggal</option>
+                                                            <option value="2">Tahun Jamak</option>
+                                                        <?php } else if ($row_rup['beban_tahun_anggaran'] == 2) { ?>
+                                                            <option value="">Pilih...</option>
+                                                            <option value="1">Tahun Tunggal</option>
+                                                            <option value="2" selected>Tahun Jamak</option>
+                                                        <?php } ?>
+
+                                                    </select>
                                             </div>
                                         </td>
                                     </tr>
@@ -361,70 +376,83 @@
                                         <td>
                                             <div class="input-group mb-2">
                                                 <span class="input-group-text"><i class="fa-solid fa-gear"></i></span>
-                                                <select class="form-select" aria-label="Default select example" name="bobot_nilai" onchange="penilaian()">
-                                                    <?php if (!$row_rup['bobot_nilai']) { ?>
-                                                        <option value="">Pilih...</option>
-                                                        <option value="1">Kombinasi</option>
-                                                        <option value="2">Biaya Terendah</option>
-                                                    <?php } else if ($row_rup['bobot_nilai'] == 1) { ?>
-                                                        <option value="">Pilih...</option>
-                                                        <option value="1" selected>Kombinasi</option>
-                                                        <option value="2">Biaya Terendah</option>
-                                                    <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
-                                                        <option value="">Pilih...</option>
-                                                        <option value="1">Kombinasi</option>
-                                                        <option value="2">Biaya Terendah</option>
-                                                    <?php } else if ($row_rup['bobot_nilai'] == 3) { ?>
-                                                        <option value="">Pilih...</option>
-                                                        <option value="1">Kombinasi</option>
-                                                        <option value="2">Biaya Terendah</option>
-                                                    <?php }  ?>
+                                                <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+                                                    <select class="form-select" aria-label="Default select example" name="bobot_nilai" onchange="penilaian()" disabled>
+                                                    <?php } else { ?>
+                                                        <select class="form-select" aria-label="Default select example" name="bobot_nilai" onchange="penilaian()">
+                                                        <?php  } ?>
 
-                                                </select>
+                                                        <?php if (!$row_rup['bobot_nilai']) { ?>
+                                                            <option value="">Pilih...</option>
+                                                            <option value="1">Kombinasi</option>
+                                                            <option value="2">Biaya Terendah</option>
+                                                        <?php } else if ($row_rup['bobot_nilai'] == 1) { ?>
+                                                            <option value="">Pilih...</option>
+                                                            <option value="1" selected>Kombinasi</option>
+                                                            <option value="2">Biaya Terendah</option>
+                                                        <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
+                                                            <option value="">Pilih...</option>
+                                                            <option value="1">Kombinasi</option>
+                                                            <option value="2" selected>Biaya Terendah</option>
+                                                        <?php } else if ($row_rup['bobot_nilai'] == 3) { ?>
+                                                            <option value="">Pilih...</option>
+                                                            <option value="1">Kombinasi</option>
+                                                            <option value="2">Biaya Terendah</option>
+                                                        <?php }  ?>
+
+                                                    </select>
                                             </div>
                                         </td>
                                         <td colspan="2">
                                             <div class="input-group mb-2">
-                                                <?php if (!$row_rup['bobot_nilai']) { ?>
+                                                <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
                                                     <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Teknis</span>
-                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" readonly value="<?= $row_rup['bobot_teknis'] ?>">
-                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i> &ensp; Bobot Biaya</span>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                                                    <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>">
-
-                                                    <span class=" input-group-text"><i class="fa-solid fa-percent"></i></span>
-                                                <?php } else if ($row_rup['bobot_nilai'] == 1) { ?>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Teknis</span>
-
-                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
+                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>" disabled>
 
                                                     <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
                                                     <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Biaya</span>
+                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_biaya'] ?>" disabled>
+                                                <?php  } else { ?>
+                                                    <?php if (!$row_rup['bobot_nilai']) { ?>
 
-                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_biaya'] ?>">
+                                                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Teknis</span>
+                                                        <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" readonly value="<?= $row_rup['bobot_teknis'] ?>" onkeyup="bobot_teknis()">
 
-                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
-                                                <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp;Bobot Teknis</span>
-                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
-                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp;Bobot Biaya</span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-percent"></i> &ensp; Bobot Biaya</span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                        <input type="number" class="form-control" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>" onkeyup="bobot_teknis()">
+                                                        <span class=" input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                    <?php } else if ($row_rup['bobot_nilai'] == 1) { ?>
+                                                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Teknis</span>
+                                                        <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
 
-                                                    <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>">
+                                                        <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp; Bobot Biaya</span>
+                                                        <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_biaya'] ?>">
 
-                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                    <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
+                                                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp;Bobot Teknis</span>
+                                                        <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
+                                                        <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
 
-                                                <?php } else if ($row_rup['bobot_nilai'] == 3) { ?>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                                                    <input type="number" class="form-control  bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" readonly value="<?= $row_rup['bobot_teknis'] ?>">
-                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
-                                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp;Bobot Biaya</span>
+                                                        <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>">
+                                                        <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
 
-                                                    <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_biaya'] ?>">
+                                                    <?php } else if ($row_rup['bobot_nilai'] == 3) { ?>
 
-                                                    <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
+                                                        <input type="number" class="form-control  bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" readonly value="<?= $row_rup['bobot_teknis'] ?>">
+                                                        <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
 
-                                                <?php }  ?>
+                                                        <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_biaya'] ?>">
+                                                        <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
+
+                                                    <?php }  ?>
+                                                <?php } ?>
+
 
                                             </div>
                                         </td>
@@ -434,10 +462,18 @@
                                             <small>Dokumen Persyaratan Pengadaan</small>
                                         </th>
                                         <td class="bg-default" colspan="3">
-                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-xl-syarat">
-                                                <i class="fa-regular fa-folder-open px-1"></i>
-                                                Setting Dokumen Persyaratan
-                                            </button>
+                                            <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+                                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-xl-syarat" disabled>
+                                                    <i class="fa-regular fa-folder-open px-1"></i>
+                                                    Setting Dokumen Persyaratan
+                                                </button>
+                                            <?php } else { ?>
+                                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-xl-syarat">
+                                                    <i class="fa-regular fa-folder-open px-1"></i>
+                                                    Setting Dokumen Persyaratan
+                                                </button>
+                                            <?php } ?>
+
 
                                             <?php if ($row_rup['id_jadwal_tender'] == 2) { ?>
                                                 <button type="button" class="btn btn-sm btn-warning text-white" onclick="get_terekomendasi()">
@@ -455,16 +491,16 @@
                                     </tr>
                                     <!-- <tr>
                                         <?php if ($row_rup['id_metode_pengadaan'] == 3 || $row_rup['id_metode_pengadaan'] == 4 || $row_rup['id_metode_pengadaan'] == 5 || $row_rup['id_metode_pengadaan'] == 6) { ?>
-                                                                                                                                                                                                                                                                                                                                                        <th class="bg-light">
-                                                                                                                                                                                                                                                                                                                                                            <small>Daftar Rekanan Tervalidasi (DRT)</small>
-                                                                                                                                                                                                                                                                                                                                                        </th>
-                                                                                                                                                                                                                                                                                                                                                        <td class="bg-default" colspan="3">
-                                                                                                                                                                                                                                                                                                                                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
-                                                                                                                                                                                                                                                                                                                                                                <i class="fa-solid fa-building-user px-1"></i>
-                                                                                                                                                                                                                                                                                                                                                                Pilih Rekanan Tervalidasi
-                                                                                                                                                                                                                                                                                                                                                            </button>
-                                                                                                                                                                                                                                                                                                                                                            <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
-                                                                                                                                                                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <th class="bg-light">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <small>Daftar Rekanan Tervalidasi (DRT)</small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </th>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <td class="bg-default" colspan="3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="fa-solid fa-building-user px-1"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Pilih Rekanan Tervalidasi
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>
                                         <?php  } else { ?>
 
                                         <?php  }   ?>
@@ -640,7 +676,12 @@
                                                             <td>
                                                                 <div class="input-group">
                                                                     <div class="input-group-text">
-                                                                        <input class="form-check-input mt-0" type="checkbox" value="Setuju">
+                                                                        <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+                                                                            <input class="form-check-input mt-0" type="checkbox" value="Setuju" checked>
+                                                                        <?php } else { ?>
+                                                                            <input class="form-check-input mt-0" type="checkbox" value="Setuju">
+                                                                        <?php   } ?>
+
                                                                     </div>
                                                                     <input type="text" class="form-control" placeholder="Kami setuju dengan pakta integritas yang berlaku" readonly>
                                                                     <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#modal-xl-pakta">
