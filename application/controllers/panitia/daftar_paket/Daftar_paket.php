@@ -24,7 +24,7 @@ class Daftar_paket extends CI_Controller
 	public function index()
 	{
 
-		$this->load->view('panitia/template_menu/header_menu');
+		// $this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/daftar_paket');
@@ -128,11 +128,11 @@ class Daftar_paket extends CI_Controller
 
 		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $cek_syarat_teknis, $data_vendor_lolos_spt, $data_vendor_lolos_laporan_keuangan, $data_vendor_lolos_neraca_keuangan, $data_vendor_terundang_by_kbli, $data['row_rup']);
 
-		$this->load->view('panitia/template_menu/header_menu');
+		// $this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
 		$this->load->view('panitia/daftar_paket/form_daftar_paket', $data);
-		$this->load->view('administrator/template_menu/footer_menu');
+		$this->load->view('panitia/daftar_paket/js_footer_paket');
 		$this->load->view('panitia/daftar_paket/file_public_daftar_paket');
 	}
 

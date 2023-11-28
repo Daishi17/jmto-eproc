@@ -27,6 +27,7 @@ class Sirup_buat_paket extends CI_Controller
 	public function index()
 	{
 		$data['pegawai_panitia'] = $this->M_rup->pegawai_panitia();
+		$data['get_jadwal'] =  $this->db->get('tbl_jadwal_tender')->result_array();
 		$this->load->view('administrator/template_menu/header_menu');
 		$this->load->view('administrator/template/si_rup/js_header_rup');
 		$this->load->view('administrator/sirup_rup/base_url'); //ini untuk base_url page rup
@@ -66,9 +67,11 @@ class Sirup_buat_paket extends CI_Controller
 	{
 		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$ruas_rup = $this->M_rup->get_ruas_by_id_rup($row_rup['id_rup']);
+		$metode = $this->M_rup->get_metode($row_rup['id_rup']);
 		$response = [
 			'row_rup' => $this->M_rup->get_row_rup($id_url_rup),
-			'result_ruas_rup' => $ruas_rup
+			'result_ruas_rup' => $ruas_rup,
+			'metode' => $metode
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}

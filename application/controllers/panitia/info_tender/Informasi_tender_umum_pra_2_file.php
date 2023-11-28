@@ -3,7 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
 class Informasi_tender_umum_pra_2_file extends CI_Controller
 {
-    var $link_vendor = 'http://localhost/jmto-vms/file_paket/';
+    // var $link_vendor = 'http://localhost/jmto-vms/file_paket/';
+    var $link_vendor = 'https://jmto-vms.kintekindo.net/file_paket/';
     function __construct()
     {
         parent::__construct();
@@ -631,8 +632,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         $total_hps_rup = $this->input->post('total_hps_rup');
 
         if ($ev_hea_tkdn >= 25) {
-            $prefensi = 0.25;
-            $total_harga = (1 - ($ev_hea_tkdn * $prefensi)) * $ev_hea_penawaran;
+            // $prefensi = 25 / 100;
+            $total_harga = (1 - ($ev_hea_tkdn / 100 * 0.25)) * $ev_hea_penawaran;
         } else {
             $prefensi = 0;
             $total_harga = (1 - ($ev_hea_tkdn * $prefensi)) * $ev_hea_penawaran;
@@ -1531,4 +1532,20 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         $this->M_panitia->update_mengikuti($upload, $where);
         $this->output->set_content_type('application/json')->set_output(json_encode('success'));
     }
+
+    // public function update_status_aanwijzing_vendor()
+    // {
+    //     $id_vendor = $this->input->post('id_vendor');
+    //     $id_rup = $this->input->post('id_rup');
+
+    //     $where = [
+    //         'id_vendor' => $id_vendor,
+    //         'id_rup' => $id_rup
+    //     ];
+
+    //     $data = [
+    //         'sts_aanwijzing_pq' => 1
+    //     ];
+    //     $this->M_panitia->update_mengikuti($data, $where);
+    // }
 }

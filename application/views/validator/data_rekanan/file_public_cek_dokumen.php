@@ -269,12 +269,12 @@
                         var sts_validasi = '<span class="badge bg-danger">Revisi</span>'
                     }
                     if (response['row_sbu'].sts_token_dokumen == 1) {
-                        var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
+                        var dokumen_sbu = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'dekrip' + '\')" class="btn btn-warning btn-sm"><i class="fas fa-lock-open mr-2"></i> Dekripsi Dokumen</a>';
                         $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
                     } else if (response['row_sbu'].sts_token_dokumen == 2) {
                         var url_dokumen_sbu = $('[name="url_dokumen_sbu"]').val()
-                        var dokumen = '<a target="_blank" href="' + url_dokumen_sbu + response['row_sbu']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;"  class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sbu']['file_dokumen'] + '</a>';
+                        var dokumen_sbu = '<a target="_blank" href="' + url_dokumen_sbu + response['row_sbu']['file_dokumen'] + '" style="white-space: nowrap;width: 200px;overflow: hidden;text-overflow: ellipsis;"  class="btn btn-sm btn-light btn-block text-dark"><img src="' + url_gambar_pdf + '" width="10%" alt=""> ' + response['row_sbu']['file_dokumen'] + '</a>';
                         var dekrip = '<a href="javascript:;" onclick="DekripEnkrip_sbu(\'' + response['row_sbu'].id_url + '\'' + ',' + '\'' + 'enkrip' + '\')" class="btn btn-success btn-sm"><i class="fas fa-lock-open mr-2"></i> Enkripsi Dokumen</a>';
                         $('.token_generate_sbu').html('<div class="input-group"><span class="input-group-text"><i class="fas fa-qrcode"></i></span><textarea class="form-control form-control-sm" disabled>' + response['row_sbu']['token_dokumen'] + '</textarea></div>');
                     }
@@ -291,7 +291,7 @@
                     html_sbu += '<tr>' +
                         '<td>' + response['row_sbu'].nomor_surat + '</td>' +
                         '<td>' + tgl_berlaku + '</td>' +
-                        '<td>' + dokumen + '</td>' +
+                        '<td>' + dokumen_sbu + '</td>' +
                         '<td>' + dekrip + '</td>' +
                         '<td>' + sts_validasi + '</td>' +
                         '<td>' + nama_validator + '</td>' +

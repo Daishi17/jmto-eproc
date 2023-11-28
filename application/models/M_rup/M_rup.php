@@ -165,6 +165,15 @@ class M_rup extends CI_Model
         return $query->row_array();
     }
 
+    public function get_metode($id_rup)
+    {
+        $this->db->select('metode_kualifikasi, metode_dokumen');
+        $this->db->from('tbl_rup');
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     public function delete_ruas($where)
     {
         $this->db->delete('tbl_ruas_rup', $where);

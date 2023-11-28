@@ -72,6 +72,48 @@
                                     <i class="fa fa-users" aria-hidden="true"></i> <?= $hitung_peserta ?> Peserta
                                 </button></th>
                         </tr>
+
+                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                            <!-- belom mulai -->
+
+                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                            <tr>
+                                <th> Peserta (Aanwijzing PQ)</th>
+                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_pq" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
+                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Prakualifikasi
+                                    </button></th>
+                            </tr>
+
+                        <?php    } else { ?>
+                            <tr>
+                                <th> Peserta (Aanwijzing PQ)</th>
+                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_pq" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
+                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Prakualifikasi
+                                    </button></th>
+                            </tr>
+                        <?php    } ?>
+
+                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                            <!-- belom mulai -->
+
+                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                            <tr>
+                                <th> Peserta (Aanwijzing Penawaran)</th>
+                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_penawaran" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
+                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Penawaran
+                                    </button></th>
+                            </tr>
+
+                        <?php    } else { ?>
+                            <tr>
+                                <th>Jumlah Peserta (Aanwijzing Penawaran)</th>
+                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_penawaran" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
+                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Penawaran
+                                    </button></th>
+                            </tr>
+                        <?php    } ?>
+
+
                         <tr>
                             <th>Dokumen Pengadaan</th>
                             <th>
@@ -857,6 +899,170 @@
                     <button type="submit" onclick="tidak_lulus_syarat_tambahan()" class="btn btn-danger btn_tidak_lulus"> <i class="fas fa fa-times"></i> Tidak Lulus Evaluasi</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lihat_peserta_aanwijzing_pq" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Peserta Pengadaan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-primary d-flex align-items-center" role="alert">
+                    <div>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Peserta Ini Merupakan Peserta Yang Mengikuti Pengadaan !!! <br>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Peserta</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($peserta_tender as $key => $value) { ?>
+                            <tr>
+                                <td scope="row"><?= $no++ ?></td>
+                                <td><?= $value['nama_usaha'] ?></td>
+                                <?php
+                                $time = time();
+                                $waktu_aanwijzing = strtotime($jadwal_aanwijzing_pq['waktu_mulai']);
+                                $waktu_aanwijzing_selesai = strtotime($jadwal_aanwijzing_pq['waktu_selesai']);
+                                ?>
+                                <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                    <?php if ($value['waktu_login'] >= $waktu_aanwijzing) { ?>
+                                        <?php
+                                        $where = [
+                                            'id_vendor' => $value['id_vendor'],
+                                            'id_rup' => $row_rup['id_rup']
+                                        ];
+                                        $data = [
+                                            'sts_aanwijzing_pq' => 1
+                                        ];
+                                        $this->M_panitia->update_mengikuti($data, $where);
+                                        ?>
+
+                                        <?php if ($value['sts_aanwijzing_pq'] == 1) { ?>
+                                            <td><span class="badge bg-success">Mengikuti</span></td>
+                                        <?php } else { ?>
+                                            <td><span class="badge bg-danger">Tidak Mengikuti</span></td>
+                                        <?php } ?>
+
+                                    <?php    } else { ?>
+                                        <?php if ($value['sts_aanwijzing_pq'] == 1) { ?>
+                                            <td><span class="badge bg-success">Mengikuti</span></td>
+                                        <?php } else { ?>
+                                            <td><span class="badge bg-danger">Tidak Mengikuti</span></td>
+                                        <?php } ?>
+
+                                    <?php    } ?>
+
+
+                                <?php  } else { ?>
+                                    <?php if ($value['sts_aanwijzing_pq'] == 1) { ?>
+                                        <td><span class="badge bg-success">Mengikuti</span></td>
+                                    <?php } else { ?>
+                                        <td><span class="badge bg-danger">Tidak Mengikuti</span></td>
+                                    <?php } ?>
+                                <?php  } ?>
+
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lihat_peserta_aanwijzing_penawaran" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Peserta Pengadaan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-primary d-flex align-items-center" role="alert">
+                    <div>
+                        <i class="fa fa-info-circle" aria-hidden="true"> </i> Peserta Ini Merupakan Peserta Yang Mengikuti Pengadaan !!! <br>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Peserta</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($peserta_tender as $key => $value) { ?>
+                            <tr>
+                                <td scope="row"><?= $no++ ?></td>
+                                <td><?= $value['nama_usaha'] ?></td>
+                                <?php
+                                $time = time();
+                                $waktu_aanwijzing_penawaran = strtotime($jadwal_aanwijzing['waktu_mulai']);
+                                $waktu_aanwijzing_selesai = strtotime($jadwal_aanwijzing['waktu_selesai']);
+                                ?>
+                                <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                    <?php if ($value['waktu_login'] >= $waktu_aanwijzing_penawaran) { ?>
+                                        <?php
+                                        $where = [
+                                            'id_vendor' => $value['id_vendor'],
+                                            'id_rup' => $row_rup['id_rup']
+                                        ];
+                                        $data = [
+                                            'sts_aanwijzing_penawaran' => 1
+                                        ];
+                                        $this->M_panitia->update_mengikuti($data, $where);
+                                        ?>
+
+                                        <?php if ($value['sts_aanwijzing_penawaran'] == 1) { ?>
+                                            <td><span class="badge bg-success">Mengikuti</span></td>
+                                        <?php } else { ?>
+                                            <td><span class="badge bg-danger">Tidak Mengikuti</span></td>
+                                        <?php } ?>
+
+                                    <?php    } else { ?>
+                                        <?php if ($value['sts_aanwijzing_penawaran'] == 1) { ?>
+                                            <td><span class="badge bg-success">Mengikuti</span></td>
+                                        <?php } else { ?>
+                                            <td><span class="badge bg-danger">Tidak Mengikuti</span></td>
+                                        <?php } ?>
+
+                                    <?php    } ?>
+
+
+                                <?php  } else { ?>
+                                    <?php if ($value['sts_aanwijzing_penawaran'] == 1) { ?>
+                                        <td><span class="badge bg-success">Mengikuti</span></td>
+                                    <?php } else { ?>
+                                        <td><span class="badge bg-danger">Tidak Mengikuti</span></td>
+                                    <?php } ?>
+                                <?php  } ?>
+
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>

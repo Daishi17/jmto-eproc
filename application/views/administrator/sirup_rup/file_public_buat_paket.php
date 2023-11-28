@@ -50,6 +50,7 @@
             dataType: "JSON",
             success: function(response) {
                 modal_paket.modal('show');
+                var html_ruas = '';
                 $('[name="random_kode"]').val(response['row_rup']['id_url_rup']);
                 $('#kode_rup').text(response['row_rup']['kode_rup']);
                 $('#tahun_rup').text(response['row_rup']['tahun_rup']);
@@ -75,7 +76,14 @@
                 $('#jenis_produk').text(response['row_rup']['jenis_produk']);
                 $('#kualifikasi_usaha').text(response['row_rup']['kualifikasi_usaha']);
                 $('#detail_ruas_rup').text(response['row_rup']['nama_ruas']);
-
+                $('[name="metode_kualifikasi"]').val(response['metode']['metode_kualifikasi']);
+                $('[name="metode_dokumen"]').val(response['metode']['metode_dokumen']);
+                $('[name="id_jadwal_tender"]').val(response['row_rup']['id_jadwal_tender']);
+                var i = 0;
+                for (i = 0; i < response['result_ruas_rup'].length; i++) {
+                    html_ruas += `${response['result_ruas_rup'][i].nama_ruas}, `
+                }
+                $('#detail_ruas_rup').html(html_ruas)
 
                 $(document).ready(function() {
                     tbl_panitia.DataTable({
@@ -204,17 +212,17 @@
                         data: {
                             random_kode: random_kode,
                             id_jadwal_tender: id_jadwal_tender,
-                            metode_kualifikasi:metode_kualifikasi,
-                            metode_dokumen:metode_dokumen
+                            metode_kualifikasi: metode_kualifikasi,
+                            metode_dokumen: metode_dokumen
                         },
                         dataType: "JSON",
                         success: function(response) {
                             $('#modal-xl-paket').modal('hide');
                             $('#modal-xl-tambah').modal('hide');
                             Swal.fire('Paket Berhasil Dibuat!', '', 'success');
-                            location.replace('<?= base_url('administrator/Sirup_rup')?>');
                             Reload_table_rup_final();
                             Reload_table_rup();
+                            // location.replace('<?= base_url('administrator/Sirup_buat_paket') ?>');
                         }
                     })
 
@@ -380,35 +388,35 @@
 
 
 
-    $('#metode_kualifikasi').change(function() {
-        var url_get_jenis_dokumen_jadwal = $('[name="url_get_jenis_dokumen_jadwal"]').val();
-        var metode_kualifikasi = $('[name="metode_kualifikasi"]').val();
-        $.ajax({
-            type: 'POST',
-            url: url_get_jenis_dokumen_jadwal,
-            data: {
-                metode_kualifikasi: metode_kualifikasi,
-            },
-            success: function(html) {
-                $('#metode_dokumen').html(html);
-            }
-        });
-    })
+    // $('#metode_kualifikasi').change(function() {
+    //     var url_get_jenis_dokumen_jadwal = $('[name="url_get_jenis_dokumen_jadwal"]').val();
+    //     var metode_kualifikasi = $('[name="metode_kualifikasi"]').val();
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: url_get_jenis_dokumen_jadwal,
+    //         data: {
+    //             metode_kualifikasi: metode_kualifikasi,
+    //         },
+    //         success: function(html) {
+    //             $('#metode_dokumen').html(html);
+    //         }
+    //     });
+    // })
 
-    $('#metode_dokumen').change(function() {
-        var url_get_jenis_jadwal = $('[name="url_get_jenis_jadwal"]').val();
-        var metode_kualifikasi = $('[name="metode_kualifikasi"]').val();
-        var metode_dokumen = $('[name="metode_dokumen"]').val();
-        $.ajax({
-            type: 'POST',
-            url: url_get_jenis_jadwal,
-            data: {
-                metode_dokumen: metode_dokumen,
-                metode_kualifikasi: metode_kualifikasi
-            },
-            success: function(html) {
-                $('#jenis_jadwal').html(html);
-            }
-        });
-    })
+    // $('#metode_dokumen').change(function() {
+    //     var url_get_jenis_jadwal = $('[name="url_get_jenis_jadwal"]').val();
+    //     var metode_kualifikasi = $('[name="metode_kualifikasi"]').val();
+    //     var metode_dokumen = $('[name="metode_dokumen"]').val();
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: url_get_jenis_jadwal,
+    //         data: {
+    //             metode_dokumen: metode_dokumen,
+    //             metode_kualifikasi: metode_kualifikasi
+    //         },
+    //         success: function(html) {
+    //             $('#jenis_jadwal').html(html);
+    //         }
+    //     });
+    // })
 </script>

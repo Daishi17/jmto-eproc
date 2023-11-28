@@ -428,16 +428,16 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nama Paket</th>
-                                <td>PAKET KEMERDEKAAN 78 RI BOGOR</td>
+                                <td><?= $row_rup['nama_rup'] ?></td>
                             </tr>
                             <tr>
                                 <th>Nama Jenis Pengadaan</th>
-                                <td>JASA KONSTRUKSI</td>
+                                <td><?= $row_rup['nama_jenis_pengadaan'] ?></td>
 
                             </tr>
                             <tr>
                                 <th>Nama Metode Pemilihan </th>
-                                <td>Prakualifikasi 2 file</td>
+                                <td><?= $row_rup['metode_kualifikasi'] ?></td>
                             </tr>
                             <tr>
                                 <th>Nama Tempat </th>
