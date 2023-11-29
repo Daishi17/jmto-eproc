@@ -2,7 +2,6 @@
     <input type="hidden" name="id_rup_global" value="<?= $row_rup['id_rup'] ?>">
     <div class="row">
         <div class="col">
-            <br><br> <br>
             <div class="row">
                 <div class="card">
                     <div class="card-body">
@@ -56,7 +55,7 @@
                                     $i = 1;
                                     foreach ($jadwal as  $value2) { ?>
                                         <tr id="erorr_jadwal_row<?= $erorr_row_detail++ ?>">
-                                            <td><?= $no++ ?><input type="hidden" name="id_jadwal_rup[<?= $i ?>]" value="<?= $value2['id_jadwal_rup'] ?>"></td>
+                                            <td><?= $no++ ?><input type="hidden" name="id_jadwal_rup[<?= $i ?>]" value="<?= $value2['id_jadwal_rup'] ?>"> </td>
                                             <td><?= $value2['nama_jadwal_rup'] ?></td>
                                             <div class="alert alert-danger" style="display: none;" role="alert">
                                                 Jadwal <?= $value2['nama_jadwal_rup'] ?> Belum Benar Mengisinya
