@@ -1354,6 +1354,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
         $isi = $this->input->post('isi');
         $id_pengirim = $this->input->post('id_pengirim');
         $id_penerima = $this->input->post('id_penerima');
+        $replay_tujuan = $this->input->post('replay_tujuan');
+        $replay_isi = $this->input->post('replay_isi');
         $id_rup = $this->input->post('id_rup');
         $config['upload_path'] = './file_chat/';
         $config['allowed_types'] = 'pdf|jpeg|jpg|png|jfif|gif|xlsx|docx';
@@ -1367,6 +1369,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'dokumen_chat' => $fileData['file_name'],
             ];
@@ -1382,6 +1386,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'img_chat' => $fileData2['file_name'],
             ];
@@ -1394,6 +1400,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
             ];
             $this->M_tender->tambah_chat($upload);
@@ -1429,6 +1437,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
         $isi = $this->input->post('isi');
         $id_pengirim = $this->input->post('id_pengirim');
         $id_penerima = $this->input->post('id_penerima');
+        $replay_tujuan = $this->input->post('replay_tujuan');
+        $replay_isi = $this->input->post('replay_isi');
         $id_rup = $this->input->post('id_rup');
         $config['upload_path'] = './file_chat/';
         $config['allowed_types'] = 'pdf|jpeg|jpg|png|jfif|gif|xlsx|docx';
@@ -1442,6 +1452,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'dokumen_chat' => $fileData['file_name'],
             ];
@@ -1457,6 +1469,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'img_chat' => $fileData2['file_name'],
             ];
@@ -1469,6 +1483,8 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
             ];
             $this->M_tender->tambah_chat_penawaran($upload);

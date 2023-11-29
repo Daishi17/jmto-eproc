@@ -99,10 +99,10 @@
                                     html += '<div class="d-flex justify-content-end mb-4">' +
                                         '<div class="msg_cotainer_send">' +
                                         '<div class="bs-callout bs-callout-info">' +
-                                        '' + d.replay_tujuan + '<br>' +
+                                        'Membalas Chat : ' + d.replay_tujuan + '<br>' +
                                         '' + d.replay_isi + '' +
                                         '</div>' +
-                                        '' + d.isi + '' +
+                                        '<br>' + d.isi + '' +
                                         '<span class="msg_time">' + kapan + ',' + time + '</span>' +
                                         '</div>' +
                                         '</div>';
@@ -110,7 +110,7 @@
                                     html += '<div class="d-flex justify-content-end mb-4">' +
                                         '<div class="msg_cotainer_send">' +
                                         '<div class="bs-callout bs-callout-info">' +
-                                        '' + d.replay_tujuan + '<br>' +
+                                        'Membalas Chat : ' + d.replay_tujuan + '<br>' +
                                         '' + d.replay_isi + '' +
                                         '</div>' +
                                         '<a  class="text-primary" target="_blank" href="<?= base_url('file_chat/') ?>' + d.dokumen_chat + '">' + d.dokumen_chat + '</a>' +
@@ -122,11 +122,11 @@
                                     html += '<div class="d-flex justify-content-end mb-4">' +
                                         '<div class="msg_cotainer_send">' +
                                         '<div class="bs-callout bs-callout-info">' +
-                                        '' + d.replay_tujuan + '<br>' +
+                                        'Membalas Chat : ' + d.replay_tujuan + '<br>' +
                                         '' + d.replay_isi + '' +
                                         '</div>' +
                                         '<a  class="text-primary" target="_blank" href="<?= base_url('file_chat/') ?>' + d.img_chat + '"><img width="100%" src="<?= base_url('file_chat/') ?>' + d.img_chat + '"></a>' +
-                                        '<br>asdasd' + d.isi + '' +
+                                        '<br>' + d.isi + '' +
                                         '<span class="msg_time">' + kapan + ',' + time + '</span>' +
                                         '</div>' +
                                         '</div>';
@@ -134,10 +134,10 @@
                                     html += '<div class="d-flex justify-content-end mb-4">' +
                                         '<div class="msg_cotainer_send">' +
                                         '<div class="bs-callout bs-callout-info">' +
-                                        '' + d.replay_tujuan + '<br>' +
+                                        'Membalas Chat : ' + d.replay_tujuan + '<br>' +
                                         '' + d.replay_isi + '' +
                                         '</div>' +
-                                        '' + d.isi + '' +
+                                        '<br>' + d.isi + '' +
                                         '<span class="msg_time">' + kapan + ',' + time + '</span>' +
                                         '</div>' +
                                         '</div>';
@@ -240,20 +240,24 @@
                                         '<span class="msg_time">' +
                                         '' + kapan + '' +
                                         '' + time + '' +
-                                        '<a onClick="Replay(' + "'" + d.id_pengirim + "','" + d.isi + "','" + d.nama_usaha + "'" + ')" href="javascript:;" class="badge badge-sm badge-warning">replay</a>	</span>' +
+                                        '<a onclick="Replay(' + "'" + d.id_pengirim + "','" + d.isi + "','" + d.nama_usaha + "'" + ')" href="javascript:;" class="badge badge-sm badge-warning">replay</a>	</span>' +
                                         '</div>' +
                                         '</div>';
                                 }
                             } else {
                                 if (d.dokumen_chat == null) {
-                                    html += `<label class="badge badge-danger ml-5" >${d.nama_usaha}</label><div class="d-flex justify-content-start mb-4">
-                        <div class="img_cont_msg">
-                        <img src="<?= base_url('assets/vendor.png') ?>" alt="" class="rounded-circle user_img_msg">
-                        </div>
-                        <div class="msg_cotainer">
-                           ${d.isi}								
-                           <span class="msg_time">${kapan}, ${time}  	</span>
-                        </div> </div>`;
+                                    html += '<label class="badge badge-danger ml-5" >' + d.nama_usaha + '</label><div class="d-flex justify-content-start mb-4">' +
+                                        '<div class="img_cont_msg">' +
+                                        '<img src="<?= base_url('assets/vendor.png') ?>" alt="" class="rounded-circle user_img_msg">' +
+                                        '</div>' +
+                                        '<div class="msg_cotainer">' +
+                                        '' + d.isi + '' +
+                                        '<span class="msg_time">' +
+                                        '' + kapan + '' +
+                                        '' + time + '' +
+                                        '<a onclick="Replay(' + "'" + d.id_pengirim + "','" + d.isi + "','" + d.nama_usaha + "'" + ')" href="javascript:;" class="badge badge-sm badge-warning">replay</a>	</span>' +
+                                        '</div>' +
+                                        '</div>';
                                 } else if (d.dokumen_chat) {
                                     html += `<label class="badge badge-danger ml-5" >${d.nama_usaha}</label><div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
@@ -287,7 +291,7 @@
                                         '<span class="msg_time">' +
                                         '' + kapan + '' +
                                         '' + time + '' +
-                                        '<a onClick="Replay(' + "'" + d.id_pengirim + "','" + d.isi + "','" + d.nama_usaha + "'" + ')" href="javascript:;" class="badge badge-sm badge-warning">replay</a>	</span>' +
+                                        '<a onclick="Replay(' + "'" + d.id_pengirim + "','" + d.isi + "','" + d.nama_usaha + "'" + ')" href="javascript:;" class="badge badge-sm badge-warning">replay</a>	</span>' +
                                         '</div>' +
                                         '</div>';
                                 }
@@ -335,6 +339,7 @@
                 }
             });
         });
+
         scrollToBottom()
 
         function scrollToBottom() {
@@ -344,4 +349,22 @@
 
         }
     });
+
+    function Replay(pengirim, isi, usaha) {
+        $('.replay_orang').css('display', 'block');
+        $('[name="replay_tujuan"]').val(usaha);
+        $('[name="replay_isi"]').val(isi);
+        $('#nama_usaha_replay').html(usaha)
+        $('#replay_tujuan_terlihat').html(isi)
+    }
+
+    function hapus_replay() {
+        $('.replay_orang').css('display', 'none');
+        $('[name="replay_tujuan"]').val('');
+        $('[name="replay_isi"]').val('');
+        $('#nama_usaha_replay').html('')
+        $('#replay_tujuan_terlihat').html('')
+    }
+
+    
 </script>

@@ -1973,4 +1973,18 @@ class M_panitia extends CI_Model
     {
         $this->db->delete('tbl_vendor_mengikuti_paket', $where);
     }
+
+    function get_yang_dapat_mengumumkan($id_rup) {
+        $this->db->select('*');
+        $this->db->from('tbl_panitia');
+        $this->db->join('tbl_manajemen_user', 'tbl_panitia.id_manajemen_user = tbl_manajemen_user.id_manajemen_user', 'left');
+        $this->db->join('tbl_pegawai', 'tbl_manajemen_user.id_pegawai = tbl_pegawai.id_pegawai', 'left');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('tbl_manajemen_user.role', 5);
+        $this->db->where('tbl_manajemen_user.id_manajemen_user', $this->session->userdata('id_manajemen_user'));
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    
 }

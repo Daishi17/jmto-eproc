@@ -1855,7 +1855,11 @@
                 }
 
                 if (response['row_rup'].status_paket_panitia == 1) {
-                    $('.status_dimumkan').attr("disabled", false);
+                    if (response['hak_mengumumkan'].role_panitia == 1 || response['hak_mengumumkan'].role_panitia) {
+                        $('.status_dimumkan').attr("disabled", false);
+                    } else {
+                        $('.status_dimumkan').attr("disabled", true);
+                    }
                 } else {
                     $('.status_dimumkan').attr("disabled", true);
                 }

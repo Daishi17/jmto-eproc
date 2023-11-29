@@ -137,6 +137,10 @@ class Daftar_paket extends CI_Controller
 
 		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $cek_syarat_teknis, $data_vendor_lolos_spt, $data_vendor_lolos_laporan_keuangan, $data_vendor_lolos_neraca_keuangan, $data_vendor_terundang_by_kbli, $data['row_rup']);
 
+		// yang dapat mengumumkan 
+		$data['diumumkan_oleh'] = $this->M_panitia->get_yang_dapat_mengumumkan($data['row_rup']['id_rup']);
+		$data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_10($data['row_rup']['id_rup']);
+
 		// $this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
@@ -282,6 +286,7 @@ class Daftar_paket extends CI_Controller
 		$jadwal = $this->M_panitia->get_jadwal($id_url_rup);
 		$row_syarat_administrasi_rup = $this->M_panitia->get_syarat_izin_usaha_tender($data_rup['id_rup']);
 		$row_syarat_teknis_rup = $this->M_panitia->get_syarat_izin_teknis_tender($data_rup['id_rup']);
+		$hak_mengumumkan = $this->M_panitia->get_yang_dapat_mengumumkan($data_rup['id_rup']);
 		$response = [
 			'row_rup' => $data_rup,
 			'panitia' => $panitia,
@@ -290,6 +295,7 @@ class Daftar_paket extends CI_Controller
 			'row_syarat_administrasi_rup' => $row_syarat_administrasi_rup,
 			'row_syarat_teknis_rup' => $row_syarat_teknis_rup,
 			'syarat_tambahan' => $syarat_tambahan,
+			'hak_mengumumkan' => $hak_mengumumkan,
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}

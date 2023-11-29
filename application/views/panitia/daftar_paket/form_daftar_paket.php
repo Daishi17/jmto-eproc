@@ -203,10 +203,24 @@
                                                                                 <div class="input-group mb-2">
                                                                                     <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dokumen">
                                                                                 </div>
-                                                                                <button type="submit" class="btn btn-sm btn-success btn_dok_izin_prinsip">
-                                                                                    <i class="fa-solid fa-square-plus"></i>
-                                                                                    Tambah Dokumen
-                                                                                </button>
+
+                                                                                <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+                                                                                    <?php if (date('Y-m-d H:i', strtotime($jadwal_download_dokumen_pengadaan['waktu_mulai']))  <= date('Y-m-d H:i')) { ?>
+                                                                                    <?php    } else { ?>
+                                                                                        <button type="submit" class="btn btn-sm btn-success btn_dok_izin_prinsip">
+                                                                                            <i class="fa-solid fa-square-plus"></i>
+                                                                                            Tambah Dokumen
+                                                                                        </button>
+                                                                                    <?php    } ?>
+
+                                                                                <?php  } else { ?>
+                                                                                    <button type="submit" class="btn btn-sm btn-success btn_dok_izin_prinsip">
+                                                                                        <i class="fa-solid fa-square-plus"></i>
+                                                                                        Tambah Dokumen
+                                                                                    </button>
+                                                                                <?php  }
+                                                                                ?>
+
                                                                             </form>
                                                                         </td>
 
@@ -233,7 +247,16 @@
                                                                             <div class="col-sm-12">
                                                                                 <div class="input-group">
                                                                                     <span class="input-group-text">Rp.</span>
-                                                                                    <input type="number" name="total_hps_rup" onkeyup="total_hps_validasi('<?= $row_rup['id_url_rup'] ?>')" class="form-control " placeholder="Total HPS" value="<?= $row_rup['total_hps_rup'] ?>">
+                                                                                    <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+                                                                                        <?php if (date('Y-m-d H:i', strtotime($jadwal_download_dokumen_pengadaan['waktu_mulai']))  <= date('Y-m-d H:i')) { ?>
+                                                                                            <input type="number" name="total_hps_rup" onkeyup="total_hps_validasi('<?= $row_rup['id_url_rup'] ?>')" class="form-control " placeholder="Total HPS" value="<?= $row_rup['total_hps_rup'] ?>">
+                                                                                        <?php    } else { ?>
+                                                                                            <input type="number" name="total_hps_rup" readonly class="form-control bg-light" placeholder="Total HPS" value="<?= $row_rup['total_hps_rup'] ?>">
+                                                                                        <?php    } ?>
+                                                                                    <?php  } else { ?>
+                                                                                        <input type="number" name="total_hps_rup" onkeyup="total_hps_validasi('<?= $row_rup['id_url_rup'] ?>')" class="form-control " placeholder="Total HPS" value="<?= $row_rup['total_hps_rup'] ?>">
+                                                                                    <?php  }
+                                                                                    ?>
                                                                                     <input type="text" id="rupiah_total_hps" class="form-control total_hps bg-light" readonly value="<?= "Rp " . number_format($row_rup['total_hps_rup'], 2, ',', '.') ?>">
                                                                                 </div>
                                                                             </div>
@@ -666,10 +689,15 @@
                         <input type="hidden" name="id_url_rup" value="<?= $row_rup['id_url_rup'] ?>">
                         <input type="hidden" name="status_paket_panitia" value="1">
                         <?php if ($row_rup['status_paket_panitia'] == 1 || $row_rup['status_paket_panitia'] == NULL) { ?>
-                            <button type="submit" class="btn btn-default btn-success btn_simpan_paket">
-                                <i class="fa-solid fa-floppy-disk px-1"></i>
-                                Simpan Data Paket
-                            </button>
+                            <?php if ($diumumkan_oleh['role_panitia'] == 1 || $diumumkan_oleh['role_panitia'] == 2) { ?>
+                                <button type="submit" class="btn btn-default btn-success btn_simpan_paket">
+                                    <i class="fa-solid fa-floppy-disk px-1"></i>
+                                    Simpan Data Paket
+                                </button>
+                            <?php  } else { ?>
+
+                            <?php }
+                            ?>
                         <?php } else { ?>
 
                         <?php  }  ?>

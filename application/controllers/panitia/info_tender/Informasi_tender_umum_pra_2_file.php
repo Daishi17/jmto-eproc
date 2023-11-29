@@ -45,8 +45,6 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $data['get_rank1'] = $this->M_panitia->get_peserta_rank1($data['row_rup']['id_rup']);
         }
 
-
-
         // get tahap
         $data['jadwal_pengumuman_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_1($data['row_rup']['id_rup']);
         $data['jadwal_dokumen_kualifikasi'] =  $this->M_jadwal->jadwal_pra_umum_2($data['row_rup']['id_rup']);
@@ -70,7 +68,6 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         $data['jadwal_masa_sanggah_akhir'] =  $this->M_jadwal->jadwal_pra_umum_20($data['row_rup']['id_rup']);
         $data['jadwal_upload_surat_penunjukan'] =  $this->M_jadwal->jadwal_pra_umum_21($data['row_rup']['id_rup']);
         // end get tahap
-
         $this->load->view('template_tender/header');
         $this->load->view('panitia/info_tender/' . $root_jadwal . '/base_url_global', $data);
         $this->load->view('panitia/info_tender/' . $root_jadwal . '/base_url_info_tender', $data);
@@ -1355,6 +1352,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         $id_pengirim = $this->input->post('id_pengirim');
         $id_penerima = $this->input->post('id_penerima');
         $id_rup = $this->input->post('id_rup');
+        $replay_tujuan = $this->input->post('replay_tujuan');
+        $replay_isi = $this->input->post('replay_isi');
         $config['upload_path'] = './file_chat/';
         $config['allowed_types'] = 'pdf|jpeg|jpg|png|jfif|gif|xlsx|docx';
         $this->load->library('upload', $config);
@@ -1366,6 +1365,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $upload = [
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
+                'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_penerima' => $id_penerima,
                 'id_rup' => $id_rup,
                 'dokumen_chat' => $fileData['file_name'],
@@ -1381,6 +1382,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $upload = [
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
+                'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_penerima' => $id_penerima,
                 'id_rup' => $id_rup,
                 'img_chat' => $fileData2['file_name'],
@@ -1393,6 +1396,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $upload = [
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
+                'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_penerima' => $id_penerima,
                 'id_rup' => $id_rup,
             ];
@@ -1429,6 +1434,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         $isi = $this->input->post('isi');
         $id_pengirim = $this->input->post('id_pengirim');
         $id_penerima = $this->input->post('id_penerima');
+        $replay_tujuan = $this->input->post('replay_tujuan');
+        $replay_isi = $this->input->post('replay_isi');
         $id_rup = $this->input->post('id_rup');
         $config['upload_path'] = './file_chat/';
         $config['allowed_types'] = 'pdf|jpeg|jpg|png|jfif|gif|xlsx|docx';
@@ -1442,6 +1449,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'dokumen_chat' => $fileData['file_name'],
             ];
@@ -1457,6 +1466,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'img_chat' => $fileData2['file_name'],
             ];
@@ -1468,6 +1479,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $upload = [
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
+                'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_penerima' => $id_penerima,
                 'id_rup' => $id_rup,
             ];
