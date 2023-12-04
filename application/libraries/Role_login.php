@@ -55,6 +55,31 @@ class Role_login
                         $this->ci->session->set_userdata($userdata);
                         redirect('administrator/dashboard');
                     }
+
+                    if ($cek->role == 3) {
+                        $sekarang = date('Y-m-d H:i');
+                        $data = [
+                            'waktu_login' => $sekarang,
+                            'alamat_ip' => $this->ci->input->ip_address(),
+                            'id_pegawai' => $cek->id_pegawai
+                        ];
+                        $this->ci->Auth_model->insert_log($data);
+                        $userdata = [
+                            'id_pegawai' => $cek->id_pegawai,
+                            'id_url_pegawai' => $cek->id_url_pegawai,
+                            'id_manajemen_user' => $cek->id_manajemen_user,
+                            'nama_pegawai' => $cek->nama_pegawai,
+                            'no_telpon' => $cek->no_telpon,
+                            'email' => $cek->email,
+                            'nip' => $cek->nip,
+                            'id_unit' => $cek->id_unit,
+                            'role' => $cek->role
+                        ];
+
+                        // buat session
+                        $this->ci->session->set_userdata($userdata);
+                        redirect('administrator/dashboard');
+                    }
                     // validator
                     if ($cek->role == 4) {
 

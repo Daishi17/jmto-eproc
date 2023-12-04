@@ -418,7 +418,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_siup_url($id_url);
 
         $secret_token = $this->input->post('token_dokumen');
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret = $get_row_enkrip['token_dokumen'];
         if ($secret_token == $secret) {
             if ($type == 'dekrip') {
@@ -732,7 +732,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_nib_url($id_url);
         $secret_token = $this->input->post('token_dokumen');
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret = $get_row_enkrip['token_dokumen'];
         if ($secret_token == $secret) {
             if ($type == 'dekrip') {
@@ -1042,7 +1042,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_sbu_url($id_url);
         $secret_token = $this->input->post('token_dokumen');
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret = $get_row_enkrip['token_dokumen'];
         if ($secret_token == $secret) {
             if ($type == 'dekrip') {
@@ -1350,7 +1350,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_siujk_url($id_url);
         $secret_token = $this->input->post('token_dokumen');
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret = $get_row_enkrip['token_dokumen'];
         if ($secret_token == $secret) {
             if ($type == 'dekrip') {
@@ -1620,7 +1620,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_akta_pendirian_url($id_url);
         $secret_token = $this->input->post('token_dokumen');
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret1 = 'jmto.1' . $id_url;
         $secret2 = 'jmto.2' . $id_url;
         if ($type == 'dekrip') {
@@ -1839,7 +1839,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_akta_perubahan_url($id_url);
         $secret_token = $this->input->post('token_dokumen');
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         // $secret = $get_row_enkrip['token_dokumen'];
         $secret1 = 'jmto.1' . $id_url;
         $secret2 = 'jmto.2' . $id_url;
@@ -2123,7 +2123,7 @@ class Rekanan_tervalidasi extends CI_Controller
         } else {
             $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_pemilik_manajerial_enkription($id_url);
         }
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url'];
         $secret_token_dokumen2 = 'jmto.2' . $get_row_enkrip['id_url'];
         $where = [
@@ -2359,7 +2359,7 @@ class Rekanan_tervalidasi extends CI_Controller
 
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_pengurus_manajerial_enkription($id_url);
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url'];
         $secret_token_dokumen2 = 'jmto.2' . $get_row_enkrip['id_url'];
         $where = [
@@ -2696,7 +2696,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $type = $this->input->post('type');
         $type_edit_pengalaman = $this->input->post('type_edit_pengalaman');
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_pengalaman_enkription($id_url);
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url'];
         $where = [
             'id_url' => $id_url
@@ -2757,7 +2757,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_sppkp_url($id_url);
         $secret_token = $this->input->post('token_dokumen');
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret = $get_row_enkrip['token_dokumen'];
         if ($secret_token == $secret) {
             if ($type == 'dekrip') {
@@ -2928,7 +2928,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_npwp_url($id_url);
         $secret_token = $this->input->post('token_dokumen');
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret = $get_row_enkrip['token_dokumen'];
         if ($secret_token == $secret) {
             if ($type == 'dekrip') {
@@ -3170,7 +3170,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_spt_enkription($id_url);
         // $id_vendor = $get_row_enkrip['id_vendor'];
         // $row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor($id_vendor);
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret_token_dokumen = $get_row_enkrip['token_dokumen'];
 
         if ($type == 'enkrip') {
@@ -3427,7 +3427,7 @@ class Rekanan_tervalidasi extends CI_Controller
         // $row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor($id_vendor);
 
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url_neraca'];
         $secret_token_dokumen2 = 'jmto.2' . $get_row_enkrip['id_url_neraca'];
         $where = [
@@ -3694,7 +3694,7 @@ class Rekanan_tervalidasi extends CI_Controller
         // $row_vendor = $this->M_Rekanan_tervalidasi->get_row_vendor($id_vendor);
 
 
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret_token_dokumen1 = 'jmto.1' . $get_row_enkrip['id_url'];
         $secret_token_dokumen2 = 'jmto.2' . $get_row_enkrip['id_url'];
         $where = [
@@ -3897,7 +3897,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_skdp_url($id_url);
 
         $secret_token = $this->input->post('token_dokumen');
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret = $get_row_enkrip['token_dokumen'];
         if ($secret_token == $secret) {
             if ($type == 'dekrip') {
@@ -4208,7 +4208,7 @@ class Rekanan_tervalidasi extends CI_Controller
         $get_row_enkrip = $this->M_Rekanan_tervalidasi->get_row_lainnya_url($id_url);
 
         $secret_token = $this->input->post('token_dokumen');
-        $chiper = "AES-128-ECB";
+        $chiper = "AES-128-CBC";
         $secret = $get_row_enkrip['token_dokumen'];
         if ($secret_token == $secret) {
             if ($type == 'dekrip') {

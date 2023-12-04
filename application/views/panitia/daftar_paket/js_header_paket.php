@@ -105,6 +105,16 @@
                         </a>
                     </li>
                 <?php } else { ?>
+                    <?php if ($this->session->userdata('role') == 3) { ?>
+                        <li>
+                            <a href="<?= base_url() ?>administrator/dashboard" class="nav-link px-2 text-white">
+                                <i class="fa-solid fa-gauge-high mb-1"></i>
+                                <small>Kembali Ke Menu Unit Kerja</small>
+                            </a>
+                        </li>
+                    <?php  } else { ?>
+                    <?php  }
+                    ?>
 
                 <?php }  ?>
             </ul>

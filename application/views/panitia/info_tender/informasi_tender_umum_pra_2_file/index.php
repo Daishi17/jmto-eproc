@@ -44,7 +44,7 @@
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th style="width: 300px;">Kode Pengadaan</th>
-                            <th> <?= $row_rup['kode_rup'] ?></th>
+                            <th> <?= $row_rup['kode_rup'] ?> <a style="float: right;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/summary_tender' . '/' . $row_rup['id_url_rup']) ?>" class="btn-sm btn btn-primary text-white"><i class="fas fa fa-file"></i> Summary Tender</a></th>
                         </tr>
                         <tr>
                             <th>Nama Paket</th>
@@ -323,7 +323,7 @@
                                 <th><?= $row_rup['bobot_biaya'] ?></th>
                             </tr>
                         <?php    } ?>
-                     
+
 
 
                         <tr>
