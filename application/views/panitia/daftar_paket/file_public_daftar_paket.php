@@ -354,7 +354,7 @@
 
     function penilaian() {
         var bobot_nilai = $('[name="bobot_nilai"]').val();
-        var url_update_rup = $('[name="url_update_rup"]').val();
+        var url_update_live_rup = $('[name="url_update_live_rup"]').val();
         var id_rup_global = $('[name="id_rup_global"]').val();
 
         if (bobot_nilai == 1) {
@@ -373,7 +373,7 @@
         }
         $.ajax({
             type: "POST",
-            url: url_update_rup,
+            url: url_update_live_rup,
             data: {
                 id_rup: id_rup_global,
                 bobot_nilai: bobot_nilai
@@ -387,7 +387,7 @@
 
     function bobot_biaya() {
         var bobot_biaya = $('[name="bobot_biaya"]').val();
-        var url_update_rup = $('[name="url_update_rup"]').val();
+        var url_update_live_rup = $('[name="url_update_live_rup"]').val();
         var id_rup_global = $('[name="id_rup_global"]').val();
         var bobot_teknis = $('[name="bobot_teknis"]').val();
         var total = parseFloat(bobot_biaya) + parseFloat(bobot_teknis);
@@ -401,7 +401,7 @@
         } else {
             $.ajax({
                 type: "POST",
-                url: url_update_rup,
+                url: url_update_live_rup,
                 data: {
                     id_rup: id_rup_global,
                     bobot_biaya: bobot_biaya
@@ -417,7 +417,7 @@
 
     function bobot_teknis() {
         var bobot_teknis = $('[name="bobot_teknis"]').val();
-        var url_update_rup = $('[name="url_update_rup"]').val();
+        var url_update_live_rup = $('[name="url_update_live_rup"]').val();
         var id_rup_global = $('[name="id_rup_global"]').val();
         var bobot_biaya = $('[name="bobot_biaya"]').val();
         var total = parseFloat(bobot_biaya) + parseFloat(bobot_teknis);
@@ -431,7 +431,7 @@
         } else {
             $.ajax({
                 type: "POST",
-                url: url_update_rup,
+                url: url_update_live_rup,
                 data: {
                     id_rup: id_rup_global,
                     bobot_teknis: bobot_teknis
@@ -978,11 +978,11 @@
                         var responkbli = '' + response['error']['id_kbli'] + '';
                         Swal.fire(responkbli, '', 'warning')
                         get_syarat_kbli()
-                        var nama_kbli = $('[name="nama_kbli"]').val('');
+                        $('[name="nama_kbli"]').val(0);
                     } else {
                         Swal.fire('Data Berhasil Di Tambah!', '', 'success')
                         get_syarat_kbli()
-                        var nama_kbli = $('[name="nama_kbli"]').val('');
+                        $('[name="nama_kbli"]').val(0);
                     }
                 }
             })
@@ -1683,34 +1683,63 @@
                 $('.btn_simpan_paket').attr("disabled", true);
             },
             success: function(response) {
-                let timerInterval
-                Swal.fire({
-                    title: 'Sedang Proses Menyimpan Data!',
-                    html: 'Membuat Data <b></b>',
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading()
-                        const b = Swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {
-                            // b.textContent = Swal.getTimerRight()
-                        }, 100)
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval)
-                        Swal.fire('Data Berhasil Di Simpan!', '', 'success')
-                        $('.btn_simpan_paket').attr("disabled", false);
-                        setTimeout(() => {
-                            window.location.href = redirect_daftar_paket
-                        }, "2000");
+                if (response == 'jadwal_validasi') {
+                    Swal.fire('Buat Jadwal Dahulu!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else if (response == 'dok_izin_validasi') {
+                    Swal.fire('Dokumen Izin Prinsip Belum Di Isi!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else if (response == 'hps_validasi') {
+                    Swal.fire('Hps Belum Di Isi!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else if (response == 'jenis_kontrak_validasi') {
+                    Swal.fire('Jenis Kontrak Belum Di Isi!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else if (response == 'beban_tahun_anggaran_validasi') {
+                    Swal.fire('Beban Tahun Anggaran Belum Di Isi!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else if (response == 'bobot_nilai_validasi') {
+                    Swal.fire('Bobot Nilai Belum Di Isi!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else if (response == 'bobot_teknis_validasi') {
+                    Swal.fire('Bobot Teknis Belum Di Isi!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else if (response == 'bobot_biaya_validasi') {
+                    Swal.fire('Bobot Biaya Belum Di Isi!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else if (response == 'syarat_tender_kualifikasi_validasi') {
+                    Swal.fire('Dokumen Persyaratan Pengadaan Belum Di Isi!', '', 'warning')
+                    $('.btn_simpan_paket').attr("disabled", false);
+                } else {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            $('.btn_simpan_paket').attr("disabled", false);
+                            setTimeout(() => {
+                                window.location.href = redirect_daftar_paket
+                            }, "2000");
 
-                    }
-                }).then((result) => {
-                    /* Read more about handling dismissals below */
-                    if (result.dismiss === Swal.DismissReason.timer) {
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
 
-                    }
-                })
+                        }
+                    })
+                }
             }
         })
     })
@@ -1813,6 +1842,22 @@
                 $('#total_hps_rup').text('Rp. ' + formatRupiah(response['row_rup'].total_hps_rup))
                 $('#detail_jadwal').html('<a href="javascript:;" onclick="lihat_detail_jadwal(\'' + response['row_rup'].id_url_rup + '\')" class="btn btn-sm btn-primary"><i class="fa-solid fa-calendar-days px-1"></i>Detail Jadwal Pengadaan</a>')
                 // detail jadwal
+                var open_dokumen_izin_prinsip = 'https://jmto-eproc.kintekindo.net/' + 'file_paket/' + response['row_rup'].nama_rup + '/DOKUMEN_IZIN_PRINSIP_DAN_HPS' + '/';
+                var html_dok_izin_prinsip = '';
+                var i_i;
+                for (i_i = 0; i_i < response['dok_izin_prinsip'].length; i_i++) {
+                    html_dok_izin_prinsip += '<tr>' +
+                        '<td>' + response['dok_izin_prinsip'][i_i].nama_file + '</td>' +
+                        '<td>' + '  <a target="_blank" href="' + open_dokumen_izin_prinsip + response['dok_izin_prinsip'][i_i].file_dokumen + '" class="btn btn-sm btn-danger">' +
+                        '<i class="fa-solid fa-folder-open"></i>' +
+                        ' File Dokumen' +
+                        '</a>' + '</td>' +
+                        '</tr>';
+                }
+                $('.tbl_dok_izin_prinsip_detail').html(html_dok_izin_prinsip);
+
+
+
                 var html = '';
                 var i;
                 for (i = 0; i < response['panitia'].length; i++) {
@@ -1829,22 +1874,6 @@
                         '</tr>';
                 }
                 $('#load_panitia').html(html);
-
-                // var html2 = ''
-                // var j;
-                // for (j = 0; j < response['ruas'].length; j++) {
-                //     html2 += '<small>' + response['ruas'][i].nama_ruas + '</small> , </td>';
-                // }
-                // $('#load_ruas').html('<i class="fa-solid fa-road px-2"></i>' + html2);
-
-                var html_dok_hps = '';
-                if (response['row_rup'].file_hps) {
-                    html_dok_hps += '<a target="_blank" href="' + url_cek_dokumen_hps + response['row_rup'].nama_rup + '/HPS' + '/' + response['row_rup'].file_hps + '" class="btn btn-default btn-info">' + '<i class="fa-solid fa-file px-1"></i>' + response['row_rup'].file_hps + '</a>';
-                    $('.load_dok_Hps').html(html_dok_hps);
-                } else {
-                    html_dok_hps += '<a class="btn btn-danger btn-sm">' + '<i class="fa-solid fa-file px-1"></i>' + 'Belum Upload' + '</a>';
-                    $('.load_dok_Hps').html(html_dok_hps);
-                }
                 var html_status_paket = '';
                 if (response['row_rup'].status_paket_panitia == 1) {
                     html_status_paket += '<small><span class="badge bg-warning text-dark">Draft Paket</span></small>';
@@ -1855,7 +1884,7 @@
                 }
 
                 if (response['row_rup'].status_paket_panitia == 1) {
-                    if (response['hak_mengumumkan'].role_panitia == 1 || response['hak_mengumumkan'].role_panitia) {
+                    if (response['hak_mengumumkan'].role_panitia == 1 || response['hak_mengumumkan'].role_panitia == 2) {
                         $('.status_dimumkan').attr("disabled", false);
                     } else {
                         $('.status_dimumkan').attr("disabled", true);
@@ -2203,4 +2232,14 @@
             }
         })
     }
+</script>
+
+<script>
+    $("#cek_fakta_integritas").change(function() {
+        if (this.checked) {
+            $('.btn_simpan_paket').attr("disabled", false);
+        } else {
+            $('.btn_simpan_paket').attr("disabled", true);
+        }
+    });
 </script>

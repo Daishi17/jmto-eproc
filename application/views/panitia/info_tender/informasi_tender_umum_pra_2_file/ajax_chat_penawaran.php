@@ -99,7 +99,7 @@
                                     html += '<div class="d-flex justify-content-end mb-4">' +
                                         '<div class="msg_cotainer_send">' +
                                         '<div class="bs-callout bs-callout-info">' +
-                                        'Membalas Chat : ' + d.replay_tujuan + '<br>' +
+                                        'Membalas Chat :' +
                                         '' + d.replay_isi + '' +
                                         '</div>' +
                                         '<br>' + d.isi + '' +
@@ -110,7 +110,7 @@
                                     html += '<div class="d-flex justify-content-end mb-4">' +
                                         '<div class="msg_cotainer_send">' +
                                         '<div class="bs-callout bs-callout-info">' +
-                                        'Membalas Chat : ' + d.replay_tujuan + '<br>' +
+                                        'Membalas Chat :' +
                                         '' + d.replay_isi + '' +
                                         '</div>' +
                                         '<a  class="text-primary" target="_blank" href="<?= base_url('file_chat/') ?>' + d.dokumen_chat + '">' + d.dokumen_chat + '</a>' +
@@ -122,7 +122,7 @@
                                     html += '<div class="d-flex justify-content-end mb-4">' +
                                         '<div class="msg_cotainer_send">' +
                                         '<div class="bs-callout bs-callout-info">' +
-                                        'Membalas Chat : ' + d.replay_tujuan + '<br>' +
+                                        'Membalas Chat :' +
                                         '' + d.replay_isi + '' +
                                         '</div>' +
                                         '<a  class="text-primary" target="_blank" href="<?= base_url('file_chat/') ?>' + d.img_chat + '"><img width="100%" src="<?= base_url('file_chat/') ?>' + d.img_chat + '"></a>' +
@@ -134,7 +134,7 @@
                                     html += '<div class="d-flex justify-content-end mb-4">' +
                                         '<div class="msg_cotainer_send">' +
                                         '<div class="bs-callout bs-callout-info">' +
-                                        'Membalas Chat : ' + d.replay_tujuan + '<br>' +
+                                        'Membalas Chat :' +
                                         '' + d.replay_isi + '' +
                                         '</div>' +
                                         '<br>' + d.isi + '' +

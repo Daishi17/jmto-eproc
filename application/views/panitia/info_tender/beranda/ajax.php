@@ -314,6 +314,31 @@
 
                 }
 
+                if (response['dok_izin_prinsip']) {
+                    // detail jadwal
+                    var open_dokumen_izin_prinsip = 'https://jmto-eproc.kintekindo.net/' + 'file_paket/' + response['row_rup'].nama_rup + '/DOKUMEN_IZIN_PRINSIP_DAN_HPS' + '/';
+                    var html_dok_izin_prinsip = '';
+                    var i_i;
+                    for (i_i = 0; i_i < response['dok_izin_prinsip'].length; i_i++) {
+                        html_dok_izin_prinsip += '<tr>' +
+                            '<td>' + response['dok_izin_prinsip'][i_i].nama_file + '</td>' +
+                            '<td>' + '  <a target="_blank" href="' + open_dokumen_izin_prinsip + response['dok_izin_prinsip'][i_i].file_dokumen + '" class="btn btn-sm btn-danger">' +
+                            '<i class="fa-solid fa-folder-open"></i>' +
+                            ' File Dokumen' +
+                            '</a>' + '</td>' +
+                            '</tr>';
+                    }
+                    $('.tbl_dok_izin_prinsip_detail').html(html_dok_izin_prinsip);
+                } else {
+
+                }
+
+
+
+
+
+
+
                 // view on button
             }
         })

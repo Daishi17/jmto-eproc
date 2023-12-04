@@ -205,7 +205,7 @@
                                                                                     <input type="text" class="form-control" placeholder="Nama Dokumen" name="nama_file">
                                                                                 </div>
                                                                                 <div class="input-group mb-2">
-                                                                                    <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dokumen">
+                                                                                    <input type="file" class="form-control" id="file" accept=".pdf,.xlsx" name="file_dokumen">
                                                                                 </div>
 
                                                                                 <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
@@ -359,7 +359,7 @@
                                                             <option value="5" selected>Persentase (%)</option>
                                                         <?php } ?>
 
-                                                    </select>
+                                                        </select>
                                             </div>
                                         </td>
                                         <th class="bg-light">
@@ -389,7 +389,7 @@
                                                             <option value="2" selected>Tahun Jamak</option>
                                                         <?php } ?>
 
-                                                    </select>
+                                                        </select>
                                             </div>
                                         </td>
                                     </tr>
@@ -424,7 +424,7 @@
                                                             <option value="2">Biaya Terendah</option>
                                                         <?php }  ?>
 
-                                                    </select>
+                                                        </select>
                                             </div>
                                         </td>
                                         <td colspan="2">
@@ -571,7 +571,7 @@
                                                                             <input type="text" class="form-control" placeholder="Nama Dokumen Pengadaan" name="nama_dok_pengadaan">
                                                                         </div>
                                                                         <div class="input-group mb-2">
-                                                                            <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dok_pengadaan">
+                                                                            <input type="file" class="form-control" id="file" accept=".pdf,.xlsx" name="file_dok_pengadaan">
                                                                         </div>
                                                                         <button type="submit" class="btn btn-sm btn-success btn_dok_pengadaan">
                                                                             <i class="fa-solid fa-square-plus"></i>
@@ -589,7 +589,7 @@
                                                                             <input type="text" class="form-control" placeholder="Nama Dokumen Prakualifikasi" name="nama_dok_prakualifikasi">
                                                                         </div>
                                                                         <div class="input-group mb-2">
-                                                                            <input type="file" class="form-control" id="file" accept=".pdf, .docx, .doc, .xlsx" name="file_dok_prakualifikasi">
+                                                                            <input type="file" class="form-control" id="file" accept=".pdf,.xlsx" name="file_dok_prakualifikasi">
                                                                         </div>
                                                                         <button type="sbumit" class="btn btn-sm btn-success btn_dok_prakualifikasi">
                                                                             <i class="fa-solid fa-square-plus"></i>
@@ -701,9 +701,9 @@
                                                                 <div class="input-group">
                                                                     <div class="input-group-text">
                                                                         <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
-                                                                            <input class="form-check-input mt-0" type="checkbox" value="Setuju" checked>
+                                                                            <input id="cek_fakta_integritas" class="form-check-input mt-0" type="checkbox" checked>
                                                                         <?php } else { ?>
-                                                                            <input class="form-check-input mt-0" type="checkbox" value="Setuju">
+                                                                            <input id="cek_fakta_integritas" class="form-check-input mt-0" type="checkbox">
                                                                         <?php   } ?>
 
                                                                     </div>
@@ -732,7 +732,7 @@
                         <input type="hidden" name="status_paket_panitia" value="1">
                         <?php if ($row_rup['status_paket_panitia'] == 1 || $row_rup['status_paket_panitia'] == NULL) { ?>
                             <?php if ($diumumkan_oleh['role_panitia'] == 1 || $diumumkan_oleh['role_panitia'] == 2) { ?>
-                                <button type="submit" class="btn btn-default btn-success btn_simpan_paket">
+                                <button disabled type="submit" class="btn btn-default btn-success btn_simpan_paket">
                                     <i class="fa-solid fa-floppy-disk px-1"></i>
                                     Simpan Data Paket
                                 </button>
@@ -1101,6 +1101,7 @@
                                                                                 <span class="input-group-text"><small>Jenis KBLI</small></span>
                                                                                 <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
                                                                                 <select name="nama_kbli" class="form-select single-select-field">
+                                                                                    <option value="0">-- Pilih Jenis KBLI --</option>
                                                                                     <?php foreach ($result_kbli as $key => $value) { ?>
                                                                                         <option value="<?= $value['id_kbli'] ?>"><?= $value['kode_kbli'] ?> | <?= $value['nama_kbli'] ?></option>
                                                                                     <?php } ?>
@@ -1155,6 +1156,7 @@
                                                                                 <span class="input-group-text"><small>Jenis SBU</small></span>
                                                                                 <span class="input-group-text"><i class="fa-solid fa-list"></i></span>
                                                                                 <select name="nama_sbu" class="form-control single-select-field">
+                                                                                    <option value="0">-- Pilih Jenis SBU --</option>
                                                                                     <?php foreach ($result_sbu as $key => $value) { ?>
                                                                                         <option value="<?= $value['id_sbu'] ?>"><?= $value['kode_sbu'] ?> | <?= $value['nama_sbu'] ?></option>
                                                                                     <?php } ?>

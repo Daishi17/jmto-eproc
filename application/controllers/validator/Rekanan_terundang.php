@@ -176,20 +176,15 @@ class Rekanan_terundang extends CI_Controller
 				$test = str_replace(",", ",", (($nm_jenis['nama_jenis_usaha'])));
 				$jenis_izin[] = $test;
 			}
+
+			// cek_jika_ada
+			$cek_jika_ada_pengajuan_dokumen = $this->M_Rekanan_terundang->cek_jika_ada_dokumen_pengajuan($rs->id_vendor);
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $rs->nama_usaha;
 			$row[] = implode(' , ', $jenis_izin);
 			$row[] = $rs->kualifikasi_usaha;
-
-			// if ($cek_siup || $cek_kbli_siup || $cek_nib || $cek_kbli_nib || $cek_sbu || $cek_kbli_sbu || $cek_siujk || $cek_kbli_siujk || $cek_akta_pendirian || $cek_akta_perubahan || $cek_pemilik || $cek_pengurus || $cek_pengalaman || $cek_sppkp || $cek_npwp || $cek_spt || $cek_neraca_keuangan || $cek_keuangan) {
-			// 	$row[] = '<small><span class="badge bg-success text-white">Sudah Upload Dokumen</span></small>';
-			// } else {
-			// 	$row[] = '<small><span class="badge bg-warning text-white">Belum Upload Dokumen</span></small>';
-			// }
-
 			$row[] = '<small><span class="badge bg-primary text-white">Rekanan Terundang</span></small>';
-
 			// nanti main kondisi hitung dokumen dimari
 			if ($rs->sts_dokumen_cek == NULL) {
 				$row[] = '<small><span class="badge swatch-orange text-white">Belum Di Periksa</span></small>';
@@ -218,38 +213,40 @@ class Rekanan_terundang extends CI_Controller
 			// 	$row[] = '<small><span class="badge bg-danger text-white">Belum Valid</span></small>';
 			// }
 
-
-			if ($rs->sts_dokumen_cek == NULL) {
-				$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> ';
-			} else if ($rs->sts_dokumen_cek == 1) {
-				if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
-					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
-						$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
-					} else {
-						$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','undang'" . ')"> <i class="fa-solid fa-times px-1"></i> Daftar Hitam</a>';
-					}
-				} else {
-					$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-					<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
-				}
+			if ($cek_jika_ada_pengajuan_dokumen) {
+				$row[] = '<a onclick="Lihat_pengajuan_dokumen(' . $rs->id_vendor . ')" href="javascript:;" class="btn btn-info btn-block btn-sm shadow-lg" ><i class="fa-solid fa-file px-1"></i> Pengajuan Perubahan Dokumen</a><a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>';
 			} else {
-				if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
-					if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
-						$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
+				if ($rs->sts_dokumen_cek == NULL) {
+					$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
+				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> ';
+				} else if ($rs->sts_dokumen_cek == 1) {
+					if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
+						if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
+							$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
+				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
+						} else {
+							$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
+				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','undang'" . ')"> <i class="fa-solid fa-times px-1"></i> Daftar Hitam</a>';
+						}
 					} else {
 						$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-						<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','undang'" . ')"> <i class="fa-solid fa-times px-1"></i> Daftar Hitam</a>';
+						<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
 					}
 				} else {
-					$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-            <a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
+					if ($cek_siup == 1 && $cek_kbli_siup == 1 && $cek_nib == 1 && $cek_kbli_nib && $cek_sbu == 1 && $cek_kbli_sbu && $cek_akta_pendirian == 1 && $cek_akta_perubahan && $cek_pemilik == 1 && $cek_pengurus == 1 && $cek_pengalaman == 1 && $cek_sppkp == 1 && $cek_npwp == 1 && $cek_spt == 1 && $cek_neraca_keuangan == 1 && $cek_keuangan == 1) {
+						if ($cek_tdk_valid_siup == 1 || $cek_tdk_valid_kbli_siup == 1 || $cek_tdk_valid_nib == 1 || $cek_tdk_valid_kbli_nib || $cek_tdk_valid_sbu == 1 || $cek_tdk_valid_kbli_sbu || $cek_tdk_valid_akta_pendirian == 1 || $cek_tdk_valid_akta_perubahan || $cek_tdk_valid_pemilik == 1 || $cek_tdk_valid_pengurus == 1 || $cek_tdk_valid_pengalaman == 1 || $cek_tdk_valid_sppkp == 1 || $cek_tdk_valid_npwp == 1 || $cek_tdk_valid_spt == 1 || $cek_tdk_valid_neraca_keuangan == 1 || $cek_tdk_valid_keuangan == 1) {
+							$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
+				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
+						} else {
+							$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
+							<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','undang'" . ')"> <i class="fa-solid fa-times px-1"></i> Daftar Hitam</a>';
+						}
+					} else {
+						$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
+				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
+					}
 				}
 			}
-
 
 			$data[] = $row;
 		}
@@ -4379,4 +4376,68 @@ class Rekanan_terundang extends CI_Controller
 		redirect($url);
 	}
 	// end lainnya
+
+	function get_datatable_pengajuan_perubahan_dokumen()
+	{
+		$id_vendor = $this->input->post('id_vendor');
+		$result = $this->M_Rekanan_terundang->getdatatable_pengajuan_dokumen($id_vendor);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($result as $res) {
+			$row = array();
+			$row[] = ++$no;
+			$row[] = $res->jenis_dokumen_perubahan;
+			$row[] = $res->waktu_pengajuan;
+			if ($res->status_perubahan_dokumen == 1) {
+				$row[] = '<small><span class="badge bg-warning">Dalam Prosess</span></small>';
+			} else if ($res->status_perubahan_dokumen == 2) {
+				$row[] = '<small><span class="badge bg-success">Berhasil Di Setujui</span></small>';
+			} else {
+				$row[] = '<small><span class="badge bg-danger">Pengajuan Ditolak</span></small>';
+			}
+			$row[] = '<a href="javascript:;" onclick="Setujui_pengajuan(' . $res->id_dokumen_perubahan . ')" class="btn btn-success btn-sm"><i class="fas fa fa-check"></i></a><a href="javascript:;" onclick="Tolak_pengajuan(' . $res->id_dokumen_perubahan . ')" class="btn btn-danger btn-sm"><i class="fas fa fa-times"></i></a>';
+			$data[] = $row;
+		}
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_Rekanan_terundang->count_all_pengajuan_dokumen($id_vendor),
+			"recordsFiltered" => $this->M_Rekanan_terundang->count_filtered_pengajuan_dokumen($id_vendor),
+			"data" => $data
+		);
+		$this->output->set_content_type('application/json')->set_output(json_encode($output));
+	}
+
+	function setujui_dokumen_pengajuan()
+	{
+		$where = [
+			'id_dokumen_perubahan' => $this->input->post('id_dokumen_perubahan')
+		];
+		// INI DI SETUJUI
+		$data = [
+			'status_perubahan_dokumen' => 2
+		];
+		$this->M_Rekanan_terundang->update_dokumen_pengajuan($data, $where);
+		$row_vendor = $this->M_Rekanan_terundang->get_row_dokumen_pengajuan($this->input->post('id_dokumen_perubahan'));
+		$response = [
+			'id_vendor' => $row_vendor
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	function tolak_dokumen_pengajuan()
+	{
+		$where = [
+			'id_dokumen_perubahan' => $this->input->post('id_dokumen_perubahan')
+		];
+		// INI DI SETUJUI
+		$data = [
+			'status_perubahan_dokumen' => 3
+		];
+		$this->M_Rekanan_terundang->update_dokumen_pengajuan($data, $where);
+		$row_vendor = $this->M_Rekanan_terundang->get_row_dokumen_pengajuan($this->input->post('id_dokumen_perubahan'));
+		$response = [
+			'id_vendor' => $row_vendor
+		];
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
 }
