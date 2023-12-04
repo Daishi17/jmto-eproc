@@ -27,7 +27,16 @@
                                 </style>
                                 <center>
                                     <a style="margin-top: -20;" href="<?= base_url('panitia/daftar_paket/daftar_paket/form_daftar_paket/') . $row_rup['id_url_rup'] ?>" class="btn btn-danger mb-2"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Kembali</a>
-                                    <button style="margin-top: -20;" type="submit" class="btnSave mb-2 btn btn-success">Update Jadwal</button>
+
+                                    <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
+                                        <?php if ($cek_ada_prubahan_jadwal) { ?>
+                                            <button style="margin-top: -20;" type="submit" class="btnSave mb-2 btn btn-success">Update Jadwal</button>
+                                        <?php } else { ?>
+                                            <button style="margin-top: -20;" disabled type="submit" class="mb-2 btn btn-success">Update Jadwal</button>
+                                        <?php  } ?>
+                                    <?php  } else { ?>
+                                        <button style="margin-top: -20;" type="submit" class="btnSave mb-2 btn btn-success">Update Jadwal</button>
+                                    <?php  } ?>
                                 </center>
                             </div>
                             <input type="hidden" name="id_url_rup" id="id_url_rup" value="<?= $row_rup['id_url_rup'] ?>">
@@ -63,15 +72,13 @@
                                             <div class="alert alert-success" style="display: none;" role="alert">
                                                 Jadwal <?= $value2['nama_jadwal_rup'] ?> Sudah Benar
                                             </div>
-
                                             <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
-
                                                 <?php if ($value2['sts_perubahan_jadwal'] == 1) { ?>
-                                                    <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" id="mulai<?= $mulai_detail++ ?>" value="<?= $value2['waktu_mulai'] ?>" type="text"></td>
+                                                    <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" id="mulai<?= $mulai_detail++ ?>" value="<?= date('Y-m-d H:i', strtotime($value2['waktu_mulai'])) ?>" type="text"></td>
                                                     <td><input class="form-control form-control-sm" name="waktu_selesai[<?= $i ?>]" id="selesai<?= $selesai_detail++ ?>" value="<?= $value2['waktu_selesai']  ?>" type="text"></td>
                                                 <?php } else { ?>
-                                                    <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" id="mulai<?= $mulai_detail++ ?>" value="<?= $value2['waktu_mulai'] ?>" type="text" style="background-color: #e9e9e9;" readonly></td>
-                                                    <td><input class="form-control form-control-sm" name="waktu_selesai[<?= $i ?>]" id="selesai<?= $selesai_detail++ ?>" value="<?= $value2['waktu_selesai']  ?>" type="text" style="background-color: #e9e9e9;" readonly></td>
+                                                    <td><input class="form-control form-control-sm" name="waktu_mulai[<?= $i ?>]" value="<?= $value2['waktu_mulai'] ?>" type="text" style="background-color: #e9e9e9;" readonly></td>
+                                                    <td><input class="form-control form-control-sm" name="waktu_selesai[<?= $i ?>]" value="<?= $value2['waktu_selesai']  ?>" type="text" style="background-color: #e9e9e9;" readonly></td>
                                                 <?php  } ?>
 
                                                 <td>

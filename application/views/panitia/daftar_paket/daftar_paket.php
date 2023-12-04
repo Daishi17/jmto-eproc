@@ -260,7 +260,6 @@
                                                                     <th><small>Sumber Dana</small></th>
                                                                     <th><small>Total Pagu</small></th>
                                                                     <th><small>Total HPS</small></th>
-                                                                    <th><small>Dokumen HPS</small></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -277,10 +276,35 @@
                                                                         <i class="fa-solid fa-money-bill px-1"></i>
                                                                         <small id="total_hps_rup"></small>
                                                                     </td>
-                                                                    <td>
-                                                                        <div class="load_dok_Hps"></div>
-                                                                    </td>
                                                                 </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+
+                                        <tr>
+                                            <th colspan="4">
+                                                <div class="card border-dark shadow-lg">
+                                                    <div class="card-header border-dark bg-gradient-red d-flex justify-content-between align-items-center">
+                                                        <div class="flex-grow-1 bd-highlight text-center">
+                                                            <span class="text-dark">
+                                                                <i class="fa-solid fa-users px-1"></i>
+                                                                <small>DOKUMEN IZIN PRINSIP DAN HPS</small>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-bordered table-sm shadow-lg">
+                                                            <thead class="bg-secondary text-white">
+                                                                <tr>
+                                                                    <th><small>Nama Dokumen</small></th>
+                                                                    <th><small>File Dokumen</small></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="tbl_dok_izin_prinsip_detail">
+
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -358,7 +382,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" tabindex="-1" id="modal_detail_jadwal">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">

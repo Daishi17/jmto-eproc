@@ -198,3 +198,45 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal_pengajuan_dokumen" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">List Pengajuan Dokumen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-header bg-warning text-white">
+                            List Dokumen Pengajun Perubahan Dokumen
+                        </div>
+                        <div class="card-body">
+                            <table class="table" id="datatable_pengajuan_dokumen">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Jenis Dokumen</th>
+                                        <th>Waktu Pengajuan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

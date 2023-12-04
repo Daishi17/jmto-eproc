@@ -138,6 +138,10 @@ class Daftar_paket extends CI_Controller
 
 		$data['result_vendor_terundang'] = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $cek_syarat_teknis, $data_vendor_lolos_spt, $data_vendor_lolos_laporan_keuangan, $data_vendor_lolos_neraca_keuangan, $data_vendor_terundang_by_kbli, $data['row_rup']);
 
+		// yang dapat mengumumkan 
+		$data['diumumkan_oleh'] = $this->M_panitia->get_yang_dapat_mengumumkan($data['row_rup']['id_rup']);
+		$data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_10($data['row_rup']['id_rup']);
+
 		// $this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
@@ -235,6 +239,7 @@ class Daftar_paket extends CI_Controller
 		$data['jadwal'] = $this->M_panitia->get_jadwal($id_url_rup);
 		$data['panitia'] = $this->M_panitia->get_panitia($data['row_rup']['id_rup']);
 		$data['role_panitia'] = $this->M_panitia->get_panitia_role($data['row_rup']['id_rup']);
+		$data['cek_ada_prubahan_jadwal'] = $this->M_panitia->cek_jika_ada_perubahan($data['row_rup']['id_rup']);
 		$this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
 		$this->load->view('panitia/daftar_paket/base_url_panitia');
@@ -243,7 +248,8 @@ class Daftar_paket extends CI_Controller
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/index', $data);
 			$this->load->view('administrator/template_menu/footer_menu');
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/ajax');
-		} else { }
+		} else {
+		}
 	}
 
 	public function get_rup_terfinalisasi()
@@ -283,6 +289,7 @@ class Daftar_paket extends CI_Controller
 		$jadwal = $this->M_panitia->get_jadwal($id_url_rup);
 		$row_syarat_administrasi_rup = $this->M_panitia->get_syarat_izin_usaha_tender($data_rup['id_rup']);
 		$row_syarat_teknis_rup = $this->M_panitia->get_syarat_izin_teknis_tender($data_rup['id_rup']);
+		$hak_mengumumkan = $this->M_panitia->get_yang_dapat_mengumumkan($data_rup['id_rup']);
 		$response = [
 			'row_rup' => $data_rup,
 			'panitia' => $panitia,
@@ -291,6 +298,8 @@ class Daftar_paket extends CI_Controller
 			'row_syarat_administrasi_rup' => $row_syarat_administrasi_rup,
 			'row_syarat_teknis_rup' => $row_syarat_teknis_rup,
 			'syarat_tambahan' => $syarat_tambahan,
+			'hak_mengumumkan' => $hak_mengumumkan,
+			'dok_izin_prinsip'  => $this->M_panitia->get_dokumen_izin_prinsip($data_rup['id_rup']),
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
@@ -380,6 +389,154 @@ class Daftar_paket extends CI_Controller
 	public function url_update_rup()
 	{
 		$id_rup = $this->input->post('id_rup');
+
+		$validasi_jadwal = $this->M_panitia->validasi_row_jadwal($id_rup);
+		$validasi_dok_izin_prinsip = $this->M_panitia->validasi_dok_izin_prinsip($id_rup);
+		$validasi_hps = $this->M_panitia->validasi_hps($id_rup);
+		// jenis_kontrak
+		$validasi_jenis_kontrak = $this->M_panitia->validasi_jenis_kontrak($id_rup);
+		// beban_tahun_anggaran
+		$validasi_beban_tahun_anggaran = $this->M_panitia->validasi_beban_tahun_anggaran($id_rup);
+		// bobot_nilai
+		$validasi_bobot_nilai = $this->M_panitia->validasi_bobot_nilai($id_rup);
+		// bobot_teknis
+		$validasi_bobot_teknis = $this->M_panitia->validasi_bobot_teknis($id_rup);
+		// bobot_biaya
+		$validasi_bobot_biaya = $this->M_panitia->validasi_bobot_biaya($id_rup);
+		// syarat_tender_kualifikasi
+		$validasi_syarat_tender_kualifikasi = $this->M_panitia->validasi_syarat_tender_kualifikasi($id_rup);
+		if (!$validasi_jadwal) {
+			$erorr = 'jadwal_validasi';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else if (!$validasi_dok_izin_prinsip) {
+			$erorr = 'dok_izin_validasi';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else if ($validasi_hps) {
+			$erorr = 'hps_validasi';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else if ($validasi_jenis_kontrak) {
+			$erorr = 'jenis_kontrak_validasi';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else if ($validasi_beban_tahun_anggaran) {
+			$erorr = 'beban_tahun_anggaran';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else if ($validasi_bobot_nilai) {
+			$erorr = 'bobot_nilai_validasi';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else if ($validasi_bobot_teknis) {
+			$erorr = 'bobot_teknis_validasi';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else if ($validasi_bobot_biaya) {
+			$erorr = 'bobot_biaya_validasi';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else if ($validasi_syarat_tender_kualifikasi) {
+			$erorr = 'syarat_tender_kualifikasi_validasi';
+			$this->output->set_content_type('application/json')->set_output(json_encode($erorr));
+		} else {
+			$id_url_rup = $this->input->post('id_url_rup');
+			$jenis_kontrak = $this->input->post('jenis_kontrak');
+			$beban_tahun_anggaran = $this->input->post('beban_tahun_anggaran');
+			$bobot_nilai = $this->input->post('bobot_nilai');
+			$bobot_biaya = $this->input->post('bobot_biaya');
+			$bobot_teknis = $this->input->post('bobot_teknis');
+			$status_paket_panitia = $this->input->post('status_paket_panitia');
+			// validasi jadwal 
+			if ($jenis_kontrak) {
+				$data = [
+					'jenis_kontrak' => $jenis_kontrak
+				];
+				$this->M_panitia->update_rup_panitia($id_rup, $data);
+				$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+			} else if ($beban_tahun_anggaran) {
+				$data = [
+					'beban_tahun_anggaran' => $beban_tahun_anggaran
+				];
+				$this->M_panitia->update_rup_panitia($id_rup, $data);
+				$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+			} else if ($bobot_nilai) {
+				$data = [
+					'bobot_nilai' => $bobot_nilai
+				];
+				$this->M_panitia->update_rup_panitia($id_rup, $data);
+				$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+			} else if ($bobot_biaya) {
+				$data = [
+					'bobot_biaya' => $bobot_biaya
+				];
+				$this->M_panitia->update_rup_panitia($id_rup, $data);
+				$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+			} else if ($bobot_teknis) {
+				$data = [
+					'bobot_teknis' => $bobot_teknis
+				];
+				$this->M_panitia->update_rup_panitia($id_rup, $data);
+				$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+			} else if ($status_paket_panitia) {
+				$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
+				$data['panitia'] = $this->M_panitia->get_panitia($data['row_rup']['id_rup']);
+				$data['syarat_izin_usaha_tender'] = $this->M_panitia->get_syarat_izin_usaha_tender($data['row_rup']['id_rup']);
+				$data['syarat_izin_teknis_tender'] = $this->M_panitia->get_syarat_izin_teknis_tender($data['row_rup']['id_rup']);
+				$data['result_kbli'] = $this->M_panitia->result_kbli();
+				$data['result_sbu'] = $this->M_panitia->result_sbu();
+				// // lolos kualifikasi
+				// cek vendor terundang
+				// lolos izin_usaha paket
+				$syarat_izin_usaha = $this->M_panitia->cek_syarat_izin_usaha($data['row_rup']['id_rup']);
+
+				$cek_syarat_kbli = $this->M_panitia->cek_syarat_kbli($data['row_rup']['id_rup']);
+				$cek_syarat_kbli_sbu = $this->M_panitia->cek_syarat_sbu($data['row_rup']['id_rup']);
+				$cek_syarat_teknis = $this->M_panitia->cek_syarat_teknis($data['row_rup']['id_rup']);
+				// siup
+				$data_vendor_lolos_siup_kbli = $this->M_panitia->data_vendor_lolos_siup_kbli($cek_syarat_kbli);
+				// nib
+				$data_vendor_lolos_nib_kbli = $this->M_panitia->data_vendor_lolos_nib_kbli($cek_syarat_kbli);
+				// siujk
+				$data_vendor_lolos_siujk_kbli = $this->M_panitia->data_vendor_lolos_siujk_kbli($cek_syarat_kbli);
+				// skdp
+				// $data_vendor_lolos_skdp_kbli = $this->M_panitia->data_vendor_lolos_skdp_kbli($cek_syarat_kbli);
+				// sbu
+				$data_vendor_lolos_sbu_kbli = $this->M_panitia->data_vendor_lolos_sbu_kbli($cek_syarat_kbli_sbu);
+
+				// spt
+				$data_vendor_lolos_spt = $this->M_panitia->data_vendor_lolos_spt($cek_syarat_teknis);
+				// laporan keuangan
+				$data_vendor_lolos_laporan_keuangan = $this->M_panitia->data_vendor_lolos_laporan_keuangan($cek_syarat_teknis);
+				// neraca keuangan
+				$data_vendor_lolos_neraca_keuangan = $this->M_panitia->data_vendor_lolos_neraca_keuangan($cek_syarat_teknis);
+				$data_vendor_terundang_by_kbli = $this->M_panitia->gabung_keseluruhan_vendor_terundang($data_vendor_lolos_siup_kbli, $data_vendor_lolos_nib_kbli, $data_vendor_lolos_siujk_kbli, $data_vendor_lolos_sbu_kbli);
+				$data_vendor_terundang = $this->M_panitia->result_vendor_terundang($syarat_izin_usaha, $cek_syarat_teknis, $data_vendor_lolos_spt, $data_vendor_lolos_laporan_keuangan, $data_vendor_lolos_neraca_keuangan, $data_vendor_terundang_by_kbli, $data['row_rup']);
+				$post_all_vendor = [];
+				foreach ($data_vendor_terundang as $value) {
+					$post_all_vendor[] = $value['id_vendor'];
+				}
+				$fix_vendor = implode(',', $post_all_vendor);
+				$key = '';
+				$keys = array_merge(range(0, 9), range('a', 'z'));
+				for ($i = 0; $i < 10; $i++) {
+					$key .= $keys[array_rand($keys)];
+				}
+
+				$vendor_key = '';
+				$vendor_keys = array_merge(range(0, 9), range('a', 'z'));
+				for ($i = 0; $i < 10; $i++) {
+					$vendor_key .= $vendor_keys[array_rand($vendor_keys)];
+				}
+				$data = [
+					'status_paket_panitia' => $status_paket_panitia,
+					'data_vendor_terundang' => $fix_vendor,
+					'token_panitia' => $key,
+					'token_vendor' => $vendor_key
+				];
+				$this->M_panitia->update_rup_panitia($id_rup, $data);
+				$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+			}
+		}
+	}
+
+
+	public function url_update_live_rup()
+	{
+		$id_rup = $this->input->post('id_rup');
 		$id_url_rup = $this->input->post('id_url_rup');
 		$jenis_kontrak = $this->input->post('jenis_kontrak');
 		$beban_tahun_anggaran = $this->input->post('beban_tahun_anggaran');
@@ -387,6 +544,7 @@ class Daftar_paket extends CI_Controller
 		$bobot_biaya = $this->input->post('bobot_biaya');
 		$bobot_teknis = $this->input->post('bobot_teknis');
 		$status_paket_panitia = $this->input->post('status_paket_panitia');
+		// validasi jadwal 
 		if ($jenis_kontrak) {
 			$data = [
 				'jenis_kontrak' => $jenis_kontrak
@@ -1178,7 +1336,8 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
 			];
-		} else { }
+		} else {
+		}
 		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])
@@ -1215,13 +1374,12 @@ class Daftar_paket extends CI_Controller
 			];
 			$this->M_panitia->insert_dok_pengadaan($upload);
 
-			if ($rup['status_paket_diumumkan'] == 1) {
-				$sts_adendum = [
-					'sts_adendum' => 1
-				];
-				var_dump($sts_adendum);
-				$this->M_panitia->update_rup_panitia($id_rup, $sts_adendum);
-			}
+			// if ($rup['status_paket_diumumkan'] == 1) {
+			// 	$sts_adendum = [
+			// 		'sts_adendum' => 1
+			// 	];
+			// 	$this->M_panitia->update_rup_panitia($id_rup, $sts_adendum);
+			// }
 		}
 	}
 	public function simpan_syarat_tambahan()

@@ -232,3 +232,156 @@
         })
     }
 </script>
+
+<script>
+    function Lihat_pengajuan_dokumen(id_vendor) {
+        var modal_pengajuan_dokumen = $('#modal_pengajuan_dokumen');
+        modal_pengajuan_dokumen.modal('show')
+        $(document).ready(function() {
+            $('#datatable_pengajuan_dokumen').DataTable({
+                "responsive": false,
+                "ordering": true,
+                "processing": true,
+                "serverSide": true,
+                "autoWidth": false,
+                "bDestroy": true,
+                // "buttons": ["excel", "pdf", "print", "colvis"],
+                initComplete: function() {
+                    this.api().buttons().container().appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+                },
+                "order": [],
+                "ajax": {
+                    "url": '<?= base_url('validator/rekanan_terundang/get_datatable_pengajuan_perubahan_dokumen') ?>',
+                    "type": "POST",
+                    data: {
+                        id_vendor: id_vendor
+                    }
+                },
+                "columnDefs": [{
+                    "target": [-1],
+                    "orderable": false
+                }],
+                "oLanguage": {
+                    "sSearch": "Pencarian : ",
+                    "sEmptyTable": "Tidak Ada Pengajuan Dokume Baru",
+                    "sLoadingRecords": "Silahkan Tunggu - loading...",
+                    "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                    "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                    "sProcessing": "Memuat Data...."
+                }
+            }).buttons().container().appendTo('#tbl_rup .col-md-6:eq(0)');
+        });
+    }
+
+    function Setujui_pengajuan(id_dokumen_perubahan) {
+        Swal.fire({
+            title: "Yakin Mau Menyetujui",
+            text: 'Data Ini Mau Di Setujui?',
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: '<?= base_url('validator/rekanan_terundang/setujui_dokumen_pengajuan') ?>',
+                    data: {
+                        id_dokumen_perubahan: id_dokumen_perubahan
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Good job!', 'Data Beharhasil Setujui!', 'success');
+                        $('#datatable_pengajuan_dokumen').DataTable({
+                            "responsive": false,
+                            "ordering": true,
+                            "processing": true,
+                            "serverSide": true,
+                            "autoWidth": false,
+                            "bDestroy": true,
+                            // "buttons": ["excel", "pdf", "print", "colvis"],
+                            initComplete: function() {
+                                this.api().buttons().container().appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+                            },
+                            "order": [],
+                            "ajax": {
+                                "url": '<?= base_url('validator/rekanan_terundang/get_datatable_pengajuan_perubahan_dokumen') ?>',
+                                "type": "POST",
+                                data: {
+                                    id_vendor: response['id_vendor']['id_vendor']
+                                }
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Tidak Ada Pengajuan Dokume Baru",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#tbl_rup .col-md-6:eq(0)');
+                    }
+                })
+            }
+        });
+    }
+
+    function Tolak_pengajuan(id_dokumen_perubahan) {
+        Swal.fire({
+            title: "Yakin Mau Tolak Pengajuanya",
+            text: 'Data Ini Mau Di Tolak Pengajuanya?',
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: '<?= base_url('validator/rekanan_terundang/tolak_dokumen_pengajuan') ?>',
+                    data: {
+                        id_dokumen_perubahan: id_dokumen_perubahan
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        Swal.fire('Good job!', 'Data Beharhasil Tolak!', 'success');
+                        $('#datatable_pengajuan_dokumen').DataTable({
+                            "responsive": false,
+                            "ordering": true,
+                            "processing": true,
+                            "serverSide": true,
+                            "autoWidth": false,
+                            "bDestroy": true,
+                            // "buttons": ["excel", "pdf", "print", "colvis"],
+                            initComplete: function() {
+                                this.api().buttons().container().appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+                            },
+                            "order": [],
+                            "ajax": {
+                                "url": '<?= base_url('validator/rekanan_terundang/get_datatable_pengajuan_perubahan_dokumen') ?>',
+                                "type": "POST",
+                                data: {
+                                    id_vendor: response['id_vendor']['id_vendor']
+                                }
+                            },
+                            "columnDefs": [{
+                                "target": [-1],
+                                "orderable": false
+                            }],
+                            "oLanguage": {
+                                "sSearch": "Pencarian : ",
+                                "sEmptyTable": "Tidak Ada Pengajuan Dokume Baru",
+                                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                                "sProcessing": "Memuat Data...."
+                            }
+                        }).buttons().container().appendTo('#tbl_rup .col-md-6:eq(0)');
+                    }
+                })
+            }
+        });
+    }
+</script>

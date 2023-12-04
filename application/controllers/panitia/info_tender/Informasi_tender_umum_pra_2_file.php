@@ -114,36 +114,38 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $row[] = $rs->nama_usaha;
 
             if ($cek_valid_vendor >= $hitung_syarat) {
-                $row[] = '<span class="badge bg-success">Sudah Valid</span>';
+                $row[] = '<span class="badge bg-success">Lulus</span>';
             } else {
-                $row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+                $row[] = '<span class="badge bg-danger">Tidak Lulus</span>';
             }
+            
+
 
             // nilai keuangan
             if ($cek_valid_vendor >= $hitung_syarat) {
                 if ($rs->ev_keuangan == NULL) {
                     $row[] = '00.00';
-                    $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Periksa</span>';
+                    $row[] = '<span class="badge bg-secondary bg-sm">Tidak Dievaluasi</span>';
                 } else {
-                    if ($rs->ev_keuangan > 60) {
+                    if ($rs->ev_keuangan >= 60) {
                         $row[] = number_format($rs->ev_keuangan, 2, ',', '.');
                         $row[] = '<span class="badge bg-success bg-sm">Lulus</span>';
                     } else {
                         $row[] = number_format($rs->ev_keuangan, 2, ',', '.');
-                        $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                        $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                     }
                 }
             } else {
                 if ($rs->ev_keuangan == NULL) {
                     $row[] = '00.00';
-                    $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Periksa</span>';
+                    $row[] = '<span class="badge bg-secondary bg-sm">Tidak Dievaluasi</span>';
                 } else {
-                    if ($rs->ev_keuangan > 60) {
+                    if ($rs->ev_keuangan >= 60) {
                         $row[] = number_format($rs->ev_keuangan, 2, ',', '.');
                         $row[] = '<span class="badge bg-success bg-sm">Lulus</span>';
                     } else {
                         $row[] = number_format($rs->ev_keuangan, 2, ',', '.');
-                        $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                        $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                     }
                 }
             }
@@ -155,27 +157,27 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             if ($cek_valid_vendor >= $hitung_syarat) {
                 if ($rs->ev_teknis == NULL) {
                     $row[] = '00.00';
-                    $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Periksa</span>';
+                    $row[] = '<span class="badge bg-secondary bg-sm">Tidak Dievaluasi</span>';
                 } else {
-                    if ($rs->ev_teknis > 60) {
+                    if ($rs->ev_teknis >= 60) {
                         $row[] = number_format($rs->ev_teknis, 2, ',', '.');
                         $row[] = '<span class="badge bg-success bg-sm">Lulus</span>';
                     } else {
                         $row[] = number_format($rs->ev_teknis, 2, ',', '.');
-                        $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                        $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                     }
                 }
             } else {
                 if ($rs->ev_teknis == NULL) {
                     $row[] = '00.00';
-                    $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Periksa</span>';
+                    $row[] = '<span class="badge bg-secondary bg-sm">Tidak Dievaluasi</span>';
                 } else {
-                    if ($rs->ev_teknis > 60) {
+                    if ($rs->ev_teknis >= 60) {
                         $row[] = number_format($rs->ev_teknis, 2, ',', '.');
                         $row[] = '<span class="badge bg-success bg-sm">Lulus</span>';
                     } else {
                         $row[] = number_format($rs->ev_teknis, 2, ',', '.');
-                        $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                        $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                     }
                 }
             }
@@ -184,31 +186,32 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             if ($cek_valid_vendor >= $hitung_syarat) {
                 if ($rs->ev_kualifikasi_akhir == NULL) {
                     $row[] = '00.00';
-                    $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Periksa</span>';
+                    $row[] = '<span class="badge bg-secondary bg-sm">Tidak Dievaluasi</span>';
                 } else {
-                    if ($rs->ev_kualifikasi_akhir > 60) {
+                    if ($rs->ev_kualifikasi_akhir >= 60) {
                         $row[] = number_format($rs->ev_kualifikasi_akhir, 2, ',', '.');
                         $row[] = '<span class="badge bg-success bg-sm">Lulus</span>';
                     } else {
                         $row[] = number_format($rs->ev_kualifikasi_akhir, 2, ',', '.');
-                        $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                        $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                     }
                 }
             } else {
                 if ($rs->ev_kualifikasi_akhir == NULL) {
                     $row[] = '00.00';
-                    $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Periksa</span>';
+                    $row[] = '<span class="badge bg-secondary bg-sm">Tidak Dievaluasi</span>';
                 } else {
-                    if ($rs->ev_kualifikasi_akhir > 60) {
+                    if ($rs->ev_kualifikasi_akhir >= 60) {
                         $row[] = number_format($rs->ev_kualifikasi_akhir, 2, ',', '.');
                         $row[] = '<span class="badge bg-success bg-sm">Lulus</span>';
                     } else {
                         $row[] = number_format($rs->ev_kualifikasi_akhir, 2, ',', '.');
-                        $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                        $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                     }
                 }
             }
 
+            
             if ($cek_valid_vendor >= $hitung_syarat) {
                 if (date('Y-m-d H:i', strtotime($jadwal_evaluasi_dokumen_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) {
                     $row[] = '<div class="text-center badge bg-danger"><small>Belum Memasuki Tahap Ini</small></div>';
@@ -228,12 +231,21 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 </div>';
                 }
             } else {
+
                 $row[] = '<div class="text-center">
-                <a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_mengikuti(' . "'" . $rs->id_vendor_mengikuti_paket . "','kualifikasi'" . ')">
+                <button disabled class="btn btn-secondary btn-sm shadow-lg text-white">
                     <i class="fa-solid fa-edit"></i>
                     <small>Evaluasi</small>
-                </a>
+                </button>
             </div>';
+
+
+            //     $row[] = '<div class="text-center">
+            //     <a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_mengikuti(' . "'" . $rs->id_vendor_mengikuti_paket . "','kualifikasi'" . ')">
+            //         <i class="fa-solid fa-edit"></i>
+            //         <small>Evaluasi</small>
+            //     </a>
+            // </div>';
             }
 
 
@@ -299,7 +311,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             if ($rs->ev_penawaran_akhir == NULL) {
                 $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Ketahui</span>';
             } else {
-                if ($rs->ev_penawaran_akhir > 60) {
+                if ($rs->ev_penawaran_akhir >= 60) {
                     $row[] = '<span class="badge bg-success bg-sm">Sah</span>';
                 } else {
                     $row[] = '<span class="badge bg-danger bg-sm">Tidak Sah</span>';
@@ -370,7 +382,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 if ($rs->ev_hea_tkdn >= $rup['persen_pencatatan'] && $rs->ev_hea_harga <= $rup['total_hps_rup']) {
                     $row[] = '<span class="badge bg-success bg-sm">Sah</span>';
                 } else {
-                    $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                    $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                 }
             } else {
                 $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Evaluasi</span>';
@@ -441,7 +453,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 if ($rs->ev_akhir_hea_akhir >= $rup['bobot_teknis']) {
                     $row[] = '<span class="badge bg-success bg-sm">Sah</span>';
                 } else {
-                    $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                    $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                 }
             } else {
                 $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Evaluasi</span>';
@@ -478,9 +490,9 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $row[] = ++$no;
             $row[] = $rs->nama_usaha;
             if ($cek_valid_vendor >= $hitung_syarat) {
-                $row[] = '<span class="badge bg-success">Sudah Valid</span>';
+                $row[] = '<span class="badge bg-success">Lulus</span>';
             } else {
-                $row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+                $row[] = '<span class="badge bg-danger">Tidak Lulus</span>';
             }
             if ($rs->ev_terendah_harga) {
                 $row[] =  number_format($rs->ev_terendah_harga, 2, ',', '.');
@@ -507,7 +519,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 if ($rs->ev_terendah_hps <= $rup['bobot_biaya']) {
                     $row[] = '<span class="badge bg-success bg-sm">Sah</span>';
                 } else {
-                    $row[] = '<span class="badge bg-danger bg-sm">Gugur</span>';
+                    $row[] = '<span class="badge bg-danger bg-sm">Tidak Lulus</span>';
                 }
             } else {
                 $row[] = '<span class="badge bg-secondary bg-sm">Belum Di Evaluasi</span>';
@@ -849,7 +861,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
     public function get_syarat_tambahan($id_rup)
     {
         $result = $this->M_panitia->gettable_syarat_tambahan($id_rup);
-        // urgensi hitung pake syarat buat cek valid atau tidak valid
+        // urgensi hitung pake syarat buat cek valid atau Tidak Lulus
         $hitung_syarat = $this->M_panitia->hitung_total_syarat($id_rup);
         $jadwal_evaluasi_dokumen_kualifikasi =  $this->M_jadwal->jadwal_pra_umum_6($id_rup);
 
@@ -861,7 +873,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $row[] = ++$no;
             $row[] = $rs->nama_usaha;
             if ($cek_valid_vendor >= $hitung_syarat) {
-                $row[] = '<span class="badge bg-success">Sudah Valid</span>';
+                $row[] = '<span class="badge bg-success">Lulus</span>';
             } else {
                 $row[] = '<span class="badge bg-danger">Belum Valid</span>';
             }
@@ -912,11 +924,11 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             $row[] = $rs->nama_syarat_tambahan;
             $row[] = '<a target="_blank" href="http://localhost/jmto-vms/file_paket/' .  $nama_rup['nama_rup'] .  '/' . $rs->nama_usaha . '/SYARAT_TAMBAHAN' . '/' . $rs->file_syarat_tambahan . '" class="btn btn-sm btn-warning text-white"><i class="fa fa-file"></i></a>';
             if ($rs->status == NULL) {
-                $row[] = '<span class="badge bg-secondary">Belum Di Periksa</span>';
+                $row[] = '<span class="badge bg-secondary">Tidak Dievaluasi</span>';
             } else if ($rs->status == 1) {
                 $row[] = '<span class="badge bg-success">Valid</span>';
             } else {
-                $row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+                $row[] = '<span class="badge bg-danger">Tidak Lulus</span>';
             }
             $row[] = '<div class="text-center">
 						<a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_syarat_tambahan(' . "'" . $rs->id_vendor_syarat_tambahan . "','evaluasi_syarat_tambah'" . ')">
@@ -1354,6 +1366,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         $isi = $this->input->post('isi');
         $id_pengirim = $this->input->post('id_pengirim');
         $id_penerima = $this->input->post('id_penerima');
+        $replay_tujuan = $this->input->post('replay_tujuan');
+        $replay_isi = $this->input->post('replay_isi');
         $id_rup = $this->input->post('id_rup');
         $config['upload_path'] = './file_chat/';
         $config['allowed_types'] = 'pdf|jpeg|jpg|png|jfif|gif|xlsx|docx';
@@ -1367,6 +1381,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'dokumen_chat' => $fileData['file_name'],
             ];
@@ -1382,6 +1398,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'img_chat' => $fileData2['file_name'],
             ];
@@ -1394,6 +1412,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
             ];
             $this->M_tender->tambah_chat($upload);
@@ -1429,6 +1449,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         $isi = $this->input->post('isi');
         $id_pengirim = $this->input->post('id_pengirim');
         $id_penerima = $this->input->post('id_penerima');
+        $replay_tujuan = $this->input->post('replay_tujuan');
+        $replay_isi = $this->input->post('replay_isi');
         $id_rup = $this->input->post('id_rup');
         $config['upload_path'] = './file_chat/';
         $config['allowed_types'] = 'pdf|jpeg|jpg|png|jfif|gif|xlsx|docx';
@@ -1442,6 +1464,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'dokumen_chat' => $fileData['file_name'],
             ];
@@ -1457,6 +1481,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'img_chat' => $fileData2['file_name'],
             ];
@@ -1469,6 +1495,8 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
+                 'replay_tujuan' => $replay_tujuan,
+                'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
             ];
             $this->M_tender->tambah_chat_penawaran($upload);

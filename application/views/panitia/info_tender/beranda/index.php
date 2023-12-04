@@ -457,10 +457,6 @@
                                             <label for="" id="total_hps_rup"></label>
                                         </small>
                                     </td>
-                                    <th class="col-2 vertical-align: middle; bg-light"><small>Dokumen HPS</small></th>
-                                    <td class="col-4 vertical-align: middle;">
-                                        <div class="load_dok_Hps"></div>
-                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="col-2 vertical-align: middle; bg-light"><small>Jenis Kontrak</small></th>
@@ -670,6 +666,29 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="load_syarat_tambahan">
+                                                    </tbody>
+                                                </table>
+
+
+                                                <table class="table table-bordered border-dark table-sm shadow-lg">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-white bg-danger" style="text-align:center; vertical-align:middle;" colspan="3">
+                                                                <small>DOKUMEN IZIN PRINSIP DAN HPS</small>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-white bg-secondary" style="text-align:left; vertical-align:middle;">
+                                                                <small>Nama Dokumen</small>
+                                                            </th>
+                                                            <th class="text-white bg-secondary" style="text-align:left; vertical-align:middle;">
+                                                                <small>File Dokumen</small>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbl_dok_izin_prinsip_detail">
                                                     </tbody>
                                                 </table>
                                             </div>

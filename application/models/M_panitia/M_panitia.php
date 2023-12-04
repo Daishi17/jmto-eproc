@@ -21,6 +21,7 @@ class M_panitia extends CI_Model
         $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
         $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
         $this->db->where('tbl_rup.sts_rup_buat_paket', 2);
+        // $this->db->where_in('tbl_rup.status_paket_panitia', [1, NULL]);
         $this->db->where('tbl_rup.status_paket_diumumkan =', NULL);
         $this->db->where('tbl_panitia.id_manajemen_user', $this->session->userdata('id_manajemen_user'));
         $i = 0;
@@ -347,7 +348,8 @@ class M_panitia extends CI_Model
             $this->db->where_in('tbl_vendor.kualifikasi_usaha', ['Kecil', 'Menengah']);
         } else if ($row_paket['syarat_tender_kualifikasi'] == 'Kecil') {
             $this->db->where('tbl_vendor.kualifikasi_usaha', 'Kecil');
-        } else { }
+        } else {
+        }
         $this->db->group_by('tbl_vendor.id_vendor');
         $query = $this->db->get();
         return $query->result_array();
@@ -1973,4 +1975,134 @@ class M_panitia extends CI_Model
     {
         $this->db->delete('tbl_vendor_mengikuti_paket', $where);
     }
+
+    function get_yang_dapat_mengumumkan($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_panitia');
+        $this->db->join('tbl_manajemen_user', 'tbl_panitia.id_manajemen_user = tbl_manajemen_user.id_manajemen_user', 'left');
+        $this->db->join('tbl_pegawai', 'tbl_manajemen_user.id_pegawai = tbl_pegawai.id_pegawai', 'left');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('tbl_manajemen_user.role', 5);
+        $this->db->where('tbl_manajemen_user.id_manajemen_user', $this->session->userdata('id_manajemen_user'));
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+
+    // INI UNTUK VALIDASI SIMPAN PADA FORM DAFTAR PAKET
+
+
+    public function validasi_row_jadwal($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('tbl_jadwal_rup.id_rup', $id_rup);
+        $this->db->where('tbl_jadwal_rup.waktu_mulai !=', NULL);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    public function cek_jika_ada_perubahan($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('tbl_jadwal_rup.id_rup', $id_rup);
+        $this->db->where('tbl_jadwal_rup.sts_perubahan_jadwal', 1);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+
+    public function validasi_dok_izin_prinsip($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_izin_prinsip');
+        $this->db->where('tbl_izin_prinsip.id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+
+    public function validasi_hps($id_rup)
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('tbl_rup.id_rup', $id_rup);
+        $this->db->where_in('tbl_rup.total_hps_rup', [NULL, 0]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function validasi_jenis_kontrak($id_rup)
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('tbl_rup.id_rup', $id_rup);
+        $this->db->where_in('tbl_rup.jenis_kontrak', [NULL, 0]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function validasi_beban_tahun_anggaran($id_rup)
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('tbl_rup.id_rup', $id_rup);
+        $this->db->where_in('tbl_rup.beban_tahun_anggaran', [NULL, 0]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    // bobot_nilai
+    public function validasi_bobot_nilai($id_rup)
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('tbl_rup.id_rup', $id_rup);
+        $this->db->where('tbl_rup.bobot_nilai', NULL);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // bobot_teknis
+    public function validasi_bobot_teknis($id_rup)
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('tbl_rup.id_rup', $id_rup);
+        $this->db->where('tbl_rup.bobot_teknis', NULL);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // bobot_biaya
+    public function validasi_bobot_biaya($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->where('tbl_rup.id_rup', $id_rup);
+        $this->db->where('tbl_rup.bobot_biaya', NULL);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+     // syarat_tender_kualifikasi
+     public function validasi_syarat_tender_kualifikasi($id_rup)
+     {
+         $this->db->select('*');
+         $this->db->from('tbl_rup');
+         $this->db->where('tbl_rup.id_rup', $id_rup);
+         $this->db->where('tbl_rup.syarat_tender_kualifikasi', NULL);
+         $query = $this->db->get();
+         return $query->result_array();
+     }
 }
