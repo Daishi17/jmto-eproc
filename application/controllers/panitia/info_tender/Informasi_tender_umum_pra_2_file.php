@@ -118,7 +118,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             } else {
                 $row[] = '<span class="badge bg-danger">Tidak Lulus</span>';
             }
-            
+
 
 
             // nilai keuangan
@@ -211,7 +211,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 }
             }
 
-            
+
             if ($cek_valid_vendor >= $hitung_syarat) {
                 if (date('Y-m-d H:i', strtotime($jadwal_evaluasi_dokumen_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) {
                     $row[] = '<div class="text-center badge bg-danger"><small>Belum Memasuki Tahap Ini</small></div>';
@@ -240,12 +240,12 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
             </div>';
 
 
-            //     $row[] = '<div class="text-center">
-            //     <a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_mengikuti(' . "'" . $rs->id_vendor_mengikuti_paket . "','kualifikasi'" . ')">
-            //         <i class="fa-solid fa-edit"></i>
-            //         <small>Evaluasi</small>
-            //     </a>
-            // </div>';
+                //     $row[] = '<div class="text-center">
+                //     <a href="javascript:;" class="btn btn-info btn-sm shadow-lg text-white" onclick="byid_mengikuti(' . "'" . $rs->id_vendor_mengikuti_paket . "','kualifikasi'" . ')">
+                //         <i class="fa-solid fa-edit"></i>
+                //         <small>Evaluasi</small>
+                //     </a>
+                // </div>';
             }
 
 
@@ -1381,7 +1381,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
-                 'replay_tujuan' => $replay_tujuan,
+                'replay_tujuan' => $replay_tujuan,
                 'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'dokumen_chat' => $fileData['file_name'],
@@ -1398,7 +1398,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
-                 'replay_tujuan' => $replay_tujuan,
+                'replay_tujuan' => $replay_tujuan,
                 'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'img_chat' => $fileData2['file_name'],
@@ -1412,7 +1412,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
-                 'replay_tujuan' => $replay_tujuan,
+                'replay_tujuan' => $replay_tujuan,
                 'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
             ];
@@ -1464,7 +1464,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
-                 'replay_tujuan' => $replay_tujuan,
+                'replay_tujuan' => $replay_tujuan,
                 'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'dokumen_chat' => $fileData['file_name'],
@@ -1481,7 +1481,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
-                 'replay_tujuan' => $replay_tujuan,
+                'replay_tujuan' => $replay_tujuan,
                 'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
                 'img_chat' => $fileData2['file_name'],
@@ -1495,7 +1495,7 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
                 'id_pengirim' => $id_pengirim,
                 'isi' => $isi,
                 'id_penerima' => $id_penerima,
-                 'replay_tujuan' => $replay_tujuan,
+                'replay_tujuan' => $replay_tujuan,
                 'replay_isi' => $replay_isi,
                 'id_rup' => $id_rup,
             ];
@@ -1674,6 +1674,78 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         ];
         $this->M_panitia->update_mengikuti($upload, $where);
         $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+    }
+
+    // ulang pengadaan
+
+    public function ulang_pengadaan()
+    {
+        $id_rup = $this->input->post('id_rup_ulang');
+        $nama_rup = $this->input->post('nama_rup_ulang');
+        $alasan_ulang = $this->input->post('alasan_ulang');
+
+
+        $date = date('Y');
+        if (!is_dir('file_paket/' . $nama_rup . '/FILE_ULANG')) {
+            mkdir('file_paket/' . $nama_rup . '/FILE_ULANG', 0777, TRUE);
+        }
+
+        $config['upload_path'] = './file_paket/' . $nama_rup  . '/FILE_ULANG';
+        $config['allowed_types'] = 'pdf|xlsx|xls';
+        $config['max_size'] = 0;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('file_ulang_paket')) {
+            $fileData = $this->upload->data();
+
+            $upload = [
+                'file_ulang_paket' => $fileData['file_name'],
+                'alasan_ulang' => $alasan_ulang,
+                'sts_ulang' => 1,
+                'status_paket_diumumkan' => 0,
+                'status_paket_panitia' => 1
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $upload);
+            $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+        } else {
+            $this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+        }
+    }
+
+    public function batal_pengadaan()
+    {
+        $id_rup = $this->input->post('id_rup_batal');
+        $nama_rup = $this->input->post('nama_rup_batal');
+        $alasan_batal = $this->input->post('alasan_batal');
+
+
+        $date = date('Y');
+        if (!is_dir('file_paket/' . $nama_rup . '/FILE_BATAL')) {
+            mkdir('file_paket/' . $nama_rup . '/FILE_BATAL', 0777, TRUE);
+        }
+
+        $config['upload_path'] = './file_paket/' . $nama_rup  . '/FILE_BATAL';
+        $config['allowed_types'] = 'pdf|xlsx|xls';
+        $config['max_size'] = 0;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('file_batal_paket')) {
+            $fileData = $this->upload->data();
+
+            $upload = [
+                'file_batal_paket' => $fileData['file_name'],
+                'alasan_batal' => $alasan_batal,
+                'sts_batal' => 1,
+                'status_paket_diumumkan' => 0,
+                'status_paket_panitia' => 0
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $upload);
+            $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+        } else {
+            $this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+        }
     }
 
     // public function update_status_aanwijzing_vendor()
