@@ -413,7 +413,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center bg-secondary text-white" colspan="2">
-                                                    <small>Tahun Jamak</small>
+                                                    <small>Tahun Anggaran</small>
                                                 </th>
                                                 <th class="text-center bg-secondary text-white" scope="col">
                                                     <small>Jangka Waktu</small>
@@ -446,7 +446,7 @@
                                                     <small>
                                                         <div class="input-group mb-2">
                                                             <span class="input-group-text"><i class="fa-solid fa-calendar"></i></span>
-                                                            <input type="number" readonly name="jangka_waktu_hari_pelaksanaan" style="background-color: #ffffe0;" class="form-control" placeholder="360">
+                                                            <input type="number" readonly name="jangka_waktu_hari_pelaksanaan" style="background-color: #ffffe0;" class="form-control" placeholder="00">
                                                             <span class="input-group-text">Hari</span>
                                                         </div>
                                                         <!-- jangka_waktu_hari_pelaksanaan -->
@@ -549,7 +549,7 @@
                         <i class="fa-solid fa-floppy-disk px-1"></i>
                         Simpan Data RUP
                     </a>
-                    <a href="<?= base_url('administrator/Sirup_rup')?>" class="btn btn-default btn-warning" onclick="history.back()">
+                    <a href="<?= base_url('administrator/Sirup_rup') ?>" class="btn btn-default btn-warning" onclick="history.back()">
                         <i class="fa-solid fa-angles-left px-1"></i>
                         Kembali Kemenu Sebelumnya
                     </a>

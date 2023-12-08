@@ -359,7 +359,7 @@
                                                             <option value="5" selected>Persentase (%)</option>
                                                         <?php } ?>
 
-                                                        </select>
+                                                    </select>
                                             </div>
                                         </td>
                                         <th class="bg-light">
@@ -389,7 +389,7 @@
                                                             <option value="2" selected>Tahun Jamak</option>
                                                         <?php } ?>
 
-                                                        </select>
+                                                    </select>
                                             </div>
                                         </td>
                                     </tr>
@@ -424,7 +424,7 @@
                                                             <option value="2">Biaya Terendah</option>
                                                         <?php }  ?>
 
-                                                        </select>
+                                                    </select>
                                             </div>
                                         </td>
                                         <td colspan="2">
@@ -457,11 +457,11 @@
                                                         <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
                                                     <?php } else if ($row_rup['bobot_nilai'] == 2) { ?>
                                                         <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp;Bobot Teknis</span>
-                                                        <input type="number" class="form-control " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" value="<?= $row_rup['bobot_teknis'] ?>">
+                                                        <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Teknis" name="bobot_teknis" onkeyup="bobot_teknis()" onkeyup="bobot_biaya()" value="<?= $row_rup['bobot_teknis'] ?>" readonly>
                                                         <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
 
                                                         <span class="input-group-text"><i class="fa-solid fa-money-bill"></i>&ensp;Bobot Biaya</span>
-                                                        <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" readonly value="<?= $row_rup['bobot_biaya'] ?>">
+                                                        <input type="number" class="form-control bg-light" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==3) return false;" placeholder="Bobot Biaya" name="bobot_biaya" onkeyup="bobot_biaya()" readonly value="<?= $row_rup['bobot_biaya'] ?>">
                                                         <span class="input-group-text"><i class="fa-solid fa-percent"></i></span>
 
                                                     <?php } else if ($row_rup['bobot_nilai'] == 3) { ?>
@@ -499,7 +499,7 @@
                                             <?php } ?>
 
 
-                                            <?php if ($row_rup['id_jadwal_tender'] == 2) { ?>
+                                            <?php if ($row_rup['id_jadwal_tender'] == 2 || $row_rup['id_jadwal_tender'] == 1) { ?>
                                                 <button type="button" class="btn btn-sm btn-warning text-white" onclick="get_terekomendasi()">
                                                     <i class="fa-solid fa-building-user px-1"></i>
                                                     Undang Rekanan Terekomendasi
@@ -515,16 +515,16 @@
                                     </tr>
                                     <!-- <tr>
                                         <?php if ($row_rup['id_metode_pengadaan'] == 3 || $row_rup['id_metode_pengadaan'] == 4 || $row_rup['id_metode_pengadaan'] == 5 || $row_rup['id_metode_pengadaan'] == 6) { ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <th class="bg-light">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <small>Daftar Rekanan Tervalidasi (DRT)</small>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </th>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <td class="bg-default" colspan="3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="fa-solid fa-building-user px-1"></i>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Pilih Rekanan Tervalidasi
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <th class="bg-light">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <small>Daftar Rekanan Tervalidasi (DRT)</small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </th>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <td class="bg-default" colspan="3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-xl-rekanan">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="fa-solid fa-building-user px-1"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Pilih Rekanan Tervalidasi
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <span class="text-danger"><small>* Khusus Jenis Tender Terbatas, Seleksi Terbatas, Pengadaan Langsung & Penunjukan Langsung</small></span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>
                                         <?php  } else { ?>
 
                                         <?php  }   ?>
@@ -1208,7 +1208,7 @@
                                                             <div class="flex-grow-1 text-center bd-highlight">
                                                                 <span class="text-dark">
                                                                     <i class="fa-regular fa-rectangle-list px-1"></i>
-                                                                    <small><strong>Persyaratan Teknis</strong></small>
+                                                                    <small><strong>Persyaratan Kualifikasi</strong></small>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -1402,7 +1402,7 @@
                                                             <div class="flex-grow-1 text-center bd-highlight">
                                                                 <span class="text-dark">
                                                                     <i class="fa-regular fa-rectangle-list px-1"></i>
-                                                                    <small><strong>Persyaratan Tambahan</strong></small>
+                                                                    <small><strong>Persyaratan Tambahan Kualifikasi</strong></small>
                                                                 </span>
                                                             </div>
                                                         </div>

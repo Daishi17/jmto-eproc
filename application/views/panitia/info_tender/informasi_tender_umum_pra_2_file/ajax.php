@@ -1,4 +1,12 @@
 <script>
+    function zeros(i) {
+        if (i < 10) {
+            return "0" + i;
+        } else {
+            return i;
+        }
+    }
+
     function lihat_detail_jadwal(id_url_rup) {
         var url_by_id_rup = $('[name="url_by_id_rup"]').val()
         var modal_detail_jadwal = $('#modal_detail_jadwal')

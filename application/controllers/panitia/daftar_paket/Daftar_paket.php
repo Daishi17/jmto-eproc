@@ -41,6 +41,7 @@ class Daftar_paket extends CI_Controller
 		$no = $_POST['start'];
 		$now = date('Y-m-d H:i');
 		foreach ($result as $rs) {
+
 			$jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
 			$row = array();
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';
@@ -146,7 +147,13 @@ class Daftar_paket extends CI_Controller
 
 		// yang dapat mengumumkan 
 		$data['diumumkan_oleh'] = $this->M_panitia->get_yang_dapat_mengumumkan($data['row_rup']['id_rup']);
-		$data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_10($data['row_rup']['id_rup']);
+		if ($data['row_rup']['id_jadwal_tender'] == 1) {
+			$data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra1file_umum_11($data['row_rup']['id_rup']);
+		} else {
+			$data['jadwal_download_dokumen_pengadaan'] =  $this->M_jadwal->jadwal_pra_umum_10($data['row_rup']['id_rup']);
+		}
+
+
 
 		// $this->load->view('panitia/template_menu/header_menu');
 		$this->load->view('panitia/daftar_paket/js_header_paket');
@@ -243,6 +250,7 @@ class Daftar_paket extends CI_Controller
 	{
 		$data['row_rup'] = $this->M_rup->get_row_rup($id_url_rup);
 		$data['jadwal'] = $this->M_panitia->get_jadwal($id_url_rup);
+		$data['jadwal_1file'] = $this->M_panitia->get_jadwal($id_url_rup);
 		$data['panitia'] = $this->M_panitia->get_panitia($data['row_rup']['id_rup']);
 		$data['role_panitia'] = $this->M_panitia->get_panitia_role($data['row_rup']['id_rup']);
 		$data['cek_ada_prubahan_jadwal'] = $this->M_panitia->cek_jika_ada_perubahan($data['row_rup']['id_rup']);
@@ -254,7 +262,11 @@ class Daftar_paket extends CI_Controller
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/index', $data);
 			$this->load->view('administrator/template_menu/footer_menu');
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/ajax');
-		} else { }
+		} else if ($data['row_rup']['id_jadwal_tender'] == 1 || $data['row_rup']['id_jadwal_tender'] == 4) {
+			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/jadwal_1file', $data);
+			$this->load->view('administrator/template_menu/footer_menu');
+			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/ajax_1file');
+		}
 	}
 
 	public function get_rup_terfinalisasi()
@@ -565,7 +577,9 @@ class Daftar_paket extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
 		} else if ($bobot_nilai) {
 			$data = [
-				'bobot_nilai' => $bobot_nilai
+				'bobot_nilai' => $bobot_nilai,
+				'bobot_biaya' => $bobot_biaya,
+				'bobot_teknis' => $bobot_teknis,
 			];
 			$this->M_panitia->update_rup_panitia($id_rup, $data);
 			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
