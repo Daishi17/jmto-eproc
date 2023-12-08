@@ -479,7 +479,7 @@
                                                                 <div class="input-group mb-2">
                                                                     <span class="input-group-text"><i class="fa-solid fa-briefcase"></i></span>
                                                                     <select class="form-control" id="metode_kualifikasi" name="metode_kualifikasi">
-                                                                        <option>Pilih Metode Kualifikasi</option>
+                                                                        <!-- <option>Pilih Metode Kualifikasi</option> -->
                                                                         <option value="Prakualifikasi">Prakualifikasi</option>
                                                                         <option value="Pascakualifikasi">Pascakualifikasi</option>
                                                                     </select>
@@ -489,7 +489,7 @@
                                                                 <div class="input-group mb-2">
                                                                     <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
                                                                     <select class="form-control" id="metode_dokumen" name="metode_dokumen">
-                                                                        <option value="">Pilih Metode Dokumen</option>
+                                                                        <!-- <option value="">Pilih Metode Dokumen</option> -->
                                                                         <option value="SATU FILE">SATU FILE</option>
                                                                         <option value="DUA FILE">DUA FILE</option>
                                                                     </select>

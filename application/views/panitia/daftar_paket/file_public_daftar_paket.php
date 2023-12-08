@@ -364,25 +364,44 @@
             $('[name="bobot_biaya"]').removeClass("bg-light");
             $('[name="bobot_biaya"]').val(0);
             $('[name="bobot_teknis"]').val(0);
+            $.ajax({
+                type: "POST",
+                url: url_update_live_rup,
+                data: {
+                    id_rup: id_rup_global,
+                    bobot_nilai: bobot_nilai,
+                    bobot_biaya: 0,
+                    bobot_teknis: 0
+                },
+                dataType: "JSON",
+                success: function(response) {
+
+                }
+            })
         } else if (bobot_nilai == 2) {
             $('[name="bobot_teknis"]').attr("readonly", true);
             $('[name="bobot_biaya"]').addClass("bg-light");
+            $('[name="bobot_teknis"]').addClass("bg-light");
             $('[name="bobot_biaya"]').attr("readonly", true);
             $('[name="bobot_biaya"]').val(100);
-            $('[name="bobot_teknis"]').removeClass("bg-light");
-        }
-        $.ajax({
-            type: "POST",
-            url: url_update_live_rup,
-            data: {
-                id_rup: id_rup_global,
-                bobot_nilai: bobot_nilai
-            },
-            dataType: "JSON",
-            success: function(response) {
+            $('[name="bobot_teknis"]').val(0);
+            $.ajax({
+                type: "POST",
+                url: url_update_live_rup,
+                data: {
+                    id_rup: id_rup_global,
+                    bobot_nilai: bobot_nilai,
+                    bobot_biaya: 100,
+                    bobot_teknis: 0
+                },
+                dataType: "JSON",
+                success: function(response) {
 
-            }
-        })
+                }
+            })
+        }
+
+
     }
 
     function bobot_biaya() {
