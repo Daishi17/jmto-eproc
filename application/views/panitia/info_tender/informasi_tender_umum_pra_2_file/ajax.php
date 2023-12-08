@@ -20,7 +20,6 @@
                 var i;
                 var no = 1;
                 for (i = 0; i < response['jadwal'].length; i++) {
-
                     var waktu_mulai = new Date(response['jadwal'][i].waktu_mulai);
                     var waktu_selesai = new Date(response['jadwal'][i].waktu_selesai);
                     var sekarang = new Date();
