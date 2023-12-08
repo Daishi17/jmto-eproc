@@ -32,3 +32,8 @@
 <!-- surat penunjukan pemenang -->
 <input type="hidden" name="url_simpan_penunjukan_pemenang" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/' . 'simpan_penunjukan_pemenang/') ?>">
 <input type="hidden" name="url_open_penunjukan_pemenang" value="<?= base_url('file_paket/' . $row_rup['nama_rup'] . '/SURAT_PENUNJUKAN_PEMENANG' . '/') ?>">
+
+<!-- ulang dan batal -->
+<input type="hidden" name="redirect" value="<?= base_url('panitia/beranda/beranda') ?>">
+<input type="hidden" name="url_ulang_pengadaan" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/' . 'ulang_pengadaan/') ?>">
+<input type="hidden" name="url_batal_pengadaan" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/' . 'batal_pengadaan/') ?>">

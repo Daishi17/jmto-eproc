@@ -58,7 +58,7 @@ class Rekanan_terundang extends CI_Controller
 		$this->M_Rekanan_terundang->update_vendor($data, $where);
 
 		$data = $this->M_Rekanan_terundang->get_row_vendor($id_url_vendor);
-		$pesan = '<i>Kepada Yth.<br><b id="nama_usaha">' . $data['nama_usaha'] . '</b><br></i><i>, Dokumen Anda Pada Aplikasi DRT JMTO Sudah Lengkap Silahkan Lakukan Pembuktian Kelengkapan Dokumen Pada</i><br>' . 'Hari	: ' . $hari . '<br><br>' . 'Tanggal	: ' . date('d-m-Y', strtotime($tanggal));
+		$pesan = '<i>Kepada Yth.<br><b id="nama_usaha">' . $data['nama_usaha'] . '</b><br></i><i>,Dokumen Anda Pada Aplikasi DRT JMTO Sudah Lengkap Silahkan Lakukan Pembuktian Kelengkapan Dokumen Pada Tanggal : ' . date('d-m-Y', strtotime($tanggal)) . ', Hari ' . $hari . ', Jam ' . $jam . ', ' . $keterangan;
 		$pesan_wa = 'Kepada Yth. ' . $data['nama_usaha'] . ' Dokumen Anda Pada Aplikasi DRT JMTO Sudah Lengkap Silahkan Lakukan Pembuktian Kelengkapan Dokumen Pada Tanggal : ' . date('d-m-Y', strtotime($tanggal)) . ', Hari ' . $hari . ', Jam ' . $jam . ', ' . $keterangan;
 		$type_email = 'KIRIM-UNDANGAN';
 		$this->email_send->sen_row_email($type_email, $id_url_vendor, $pesan);
@@ -473,8 +473,6 @@ class Rekanan_terundang extends CI_Controller
 		$alasan_validator = $this->input->post('alasan_validator');
 		$id_url = $this->input->post('id_url_siup');
 		$nm_validator = $this->session->userdata('nama_pegawai');
-
-
 		if (!$type_kbli) {
 			$id_vendor = $this->M_Rekanan_terundang->get_row_siup_url($id_url);
 			$get_vendor = $id_vendor['id_vendor'];
@@ -484,6 +482,7 @@ class Rekanan_terundang extends CI_Controller
 				$data = [
 					'alasan_validator' => $alasan_validator,
 					'sts_validasi' => 1,
+					'sts_pemeriksaan' => 1,
 					'nama_validator' => $nm_validator,
 					'tgl_periksa' => date('Y-m-d H:i')
 				];
@@ -515,14 +514,15 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
 				$data = [
 					'alasan_validator' => $alasan_validator,
 					'sts_validasi' => 2,
+					'sts_pemeriksaan' => 1,
 					'nama_validator' => $nm_validator,
 					'tgl_periksa' => date('Y-m-d H:i')
 				];
@@ -552,8 +552,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -596,8 +596,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -633,8 +633,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -826,8 +826,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -863,8 +863,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -907,8 +907,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -944,8 +944,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -1136,8 +1136,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -1174,8 +1174,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -1218,8 +1218,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -1255,8 +1255,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -1443,8 +1443,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -1480,8 +1480,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -1524,8 +1524,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -1561,8 +1561,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -1704,8 +1704,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -1741,8 +1741,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -1924,8 +1924,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -1961,8 +1961,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -2203,8 +2203,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		} else {
@@ -2240,8 +2240,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		}
@@ -2435,8 +2435,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		} else {
@@ -2472,8 +2472,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		}
@@ -2623,8 +2623,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		} else {
@@ -2660,8 +2660,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		}
@@ -2832,8 +2832,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		} else {
@@ -2869,8 +2869,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		}
@@ -3003,8 +3003,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		} else {
@@ -3040,8 +3040,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		}
@@ -3260,8 +3260,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		} else {
@@ -3297,8 +3297,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		}
@@ -3518,8 +3518,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		} else {
@@ -3554,8 +3554,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		}
@@ -3791,8 +3791,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		} else {
@@ -3827,8 +3827,8 @@ class Rekanan_terundang extends CI_Controller
 			$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 			// ambil di sini
 			$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-			$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-			$no_telpon = $data_vendor['no_telpon'];
+			$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+			$no_telpon = $data_vendor_row['no_telpon'];
 			$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 			// end batas
 		}
@@ -3990,8 +3990,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -4027,8 +4027,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}
@@ -4071,8 +4071,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			} else {
@@ -4108,8 +4108,8 @@ class Rekanan_terundang extends CI_Controller
 				$this->email_send->sen_row_email($type_email, $id_vendor['id_vendor'], $message);
 				// ambil di sini
 				$get_row_vendor = $this->M_Rekanan_terundang->get_row_vendor_id_vendor($id_vendor['id_vendor']);
-				$data_vendor = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
-				$no_telpon = $data_vendor['no_telpon'];
+				$data_vendor_row = $this->M_Rekanan_terundang->get_row_vendor_url($get_row_vendor['id_url_vendor']);
+				$no_telpon = $data_vendor_row['no_telpon'];
 				$this->kirim_wa->kirim_wa_vendor_terdaftar($no_telpon, $alasan_validator);
 				// end batas
 			}

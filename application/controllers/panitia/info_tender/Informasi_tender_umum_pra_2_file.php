@@ -1776,4 +1776,91 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         // $this->load->view('template_tender/header');
         $this->load->view('panitia/info_tender/' . $root_jadwal . '/summary_tender', $data);
     }
+    // ulang pengadaan
+
+    public function ulang_pengadaan()
+    {
+        $id_rup = $this->input->post('id_rup_ulang');
+        $nama_rup = $this->input->post('nama_rup_ulang');
+        $alasan_ulang = $this->input->post('alasan_ulang');
+
+
+        $date = date('Y');
+        if (!is_dir('file_paket/' . $nama_rup . '/FILE_ULANG')) {
+            mkdir('file_paket/' . $nama_rup . '/FILE_ULANG', 0777, TRUE);
+        }
+
+        $config['upload_path'] = './file_paket/' . $nama_rup  . '/FILE_ULANG';
+        $config['allowed_types'] = 'pdf|xlsx|xls';
+        $config['max_size'] = 0;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('file_ulang_paket')) {
+            $fileData = $this->upload->data();
+
+            $upload = [
+                'file_ulang_paket' => $fileData['file_name'],
+                'alasan_ulang' => $alasan_ulang,
+                'sts_ulang' => 1,
+                'status_paket_diumumkan' => 0,
+                'status_paket_panitia' => 1
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $upload);
+            $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+        } else {
+            $this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+        }
+    }
+
+    public function batal_pengadaan()
+    {
+        $id_rup = $this->input->post('id_rup_batal');
+        $nama_rup = $this->input->post('nama_rup_batal');
+        $alasan_batal = $this->input->post('alasan_batal');
+
+
+        $date = date('Y');
+        if (!is_dir('file_paket/' . $nama_rup . '/FILE_BATAL')) {
+            mkdir('file_paket/' . $nama_rup . '/FILE_BATAL', 0777, TRUE);
+        }
+
+        $config['upload_path'] = './file_paket/' . $nama_rup  . '/FILE_BATAL';
+        $config['allowed_types'] = 'pdf|xlsx|xls';
+        $config['max_size'] = 0;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('file_batal_paket')) {
+            $fileData = $this->upload->data();
+
+            $upload = [
+                'file_batal_paket' => $fileData['file_name'],
+                'alasan_batal' => $alasan_batal,
+                'sts_batal' => 1,
+                'status_paket_diumumkan' => 0,
+                'status_paket_panitia' => 0
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $upload);
+            $this->output->set_content_type('application/json')->set_output(json_encode('success'));
+        } else {
+            $this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+        }
+    }
+
+    // public function update_status_aanwijzing_vendor()
+    // {
+    //     $id_vendor = $this->input->post('id_vendor');
+    //     $id_rup = $this->input->post('id_rup');
+
+    //     $where = [
+    //         'id_vendor' => $id_vendor,
+    //         'id_rup' => $id_rup
+    //     ];
+
+    //     $data = [
+    //         'sts_aanwijzing_pq' => 1
+    //     ];
+    //     $this->M_panitia->update_mengikuti($data, $where);
+    // }
 }

@@ -49,17 +49,23 @@ class Daftar_paket extends CI_Controller
 			$row[] = '<small>' . $rs->nama_jenis_pengadaan . '</small>';
 			$row[] = '<small>' . $rs->nama_metode_pengadaan . '</small>';
 			$row[] = '<small>' . "Rp " . number_format($rs->total_hps_rup, 2, ',', '.') . '</small>';
-			if ($rs->status_paket_panitia == 1) {
-				$row[] = '<small><span class="badge bg-warning text-dark">Draft Paket</span></small>';
+
+			if ($rs->sts_ulang == 1) {
+				$row[] = '<small><span class="badge bg-warning text-dark">Draft Paket (Sedang Mengulang)</span></small>';
 			} else {
-				if ($jadwal_terakhir['waktu_mulai'] < $now) {
-					$row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
-					</span>';
+				if ($rs->status_paket_panitia == 1) {
+					$row[] = '<small><span class="badge bg-warning text-dark">Draft Paket</span></small>';
 				} else {
-					$row[] = '<span class="badge bg-danger text-white">Sedang Berlangsung
-					</span>';
+					if ($jadwal_terakhir['waktu_mulai'] < $now) {
+						$row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
+						</span>';
+					} else {
+						$row[] = '<span class="badge bg-danger text-white">Sedang Berlangsung
+						</span>';
+					}
 				}
 			}
+
 			$row[] = '<div class="text-center">
 						<a href="javascript:;" class="btn btn-info btn-sm shadow-lg" onclick="byid_paket(' . "'" . $rs->id_url_rup . "'" . ')">
 							<i class="fa-solid fa-users-viewfinder"></i>
@@ -248,8 +254,7 @@ class Daftar_paket extends CI_Controller
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/index', $data);
 			$this->load->view('administrator/template_menu/footer_menu');
 			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas/ajax');
-		} else {
-		}
+		} else { }
 	}
 
 	public function get_rup_terfinalisasi()
@@ -321,7 +326,8 @@ class Daftar_paket extends CI_Controller
 		$data_rup = $this->M_rup->get_row_rup($id_url_rup);
 		$data = [
 			'status_paket_panitia' => 2,
-			'status_paket_diumumkan' => 1
+			'status_paket_diumumkan' => 1,
+			'sts_ulang' => 0
 		];
 		$this->M_panitia->update_rup_panitia($data_rup['id_rup'], $data);
 		// kirim email & wa 
@@ -1336,8 +1342,7 @@ class Daftar_paket extends CI_Controller
 			$data = [
 				'tahun_akhir_neraca_keuangan' => $tahun_akhir_neraca_keuangan,
 			];
-		} else {
-		}
+		} else { }
 		$this->M_panitia->update_syarat_izin_teknis_tender($row_rup['id_rup'], $data);
 		$response = [
 			'row_syarat_izin_teknis_tender' => $this->M_panitia->get_syarat_izin_teknis_tender($row_rup['id_rup'])

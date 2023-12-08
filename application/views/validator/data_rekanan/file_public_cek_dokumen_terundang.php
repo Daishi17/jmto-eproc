@@ -15,7 +15,12 @@
                 var html = '';
                 if (response['row_siup']) {
                     var html_siup = '';
-                    if (response['row_siup'].sts_validasi == null || response['row_siup'].sts_validasi == 0) {
+                    if (response['row_siup'].sts_pemeriksaan == 0) {
+                        var tombol_validasi = '<a href="javascript:;" onclick="Valid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
+                            '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
+                        var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
+                    } else {
+                        if (response['row_siup'].sts_validasi == null || response['row_siup'].sts_validasi == 0) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
                         var sts_validasi = '<span class="badge bg-secondary">Belum Di Periksa</span>'
@@ -30,7 +35,8 @@
                     } else if (response['row_siup'].sts_validasi == 3) {
                         var tombol_validasi = '<a href="javascript:;" onclick="Valid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-success btn-sm shadow-lg"><i class="fa-solid fa-square-check px-1"></i><small>Valid</small></a> ' +
                             '<a href="javascript:;" onclick="NonValid_siup(\'' + response['row_siup'].id_url + '\')" class="btn btn-danger btn-sm shadow-lg"><i class="fa-solid fa-rectangle-xmark px-1"></i><small>Tidak Valid</small></a>';
-                        var sts_validasi = '<span class="badge bg-warning">Revisi</span>'
+                            var sts_validasi = '<span class="badge bg-secondary">Revisi</span>'
+                    }
                     }
                     if (response['row_siup'].sts_token_dokumen == 1) {
                         var dokumen = '<span class="badge bg-danger">DOKUMEN TERENKRIPSI <i class="fas fa-lock mr-2"></i></span>';
