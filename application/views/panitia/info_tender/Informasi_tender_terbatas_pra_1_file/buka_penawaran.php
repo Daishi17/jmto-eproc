@@ -41,20 +41,9 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-file1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dokumen Pengadaan File I</button>
                             </li>
-                            <?php if (date('Y-m-d H:i', strtotime($jadwal_pembukaan_file2['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-                                <!-- belom mulai -->
-
-                            <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pembukaan_file2['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pembukaan_file2['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Pengadaan File II</button>
-                                </li>
-
-                            <?php    } else { ?>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Pengadaan File II</button>
-                                </li>
-
-                            <?php    } ?>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-file2" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dokumen Pengadaan File II</button>
+                            </li>
 
                         </ul>
 
@@ -103,8 +92,8 @@
                                                 <th>No</th>
                                                 <th>Nama Peserta</th>
                                                 <!-- <th>Nilai Penawaran</th>
-                                                                <th>TKDN/PDN/IMPORT</th>
-                                                                <th>Persentase TKDN/PDN/IMPORT </th> -->
+                                                                    <th>TKDN/PDN/IMPORT</th>
+                                                                    <th>Persentase TKDN/PDN/IMPORT </th> -->
                                                 <th>Lihat Dok Penawaran</th>
                                             </thead>
                                             <tbody>
@@ -216,8 +205,8 @@
                                 <th>No</th>
                                 <th>Nama Usaha</th>
                                 <!-- <th>Nilai Penawaran</th>
-                                            <th>TKDN/PDN/IMPORT</th>
-                                            <th>Persentase TKDN/PDN/IMPORT</th> -->
+                                                <th>TKDN/PDN/IMPORT</th>
+                                                <th>Persentase TKDN/PDN/IMPORT</th> -->
                                 <th>File</th>
                             </tr>
                         </thead>

@@ -323,7 +323,7 @@
                                 <th><?= $row_rup['bobot_biaya'] ?></th>
                             </tr>
                         <?php    } ?>
-                     
+
 
 
                         <tr>
@@ -602,7 +602,7 @@
                                 <td><?= $value['nama_usaha'] ?></td>
                                 <td><?= $value['email'] ?></td>
                                 <td>
-                                    <?php if ($value['ev_akhir_hea_peringkat'] == 1) { ?>
+                                    <?php if ($value['ev_terendah_peringkat'] == 1) { ?>
                                         <i class="fas fa fa-star text-warning"></i>
                                     <?php   } else { ?>
                                         <i class="fas fa fa-times text-danger"></i>
