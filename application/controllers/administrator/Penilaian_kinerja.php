@@ -139,7 +139,7 @@ class Penilaian_kinerja extends CI_Controller
 		$bobot_pekerjaan_kontruksi = $this->input->post('bobot_pekerjaan_kontruksi', TRUE);
 		$penilaian_pekerjaan_kontruksi = $this->input->post('penilaian_kontruksi', TRUE);
 		$nilai_akhir_pekerjaan_kontruksi = $this->input->post('nilai_akhir_pekerjaan_kontruksi', TRUE);
-		// tbl_vendor mengikuti paket
+		// tbl_vendor mengikuti paket asdasd
 		$rating_penilaian_vendor_pekerjaan_kontruksi = $this->input->post('rating_penilaian_vendor_pekerjaan_kontruksi');
 		$status_rating_pekerjaan_kontruksi = $this->input->post('status_rating_pekerjaan_kontruksi');
 		$status_nilai_akhir_pekerjaan_kontruksi = $this->input->post('status_nilai_akhir_pekerjaan_kontruksi');
