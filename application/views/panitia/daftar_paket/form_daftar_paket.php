@@ -359,7 +359,7 @@
                                                             <option value="5" selected>Persentase (%)</option>
                                                         <?php } ?>
 
-                                                    </select>
+                                                        </select>
                                             </div>
                                         </td>
                                         <th class="bg-light">
@@ -389,7 +389,7 @@
                                                             <option value="2" selected>Tahun Jamak</option>
                                                         <?php } ?>
 
-                                                    </select>
+                                                        </select>
                                             </div>
                                         </td>
                                     </tr>
@@ -424,7 +424,7 @@
                                                             <option value="2">Biaya Terendah</option>
                                                         <?php }  ?>
 
-                                                    </select>
+                                                        </select>
                                             </div>
                                         </td>
                                         <td colspan="2">
@@ -504,8 +504,13 @@
                                                     <i class="fa-solid fa-building-user px-1"></i>
                                                     Undang Rekanan Terekomendasi
                                                 </button>
+                                            <?php } else if ($row_rup['id_jadwal_tender'] == 9) { ?>
+                                                <button type="button" class="btn btn-sm btn-warning text-white" onclick="get_terekomendasi()">
+                                                    <i class="fa-solid fa-building-user px-1"></i>
+                                                    Pilih Penyedia
+                                                </button>
                                             <?php } else { ?>
-                                                <button type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal-xl-rekomendasi">
+                                                <button type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" onclick="get_terekomendasi_umum()">
                                                     <i class="fa-solid fa-building-user px-1"></i>
                                                     Lihat Rekanan Terekomendasi
                                                 </button>
@@ -1518,15 +1523,17 @@
                                         <table class="table table-sm table-bordered border-dark table-sm shadow-lg">
                                             <thead class="bg-secondary text-white text-center">
                                                 <tr>
+                                                    <th class="col-sm-1"><small>No</small></th>
                                                     <th class="col-sm-4"><small>Nama Perusahaan</small></th>
                                                     <th class="col-sm-2"><small>Email</small></th>
                                                     <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
                                                     <th class="col-sm-2"><small>Rating</small></th>
                                                     <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
+                                                    <th class="col-sm-2"><small>Aksi</small></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <?php foreach ($result_vendor_terundang as $key => $value) { ?>
+                                            <tbody id="load_rekomendasi_umum">
+                                                <!-- <?php foreach ($result_vendor_terundang as $key => $value) { ?>
                                                     <tr>
                                                         <td>
                                                             <small>
@@ -1570,7 +1577,7 @@
                                                             </center>
                                                         </td>
                                                     </tr>
-                                                <?php   } ?>
+                                                <?php   } ?> -->
                                             </tbody>
                                         </table>
                                     </div>
@@ -1605,76 +1612,88 @@
                         <div class="row">
                             <div class="col">
                                 <div class="card border-dark shadow-lg">
-                                    <div class="card-header border-dark bd-blue-700 d-flex justify-content-between align-items-center">
-                                        <div class="flex-grow-1 bd-highlight">
-                                            <span class="text-white">
-                                                <i class="fa-regular fa-rectangle-list px-1"></i>
-                                                <small><strong>List Data - Rekanan Ter-Rekomendasi Sesuai Persyaratan Pengadaan</strong></small>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Rekanan Terekomendasi</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Rekanan Terpilih</button>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                <table class="table table-sm table-bordered border-dark table-sm shadow-lg" id="table_terekomendasi">
-                                                    <thead class="bg-secondary text-white text-center">
-                                                        <tr>
-                                                            <th class="col-sm-1"><small>No</small></th>
-                                                            <th class="col-sm-4"><small>Nama Perusahaan</small></th>
-                                                            <th class="col-sm-2"><small>Email</small></th>
-                                                            <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
-                                                            <th class="col-sm-2"><small>Rating</small></th>
-                                                            <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
-                                                            <th class="col-sm-2"><small>Aksi</small></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="load_rekomendasi">
-                                                    </tbody>
-                                                </table>
+                                    <?php if ($row_rup['id_jadwal_tender'] == 2 || $row_rup['id_jadwal_tender'] == 1) { ?>
+                                        <div class="card-header border-dark bd-blue-700 d-flex justify-content-between align-items-center">
+                                        <?php } else { ?>
+                                            <div class="card-header border-dark bd-yellow-700 d-flex justify-content-between align-items-center">
+                                            <?php }  ?>
+                                            <div class="flex-grow-1 bd-highlight">
+                                                <span class="text-white">
+                                                    <i class="fa-regular fa-rectangle-list px-1"></i>
+                                                    <?php if ($row_rup['id_jadwal_tender'] == 2 || $row_rup['id_jadwal_tender'] == 1) { ?>
+                                                        <small><strong>List Data - Rekanan Ter-Rekomendasi Sesuai Persyaratan Pengadaan</strong></small>
+                                                    <?php } else { ?>
+                                                        <small><strong>Pilih - Rekanan Ter-Rekomendasi Sesuai Persyaratan Pengadaan</strong></small>
+                                                    <?php }  ?>
+                                                </span>
                                             </div>
-                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                <table class="table table-sm table-bordered border-dark table-sm shadow-lg" id="table_terpilih">
-                                                    <thead class="bg-secondary text-white text-center">
-                                                        <tr>
-                                                            <th class="col-sm-1"><small>No</small></th>
-                                                            <th class="col-sm-4"><small>Nama Perusahaan</small></th>
-                                                            <th class="col-sm-2"><small>Email</small></th>
-                                                            <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
-                                                            <th class="col-sm-2"><small>Rating</small></th>
-                                                            <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
-                                                            <th class="col-sm-2"><small>Aksi</small></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="load_terpilih">
-                                                    </tbody>
-                                                </table>
                                             </div>
-                                        </div>
+                                            <div class="card-body">
+                                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <?php if ($row_rup['id_jadwal_tender'] == 2 || $row_rup['id_jadwal_tender'] == 1) { ?>
+                                                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Rekanan Terekomendasi</button>
+                                                        <?php } else { ?>
+                                                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Pilih Rekanan Penunjukan Langsung</button>
+                                                        <?php }  ?>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Rekanan Terpilih</button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content" id="pills-tabContent">
+                                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                        <table class="table table-sm table-bordered border-dark table-sm shadow-lg" id="table_terekomendasi">
+                                                            <thead class="bg-secondary text-white text-center">
+                                                                <tr>
+                                                                    <th class="col-sm-1"><small>No</small></th>
+                                                                    <th class="col-sm-4"><small>Nama Perusahaan</small></th>
+                                                                    <th class="col-sm-2"><small>Email</small></th>
+                                                                    <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
+                                                                    <th class="col-sm-2"><small>Rating</small></th>
+                                                                    <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
+                                                                    <th class="col-sm-2"><small>Aksi</small></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="load_rekomendasi">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                        <table class="table table-sm table-bordered border-dark table-sm shadow-lg" id="table_terpilih">
+                                                            <thead class="bg-secondary text-white text-center">
+                                                                <tr>
+                                                                    <th class="col-sm-1"><small>No</small></th>
+                                                                    <th class="col-sm-4"><small>Nama Perusahaan</small></th>
+                                                                    <th class="col-sm-2"><small>Email</small></th>
+                                                                    <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
+                                                                    <th class="col-sm-2"><small>Rating</small></th>
+                                                                    <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
+                                                                    <th class="col-sm-2"><small>Aksi</small></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="load_terpilih">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
 
-                                    </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer justify-content-start">
-                        <div class="container-fluid">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                <i class="fa-solid fa-angles-left"></i>
-                                Close
-                            </button>
+                        <div class="modal-footer justify-content-start">
+                            <div class="container-fluid">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    <i class="fa-solid fa-angles-left"></i>
+                                    Close
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </div>

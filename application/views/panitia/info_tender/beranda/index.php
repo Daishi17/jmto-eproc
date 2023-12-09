@@ -42,7 +42,7 @@
                                 </button>
                                 <button class="nav-link text-dark" id="nav-juksung-tab" data-bs-toggle="tab" data-bs-target="#nav-juksung" type="button" role="tab" aria-controls="nav-juksung" aria-selected="true">
                                     <i class="fa-solid fa-gift"></i>
-                                    <small><b>Penunjukan Langsung &nbsp;<span class="badge bg-secondary">0</span></b></small>
+                                    <small><b>Penunjukan Langsung &nbsp;<span class="badge bg-secondary"><?= count($count_tender_penunjukan_langsung) ?></span></b></small>
                                 </button>
                                 <button class="nav-link text-dark" id="nav-selekterbatas-tab" data-bs-toggle="tab" data-bs-target="#nav-selekterbatas" type="button" role="tab" aria-controls="nav-selekterbatas" aria-selected="true">
                                     <i class="fa-solid fa-gift"></i>
@@ -178,7 +178,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <table id="example5" class="table table-bordered border-dark table-sm table-striped">
+                                    <table id="tbl_paket_tender_penunjukan_langsung" class="table table-bordered border-dark table-sm table-striped">
                                         <thead class="bg-secondary col-12">
                                             <tr>
                                                 <th class="col-1"><small class="text-white">Tahun</small></th>
@@ -194,20 +194,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><small>2023</small></td>
-                                                <td><small>Pengadaan Sewa Keamanan / Securty</small></td>
-                                                <td><small>General Affair</small></td>
-                                                <td><small>Jasa Lain</small></td>
-                                                <td><small>1.300.000.000</small></td>
-                                                <td><small><span class="badge bg-danger">Tender Sudah Selesai</span></small></td>
-                                                <td>
-                                                    <div class="text-center">
-                                                        <button type="button" class="btn btn-info btn-sm shadow-lg" data-bs-toggle="modal" data-bs-target="#modal-xl-detail">
-                                                            <i class="fa-solid fa-users-viewfinder"></i>
-                                                            <small>Detail</small>
-                                                        </button>
-                                                    </div>
-                                                </td>
+                                              
                                             </tr>
                                         </tbody>
                                     </table>

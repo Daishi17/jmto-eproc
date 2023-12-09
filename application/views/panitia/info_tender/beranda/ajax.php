@@ -71,6 +71,45 @@
         $('#tbl_paket_tender_terbatas').DataTable().ajax.reload();
     }
 
+    // INI UNTUK PENUNJUKAN LANGSUNG
+    $(document).ready(function() {
+        $('#tbl_paket_tender_penunjukan_langsung').DataTable({
+            "responsive": false,
+            "ordering": true,
+            "processing": true,
+            "serverSide": true,
+            "autoWidth": false,
+            "bDestroy": true,
+            "buttons": ["excel", "pdf", "print", "colvis"],
+            initComplete: function() {
+                this.api().buttons().container().appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+            },
+            "order": [],
+            "ajax": {
+                "url": '<?= base_url('panitia/beranda/beranda/get_draft_paket_penunjukan_langsung') ?>',
+                "type": "POST",
+            },
+            "columnDefs": [{
+                "target": [-1],
+                "orderable": false
+            }],
+            "oLanguage": {
+                "sSearch": "Pencarian : ",
+                "sEmptyTable": "Data Tidak Tersedia",
+                "sLoadingRecords": "Silahkan Tunggu - loading...",
+                "sLengthMenu": "Menampilkan &nbsp;  _MENU_  &nbsp;   Data",
+                "sZeroRecords": "Tidak Ada Data Yang Di Cari",
+                "sProcessing": "Memuat Data...."
+            }
+        }).buttons().container().appendTo('#tbl_rup .col-md-6:eq(0)');
+    });
+
+    function Reload_table_paket_tender_umum() {
+        $('#tbl_paket_tender_penunjukan_langsung').DataTable().ajax.reload();
+    }
+
+    // END PENUNJUKAN LANGSUNG
+
     function byid_paket(id_url_rup) {
         var url_cek_dokumen_hps = $('[name="url_cek_dokumen_hps"]').val()
         var url_by_id_rup = $('[name="url_by_id_rup"]').val()
@@ -80,7 +119,6 @@
             dataType: "JSON",
             success: function(response) {
                 $('#modal-xl-detail').modal('show')
-
                 var root_jadwal = response['row_rup'].root_jadwal + '/informasi_pengadaan/' + response['row_rup'].id_url_rup;
                 $('#button_ke_info_tender').html('<a href="<?= base_url('panitia/info_tender/') ?>' + root_jadwal + '" class="btn btn-default btn-warning"><i class="fa-solid fa-circle-up px-1"></i>Halaman Informasi Tender</a>');
                 if (response['row_rup'].jenis_kontrak == 1) {

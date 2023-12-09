@@ -107,6 +107,9 @@ class Email_send
         } else if ($type == 'KIRIM-UNDANGAN') {
             $this->ci->email->subject("E-PROCUREMENT JMTO : UNDANGAN VERIFIKASI KELENGKAPAN DOKUMEN");
             $this->ci->email->message("$message ");
+        } else if ($type == 'PENILAIAN-KINERJA') {
+            $this->ci->email->subject("E-PROCUREMENT JMTO : INFORMARSI PENILAIAN KINERJA PENYEDIA JMTO");
+            $this->ci->email->message("$message ");
         } else if ($type == 'PENGUMUMAN PEMENANG') {
             $this->ci->email->subject("E-PROCUREMENT JMTO : PENGUMUMAN PEMENANG TENDER");
             $this->ci->email->message("$message ");

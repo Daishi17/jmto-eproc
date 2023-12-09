@@ -10,24 +10,37 @@ class M_jenis_jadwal extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function get_result_jenis_jadwal_paket_dokumen($metode_kualifikasi)
+    public function get_result_jenis_jadwal_paket_dokumen($metode_kualifikasi, $id_metode_pengadaan)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_tender');
         $this->db->where('metode_kualifikasi', $metode_kualifikasi);
+        $this->db->where('id_metode_pengadaan', $id_metode_pengadaan);
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function get_result_jenis_jadwal_paket($metode_kualifikasi, $metode_dokumen)
+    public function get_result_jenis_jadwal_paket($metode_kualifikasi, $metode_dokumen, $id_metode_pengadaan)
     {
         $this->db->select('*');
         $this->db->from('tbl_jadwal_tender');
         $this->db->where('metode_kualifikasi', $metode_kualifikasi);
         $this->db->where('metode_dokumen', $metode_dokumen);
+        $this->db->where('id_metode_pengadaan', $id_metode_pengadaan);
         $query = $this->db->get();
         return $query->result_array();
     }
 
+    public function get_result_jenis_jadwal_paket_juksung($id_metode_pengadaan)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_tender');
+        $this->db->where('id_metode_pengadaan', $id_metode_pengadaan);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+    
     // INI UNTUK GENERATE JADWAL TESTING
     // data
 
@@ -59,5 +72,4 @@ class M_jenis_jadwal extends CI_Model
     {
         $this->db->insert('tbl_jadwal_rup', $data);
     }
-    
 }

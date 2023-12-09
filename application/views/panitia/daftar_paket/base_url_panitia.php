@@ -56,7 +56,7 @@
 
 <!-- rekanan terekomendasi -->
 <input type="hidden" name="url_get_rekanan_terekomendasi" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_rekanan_terkomendasi') ?>">
-
+<input type="hidden" name="url_get_rekanan_terekomendasi_umum" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_rekanan_terkomendasi_umum') ?>">
 <input type="hidden" name="url_invite_rekanan" value="<?= base_url('panitia/daftar_paket/daftar_paket/invite_rekanan/') ?>">
 <input type="hidden" name="url_batal_pilih_rekanan" value="<?= base_url('panitia/daftar_paket/daftar_paket/batal_pilih_rekanan/') ?>">
 <input type="hidden" name="url_get_rekanan_terpilih" value="<?= base_url('panitia/daftar_paket/daftar_paket/get_rekanan_terpilih') ?>">

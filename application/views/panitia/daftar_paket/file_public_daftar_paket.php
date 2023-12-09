@@ -2167,7 +2167,6 @@
         var id_rup_global = $('[name="id_rup_global"]').val();
         var id_url_rup = $('[name="id_url_rup"]').val();
         var url_get_rekanan_terekomendasi = $('[name="url_get_rekanan_terekomendasi"]').val()
-
         $.ajax({
             type: "POST",
             url: url_get_rekanan_terekomendasi,
@@ -2197,6 +2196,41 @@
         })
     }
 
+    function get_terekomendasi_umum() {
+        var modal = $('#modal-xl-rekomendasi')
+        var id_rup_global = $('[name="id_rup_global"]').val();
+        var id_url_rup = $('[name="id_url_rup"]').val();
+        var url_get_rekanan_terekomendasi_umum = $('[name="url_get_rekanan_terekomendasi_umum"]').val()
+        $.ajax({
+            type: "POST",
+            url: url_get_rekanan_terekomendasi_umum,
+            data: {
+                id_rup_global: id_rup_global,
+                id_url_rup: id_url_rup
+            },
+            dataType: "JSON",
+            success: function(response) {
+                modal.modal('show')
+                var html = '';
+                var i;
+                var o = 0;
+                for (i = 0; i < response.length; i++) {
+                    html += '<tr>' +
+                        '<td>' + ++o + '</td>' +
+                        '<td>' + response[i].nama_usaha + '</td>' +
+                        '<td>' + response[i].email + '</td>' +
+                        '<td>' + response[i].kualifikasi_usaha + '</td>' +
+                        '<td>' + '80' + '</td>' +
+                        '<td>' + ' <center><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small> <small> <span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small></center>' + '</td>' +
+                        '<td><a href="javascript:;" onclick="pilih_vendor(\'' + response[i].id_vendor + '\'' + ',' + '\'' + id_rup_global + '\'' + ',' + '\'' + response[i].nama_usaha + '\')" class="btn btn-sm btn-warning"><i class="fas fa fa-edit"></i> Pilih</a></td>' +
+                        '</tr>'
+                }
+                $('#load_rekomendasi_umum').html(html);
+            }
+        })
+    }
+
+
     function pilih_vendor(id_vendor, id_rup_global, nama_usaha) {
         var url_invite_rekanan = $('[name="url_invite_rekanan"]').val()
         Swal.fire({
@@ -2221,6 +2255,8 @@
                     success: function(response) {
                         if (response == 'gagal') {
                             Swal.fire('Oops, Penyedia Sudah Ada Di Dalam Pengadaan Ini, Silahkan Pilih Penyedia Yang Lain!', '', 'warning')
+                        } else if (response == 'sudah_ada') {
+                            Swal.fire('Oops, Penyedia Penunjukan Langsung Hanya Satu Saja!', '', 'warning')
                         } else {
                             Swal.fire('Penyedia Berhasil Di Pilih!', '', 'success')
                             vendor_terpilih()

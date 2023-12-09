@@ -165,6 +165,25 @@ class M_rup extends CI_Model
         return $query->row_array();
     }
 
+    public function get_row_rup_by_id_rup($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->join('tbl_departemen', 'tbl_rup.id_departemen = tbl_departemen.id_departemen', 'left');
+        $this->db->join('tbl_jadwal_tender', 'tbl_rup.id_jadwal_tender = tbl_jadwal_tender.id_jadwal_tender', 'left');
+        $this->db->join('tbl_section', 'tbl_rup.id_section = tbl_section.id_section', 'left');
+        $this->db->join('tbl_rkap', 'tbl_rup.id_rkap = tbl_rkap.id_rkap', 'left');
+        $this->db->join('tbl_provinsi', 'tbl_rup.id_provinsi = tbl_provinsi.id_provinsi', 'left');
+        $this->db->join('tbl_kabupaten', 'tbl_rup.id_kabupaten = tbl_kabupaten.id_kabupaten', 'left');
+        $this->db->join('tbl_jenis_pengadaan', 'tbl_rup.id_jenis_pengadaan = tbl_jenis_pengadaan.id_jenis_pengadaan', 'left');
+        $this->db->join('tbl_metode_pengadaan', 'tbl_rup.id_metode_pengadaan = tbl_metode_pengadaan.id_metode_pengadaan', 'left');
+        $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
+        $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
+        $this->db->where('id_rup', $id_rup);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     public function get_metode($id_rup)
     {
         $this->db->select('metode_kualifikasi, metode_dokumen');

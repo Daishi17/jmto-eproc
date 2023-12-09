@@ -488,7 +488,7 @@
                                                             <td>
                                                                 <div class="input-group mb-2">
                                                                     <span class="input-group-text"><i class="fa-solid fa-folder-tree"></i></span>
-                                                                    <select class="form-control" id="metode_dokumen" name="metode_dokumen">
+                                                                    <select  class="form-control" id="metode_dokumen" name="metode_dokumen">
                                                                         <!-- <option value="">Pilih Metode Dokumen</option> -->
                                                                         <option value="SATU FILE">SATU FILE</option>
                                                                         <option value="DUA FILE">DUA FILE</option>
@@ -500,9 +500,6 @@
                                                                     <span class="input-group-text"><i class="fa-regular fa-calendar-check"></i></span>
                                                                     <select name="id_jadwal_tender" class="form-control" id="jenis_jadwal">
                                                                         <option value="">Pilih Jenis Jadwal</option>
-                                                                        <?php foreach ($get_jadwal as $key => $value) { ?>
-                                                                            <option value="<?= $value['id_jadwal_tender'] ?>"><?= $value['nama_jadwal_pengadaan'] ?></option>
-                                                                        <?php  } ?>
                                                                     </select>
                                                                 </div>
                                                             </td>

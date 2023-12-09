@@ -249,7 +249,8 @@ class Sirup_buat_paket extends CI_Controller
 				'tgl_berlaku_skdp' => date('Y-m-d'),
 			];
 			$this->M_rup->tambah_izin_usaha($data);
-		} else { }
+		} else {
+		}
 
 		if (!$cek_syarat_izin_teknis) {
 			$data = [
@@ -262,7 +263,8 @@ class Sirup_buat_paket extends CI_Controller
 				'tahun_akhir_neraca_keuangan' => '2020',
 			];
 			$this->M_rup->tambah_izin_teknis($data);
-		} else { }
+		} else {
+		}
 
 		foreach ($result_jadwal as $key => $value) {
 			$id = $this->uuid->v4();
@@ -366,12 +368,12 @@ class Sirup_buat_paket extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($output));
 	}
 
-
-
 	public function get_jenis_jadwal_dokumen() //satuan kerja
 	{
 		$metode_kualifikasi = $this->input->post('metode_kualifikasi');
-		$data = $this->M_jenis_jadwal->get_result_jenis_jadwal_paket_dokumen($metode_kualifikasi);
+		$id_url_rup = $this->input->post('id_url_rup');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$data = $this->M_jenis_jadwal->get_result_jenis_jadwal_paket_dokumen($metode_kualifikasi, $row_rup['id_metode_pengadaan']);
 		echo '<option value="">Pilih Metode Dokumen</option>';
 		foreach ($data as $key => $value) {
 			echo '<option value="' . $value['metode_dokumen'] . '">' . $value['metode_dokumen'] . '</option>';
@@ -381,10 +383,17 @@ class Sirup_buat_paket extends CI_Controller
 	{
 		$metode_kualifikasi = $this->input->post('metode_kualifikasi');
 		$metode_dokumen = $this->input->post('metode_dokumen');
-		$data = $this->M_jenis_jadwal->get_result_jenis_jadwal_paket($metode_kualifikasi, $metode_dokumen);
+		$id_url_rup = $this->input->post('id_url_rup');
+		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
+		$data = $this->M_jenis_jadwal->get_result_jenis_jadwal_paket($metode_kualifikasi, $metode_dokumen, $row_rup['id_metode_pengadaan']);
 		echo '<option value="">Pilih Jenis Jadwal</option>';
 		foreach ($data as $key => $value) {
 			echo '<option value="' . $value['id_jadwal_tender'] . '">' . $value['nama_jadwal_pengadaan'] . '</option>';
 		}
+	}
+
+	public function get_jenis_jadwal_juksung($id_url_rup) //satuan kerja
+	{
+		echo '<option value="9">Penunjukan Langsung</option>';
 	}
 }

@@ -30,6 +30,22 @@ class M_count extends CI_Model
         return $query->result_array();
     }
 
+    // PENUNJUKAN LANGSUNG
+
+    public function count_tender_penunjukan_langsung($id_manajemenen_user)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rup');
+        $this->db->join('tbl_panitia', 'tbl_rup.id_rup = tbl_panitia.id_rup', 'left');
+        $this->db->where('tbl_panitia.id_manajemen_user', $id_manajemenen_user);
+        $this->db->where('tbl_rup.id_metode_pengadaan', 3);
+        $this->db->where('tbl_rup.status_paket_diumumkan', 1);
+        $this->db->group_by('tbl_rup.id_rup');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    // END PENUNJUKAN LANGSUNG
+
 
 
     public function count_tender_umum_area($row_user)
@@ -269,6 +285,141 @@ class M_count extends CI_Model
         return $this->db->count_all_results();
     }
 
+    public function get_penilaian_kinerja_kontruksi_1()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 25);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_2()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 26);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_3()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 27);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_4()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 28);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_5()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 29);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_6()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 30);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_7()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 31);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_8()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 32);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_9()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 33);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_10()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 34);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_11()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 35);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_12()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 36);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_13()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 37);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_14()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 38);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_15()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 39);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_16()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 40);
+        return $this->db->get()->row_array();
+    }
+
+    public function get_penilaian_kinerja_kontruksi_17()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_penilaian_kinerja');
+        $this->db->where('tbl_penilaian_kinerja.id_penilaian_pekerjaan', 41);
+        return $this->db->get()->row_array();
+    }
 
     // table untuk
 }

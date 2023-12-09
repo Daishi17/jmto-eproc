@@ -10,24 +10,24 @@
                         <li class="nav-item">
                             <a class="nav-link active" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/informasi_pengadaan' . '/' . $row_rup['id_url_rup']) ?>"><i class="fa fa-columns" aria-hidden="true"></i> Informasi Pengadaan</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/aanwijzing' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (PQ)</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/aanwijzing_penawaran' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (Penawaran)</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/evaluasi' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Evaluasi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/negosiasi' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-tags" aria-hidden="true"></i> Negosiasi</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white " style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/sanggahan_prakualifikasi' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan Prakualifikasi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/sanggahan_akhir' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Sanggahan </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -72,47 +72,6 @@
                                     <i class="fa fa-users" aria-hidden="true"></i> <?= $hitung_peserta ?> Peserta
                                 </button></th>
                         </tr>
-
-                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-                            <!-- belom mulai -->
-
-                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing_pq['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                            <tr>
-                                <th> Peserta (Aanwijzing PQ)</th>
-                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_pq" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
-                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Prakualifikasi
-                                    </button></th>
-                            </tr>
-
-                        <?php    } else { ?>
-                            <tr>
-                                <th> Peserta (Aanwijzing PQ)</th>
-                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_pq" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
-                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Prakualifikasi
-                                    </button></th>
-                            </tr>
-                        <?php    } ?>
-
-                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-                            <!-- belom mulai -->
-
-                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                            <tr>
-                                <th> Peserta (Aanwijzing Penawaran)</th>
-                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_penawaran" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
-                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Penawaran
-                                    </button></th>
-                            </tr>
-
-                        <?php    } else { ?>
-                            <tr>
-                                <th>Jumlah Peserta (Aanwijzing Penawaran)</th>
-                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_penawaran" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
-                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Penawaran
-                                    </button></th>
-                            </tr>
-                        <?php    } ?>
-
 
                         <tr>
                             <th>Dokumen Pengadaan</th>
@@ -427,12 +386,12 @@
                         <tr>
                             <th>Surat Penunjukan Pemenang Pengadaan</th>
                             <th>
-                                <?php if (date('Y-m-d H:i', strtotime($jadwal_upload_surat_penunjukan['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
+                                <?php if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_pemenang['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
                                     <button type="button" class="btn btn-sm btn-danger" disabled>
                                         <i class="fa fa-upload" aria-hidden="true"></i> Belum Memasuki Tahap Ini
                                     </button>
 
-                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_upload_surat_penunjukan['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_upload_surat_penunjukan['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
+                                <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pengumuman_pemenang['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pengumuman_pemenang['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#surat_penunjukan">
                                         <i class="fa fa-upload" aria-hidden="true"></i> Upload Surat Penunjukan
                                     </button>
