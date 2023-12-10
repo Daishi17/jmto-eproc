@@ -1835,4 +1835,69 @@
         }
 
     })
+
+    function onkeyup_undangan(id_rup, post_type) {
+        if (post_type == 'no_undangan') {
+            var value = $('#value_undangan1').val()
+        } else if (post_type == 'tgl_surat') {
+            var value = $('#value_undangan2').val()
+        } else if (post_type == 'hari') {
+            var value = $('#value_undangan3').val()
+        } else if (post_type == 'tanggal') {
+            var value = $('#value_undangan4').val()
+        } else if (post_type == 'waktu') {
+            var value = $('#value_undangan5').val()
+        } else if (post_type == 'jml_halaman') {
+            var value = $('#value_undangan6').val()
+        }
+
+        var url_post_undangan_pembuktian = $('[name="url_post_undangan_pembuktian"]').val()
+        $.ajax({
+            url: url_post_undangan_pembuktian,
+            type: 'post',
+            data: {
+                value: value,
+                post_type: post_type,
+                id_rup: id_rup
+            },
+            success: () => {
+
+            }
+        })
+    }
+
+    function onkeyup_undang_penyedia_waktu(id_vendor_mengikuti_paket, post_type) {
+        var value = $('[name="wkt_undang_pembuktian"]').val()
+        var url_post_undangan_pembuktian_vendor_waktu = $('[name="url_post_undangan_pembuktian_vendor_waktu"]').val()
+        $.ajax({
+            url: url_post_undangan_pembuktian_vendor_waktu,
+            type: 'post',
+            data: {
+                value: value,
+                post_type: post_type,
+                id_vendor_mengikuti_paket: id_vendor_mengikuti_paket
+            },
+            success: () => {
+
+            }
+        })
+    }
+
+
+    function onkeyup_undang_penyedia_metode(id_vendor_mengikuti_paket, post_type) {
+        var value2 = $('[name="metode_pembuktian"]').val()
+        var url_post_undangan_pembuktian_vendor_metode = $('[name="url_post_undangan_pembuktian_vendor_metode"]').val()
+        $.ajax({
+            url: url_post_undangan_pembuktian_vendor_metode,
+            type: 'post',
+            data: {
+                value: value2,
+                post_type: post_type,
+                id_vendor_mengikuti_paket: id_vendor_mengikuti_paket
+            },
+            success: () => {
+
+            }
+        })
+    }
 </script>

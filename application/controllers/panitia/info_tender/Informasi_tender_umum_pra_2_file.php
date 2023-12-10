@@ -1858,6 +1858,81 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         }
     }
 
+    // save undangan pembuktian
+    public function save_undangan_pembuktian()
+    {
+        $value = $this->input->post('value');
+        $post_type = $this->input->post('post_type');
+        $id_rup = $this->input->post('id_rup');
+
+        if ($post_type == 'no_undangan') {
+            $data = [
+                'no_undangan' => $value
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $data);
+        } else if ($post_type == 'tgl_surat') {
+            $data2 = [
+                'tgl_surat_undangan' => $value
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $data2);
+        } else if ($post_type == 'hari') {
+            $data3 = [
+                'hari_undangan' => $value
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $data3);
+        } else if ($post_type == 'tanggal') {
+            $data4 = [
+                'tanggal_undangan' => $value
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $data4);
+        } else if ($post_type == 'waktu') {
+            $data5 = [
+                'waktu_undangan' => $value
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $data5);
+        } else if ($post_type == 'jml_halaman') {
+            $data6 = [
+                'jml_halaman_undangan' => $value
+            ];
+            $this->M_panitia->update_rup_panitia($id_rup, $data6);
+        }
+    }
+
+    public function save_undangan_pembuktian_vendor_waktu()
+    {
+        $value = $this->input->post('value');
+        $post_type = $this->input->post('post_type');
+        $id_rup = $this->input->post('id_rup');
+        $id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+
+        $where = [
+            'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket
+        ];
+        if ($post_type == 'wkt_undang_pembuktian') { } else if ($post_type == 'metode_pembuktian') {
+            $data2 = [
+                'metode_pembuktian' => $value
+            ];
+            $this->M_panitia->update_mengikuti($data2, $where);
+        }
+    }
+
+    public function save_undangan_pembuktian_vendor_metode()
+    {
+        $value = $this->input->post('value');
+        $post_type = $this->input->post('post_type');
+        $id_rup = $this->input->post('id_rup');
+        $id_vendor_mengikuti_paket = $this->input->post('id_vendor_mengikuti_paket');
+
+        $where = [
+            'id_vendor_mengikuti_paket' => $id_vendor_mengikuti_paket
+        ];
+        $data = [
+            'wkt_undang_pembuktian' => $value
+        ];
+        $this->M_panitia->update_mengikuti($data, $where);
+    }
+
+
     // public function update_status_aanwijzing_vendor()
     // {
     //     $id_vendor = $this->input->post('id_vendor');
