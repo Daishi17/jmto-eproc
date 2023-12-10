@@ -87,7 +87,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="<?= base_url('administrator/berita_tender') ?>">
                                 <i class="fa-solid fa-newspaper px-1"></i>
                                 <small>Buat Berita / Pengumuman</small>
                             </a>
@@ -116,15 +116,9 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="<?= base_url('administrator/penilaian_kinerja') ?>">
                                 <i class="fa-solid fa-chart-column px-1"></i>
                                 <small>Penilaian Kinerja Rekanan</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="fa-solid fa-chart-area px-1"></i>
-                                <small>Progres Kinerja Rekanan</small>
                             </a>
                         </li>
                     </ul>

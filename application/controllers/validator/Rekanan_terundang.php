@@ -226,7 +226,7 @@ class Rekanan_terundang extends CI_Controller
 				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
 						} else {
 							$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','undang'" . ')"> <i class="fa-solid fa-times px-1"></i> Daftar Hitam</a>';
+				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','daftar_hitam'" . ')"> <i class="fa-solid fa-times px-1"></i> Daftar Hitam</a>';
 						}
 					} else {
 						$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
@@ -239,7 +239,7 @@ class Rekanan_terundang extends CI_Controller
 				<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a>';
 						} else {
 							$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
-							<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','undang'" . ')"> <i class="fa-solid fa-times px-1"></i> Daftar Hitam</a>';
+							<a href="javascript:;" class="btn btn-success btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','pesan'" . ')"> <i class="fa-solid fa-envelope px-1"></i> Pesan</a> <a href="javascript:;" class="btn btn-danger btn-block btn-sm shadow-lg" onClick="byid_vendor(' . "'" . $rs->id_url_vendor . "','daftar_hitam'" . ')"> <i class="fa-solid fa-times px-1"></i> Daftar Hitam</a>';
 						}
 					} else {
 						$row[] = '<a href="' . base_url('validator/rekanan_tervalidasi/cek_dokumen/' . $rs->id_url_vendor) . '" class="btn btn-warning btn-block btn-sm shadow-lg" ><i class="fa-solid fa-share-from-square px-1"></i> Validasi</a><br>
@@ -4439,5 +4439,40 @@ class Rekanan_terundang extends CI_Controller
 			'id_vendor' => $row_vendor
 		];
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+
+
+	public function upload_dafatar_hitam()
+	{
+		if (!is_dir('file_paket/DOKUMEN_DAFTAR_HITAM')) {
+			mkdir('file_paket/DOKUMEN_DAFTAR_HITAM', 0777, TRUE);
+		}
+
+		$config['upload_path'] = './file_paket/DOKUMEN_DAFTAR_HITAM';
+		$config['allowed_types'] = 'pdf|xlsx|xls';
+		$config['max_size'] = 0;
+
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('file_dok_daftar_hitam')) {
+			$fileData = $this->upload->data();
+
+			$upload = [
+				'file_dok_daftar_hitam' => $fileData['file_name'],
+				'sts_aktif' =>  NULL,
+				'status_daftar_hitam_vendor' => 2,
+				'masa_berlaku_daftar_hitam_mulai' => $this->input->post('masa_berlaku_daftar_hitam_mulai'),
+				'masa_berlaku_daftar_hitam_selesai' => $this->input->post('masa_berlaku_daftar_hitam_selesai'),
+				'alasan_daftar_hitam' => $this->input->post('alasan_daftar_hitam')
+			];
+			$where = [
+				'id_url_vendor' => $this->input->post('id_url_vendor')
+			];
+			$this->M_Rekanan_terundang->update_vendor($upload, $where);
+			$this->output->set_content_type('application/json')->set_output(json_encode('success'));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode('gagal'));
+		}
 	}
 }

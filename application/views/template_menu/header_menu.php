@@ -201,7 +201,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="<?= base_url('validator/daftar_hitam')?>">
                                     <i class="fa-solid fa-user-secret px-1"></i>
                                     <small>Daftar Hitam Rekanan</small>
                                 </a>
@@ -254,20 +254,12 @@
                                     <small>Daftar Paket Penyedia</small>
                                 </a>
                             </li>
+                           
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="<?= base_url('administrator/penilaian_kinerja')?>">
-                                    <i class="fa-brands fa-product-hunt px-1"></i>
-                                    <small>Info Penilaian Kinerja Rekanan</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<?= base_url('administrator/berita_tender')?>">
                                     <i class="fa-solid fa-newspaper px-1"></i>
                                     <small>Buat Berita / Pengumuman</small>
                                 </a>
@@ -296,7 +288,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<?= base_url('administrator/penilaian_kinerja')?>">
                                     <i class="fa-solid fa-chart-column px-1"></i>
                                     <small>Penilaian Kinerja Rekanan</small>
                                 </a>

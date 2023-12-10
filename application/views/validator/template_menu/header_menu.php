@@ -144,9 +144,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a style="font-size:14px" href="#" class="dropdown-item">
-                                    <i class="fas fa-user-tag mr-2"></i>
-                                    Daftar Hitam Rekanan
+                                <a class="dropdown-item" href="<?= base_url('validator/daftar_hitam') ?>">
+                                    <i class="fa-solid fa-user-secret px-1"></i>
+                                    <small>Daftar Hitam Rekanan</small>
                                 </a>
                             </li>
                         </ul>
@@ -195,7 +195,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <span class="text-primary">
                                     <strong>
                                         <i class="fas fa-user-lock mr-2"></i>
-                                        <?= $this->session->userdata('nama_pegawai');?>
+                                        <?= $this->session->userdata('nama_pegawai'); ?>
                                     </strong>
                                 </span>
                             </span>

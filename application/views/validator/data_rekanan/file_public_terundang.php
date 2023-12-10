@@ -83,6 +83,7 @@
         var url_get_rekanan_terundang_by_id = $('[name="url_get_rekanan_terundang_by_id"]').val();
         var modal_pesan = $('#modal_pesan')
         var modal_undang = $('#modal_undang')
+        var modal_daftar_hitam = $('#modal_daftar_hitam')
         $.ajax({
             type: "GET",
             url: url_get_rekanan_terundang_by_id + id_vendor,
@@ -93,6 +94,10 @@
                     modal_pesan.modal('show')
                 } else if (type == 'undang') {
                     modal_undang.modal('show')
+                    $('[name="id_url_vendor"]').val(id_vendor)
+                    $('#nama_usaha').text(response['row_vendor'].nama_usaha)
+                } else if (type == 'daftar_hitam') {
+                    modal_daftar_hitam.modal('show')
                     $('[name="id_url_vendor"]').val(id_vendor)
                     $('#nama_usaha').text(response['row_vendor'].nama_usaha)
                 } else {
@@ -384,4 +389,61 @@
             }
         });
     }
+</script>
+
+<script>
+    var form_daftar_hitam = $('#form_daftar_hitam')
+    form_daftar_hitam.on('submit', function(e) {
+        var file_dok_daftar_hitam = $('[name="file_dok_daftar_hitam"]').val();
+        if (file_dok_daftar_hitam == '') {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Dokumen Wajib Di Isi!',
+            })
+        } else {
+            e.preventDefault();
+            $.ajax({
+                url: '<?= base_url('validator/rekanan_terundang/upload_dafatar_hitam') ?>',
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $('.btn_daftar_hitam').attr("disabled", true);
+                },
+                success: function(response) {
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Sedang Proses Menyimpan Data!',
+                        html: 'Membuat Data <b></b>',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                // b.textContent = Swal.getTimerRight()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                            Swal.fire('Data Berhasil Di Simpan!', '', 'success')
+                            form_daftar_hitam[0].reset();
+                            reload_table()
+                            $('#modal_daftar_hitam').modal('hide');
+                            $('.btn_daftar_hitam').attr("disabled", false);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+
+                        }
+                    })
+                }
+            })
+        }
+    })
 </script>
