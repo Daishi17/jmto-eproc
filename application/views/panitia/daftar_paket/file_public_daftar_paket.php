@@ -2312,3 +2312,17 @@
         }
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('.table_terekomendasi').DataTable({
+            "ordering": true,
+        });
+    });
+
+    $(document).ready(function() {
+        $('.table_rekomendasi_1').DataTable({
+            "ordering": true,
+        });
+    });
+</script>

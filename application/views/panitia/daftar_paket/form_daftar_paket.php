@@ -1520,7 +1520,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-sm table-bordered border-dark table-sm shadow-lg">
+                                        <table class="table_rekomendasi_1 table table-sm table-bordered border-dark table-sm shadow-lg">
                                             <thead class="bg-secondary text-white text-center">
                                                 <tr>
                                                     <th class="col-sm-1"><small>No</small></th>
@@ -1643,7 +1643,7 @@
                                                 </ul>
                                                 <div class="tab-content" id="pills-tabContent">
                                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                        <table class="table table-sm table-bordered border-dark table-sm shadow-lg" id="table_terekomendasi">
+                                                        <table class="table_terekomendasi table table-sm table-bordered border-dark table-sm shadow-lg">
                                                             <thead class="bg-secondary text-white text-center">
                                                                 <tr>
                                                                     <th class="col-sm-1"><small>No</small></th>
@@ -1660,7 +1660,7 @@
                                                         </table>
                                                     </div>
                                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                                        <table class="table table-sm table-bordered border-dark table-sm shadow-lg" id="table_terpilih">
+                                                        <table class="table_terpilih table table-sm table-bordered border-dark table-sm shadow-lg">
                                                             <thead class="bg-secondary text-white text-center">
                                                                 <tr>
                                                                     <th class="col-sm-1"><small>No</small></th>

@@ -1695,6 +1695,17 @@ class M_panitia extends CI_Model
         return $query->result_array();
     }
 
+    public function cek_null_syarat($id_rup, $id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_syarat_tambahan');
+        $this->db->where('tbl_vendor_syarat_tambahan.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_syarat_tambahan.id_vendor', $id_vendor);
+        $this->db->where('tbl_vendor_syarat_tambahan.status', NULL);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 
 
     public function cek_valid_vendor_new($id_rup, $id_vendor)
@@ -2158,7 +2169,7 @@ class M_panitia extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_rup');
         $this->db->where('tbl_rup.id_rup', $id_rup);
-        $this->db->where_in('tbl_rup.total_hps_rup', [NULL, 0]);
+        $this->db->where('tbl_rup.total_hps_rup', 0);
         $query = $this->db->get();
         return $query->result_array();
     }
