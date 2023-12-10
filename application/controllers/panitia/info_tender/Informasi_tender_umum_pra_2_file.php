@@ -869,13 +869,23 @@ class Informasi_tender_umum_pra_2_file extends CI_Controller
         $no = $_POST['start'];
         foreach ($result as $rs) {
             $cek_valid_vendor = $this->M_panitia->cek_valid_vendor($id_rup, $rs->id_vendor);
+            $cek_tidak_valid = $this->M_panitia->cek_tidak_valid($id_rup, $rs->id_vendor);
+
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->nama_usaha;
             if ($cek_valid_vendor >= $hitung_syarat) {
                 $row[] = '<span class="badge bg-success">Lulus</span>';
             } else {
-                $row[] = '<span class="badge bg-danger">Belum Valid</span>';
+                if ($cek_tidak_valid) {
+                    $row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+                } else {
+                    if ($cek_valid_vendor >= $hitung_syarat) {
+                        $row[] = '<span class="badge bg-secondary">Belum Diperiksa</span>';
+                    } else {
+                        $row[] = '<span class="badge bg-warning">Belum Lengkap</span>';
+                    }
+                }
             }
             if (date('Y-m-d H:i', strtotime($jadwal_evaluasi_dokumen_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) {
                 $row[] = '<div class="text-center">

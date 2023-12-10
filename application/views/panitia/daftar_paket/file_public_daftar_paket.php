@@ -1613,6 +1613,7 @@
                             load_dok_pengadaan()
                             Swal.fire('Data Berhasil Di Simpan!', '', 'success')
                             $('.btn_dok_pengadaan').attr("disabled", false);
+                            form_dokumen_pengadaan[0].reset();
 
                         }
                     }).then((result) => {
@@ -1670,6 +1671,7 @@
                             load_dok_prakualifikasi()
                             Swal.fire('Data Berhasil Di Simpan!', '', 'success')
                             $('.btn_dok_prakualifikasi').attr("disabled", false);
+                            form_dokumen_prakualifikasi[0].reset();
                         }
                     }).then((result) => {
                         /* Read more about handling dismissals below */
@@ -2222,8 +2224,7 @@
                         '<td>' + response[i].kualifikasi_usaha + '</td>' +
                         '<td>' + '80' + '</td>' +
                         '<td>' + ' <center><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small> <small> <span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small><small><span class="text-warning"><i class="fas fa fa-star"></i></span></small></center>' + '</td>' +
-                        '<td><a href="javascript:;" onclick="pilih_vendor(\'' + response[i].id_vendor + '\'' + ',' + '\'' + id_rup_global + '\'' + ',' + '\'' + response[i].nama_usaha + '\')" class="btn btn-sm btn-warning"><i class="fas fa fa-edit"></i> Pilih</a></td>' +
-                        '</tr>'
+                        '</tr>';
                 }
                 $('#load_rekomendasi_umum').html(html);
             }

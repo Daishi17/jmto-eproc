@@ -125,6 +125,8 @@
                             <img src="<?php echo base_url(); ?>/assets/brand/avatar5.png" alt="mdo" width="32" height="32" class="rounded-circle shadow-lg">&nbsp;
                             <?php if ($this->session->userdata('role') == 2) { ?>
                                 <small class="text-white">Administrator</small>
+                            <?php } else if ($this->session->userdata('role') == 3) { ?>
+                                <small class="text-white">Unit Kerja</small>
                             <?php } else { ?>
                                 <small class="text-white">Panitia</small>
                             <?php }  ?>

@@ -21,7 +21,7 @@ class M_panitia extends CI_Model
         $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
         $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
         $this->db->where('tbl_rup.sts_rup', 1);
-        $this->db->where_in('tbl_rup.sts_rup_buat_paket', [1, 2]);
+        $this->db->where('tbl_rup.status_paket_panitia', NULL);
         $this->db->where('tbl_panitia.id_manajemen_user', $this->session->userdata('id_manajemen_user'));
         $i = 0;
         foreach ($this->order_rup_paket_final as $item) // looping awal
@@ -83,7 +83,7 @@ class M_panitia extends CI_Model
         $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
         $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
         $this->db->where('tbl_rup.sts_rup', 1);
-        $this->db->where_in('tbl_rup.sts_rup_buat_paket', [1, 2]);
+        $this->db->where('tbl_rup.status_paket_panitia', NULL);
         $this->db->where('tbl_panitia.id_manajemen_user', $this->session->userdata('id_manajemen_user'));
         return $this->db->count_all_results();
     }
@@ -1681,6 +1681,31 @@ class M_panitia extends CI_Model
         $this->db->where('tbl_vendor_syarat_tambahan.id_vendor', $id_vendor);
         $this->db->where('tbl_vendor_syarat_tambahan.status', 1);
         return $this->db->count_all_results();
+    }
+
+    
+    public function cek_tidak_valid($id_rup, $id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_syarat_tambahan');
+        $this->db->where('tbl_vendor_syarat_tambahan.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_syarat_tambahan.id_vendor', $id_vendor);
+        $this->db->where('tbl_vendor_syarat_tambahan.status', 2);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+
+    public function cek_valid_vendor_new($id_rup, $id_vendor)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_vendor_syarat_tambahan');
+        $this->db->where('tbl_vendor_syarat_tambahan.id_rup', $id_rup);
+        $this->db->where('tbl_vendor_syarat_tambahan.id_vendor', $id_vendor);
+        $this->db->where('tbl_vendor_syarat_tambahan.status', 1);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     // end syarat tambahan

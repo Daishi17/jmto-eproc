@@ -691,7 +691,6 @@
                             </tbody>
                         </table>
                     </div>
-
                     <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
                         <div class="flex-grow-1 bd-highlight">
                             <span class="text-dark">
@@ -730,8 +729,6 @@
                             </tbody>
                         </table>
                     </div>
-
-
                     <div class="card-header border-dark bg-primary d-flex justify-content-between align-items-center">
                         <div class="flex-grow-1 bd-highlight">
                             <span class="text-dark">

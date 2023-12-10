@@ -567,7 +567,6 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
     
-
     public function jadwal_tender_terbatas_pasca_1_file_11($id_rup)
     {
         $this->db->select('*');

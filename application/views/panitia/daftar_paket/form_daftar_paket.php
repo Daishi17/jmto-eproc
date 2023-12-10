@@ -1529,7 +1529,7 @@
                                                     <th class="col-sm-2"><small>Kualifikasi Usaha</small></th>
                                                     <th class="col-sm-2"><small>Rating</small></th>
                                                     <th class="col-sm-2"><small>Penilaian Kinerja</small></th>
-                                                    <th class="col-sm-2"><small>Aksi</small></th>
+                                                    <!-- <th class="col-sm-2"><small>Aksi</small></th> -->
                                                 </tr>
                                             </thead>
                                             <tbody id="load_rekomendasi_umum">

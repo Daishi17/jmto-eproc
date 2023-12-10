@@ -103,7 +103,7 @@
                                                         <?php }  ?>
                                                     <?php  } else { ?>
                                                         <?php if ($value2['sts_perubahan_jadwal'] == 2) { ?>
-                                                            <a href="javascript:;" title="Menunggu Perubahan" onclick="edit_jadwal(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                                            <a href="javascript:;" title="Menunggu Perubahan" onclick="edit_jadwal(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-warning"><i class="fa fa-refresh"></i></a>
                                                         <?php } else { ?>
                                                             <a href="javascript:;" title="Edit Jadwal" onclick="edit_jadwal(<?= $value2['id_jadwal_rup'] ?>)" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                                         <?php } ?>
