@@ -225,6 +225,18 @@ class M_jadwal extends CI_Model
         return $query->row_array();
     }
 
+    public function jadwal_pasca_terbatas($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->like('nama_jadwal_rup', 'Penunjukan Pelaksanaan Pekerjaan (Gunning)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    
+
     public function insert_alasan($data)
     {
         $this->db->insert('tbl_alasan_jadwal_rup', $data);
@@ -522,6 +534,82 @@ class M_jadwal extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+
+    // INI UNUTK JADWAL TENDER TERBATAS PASCAKUALIFIKASI 1 FILE
+    public function jadwal_tender_terbatas_pasca_1_file_4($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pembukaan Dokumen Tender (Dok Kualifikasi dan Penawaran)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_tender_terbatas_pasca_1_file_5($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->like('nama_jadwal_rup', 'Evaluasi Penawaran');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_tender_terbatas_pasca_1_file_8($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->like('nama_jadwal_rup', 'Pembuktian Kualifikasi Terhadap Peringkat 1');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
     
+
+    public function jadwal_tender_terbatas_pasca_1_file_11($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->like('nama_jadwal_rup', 'Pemberitahuan / Pengumuman Pemenang Pengadaan');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_tender_terbatas_pasca_1_file_13($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->like('nama_jadwal_rup', 'Penunjukan Pelaksanaan Pekerjaan (Gunning)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+
+    // INI UNUTK JADWAL TENDER TERBATAS PASCAKUALIFIKASI 2 FILE
+    public function jadwal_tender_terbatas_pasca_2_file_4($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->where('nama_jadwal_rup', 'Pembukaan Dokumen Tender (Dok Kualifikasi dan Penawaran Sampul I)');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function jadwal_tender_terbatas_pasca_2_file_11($id_rup)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_jadwal_rup');
+        $this->db->where('id_rup', $id_rup);
+        $this->db->like('nama_jadwal_rup', 'Pembuktian Kualifikasi');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+    
+
 
 }

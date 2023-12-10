@@ -499,7 +499,7 @@
                                             <?php } ?>
 
 
-                                            <?php if ($row_rup['id_jadwal_tender'] == 2 || $row_rup['id_jadwal_tender'] == 1) { ?>
+                                            <?php if ($row_rup['id_jadwal_tender'] == 2 || $row_rup['id_jadwal_tender'] == 1|| $row_rup['id_jadwal_tender'] == 3 || $row_rup['id_jadwal_tender'] == 6) { ?>
                                                 <button type="button" class="btn btn-sm btn-warning text-white" onclick="get_terekomendasi()">
                                                     <i class="fa-solid fa-building-user px-1"></i>
                                                     Undang Rekanan Terekomendasi

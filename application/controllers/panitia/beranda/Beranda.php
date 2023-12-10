@@ -84,7 +84,11 @@ class Beranda extends CI_Controller
 		$no = $_POST['start'];
 		$now = date('Y-m-d H:i');
 		foreach ($result as $rs) {
-			$jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
+			if ($rs->id_jadwal_tender == 3 || $rs->id_jadwal_tender == 6) {
+				$jadwal_terakhir = $this->M_jadwal->jadwal_pasca_terbatas($rs->id_rup);
+			} else {
+				$jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
+			}
 			$row = array();
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';
 			$row[] = '<small>' . $rs->nama_rup . '</small>';

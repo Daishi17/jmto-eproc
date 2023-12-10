@@ -20,9 +20,8 @@ class M_panitia extends CI_Model
         $this->db->join('tbl_metode_pengadaan', 'tbl_rup.id_metode_pengadaan = tbl_metode_pengadaan.id_metode_pengadaan', 'left');
         $this->db->join('tbl_jenis_anggaran', 'tbl_rup.id_jenis_anggaran = tbl_jenis_anggaran.id_jenis_anggaran', 'left');
         $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
-        $this->db->where('tbl_rup.sts_rup_buat_paket', 2);
-        // $this->db->where_in('tbl_rup.status_paket_panitia', [1, NULL]);
-        $this->db->where('tbl_rup.status_paket_diumumkan =', NULL);
+        $this->db->where('tbl_rup.sts_rup', 1);
+        $this->db->where_in('tbl_rup.sts_rup_buat_paket', [1, 2]);
         $this->db->where('tbl_panitia.id_manajemen_user', $this->session->userdata('id_manajemen_user'));
         $i = 0;
         foreach ($this->order_rup_paket_final as $item) // looping awal
@@ -73,6 +72,7 @@ class M_panitia extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_rup');
+        $this->db->join('tbl_panitia', 'tbl_rup.id_rup = tbl_panitia.id_rup', 'left');
         $this->db->join('tbl_departemen', 'tbl_rup.id_departemen = tbl_departemen.id_departemen', 'left');
         $this->db->join('tbl_section', 'tbl_rup.id_section = tbl_section.id_section', 'left');
         $this->db->join('tbl_rkap', 'tbl_rup.id_rkap = tbl_rkap.id_rkap', 'left');
@@ -84,6 +84,7 @@ class M_panitia extends CI_Model
         $this->db->join('mst_ruas', 'tbl_rup.id_ruas = mst_ruas.id_ruas', 'left');
         $this->db->where('tbl_rup.sts_rup', 1);
         $this->db->where_in('tbl_rup.sts_rup_buat_paket', [1, 2]);
+        $this->db->where('tbl_panitia.id_manajemen_user', $this->session->userdata('id_manajemen_user'));
         return $this->db->count_all_results();
     }
 

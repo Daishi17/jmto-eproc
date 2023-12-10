@@ -42,7 +42,11 @@ class Daftar_paket extends CI_Controller
 		$now = date('Y-m-d H:i');
 		foreach ($result as $rs) {
 
-			$jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
+			if ($rs->id_jadwal_tender == 3 || $rs->id_jadwal_tender == 6) {
+				$jadwal_terakhir = $this->M_jadwal->jadwal_pasca_terbatas($rs->id_rup);
+			} else {
+				$jadwal_terakhir = $this->M_jadwal->jadwal_pra_umum_22($rs->id_rup);
+			}
 			$row = array();
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';
 			$row[] = '<small>' . $rs->nama_rup . '</small>';
@@ -57,7 +61,7 @@ class Daftar_paket extends CI_Controller
 				if ($rs->status_paket_panitia == 1) {
 					$row[] = '<small><span class="badge bg-warning text-dark">Draft Paket</span></small>';
 				} else {
-					if ($jadwal_terakhir['waktu_mulai'] < $now) {
+					if ($jadwal_terakhir['waktu_mulai'] <= $now) {
 						$row[] = '<span class="badge bg-success text-white">Pengadaan Sudah Selesai
 						</span>';
 					} else {
@@ -338,6 +342,14 @@ class Daftar_paket extends CI_Controller
 			$this->load->view('panitia/daftar_paket/jadwal_tender_penunjukan_langsung/index', $data);
 			$this->load->view('administrator/template_menu/footer_menu');
 			$this->load->view('panitia/daftar_paket/jadwal_tender_penunjukan_langsung/ajax');
+		} else if ($data['row_rup']['id_jadwal_tender'] == 3) {
+			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas_pasca_1_file/index', $data);
+			$this->load->view('administrator/template_menu/footer_menu');
+			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas_pasca_1_file/ajax');
+		}else if ($data['row_rup']['id_jadwal_tender'] == 6) {
+			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas_pasca_2_file/index', $data);
+			$this->load->view('administrator/template_menu/footer_menu');
+			$this->load->view('panitia/daftar_paket/jadwal_tender_terbatas_pasca_2_file/ajax');
 		}
 	}
 
