@@ -13,6 +13,7 @@ class Daftar_hitam extends CI_Controller
         $this->load->model('M_master/M_karyawan');
         $this->load->model('M_section/M_section');
         $this->load->model('M_master/M_berita_tender');
+        $this->load->model('M_datapenyedia/M_Rekanan_terundang');
         $role = $this->session->userdata('role');
         if (!$role == 1) {
             redirect('auth');
@@ -92,16 +93,18 @@ class Daftar_hitam extends CI_Controller
 
     function non_daftar_hitam()
     {
+
+        $row_vendor = $this->M_Rekanan_terundang->get_row_vendor($this->input->post('id_url_vendor'));
         $upload = [
             'sts_aktif' =>  1,
             'status_daftar_hitam_vendor' => NULL,
         ];
         $where = [
-            'id_url_vendor' => $this->input->post('id_url_vendor')
+            'id_vendor' => $row_vendor['id_vendor']
         ];
         $this->M_Rekanan_terundang->update_vendor($upload, $where);
         $this->output->set_content_type('application/json')->set_output(json_encode('success'));
     }
 
-
+    
 }
