@@ -869,13 +869,27 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
         $no = $_POST['start'];
         foreach ($result as $rs) {
             $cek_valid_vendor = $this->M_panitia->cek_valid_vendor($id_rup, $rs->id_vendor);
+            $cek_tidak_valid = $this->M_panitia->cek_tidak_valid($id_rup, $rs->id_vendor);
+            $cek_null_syarat = $this->M_panitia->cek_null_syarat($id_rup, $rs->id_vendor);
             $row = array();
             $row[] = ++$no;
             $row[] = $rs->nama_usaha;
             if ($cek_valid_vendor >= $hitung_syarat) {
                 $row[] = '<span class="badge bg-success">Lulus</span>';
             } else {
-                $row[] = '<span class="badge bg-danger">Belum Valid</span>';
+                if ($cek_null_syarat) {
+                    $row[] = '<span class="badge bg-secondary">Belum Diperiksa</span>';
+                } else {
+                    if ($cek_tidak_valid) {
+                        $row[] = '<span class="badge bg-danger">Tidak Valid</span>';
+                    } else {
+                        if ($cek_valid_vendor >= $hitung_syarat) {
+                            $row[] = '<span class="badge bg-secondary">Belum Diperiksa</span>';
+                        } else {
+                            $row[] = '<span class="badge bg-warning">Belum Lengkap</span>';
+                        }
+                    }
+                }
             }
             if (date('Y-m-d H:i', strtotime($jadwal_evaluasi_dokumen_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) {
                 $row[] = '<div class="text-center">
@@ -1179,8 +1193,15 @@ class Informasi_tender_terbatas_pra_2_file extends CI_Controller
     {
         $id_url_rup = $this->input->post('id_url_rup');
         $row_rup = $this->M_rup->get_row_rup($id_url_rup);
-        $get_rank1 = $this->M_panitia->get_peserta_rank1($row_rup['id_rup']);
-        $message = 'Selamat Anda Telah Memenangkan Pengadaan Paket ' . $row_rup['nama_rup'] . ' Dengan Penawaran Rp.' . number_format($get_rank1['ev_hea_harga'], 2, ',', '.') . '';
+
+        if ($row_rup['bobot_nilai'] == 1) {
+            $get_rank1 = $this->M_panitia->get_peserta_rank1($row_rup['id_rup']);
+            $message = 'Selamat Anda Telah Memenangkan Pengadaan Paket ' . $row_rup['nama_rup'] . ' Dengan Penawaran Rp.' . number_format($get_rank1['ev_hea_penawaran'], 2, ',', '.') . '';
+        } else {
+            $get_rank1 = $this->M_panitia->get_peserta_rank1_biaya($row_rup['id_rup']);
+            $message = 'Selamat Anda Telah Memenangkan Pengadaan Paket ' . $row_rup['nama_rup'] . ' Dengan Penawaran Rp.' . number_format($get_rank1['ev_hea_penawaran'], 2, ',', '.') . '';
+        }
+
         $this->kirim_wa->kirim_wa_vendor_terdaftar($get_rank1['no_telpon'], $message);
         $type_email = 'PENGUMUMAN PEMENANG';
         $this->email_send->sen_row_email($type_email, $get_rank1['id_vendor'], $message);

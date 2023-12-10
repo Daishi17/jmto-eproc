@@ -13,9 +13,9 @@
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/aanwijzing' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (PQ)</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/aanwijzing_penawaran' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-comments" aria-hidden="true"></i> Aanwijzing (Penawaran)</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link bg-primary text-white" style="margin-left: 5px;" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/evaluasi' . '/'  . $row_rup['id_url_rup']) ?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Evaluasi</a>
                         </li>
@@ -44,7 +44,7 @@
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th style="width: 300px;">Kode Pengadaan</th>
-                            <th> <?= $row_rup['kode_rup'] ?></th>
+                            <th> <?= $row_rup['kode_rup'] ?> <a style="float: right;" target="_blank" href="<?= base_url('panitia/info_tender/' . $root_jadwal . '/summary_tender' . '/' . $row_rup['id_url_rup']) ?>" class="btn-sm btn btn-primary text-white"><i class="fas fa fa-file"></i> Summary Tender</a></th>
                         </tr>
                         <tr>
                             <th>Nama Paket</th>
@@ -93,25 +93,7 @@
                             </tr>
                         <?php    } ?>
 
-                        <?php if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
-                            <!-- belom mulai -->
 
-                        <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_aanwijzing['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
-                            <tr>
-                                <th> Peserta (Aanwijzing Penawaran)</th>
-                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_penawaran" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
-                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Penawaran
-                                    </button></th>
-                            </tr>
-
-                        <?php    } else { ?>
-                            <tr>
-                                <th>Jumlah Peserta (Aanwijzing Penawaran)</th>
-                                <th><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#lihat_peserta_aanwijzing_penawaran" title="Peserta Aanwijzing Prakuakifikasi Yang Aktif">
-                                        <i class="fa fa-users" aria-hidden="true"></i> Peserta Aanwijzing Penawaran
-                                    </button></th>
-                            </tr>
-                        <?php    } ?>
 
 
                         <tr>

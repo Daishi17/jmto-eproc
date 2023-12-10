@@ -1814,17 +1814,6 @@
                 $('#modal-xl-detail').modal('show')
                 $('[name="id_url_rup"]').val(id_url_rup)
                 $('[name="nama_rup"]').val(response['row_rup'].nama_rup)
-                if (response['row_rup'].jenis_kontrak == 1) {
-                    var jenis_kontrak = 'Lump Sum'
-                } else if (response['row_rup'].jenis_kontrak == 2) {
-                    var jenis_kontrak = 'Harga Satuan'
-                } else if (response['row_rup'].jenis_kontrak == 3) {
-                    var jenis_kontrak = 'Gabungan Lump Sum dan Harga Satuan'
-                } else if (response['row_rup'].jenis_kontrak == 4) {
-                    var jenis_kontrak = 'Terima Jadi(Turnkey)'
-                } else if (response['row_rup'].jenis_kontrak == 5) {
-                    var jenis_kontrak = 'Persentase( % )'
-                }
 
                 function formatRupiah(angka, prefix) {
                     var number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -1851,10 +1840,28 @@
                 $('#jangka_waktu_hari_pelaksanaan').text(response['row_rup'].jangka_waktu_hari_pelaksanaan)
                 $('#nama_jenis_anggaran').text(response['row_rup'].nama_jenis_anggaran)
                 $('#nama_jenis_pengadaan').text(response['row_rup'].nama_jenis_pengadaan)
-                $('#nama_metode_pengadaan').text(response['row_rup'].nama_metode_pengadaan)
-                $('#metode_kualifikasi').text(response['row_rup'].metode_kualifikasi)
-                $('#metode_dokumen').text(response['row_rup'].metode_dokumen)
-                $('#kualifikasi_usaha').text(response['row_rup'].kualifikasi_usaha)
+                if (response['row_rup'].id_jadwal_tender == 9) {
+                    $('#nama_metode_pengadaan').text(response['row_rup'].nama_metode_pengadaan)
+                    $('#kualifikasi_usaha').text(response['row_rup'].kualifikasi_usaha)
+                    $('#metode_kualifikasi').text('-')
+                    $('#metode_dokumen').text('-')
+                } else {
+                    $('#nama_metode_pengadaan').text(response['row_rup'].nama_metode_pengadaan)
+                    $('#kualifikasi_usaha').text(response['row_rup'].kualifikasi_usaha)
+                    $('#metode_kualifikasi').text(response['row_rup'].metode_kualifikasi)
+                    $('#metode_dokumen').text(response['row_rup'].metode_dokumen)
+                }
+                if (response['row_rup'].jenis_kontrak == 1) {
+                    var jenis_kontrak = 'Lump Sum'
+                } else if (response['row_rup'].jenis_kontrak == 2) {
+                    var jenis_kontrak = 'Harga Satuan'
+                } else if (response['row_rup'].jenis_kontrak == 3) {
+                    var jenis_kontrak = 'Gabungan Lump Sum dan Harga Satuan'
+                } else if (response['row_rup'].jenis_kontrak == 4) {
+                    var jenis_kontrak = 'Terima Jadi(Turnkey)'
+                } else if (response['row_rup'].jenis_kontrak == 5) {
+                    var jenis_kontrak = 'Persentase( % )'
+                }
                 $('#jenis_kontrak').text(jenis_kontrak)
                 $('#bobot_teknis').text(response['row_rup'].bobot_teknis)
                 $('#bobot_biaya').text(response['row_rup'].bobot_biaya)

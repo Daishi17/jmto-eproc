@@ -928,8 +928,14 @@ class Informasi_tender extends CI_Controller
 	{
 		$id_url_rup = $this->input->post('id_url_rup');
 		$row_rup = $this->M_rup->get_row_rup($id_url_rup);
-		$get_rank1 = $this->M_panitia->get_peserta_rank1($row_rup['id_rup']);
-		$message = 'Selamat Anda Telah Memenangkan Pengadaan Paket ' . $row_rup['nama_rup'] . ' Dengan Penawaran Rp.' . number_format($get_rank1['ev_hea_harga'], 2, ',', '.') . '';
+		if ($row_rup['bobot_nilai'] == 1) {
+            $get_rank1 = $this->M_panitia->get_peserta_rank1($row_rup['id_rup']);
+            $message = 'Selamat Anda Telah Memenangkan Pengadaan Paket ' . $row_rup['nama_rup'] . ' Dengan Penawaran Rp.' . number_format($get_rank1['ev_hea_penawaran'], 2, ',', '.') . '';
+        } else {
+            $get_rank1 = $this->M_panitia->get_peserta_rank1_biaya($row_rup['id_rup']);
+            $message = 'Selamat Anda Telah Memenangkan Pengadaan Paket ' . $row_rup['nama_rup'] . ' Dengan Penawaran Rp.' . number_format($get_rank1['ev_hea_penawaran'], 2, ',', '.') . '';
+        }
+
 		$this->kirim_wa->kirim_wa_vendor_terdaftar($get_rank1['no_telpon'], $message);
 		$type_email = 'PENGUMUMAN PEMENANG';
 		$this->email_send->sen_row_email($type_email, $get_rank1['id_vendor'], $message);
