@@ -201,7 +201,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="<?= base_url('validator/daftar_hitam')?>">
+                                <a class="dropdown-item" href="<?= base_url('validator/daftar_hitam') ?>">
                                     <i class="fa-solid fa-user-secret px-1"></i>
                                     <small>Daftar Hitam Rekanan</small>
                                 </a>
@@ -213,59 +213,65 @@
 
                 <?php if ($this->session->userdata('role') == 4) { ?>
                 <?php  } else { ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-cash-register"></i>
-                            <small>SI-RUP</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_rka">
-                                    <i class="fa-solid fa-money-check-dollar px-1"></i>
-                                    <small>Rencana Kerja Anggaran Pengadaan (RKAP)</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_rup">
-                                    <i class="fa-solid fa-money-check px-1"></i>
-                                    <small>Rencana Umum Pengadaan (RUP)</small>
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_buat_paket">
-                                    <i class="fa-solid fa-business-time px-1"></i>
-                                    <small>Buat Paket Penyedia</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-business-time"></i>
-                            <small>Transaksi Tender</small>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url('panitia/daftar_paket/daftar_paket') ?>">
-                                    <i class="fa-solid fa-folder-plus px-1"></i>
-                                    <small>Daftar Paket Penyedia</small>
-                                </a>
-                            </li>
-                           
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="<?= base_url('administrator/berita_tender')?>">
-                                    <i class="fa-solid fa-newspaper px-1"></i>
-                                    <small>Buat Berita / Pengumuman</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+
+                    <?php if ($this->session->userdata('role') == 3) { ?>
+                    <?php  } else { ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-cash-register"></i>
+                                <small>SI-RUP</small>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_rka">
+                                        <i class="fa-solid fa-money-check-dollar px-1"></i>
+                                        <small>Rencana Kerja Anggaran Pengadaan (RKAP)</small>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_rup">
+                                        <i class="fa-solid fa-money-check px-1"></i>
+                                        <small>Rencana Umum Pengadaan (RUP)</small>
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<?= base_url() ?>administrator/Sirup_buat_paket">
+                                        <i class="fa-solid fa-business-time px-1"></i>
+                                        <small>Buat Paket Penyedia</small>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-business-time"></i>
+                                <small>Transaksi Tender</small>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="<?= base_url('panitia/daftar_paket/daftar_paket') ?>">
+                                        <i class="fa-solid fa-folder-plus px-1"></i>
+                                        <small>Daftar Paket Penyedia</small>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<?= base_url('administrator/berita_tender') ?>">
+                                        <i class="fa-solid fa-newspaper px-1"></i>
+                                        <small>Buat Berita / Pengumuman</small>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php  }
+                    ?>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-chart-pie"></i>
@@ -288,7 +294,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="<?= base_url('administrator/penilaian_kinerja')?>">
+                                <a class="dropdown-item" href="<?= base_url('administrator/penilaian_kinerja') ?>">
                                     <i class="fa-solid fa-chart-column px-1"></i>
                                     <small>Penilaian Kinerja Rekanan</small>
                                 </a>

@@ -22,6 +22,7 @@
                 for (i = 0; i < response['jadwal'].length; i++) {
                     var waktu_mulai = new Date(response['jadwal'][i].waktu_mulai);
                     var waktu_selesai = new Date(response['jadwal'][i].waktu_selesai);
+                    const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
                     var sekarang = new Date();
                     // kondisi jadwal
                     if (sekarang < waktu_mulai) {
@@ -46,10 +47,9 @@
                     html += '<tr>' +
                         '<td><small>' + no++ + '</small></td>' +
                         '<td><small>' + response['jadwal'][i].nama_jadwal_rup + ' ' + check + '</small></td>' +
-                        '<td><small>' + response['jadwal'][i].waktu_mulai + '</small></td>' +
-                        '<td><small>' + response['jadwal'][i].waktu_selesai + '</small></td>' +
+                        `<td><small>${waktu_mulai.getDate()}-${months[waktu_mulai.getMonth()]}-${waktu_mulai.getFullYear()} ${zeros(waktu_mulai.getHours())}:${zeros(waktu_mulai.getMinutes())}</small></td>` +
+                        `<td><small>${waktu_selesai.getDate()}-${months[waktu_selesai.getMonth()]}-${waktu_selesai.getFullYear()} ${zeros(waktu_selesai.getHours())}:${zeros(waktu_mulai.getMinutes())}</small></td>` +
                         '<td>' + status_waktu + '</td>' +
-                        '<td>Panitia</td>' +
                         '<td><small>' + alasan + '</small></td>' +
                         '</tr>';
                 }
@@ -1835,4 +1835,91 @@
         }
 
     })
+
+    function onkeyup_undangan(id_rup, post_type) {
+        if (post_type == 'no_undangan') {
+            var value = $('#value_undangan1').val()
+        } else if (post_type == 'tgl_surat') {
+            var value = $('#value_undangan2').val()
+        } else if (post_type == 'hari') {
+            var value = $('#value_undangan3').val()
+        } else if (post_type == 'tanggal') {
+            var value = $('#value_undangan4').val()
+        } else if (post_type == 'waktu') {
+            var value = $('#value_undangan5').val()
+        } else if (post_type == 'jml_halaman') {
+            var value = $('#value_undangan6').val()
+        }
+
+        var url_post_undangan_pembuktian = $('[name="url_post_undangan_pembuktian"]').val()
+        $.ajax({
+            url: url_post_undangan_pembuktian,
+            type: 'post',
+            data: {
+                value: value,
+                post_type: post_type,
+                id_rup: id_rup
+            },
+            success: () => {
+
+            }
+        })
+    }
+
+
+    function onkeyup_global_rup(id_rup, post_type) {
+        var url_post_pengumuman_hasil_kualifikasi = $('[name="url_post_pengumuman_hasil_kualifikasi"]').val()
+        var value = $('[name="' + post_type + '"]').val()
+        $.ajax({
+            url: url_post_pengumuman_hasil_kualifikasi,
+            type: 'post',
+            data: {
+                post_type: post_type,
+                value: value,
+                id_rup: id_rup
+            },
+            success: () => {
+
+            }
+        })
+    }
+
+
+
+
+
+    function onkeyup_undang_penyedia_waktu(id_vendor_mengikuti_paket, post_type) {
+        var value = $('[name="wkt_undang_pembuktian"]').val()
+        var url_post_undangan_pembuktian_vendor_waktu = $('[name="url_post_undangan_pembuktian_vendor_waktu"]').val()
+        $.ajax({
+            url: url_post_undangan_pembuktian_vendor_waktu,
+            type: 'post',
+            data: {
+                value: value,
+                post_type: post_type,
+                id_vendor_mengikuti_paket: id_vendor_mengikuti_paket
+            },
+            success: () => {
+
+            }
+        })
+    }
+
+
+    function onkeyup_undang_penyedia_metode(id_vendor_mengikuti_paket, post_type) {
+        var value2 = $('[name="metode_pembuktian"]').val()
+        var url_post_undangan_pembuktian_vendor_metode = $('[name="url_post_undangan_pembuktian_vendor_metode"]').val()
+        $.ajax({
+            url: url_post_undangan_pembuktian_vendor_metode,
+            type: 'post',
+            data: {
+                value: value2,
+                post_type: post_type,
+                id_vendor_mengikuti_paket: id_vendor_mengikuti_paket
+            },
+            success: () => {
+
+            }
+        })
+    }
 </script>

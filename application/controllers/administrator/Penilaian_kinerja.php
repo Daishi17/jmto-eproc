@@ -114,6 +114,7 @@ class Penilaian_kinerja extends CI_Controller
 			}
 			$row[] = '<small>' . $rs->nama_jenis_pengadaan . '</small>';
 			$row[] = '<small>' . $rs->nama_metode_pengadaan . '</small>';
+			
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';
 			$row[] = '<small>' . $rs->tahun_rup . '</small>';

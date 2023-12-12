@@ -223,16 +223,18 @@
                                     </button>
                                 <?php    } else if (date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_selesai'])) >= date('Y-m-d H:i') || date('Y-m-d H:i', strtotime($jadwal_pembuktian_kualifikasi['waktu_mulai'])) == date('Y-m-d H:i')) { ?>
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
-                                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Undangan Pembuktian
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Buat Undangan Pembuktian
                                     </button>
                                 <?php    } else { ?>
                                     <!-- udah selesai -->
                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#undangan_pembuktian">
-                                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Undangan Pembuktian
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Buat Undangan Pembuktian
                                     </button>
                                 <?php    } ?>
                             </th>
                         </tr>
+
+
                         <?php if (date('Y-m-d H:i', strtotime($jadwal_evaluasi_dokumen_kualifikasi['waktu_mulai']))  >= date('Y-m-d H:i')) { ?>
                             <!-- belom mulai -->
 
@@ -639,26 +641,60 @@
                     </div>
                 </div>
                 <form id="form_upload_undangan_pembuktian" action="javascript:;" enctype="multipart/form-data">
-                    <input type="hidden" name="id_rup_pembuktian" value="<?= $row_rup['id_rup'] ?>">
-                    <input type="hidden" name="nama_rup_pembuktian" value="<?= $row_rup['nama_rup'] ?>">
-                    <div class="input-group">
-                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_undangan_pembuktian">
-                        <button class="btn btn-outline-secondary btn_undangan" type="submit">Upload</button>
-                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nomor</th>
+                                <th><input type="text" name="no_undangan" id="value_undangan1" class="form-control" onkeyup="onkeyup_undangan(<?= $row_rup['id_rup'] ?>, 'no_undangan')" placeholder="Nomor Surat" class="form-control" value="<?= $row_rup['no_undangan'] ?>"></th>
+                            </tr>
+                            <tr>
+                                <th>Tanggal Surat</th>
+                                <th><input type="text" id="value_undangan2" name="tgl_surat" onkeyup="onkeyup_undangan(<?= $row_rup['id_rup'] ?>, 'tgl_surat')" class=" form-control" placeholder="Tanggal Surat" class="form-control" value="<?= $row_rup['tgl_surat_undangan'] ?>"></th>
+                            </tr>
+                            <tr>
+                                <th>Hari</th>
+                                <th><input type=" text" id="value_undangan3" name="hari" onkeyup="onkeyup_undangan(<?= $row_rup['id_rup'] ?>, 'hari')" class=" form-control" placeholder="Hari" class="form-control" value="<?= $row_rup['hari_undangan'] ?>"></th>
+                            </tr>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th><input type=" text" id="value_undangan4" name="tanggal" onkeyup="onkeyup_undangan(<?= $row_rup['id_rup'] ?>, 'tanggal')" class=" form-control" placeholder="Tanggal" class="form-control" value="<?= $row_rup['tanggal_undangan'] ?>"></th>
+                            </tr>
+                            <tr>
+                                <th>Waktu</th>
+                                <th><input type="text" id="value_undangan5" name="waktu" onkeyup="onkeyup_undangan(<?= $row_rup['id_rup'] ?>, 'waktu')" class=" form-control" placeholder="Waktu" class="form-control" value="<?= $row_rup['waktu_undangan'] ?>"></th>
+                            </tr>
+                            <!--<tr>-->
+                            <!--    <th>Jumlah Halaman Dokumen Kualifikasi</th>-->
+                            <!--    <th><input type="text" id="value_undangan6" name="jml_halaman" onkeyup="onkeyup_undangan(<?= $row_rup['id_rup'] ?>, 'jml_halaman')" class=" form-control" placeholder="Jumlah Halaman" class="form-control" value="<?= $row_rup['jml_halaman_undangan'] ?>"></th>-->
+                            <!--</tr>-->
+                        </thead>
+                    </table>
                 </form>
-                <br>
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama File</th>
-                            <th>File</th>
+                            <th>Peserta Penawaran</th>
+                            <th>Waktu</th>
+                            <th>Metode</th>
                         </tr>
                     </thead>
-                    <tbody id="tbl_undangan_pembuktian">
-
+                    <tbody>
+                        <?php $i = 1;
+                        foreach ($peserta_tender as $key => $value) { ?>
+                            <tr>
+                                <td><?= $i++ ?></td>
+                                <td><?= $value['nama_usaha'] ?></td>
+                                <td><input type="text" name="wkt_undang_pembuktian" class="form-control" onkeyup="onkeyup_undang_penyedia_waktu(<?= $value['id_vendor_mengikuti_paket'] ?>, 'wkt_undang_pembuktian')" value="<?= $value['wkt_undang_pembuktian'] ?>"></td>
+                                <td><input type="text" name="metode_pembuktian" class="form-control" onkeyup="onkeyup_undang_penyedia_metode(<?= $value['id_vendor_mengikuti_paket'] ?>, 'metode_pembuktian')" value="<?= $value['metode_pembuktian'] ?>"></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
+
+                <br>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -680,26 +716,44 @@
                         <i class="fa fa-info-circle" aria-hidden="true"> </i> Pengumuman Hasil Prakualifikasi Pengadaan !!! <br>
                     </div>
                 </div>
-                <form id="form_upload_hasil_prakualifikasi" action="javascript:;" enctype="multipart/form-data">
-                    <div class="input-group">
-                        <input type="hidden" name="id_rup_prakualifikasi" value="<?= $row_rup['id_rup'] ?>">
-                        <input type="hidden" name="nama_rup_prakualifikasi" value="<?= $row_rup['nama_rup'] ?>">
-                        <input type="file" class="form-control" accept=".xlsx, .xls, .pdf" name="file_pengumuman_prakualifikasi">
-                        <button class="btn btn-outline-secondary btn_hasil_pra" type="submit">Upload</button>
-                    </div>
-                </form>
                 <br>
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama File</th>
-                            <th>File</th>
+                            <th>Nomor</th>
+                            <th><input type="text" name="no_pengumuman_hasil_kualifikasi" id="value_undangan1" class="form-control" onkeyup="onkeyup_global_rup(<?= $row_rup['id_rup'] ?>, 'no_pengumuman_hasil_kualifikasi')" placeholder="Nomor Surat" class="form-control" value="<?= $row_rup['no_pengumuman_hasil_kualifikasi'] ?>"></th>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Surat</th>
+                            <th><input type="text" id="value_undangan2" name="tanggal_pengumuman_hasil_kualifikasi" onkeyup="onkeyup_global_rup(<?= $row_rup['id_rup'] ?>, 'tanggal_pengumuman_hasil_kualifikasi')" class=" form-control" placeholder="Tanggal Surat" class="form-control" value="<?= $row_rup['tanggal_pengumuman_hasil_kualifikasi'] ?>"></th>
+                        </tr>
+                        <tr>
+                            <th>Hari Mulai</th>
+                            <th><input type=" text" id="value_undangan3" name="hari_isi_pengumuman_hasil_kualifikasi_mulai" onkeyup="onkeyup_global_rup(<?= $row_rup['id_rup'] ?>, 'hari_isi_pengumuman_hasil_kualifikasi_mulai')" class=" form-control" placeholder="Hari" class="form-control" value="<?= $row_rup['hari_isi_pengumuman_hasil_kualifikasi_mulai'] ?>"></th>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Mulai</th>
+                            <th><input type=" text" id="value_undangan4" name="tanggal_isi_pengumuman_hasil_kualifikasi_mulai" onkeyup="onkeyup_global_rup(<?= $row_rup['id_rup'] ?>, 'tanggal_isi_pengumuman_hasil_kualifikasi_mulai')" class=" form-control" placeholder="Tanggal" class="form-control" value="<?= $row_rup['tanggal_isi_pengumuman_hasil_kualifikasi_mulai'] ?>"></th>
+                        </tr>
+                        <tr>
+                            <th>Waktu Mulai</th>
+                            <th><input type="text" id="value_undangan5" name="pukul_isi_pengumuman_hasil_kualifikasi_mulai" onkeyup="onkeyup_global_rup(<?= $row_rup['id_rup'] ?>, 'pukul_isi_pengumuman_hasil_kualifikasi_mulai')" class=" form-control" placeholder="Waktu" class="form-control" value="<?= $row_rup['pukul_isi_pengumuman_hasil_kualifikasi_mulai'] ?>"></th>
+                        </tr>
+
+                        <tr>
+                            <th>Hari Mulai</th>
+                            <th><input type=" text" id="value_undangan3" name="hari_isi_pengumuman_hasil_kualifikasi_selesai" onkeyup="onkeyup_global_rup(<?= $row_rup['id_rup'] ?>, 'hari_isi_pengumuman_hasil_kualifikasi_selesai')" class=" form-control" placeholder="Hari" class="form-control" value="<?= $row_rup['hari_isi_pengumuman_hasil_kualifikasi_selesai'] ?>"></th>
+                        </tr>
+                        <tr>
+                            <th>Tanggal selesai</th>
+                            <th><input type=" text" id="value_undangan4" name="tanggal_isi_pengumuman_hasil_kualifikasi_selesai" onkeyup="onkeyup_global_rup(<?= $row_rup['id_rup'] ?>, 'tanggal_isi_pengumuman_hasil_kualifikasi_selesai')" class=" form-control" placeholder="Tanggal" class="form-control" value="<?= $row_rup['tanggal_isi_pengumuman_hasil_kualifikasi_selesai'] ?>"></th>
+                        </tr>
+                        <tr>
+                            <th>Waktu selesai</th>
+                            <th><input type="text" id="value_undangan5" name="pukul_isi_pengumuman_hasil_kualifikasi_selesai" onkeyup="onkeyup_global_rup(<?= $row_rup['id_rup'] ?>, 'pukul_isi_pengumuman_hasil_kualifikasi_selesai')" class=" form-control" placeholder="Waktu" class="form-control" value="<?= $row_rup['pukul_isi_pengumuman_hasil_kualifikasi_selesai'] ?>"></th>
                         </tr>
                     </thead>
-                    <tbody id="tbl_hasil_prakualifikasi">
-
-                    </tbody>
                 </table>
             </div>
             <div class="modal-footer">

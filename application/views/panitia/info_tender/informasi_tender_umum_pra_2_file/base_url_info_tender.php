@@ -37,3 +37,10 @@
 <input type="hidden" name="redirect" value="<?= base_url('panitia/beranda/beranda') ?>">
 <input type="hidden" name="url_ulang_pengadaan" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/' . 'ulang_pengadaan/') ?>">
 <input type="hidden" name="url_batal_pengadaan" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/' . 'batal_pengadaan/') ?>">
+
+<!-- undangan pembuktian -->
+<input type="hidden" name="url_post_undangan_pembuktian" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/save_undangan_pembuktian') ?>">
+<input type="hidden" name="url_post_undangan_pembuktian_vendor_waktu" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/save_undangan_pembuktian_vendor_waktu') ?>">
+<input type="hidden" name="url_post_undangan_pembuktian_vendor_metode" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/save_undangan_pembuktian_vendor_metode') ?>">
+
+<input type="hidden" name="url_post_pengumuman_hasil_kualifikasi" value="<?= base_url('panitia/info_tender/' . $root_jadwal . '/save_pengumuman_hasil_kualifikasi') ?>">

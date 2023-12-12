@@ -636,7 +636,6 @@
                             <th>NIP</th>
                             <th>Jabatan</th>
                         </tr>
-
                         <?php $no = 1;
                         foreach ($data_panitia as $key => $value) { ?>
                             <tr>

@@ -706,7 +706,7 @@
                                                                 <div class="input-group">
                                                                     <div class="input-group-text">
                                                                         <?php if ($row_rup['status_paket_diumumkan'] == 1) { ?>
-                                                                            <input id="cek_fakta_integritas" class="form-check-input mt-0" type="checkbox" checked>
+                                                                            <input disabled id="cek_fakta_integritas" class="form-check-input mt-0" type="checkbox" checked>
                                                                         <?php } else { ?>
                                                                             <input id="cek_fakta_integritas" class="form-check-input mt-0" type="checkbox">
                                                                         <?php   } ?>
